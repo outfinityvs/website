@@ -18,8 +18,8 @@
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 2rem;
-  --spacing-lg: 4rem;
-  --spacing-xl: 6rem;
+  --spacing-lg: 3.25rem;
+  --spacing-xl: 4rem;
   --radius: 8px;
   --transition: all 0.2s ease;
 }
@@ -56,7 +56,7 @@ a {
 }
 
 .floor {
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-lg) 0;
 }
 
 /* Navigation */
@@ -66,9 +66,9 @@ a {
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(34, 63, 63, 0.94);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
+  border-bottom: 1px solid rgba(13, 17, 17, 0.12);
+  backdrop-filter: none;
 }
 
 .nav-inner {
@@ -102,6 +102,8 @@ a {
   width: 68px;
   height: 40px;
   padding: 0.15rem 0.3rem;
+  border: none;
+  background: transparent;
 }
 
 .official-logo {
@@ -113,7 +115,7 @@ a {
 .brand-text {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--paper);
+  color: var(--ink-950);
 }
 
 .nav-links {
@@ -123,7 +125,7 @@ a {
 }
 
 .nav-links a {
-  color: rgba(247, 249, 249, 0.74);
+  color: rgba(13, 17, 17, 0.7);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0;
@@ -132,7 +134,7 @@ a {
 }
 
 .nav-links a:hover {
-  color: var(--paper);
+  color: var(--ink-950);
 }
 
 .nav-cta {
@@ -140,8 +142,8 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(212, 175, 55, 0.8);
-  color: var(--gold-soft);
+  border: 1px solid var(--gold);
+  color: var(--ink-950);
   padding: 0.55rem 1rem;
   border-radius: var(--radius);
   font-size: 0.8125rem;
@@ -163,23 +165,23 @@ a {
   font-weight: 800;
   letter-spacing: 0;
   text-transform: uppercase;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 0.625rem;
 }
 
 .section-title {
   max-width: 920px;
-  font-size: 2.25rem;
+  font-size: 2.05rem;
   font-weight: 760;
   line-height: 1.18;
   letter-spacing: 0;
-  margin-bottom: var(--spacing-sm);
+  margin-bottom: 0.75rem;
 }
 
 .section-desc {
   max-width: 920px;
-  font-size: 1.0625rem;
+  font-size: 1rem;
   color: var(--muted);
-  line-height: 1.72;
+  line-height: 1.6;
 }
 
 .btn {
@@ -219,11 +221,11 @@ a {
 
 /* Floor 1 */
 .floor-hero {
-  min-height: min(900px, 88vh);
+  min-height: min(760px, 78vh);
   display: flex;
   align-items: center;
-  padding-top: 8rem;
-  padding-bottom: 5rem;
+  padding-top: 6.5rem;
+  padding-bottom: 3.25rem;
   background:
     linear-gradient(135deg, rgba(34, 63, 63, 0.96), rgba(47, 79, 79, 0.92)),
     url("../assets/network-bg.svg");
@@ -240,8 +242,8 @@ a {
 }
 
 .hero h1 {
-  max-width: 960px;
-  font-size: 3.75rem;
+  max-width: 860px;
+  font-size: 3.55rem;
   font-weight: 780;
   line-height: 1.05;
   letter-spacing: 0;
@@ -251,8 +253,8 @@ a {
 .hero-lead {
   max-width: 920px;
   color: rgba(247, 249, 249, 0.86);
-  font-size: 1.1875rem;
-  line-height: 1.74;
+  font-size: 1.125rem;
+  line-height: 1.62;
   margin-bottom: var(--spacing-sm);
 }
 
@@ -260,7 +262,7 @@ a {
   max-width: 880px;
   color: rgba(247, 249, 249, 0.68);
   font-size: 1rem;
-  line-height: 1.72;
+  line-height: 1.58;
   margin-bottom: var(--spacing-md);
 }
 
@@ -271,21 +273,23 @@ a {
 }
 
 .hero-identity {
-  min-height: 440px;
+  min-height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--spacing-md);
   padding: var(--spacing-md);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid transparent;
   border-radius: var(--radius);
-  background: rgba(13, 17, 17, 0.14);
+  background: transparent;
 }
 
 .logo-shell-hero {
   width: min(100%, 440px);
-  padding: 1rem;
+  padding: 0;
   align-self: center;
+  border: none;
+  background: transparent;
 }
 
 .logo-shell-hero .official-logo {
@@ -299,7 +303,7 @@ a {
 
 .identity-flow span {
   display: block;
-  padding: 0.85rem 1rem;
+  padding: 0.72rem 0.9rem;
   border-left: 3px solid rgba(212, 175, 55, 0.85);
   background: rgba(255, 255, 255, 0.06);
   color: rgba(247, 249, 249, 0.86);
@@ -309,33 +313,33 @@ a {
 
 /* Floor 2 */
 .floor-investors {
-  background: var(--paper);
-  color: var(--ink-950);
+  background: var(--ink-900);
+  color: var(--paper);
 }
 
 .floor-investors .section-label {
-  color: var(--green-700);
+  color: var(--gold-soft);
 }
 
 .floor-investors .section-desc {
-  color: rgba(13, 17, 17, 0.66);
+  color: var(--muted);
 }
 
 .audience-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .audience-card,
 .fit-card {
-  min-height: 230px;
+  min-height: 185px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--spacing-sm);
-  padding: 1.35rem;
+  padding: 1.15rem;
   border-radius: var(--radius);
   border: 1px solid var(--border-dark);
   background: #ffffff;
@@ -362,9 +366,23 @@ a {
   line-height: 1.45;
 }
 
+.floor-investors .audience-card {
+  border-color: var(--border-light);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.floor-investors .audience-card h3 {
+  color: var(--paper);
+}
+
+.floor-investors .audience-card p,
+.floor-investors .audience-card span {
+  color: var(--muted);
+}
+
 /* Floor 3 */
 .floor-partners {
-  background: var(--green-800);
+  background: var(--ink-950);
   color: var(--paper);
 }
 
@@ -380,15 +398,15 @@ a {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .partner-card {
-  min-height: 245px;
-  padding: var(--spacing-md);
+  min-height: 190px;
+  padding: 1.15rem;
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(13, 17, 17, 0.2);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .partner-card h3 {
@@ -418,13 +436,13 @@ a {
 .thesis-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--spacing-md);
-  margin-top: var(--spacing-lg);
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
 }
 
 .thesis-card {
-  min-height: 280px;
-  padding: var(--spacing-md);
+  min-height: 220px;
+  padding: 1.15rem;
   border-radius: var(--radius);
   border: 1px solid rgba(85, 196, 208, 0.16);
   background: rgba(255, 255, 255, 0.035);
@@ -459,9 +477,9 @@ a {
 
 /* Floor 5 */
 .floor-platform {
-  background: var(--green-800);
+  background: var(--ink-900);
   color: var(--paper);
-  border-top: 4px solid rgba(85, 196, 208, 0.55);
+  border-top: 1px solid rgba(85, 196, 208, 0.22);
 }
 
 .floor-platform .section-label {
@@ -476,19 +494,19 @@ a {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .asset-item {
-  min-height: 220px;
+  min-height: 175px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: var(--spacing-sm);
-  padding: var(--spacing-md);
+  padding: 1.15rem;
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.14);
-  background: rgba(13, 17, 17, 0.18);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .asset-item-featured {
@@ -539,12 +557,12 @@ a {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .model-card {
-  min-height: 260px;
-  padding: var(--spacing-md);
+  min-height: 205px;
+  padding: 1.15rem;
   border: 1px solid var(--border-dark);
   border-radius: var(--radius);
   background: #ffffff;
@@ -591,12 +609,12 @@ a {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .engine-card {
-  min-height: 280px;
-  padding: var(--spacing-md);
+  min-height: 205px;
+  padding: 1.15rem;
   border-radius: var(--radius);
   border: 1px solid var(--border-light);
   background: rgba(255, 255, 255, 0.04);
@@ -644,11 +662,11 @@ a {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--spacing-sm);
-  margin-top: var(--spacing-lg);
+  margin-top: var(--spacing-md);
 }
 
 .fit-card {
-  min-height: 210px;
+  min-height: 165px;
 }
 
 /* CTA and footer */
