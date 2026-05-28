@@ -314,16 +314,16 @@ a {
 
 /* Floor 2 */
 .floor-investors {
-  background: var(--ink-950);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink-950);
 }
 
 .floor-investors .section-label {
-  color: var(--gold-bright);
+  color: var(--green-700);
 }
 
 .floor-investors .section-desc {
-  color: var(--muted);
+  color: rgba(13, 17, 17, 0.68);
 }
 
 .audience-grid {
@@ -368,17 +368,20 @@ a {
 }
 
 .floor-investors .audience-card {
-  border-color: var(--border-light);
-  background: rgba(255, 255, 255, 0.04);
+  border-color: var(--border-dark);
+  background: #ffffff;
 }
 
 .floor-investors .audience-card h3 {
-  color: var(--paper);
+  color: var(--ink-950);
 }
 
-.floor-investors .audience-card p,
+.floor-investors .audience-card p {
+  color: rgba(13, 17, 17, 0.7);
+}
+
 .floor-investors .audience-card span {
-  color: var(--muted);
+  color: var(--green-700);
 }
 
 /* Floor 3 */
@@ -426,33 +429,33 @@ a {
 
 /* Floor 4 */
 .floor-thesis {
-  background: var(--paper);
-  color: var(--ink-950);
+  background: var(--ink-950);
+  color: var(--paper);
 }
 
 .floor-thesis .section-desc {
-  color: rgba(13, 17, 17, 0.68);
+  color: var(--muted);
 }
 
 .floor-thesis .section-label {
-  color: var(--green-700);
+  color: var(--gold-bright);
 }
 
 .floor-thesis .thesis-card {
-  border-color: var(--border-dark);
-  background: #ffffff;
+  border-color: var(--border-light);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .floor-thesis .thesis-card h3 {
-  color: var(--ink-950);
+  color: var(--paper);
 }
 
 .floor-thesis .thesis-card p {
-  color: rgba(13, 17, 17, 0.7);
+  color: var(--muted);
 }
 
 .floor-thesis .thesis-icon {
-  background: rgba(212, 175, 55, 0.22);
+  background: rgba(255, 227, 107, 0.22);
   color: var(--ink-950);
 }
 
@@ -500,9 +503,9 @@ a {
 
 /* Floor 5 */
 .floor-platform {
-  background: var(--ink-950);
+  background: var(--green-800);
   color: var(--paper);
-  border-top: 1px solid rgba(85, 196, 208, 0.22);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .floor-platform .section-label {
@@ -537,7 +540,7 @@ a {
 }
 
 .asset-year {
-  color: rgba(247, 249, 249, 0.58);
+  color: var(--gold-bright);
   font-family: var(--font-mono);
   font-size: 0.8125rem;
   font-weight: 800;
