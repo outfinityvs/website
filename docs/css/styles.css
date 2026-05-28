@@ -12,6 +12,7 @@
   --muted: #b8c6c2;
   --gold: #d4af37;
   --gold-soft: #f0d77a;
+  --gold-bright: #ffe36b;
   --cyan: #55c4d0;
   --border-light: rgba(255, 255, 255, 0.12);
   --border-dark: rgba(13, 17, 17, 0.12);
@@ -313,12 +314,12 @@ a {
 
 /* Floor 2 */
 .floor-investors {
-  background: var(--ink-900);
+  background: var(--ink-950);
   color: var(--paper);
 }
 
 .floor-investors .section-label {
-  color: var(--gold-soft);
+  color: var(--gold-bright);
 }
 
 .floor-investors .section-desc {
@@ -382,12 +383,12 @@ a {
 
 /* Floor 3 */
 .floor-partners {
-  background: var(--ink-950);
+  background: var(--green-800);
   color: var(--paper);
 }
 
 .floor-partners .section-label {
-  color: var(--gold-soft);
+  color: var(--gold-bright);
 }
 
 .floor-partners .section-desc {
@@ -425,12 +426,34 @@ a {
 
 /* Floor 4 */
 .floor-thesis {
-  background: var(--ink-950);
-  color: var(--paper);
+  background: var(--paper);
+  color: var(--ink-950);
+}
+
+.floor-thesis .section-desc {
+  color: rgba(13, 17, 17, 0.68);
 }
 
 .floor-thesis .section-label {
-  color: var(--cyan);
+  color: var(--green-700);
+}
+
+.floor-thesis .thesis-card {
+  border-color: var(--border-dark);
+  background: #ffffff;
+}
+
+.floor-thesis .thesis-card h3 {
+  color: var(--ink-950);
+}
+
+.floor-thesis .thesis-card p {
+  color: rgba(13, 17, 17, 0.7);
+}
+
+.floor-thesis .thesis-icon {
+  background: rgba(212, 175, 55, 0.22);
+  color: var(--ink-950);
 }
 
 .thesis-grid {
@@ -477,13 +500,13 @@ a {
 
 /* Floor 5 */
 .floor-platform {
-  background: var(--ink-900);
+  background: var(--ink-950);
   color: var(--paper);
   border-top: 1px solid rgba(85, 196, 208, 0.22);
 }
 
 .floor-platform .section-label {
-  color: var(--gold-soft);
+  color: var(--gold-bright);
 }
 
 .floor-platform .section-desc {
@@ -522,7 +545,7 @@ a {
 }
 
 .asset-item h3 {
-  color: var(--gold-soft);
+  color: var(--gold-bright);
   font-size: 1.2rem;
   font-weight: 780;
 }
@@ -597,12 +620,12 @@ a {
 
 /* Floor 7 */
 .floor-engine {
-  background: var(--ink-900);
+  background: var(--ink-950);
   color: var(--paper);
 }
 
 .floor-engine .section-label {
-  color: var(--gold-soft);
+  color: var(--gold-bright);
 }
 
 .engine-grid {
@@ -671,7 +694,7 @@ a {
 
 /* CTA and footer */
 .floor-cta {
-  background: var(--green-900);
+  background: var(--green-800);
   color: var(--paper);
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
