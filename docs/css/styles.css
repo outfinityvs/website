@@ -356,7 +356,7 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1.8fr) minmax(320px, 0.95fr);
   gap: 2rem;
-  align-items: end;
+  align-items: stretch;
 }
 
 .home-hero h1,
@@ -382,6 +382,10 @@ main {
 .home-hero .hero-support,
 .hero-panel p,
 .page-hero .lead,
+.home-hero-copy p,
+.hero-support,
+.section-intro,
+.teaser-card p,
 .theme-studio .page-section p,
 .theme-ventures .page-section p,
 .theme-partners .page-section p,
@@ -395,10 +399,15 @@ main {
 .theme-research .page-cta p,
 .theme-contact .page-cta p {
   color: rgba(247, 249, 249, 0.84);
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .home-hero-copy {
   max-width: 760px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .hero-support {
@@ -407,6 +416,9 @@ main {
 }
 
 .hero-panel {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
   padding: 1.6rem;
   border-radius: var(--radius);
   border: 1px solid rgba(212, 175, 55, 0.26);
@@ -420,8 +432,13 @@ main {
   line-height: 1.2;
 }
 
-.hero-panel p + p {
+.hero-panel p {
   margin-top: 0.9rem;
+}
+
+.home-hero-copy .hero-actions {
+  margin-top: auto;
+  padding-top: 1.3rem;
 }
 
 .home-floor {
@@ -669,29 +686,22 @@ main {
 }
 
 .page-copy {
-  padding-top: 1.45rem;
+  padding-top: 1.15rem;
 }
 
 .page-section {
-  padding-top: 1.9rem;
-  margin-top: 1.9rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.theme-investors .page-section,
-.theme-operating .page-section,
-.theme-legal .page-section {
-  border-top-color: rgba(13, 17, 17, 0.1);
+  padding-top: 1.05rem;
+  margin-top: 1.05rem;
 }
 
 .page-section:first-child {
   padding-top: 0;
   margin-top: 0;
-  border-top: 0;
 }
 
 .page-section h2,
 .page-cta h2 {
+  margin: 0 0 0.68rem;
   font-size: clamp(1.22rem, 2vw, 1.38rem);
   line-height: 1.22;
   letter-spacing: -0.02em;
@@ -711,6 +721,7 @@ main {
 .page-hero .lead,
 .page-section p,
 .page-cta p {
+  margin: 0;
   text-align: justify;
   text-justify: inter-word;
 }
@@ -728,7 +739,7 @@ main {
 }
 
 .page-section p + p {
-  margin-top: 1rem;
+  margin-top: 0.82rem;
 }
 
 .page-copy p a,
@@ -794,7 +805,7 @@ main {
 
 .related-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
   margin-top: 1.25rem;
 }
@@ -859,13 +870,6 @@ main {
 
 .page-cta--home p {
   color: rgba(247, 249, 249, 0.82);
-}
-
-.section-divider {
-  border: none;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.25);
-  margin: 2.5rem 0 1.5rem;
 }
 
 .footer {
@@ -1002,6 +1006,10 @@ main {
   }
 
   .teaser-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .related-grid {
     grid-template-columns: 1fr;
   }
 
