@@ -57,11 +57,19 @@
       { href: "/partners/research-partners/", label: "Research Partners" },
       { href: "/partners/recruitment-partners/", label: "Recruitment Partners" }
     ],
+    resources: [
+      { href: "https://www.axiologic.net", label: "Axiologic Research" },
+      { href: "https://www.assistos.org/", label: "AssistOS" },
+      { href: "https://agisystem2.com/", label: "Neuro-Symbolic AI" }
+    ],
     contact: [
       { href: "/contact/", label: "Contact Form" }
     ]
   };
 
+  function isExternal(href) {
+    return /^https?:\/\//.test(href);
+  }
   function normalize(p) {
     return p.replace(/\/$/, "");
   }
@@ -69,8 +77,10 @@
     var html = "";
     var p = normalize(path);
     for (var i = 0; i < arr.length; i++) {
-      var active = p === normalize(arr[i].href) ? " current" : "";
-      html += '<a class="submenu-link' + active + '" href="' + arr[i].href + '">' + arr[i].label + "</a>";
+      var ext = isExternal(arr[i].href);
+      var active = !ext && p === normalize(arr[i].href) ? " current" : "";
+      var target = ext ? ' target="_blank" rel="noreferrer"' : "";
+      html += '<a class="submenu-link' + active + '" href="' + arr[i].href + '"' + target + '>' + arr[i].label + "</a>";
     }
     return html;
   }
@@ -112,12 +122,15 @@
     '<div class="menu-layer"><div class="menu-panel" id="menu-panel-partners" aria-label="Partners submenu">' +
     '<div class="menu-section"><p class="menu-section-title">Partners</p>' +
     renderLinks(links.partners) +
+    '</div><div class="menu-section-group">' +
+    '<div class="menu-section"><p class="menu-section-title">Resources</p>' +
+    renderLinks(links.resources) +
     '</div><div class="menu-section"><p class="menu-section-title">Contact</p>' +
     renderLinks(links.contact) +
+    '</div></div>' +
     "</div></div></div>" +
     "</li>" +
     "</ul>" +
-    '<a class="nav-cta" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Contact</a>' +
     "</div>" +
     "</nav>";
 

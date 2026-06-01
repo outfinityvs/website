@@ -211,6 +211,12 @@ ul {
   background: rgba(13, 17, 17, 0.02);
 }
 
+.menu-section-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
 .menu-section-title {
   margin-bottom: 0.25rem;
   font-size: 0.72rem;
@@ -400,6 +406,25 @@ main {
 .theme-research .page-cta p,
 .theme-contact .page-cta p {
   color: rgba(247, 249, 249, 0.84);
+}
+
+.home-hero .hero-support,
+.hero-panel p,
+.home-hero-copy p,
+.hero-support,
+.page-hero .lead,
+.theme-studio .page-section p,
+.theme-ventures .page-section p,
+.theme-partners .page-section p,
+.theme-thesis .page-section p,
+.theme-research .page-section p,
+.theme-contact .page-section p,
+.theme-studio .page-cta p,
+.theme-ventures .page-cta p,
+.theme-partners .page-cta p,
+.theme-thesis .page-cta p,
+.theme-research .page-cta p,
+.theme-contact .page-cta p {
   text-align: justify;
   text-justify: inter-word;
 }
@@ -454,7 +479,6 @@ main {
 }
 
 .section-intro {
-  max-width: 900px;
   margin-top: 0.95rem;
   font-size: 1.12rem;
 }
@@ -480,13 +504,19 @@ main {
   background: var(--ink-950);
 }
 
-.home-floor--partners .teaser-grid {
+.home-floor--partners .teaser-grid,
+.home-floor--thesis .teaser-grid,
+.home-floor--research .teaser-grid {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.home-floor--thesis {
+.home-floor--partners {
   background: var(--paper);
   color: var(--ink-950);
+}
+
+.home-floor--thesis {
+  background: var(--green-800);
 }
 
 .home-floor--research {
@@ -552,6 +582,8 @@ main {
 .teaser-card p {
   flex: 1;
   font-size: 1.02rem;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .home-floor--dark .teaser-card p {
@@ -646,7 +678,7 @@ main {
 }
 
 .page-shell {
-  width: var(--editorial);
+  width: var(--container);
   margin: 0 auto;
 }
 
