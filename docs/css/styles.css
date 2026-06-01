@@ -480,8 +480,8 @@ main {
   background: var(--ink-950);
 }
 
-.home-floor--partners {
-  background: var(--green-900);
+.home-floor--partners .teaser-grid {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .home-floor--thesis {
@@ -504,7 +504,7 @@ main {
 
 .teaser-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
   margin-top: 1.95rem;
 }
@@ -1014,6 +1014,10 @@ main {
 
   .home-hero {
     padding: 4.2rem 0 3.4rem;
+  }
+
+  .teaser-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .hero-actions {
