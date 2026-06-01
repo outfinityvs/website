@@ -117,7 +117,7 @@ ul {
   min-height: 44px;
   padding: 0.45rem 0.8rem;
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--radius);
   background: transparent;
   font-size: 0.8rem;
   font-weight: 800;
@@ -251,7 +251,7 @@ ul {
   min-height: 44px;
   padding: 0.72rem 1rem;
   border: 1px solid rgba(212, 175, 55, 0.82);
-  border-radius: 999px;
+  border-radius: var(--radius);
   font-size: 0.74rem;
   font-weight: 800;
   letter-spacing: 0.04em;
@@ -283,7 +283,7 @@ main {
   justify-content: center;
   min-height: 52px;
   padding: 0.92rem 1.35rem;
-  border-radius: 999px;
+  border-radius: var(--radius);
   border: 1px solid transparent;
   font-size: 0.95rem;
   font-weight: 800;
@@ -902,7 +902,7 @@ main {
 
 .footer-links a {
   padding: 0.22rem 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.16);
   font-size: 0.78rem;
   color: rgba(247, 249, 249, 0.82);
@@ -983,14 +983,29 @@ main {
     font-size: 17px;
   }
 
+  .nav-inner {
+    gap: 0.5rem;
+    flex-wrap: nowrap;
+  }
+
+  .brand {
+    order: 1;
+    margin-left: auto;
+  }
+
   .brand span {
     display: none;
   }
 
+  .menu-groups {
+    order: 0;
+    width: auto;
+    margin-left: 0;
+    gap: 0.15rem;
+  }
+
   .nav-cta {
-    margin-left: auto;
-    padding-inline: 0.85rem;
-    font-size: 0.71rem;
+    display: none;
   }
 
   .page-main {
