@@ -1,0 +1,262 @@
+# review_texts.backlog — Outfinity Website Text Review
+
+## H1: Probleme majore — conținut lipsă față de instrucțiuni
+
+### [BLOCKER] docs/studio/index.html — Lipsește secțiunea "What we are building"
+Instrucțiunile cer o listă explicită a domeniilor de interes AI (agentic AI, AI infrastructure, explainable AI, regulated-industry AI, AI-assisted software engineering, AI governance, privacy-preserving computation, secure collaboration, AI+blockchain, open-source tools). Pagina nu listează aceste domenii, ci doar menționează generic "agentic systems, AI infrastructure, privacy-preserving AI, explainable and verifiable AI". Domeniile cheie (AI-assisted software engineering, AI governance, blockchain, open-source) sunt complet omise.
+
+### [BLOCKER] docs/studio/index.html — Lipsește secțiunea "Why the venture studio model"
+Instrucțiunile cer o secțiune explicită care explică DE CE un venture studio și nu un accelerator/consultancy/investitor pasiv. Pagina curentă nu face deloc această comparație. Aceasta este o poziționare critică lipsă.
+
+### [BLOCKER] Lipsește pagina "Why Outfinity Is Different" (Chapter 10 din instrucțiuni)
+Instrucțiunile definesc această pagină ca o pagină de poziționare care compară explicit Outfinity cu: accelerator clasic, consultancy, investitor pasiv, laborator corporatist. Nu există o astfel de pagină în site. Musai de creat.
+
+### [BLOCKER] Lipsește pagina "Work With Outfinity" (Chapter 11 din instrucțiuni)
+Instrucțiunile definesc această pagină ca principala pagină de conversie, cu secțiuni dedicate pentru AI Labs, researchers, entrepreneurs, industry experts, investors, recruitment partners, și un "How to start". Nu există o astfel de pagină.
+
+### [BLOCKER] Lipsește pagina "Venture Formation and NewCo Creation" (Chapter 6)
+Instrucțiunile definesc o pagină întreagă despre: What is a NewCo, Conditions for forming a NewCo, Founders and roles, Studio participation, IP, Governance. Acest conținut este complet absent din site.
+
+### [CRITICAL] docs/studio/how-ventures-are-built/index.html — Au dispărut etapele distincte
+Instrucțiunile definesc 6 etape: 1.Venture thesis, 2.Collaboration before incorporation, 3.Venture sprint, 4.Prototype and proof, 5.Venture formation, 6.Investment readiness. Pagina curentă le-a redus la 4 secțiuni vagi. Au dispărut conceptele cheie: "Collaboration before incorporation" (etapa 2), "Venture sprint" (etapa 3), "Investment readiness" (etapa 6). Acestea sunt elemente de diferențiere critică.
+
+### [CRITICAL] docs/studio/explorer-circle/index.html — Lipsește "Open-source contributions"
+Instrucțiunile cer o secțiune despre contribuțiile open-source sub licențe MIT, cum contribuțiile intenționate devin utilizabile conform licenței repository-ului. Pagina menționează open-source în treacăt dar nu are secțiune dedicată.
+
+### [CRITICAL] docs/studio/explorer-circle/index.html — Lipsește "Paid work and IP"
+Instrucțiunile cer o secțiune explicită: când un membru este plătit, rezultatul este atribuit entității plătitoare; background IP rămâne la proprietar. Această distincție esențială lipsește.
+
+### [CRITICAL] docs/partners/ai-labs/index.html — Lipsește "Protecting independence and ownership"
+Instrucțiunile cer o secțiune care distinge clar între: background IP, open-source contributions, paid deliverables, venture-specific work. Pagina menționează vag "Each role is framed clearly" fără a detalia această distincție critică.
+
+### [CRITICAL] docs/partners/founder-operators/index.html — Roluri colapsate neclar
+Instrucțiunile definesc 5 roluri distincte: Entrepreneurs in Residence, Industry Venture Partners, Growth/Marketing experts, Advisors and strategic collaborators, How collaboration begins. Pagina le-a redus la 2 secțiuni vagi. În special "Industry Venture Partners" (un rol important pentru acces la piețe) este complet invizibil.
+
+### [CRITICAL] Lipsește conceptul de "vesting" pentru fondatori
+Instrucțiunile (Chapter 6) spun: "Founder equity should normally be subject to vesting. Vesting means that equity is earned over time..." Acest concept nu apare nicăieri în site.
+
+### [CRITICAL] Lipsește conceptul de "cap table" clar explicat
+Instrucțiunile definesc cap table ca "the economic table showing who owns the company". Nu există nicio mențiune în site. Investor pages nu explică acest concept.
+
+### [CRITICAL] Lipsește "ESOP" / employee participation
+Instrucțiunile (Chapter 7) au o secțiune întreagă: "Employee and contributor participation... ESOP, meaning Employee Stock Option Plan". Acest concept nu apare deloc.
+
+### [HIGH] docs/investors/index.html — Nu explică structurile de investiții
+Instrucțiunile definesc: OpCo, HoldCo, NewCo investment, SPV, convertible instruments. Pagina menționează studio-level și venture-specific dar nu explică aceste mecanisme. Conceptele sunt vitale pentru investitori.
+
+### [HIGH] docs/investors/venture-specific-participation/index.html — Lipsește "Public disclaimer"
+Instrucțiunile cer: "Nothing on this page constitutes an offer to sell securities, an investment recommendation, a public solicitation to invest or financial advice." Această clauză legală obligatorie lipsește.
+
+### [HIGH] Lipsește pagina "Research Base" — conținut vag
+docs/research/index.html este extrem de subțire. Instrucțiunile cer o pagină care explică cum cercetarea aplicată devine venture thesis. Se menționează Axiologic dar fără detalii despre cum anume se face tranziția.
+
+## H2: Text ciudat / prost formulat / neclar
+
+### [MEDIUM] docs/imprint/index.html:1-10 — Text placeholder, nu conținut real
+Fraza: "This page is used for the legal entity name, registration information, representative details, and official contact references required for the operator of the Outfinity website in the relevant jurisdiction."
+Problema: Este o descriere a Ce AR TREBUI să conțină pagina, nu conținutul real. Nu există nume de entitate, număr de înregistrare, adresă, reprezentant. Pagina e un schelet gol.
+
+### [MEDIUM] docs/privacy-policy/index.html:1-10 — Extrem de vag, fără substanță legală
+Fraza: "Access to submitted information is limited to the people involved in qualification, follow-up, and relationship management"
+Problema: Nu menționează: perioade de retenție, baza legală (GDPR), procesatori terți, drepturile utilizatorului (ștergere, acces, portabilitate), cookie-uri, transfer internațional. E insuficient pentru conformitate.
+
+### [MEDIUM] docs/terms/index.html:1-10 — Text vag, fără termeni reali
+Fraza: "Use of the site, its content, and any submitted information is expected to respect applicable law, intellectual property, and the practical operating boundaries of the website."
+Problema: "Expected to respect" e o frază extrem de slabă pentru termeni și condiții. Nu există limitare de răspundere, jurisdicție, lege aplicabilă, clauze de confidențialitate.
+
+### [LOW] docs/cookies/index.html — Fără categorii de cookie-uri
+Problema: Nu listează cookie-urile reale folosite, scopul lor, durata, posibilitatea de opt-out. E o pagină descriptivă nu o politică de cookie-uri.
+
+### [LOW] docs/legal-disclaimer/index.html — Nu conține un disclaimer real
+Fraza: "This website presents Outfinity's studio model, venture directions, and collaboration themes in a public format designed for general understanding."
+Problema: Un disclaimer legal ar trebui să includă limitări de răspundere. Aceasta e o descriere a site-ului, nu un disclaimer.
+
+### [MEDIUM] Multiple pagini: fraze "This X is designed for Y" ca substituent pentru conținut real
+Exemple:
+- "/operating-model/legal-ip/: This creates a transparent framework for shared technical work" — frază vagă, nu explică MECANISMUL
+- "/investors/studio-level-participation/: This gives investors exposure to the layer where important opportunities are formed" — vag
+- "/contact/: The process is designed to keep the first interaction short, relevant, and immediately useful" — frază autodescripțivă, nu conținut util
+Problema generală: multe fraze DESCRIU ce ar trebui să facă ceva, în loc să comunice direct valoarea.
+
+## H3: Ton negativist / defensiv
+
+### [MEDIUM] Tonul "Not a..." în lipsa unui "This is a..."
+Deși instrucțiunile includ comparații "not an accelerator/consultancy/investor", în practică paginile încep des cu ce NU este Outfinity. Exemple:
+- docs/studio/index.html: nu spune clar "Suntem un venture studio" ci mai degrabă "Nu suntem un accelerator"
+- explorer-circle: "The Explorer Circle is not a public community, a job board or an automatic investment program" — începe cu negația
+Problema: Creează un ton defensiv. Soluția: Pune mai întâi afirmația pozitivă, apoi comparația.
+
+### [LOW] Prea mult "selective", "disciplined", "serious" = ton elitist
+Cuvintele "selective", "disciplined", "serious" apar de zeci de ori. În cantitate mare, creează un ton elitist și distant. Exemple:
+- "Outfinity is selective by design"
+- "We prefer a small network of highly relevant contributors"
+- "serious AI ventures" (de 15+ ori)
+- "serious people" (apare de 3-4 ori)
+Problema: Un vizitator nou poate simți că site-ul îl judecă înainte să cunoască oportunitea. Soluția: păstrează "disciplined" dar reduce "serious" și "selective".
+
+## H4: Conținut care contrazice instrucțiunile
+
+### [HIGH] docs/partners/research-partners/index.html — Confuzie cu AI Labs
+Instrucțiunile definesc AI Labs ca parteneri tehnici și Research Partners ca organizații de cercetare (universități, consorții). În practică, paginile "AI Labs" și "Research Partners" se suprapun puternic — amândouă vorbesc despre "research depth", "technical capability", "demonstrators". Un vizitator nu poate distinge între cele două track-uri. Ar trebui să fie clar: AI Labs = echipe tehnice care construiesc sisteme; Research Partners = universități/consorții care fac cercetare academică.
+
+### [HIGH] docs/partners/recruitment-partners/index.html — Nu apare în structura instrucțiunilor
+Instrucțiunile nu menționează deloc "Recruitment Partners" ca un capitol separat. Este un concept ad-hoc. Sugestie: integrează-l în "Organic Recruitment and Venture Discovery" (Chapter 9 din instrucțiuni) care explică exact modelul de recrutare organic.
+
+### [MEDIUM] Toate paginile: Numele "Axiologic" apare brusc fără context
+docs/research/index.html: "Axiologic Research contributes a significant part of this technical grounding, together with systems such as AssistOS, Ploinky, MRP-VM, OpenDSU"
+Problema: Un vizitator nou nu știe ce e Axiologic. Instrucțiunile menționează "Axiologic" o singură dată în context IP. Pagina ar trebui să explice relația (ex: research partner, entity affiliată) sau să integreze mai natural.
+
+### [MEDIUM] docs/operating-model/index.html — "What stays clear" în loc de "How it works"
+Instrucțiunile definesc operating model ca un proces pe etape (thesis, collaboration, validation, venture formation). Pagina curentă are secțiuni: "Why the model is staged", "What stays clear as a venture matures", "When a NewCo is created". Lipsește secțiunea care explică CUM funcționează modelul pas cu pas.
+
+## H5: Pagini slab finisate — propuneri de conținut
+
+### docs/privacy-policy/index.html
+Propunere de adăugat:
+- Entitatea responsabilă (nume, adresă, contact)
+- Baza legală pentru prelucrare (GDPR Art. 6)
+- Categoriile de date colectate (nume, email, organizație, mesaj)
+- Scopul prelucrării (qualification, relationship management)
+- Perioada de retenție (ex: 24 luni după ultimul contact)
+- Drepturile utilizatorului (acces, rectificare, ștergere, portabilitate, opoziție)
+- Procesatori terți (Google Forms dacă e cazul)
+- Transfer internațional de date
+- Dreptul de a depune plângere la autoritatea de supraveghere
+
+### docs/terms/index.html
+Propunere de adăugat:
+- Limitare de răspundere (site-ul nu constituie sfat juridic/financiar)
+- Legea aplicabilă și jurisdicția
+- Proprietate intelectuală a conținutului site-ului
+- Link-uri externe (nu suntem responsabili pentru conținut terță parte)
+- Modificări ale termenilor
+- Contact pentru notificări legale
+
+### docs/cookies/index.html
+Propunere de adăugat:
+- Listează cookie-urile reale folosite (categorii: esențiale, funcționale, analytics)
+- Pentru fiecare cookie: nume, scop, durată, terță parte
+- Mecanism de opt-out / consimțământ
+- Politica de cookie-uri a serviciilor terțe (dacă există analytics)
+
+### docs/imprint/index.html
+Propunere de adăugat:
+- Numele legal al entității
+- Forma juridică
+- Adresa sediului social
+- Număr de înregistrare (trade register)
+- VAT ID / tax ID
+- Reprezentant legal (nume)
+- Email de contact legal
+- Supervisory authority (dacă e cazul, ex. pentru Germania)
+
+### docs/legal-disclaimer/index.html
+Propunere de adăugat:
+- Disclaimer general: informațiile de pe site sunt cu titlu informativ
+- Nu constituie sfat juridic, financiar sau de investiții
+- Nu există garanții privind acuratețea sau actualitatea
+- Limitare de răspundere pentru daune rezultate din utilizarea site-ului
+- Link-uri externe: nu avem control asupra conținutului acestora
+
+## H6: Propuneri de reorganizare a conținutului
+
+### [HIGH] Adaugă secțiunea "What We Are Building" în docs/studio/index.html
+Listează explicit domeniile de interes așa cum apar în instrucțiuni:
+- Agentic AI systems
+- AI infrastructure
+- Explainable and verifiable AI
+- Regulated-industry AI
+- AI-assisted software engineering
+- AI governance
+- Privacy-preserving computation
+- Secure digital collaboration
+- AI and blockchain coordination
+- Open-source tools
+
+### [HIGH] Adaugă secțiunea "Why the venture studio model" în docs/studio/index.html
+Explică: researcher vs. commercial structure, AI Lab vs. investor-ready venture, industry expert vs. technical team, entrepreneur vs. deep technology. Arată cum Outfinity combină aceste elemente.
+
+### [HIGH] Creează pagina "Why Outfinity Is Different" (nouă)
+Comparație explicită:
+- Not a classical accelerator (works before company exists)
+- Not a consultancy (builds companies, not deliverables)
+- Not a passive investor (contributes theses, architecture, recruitment)
+- Not a closed corporate lab (works with external AI Labs)
+
+### [HIGH] Creează pagina "Work With Outfinity" (nouă)
+Secțiuni: For AI Labs, For researchers, For entrepreneurs, For industry experts, For investors, For recruitment partners, How to start.
+
+### [HIGH] Creează pagina "Venture Formation and NewCo Creation" (nouă)
+Secțiuni: What is a NewCo, Conditions for formation, Founders and roles, Studio participation, IP, Governance, Vesting.
+
+### [HIGH] Restructurează docs/studio/how-ventures-are-built/index.html
+Adaugă cele 6 etape explicite:
+1. Venture thesis
+2. Collaboration before incorporation
+3. Venture sprint
+4. Prototype and proof
+5. Venture formation
+6. Investment readiness
+
+### [MEDIUM] docs/studio/explorer-circle/index.html — Adaugă secțiunile lipsă
+- Open-source contributions (MIT License, contribuțiile intenționate)
+- Paid work and IP (attribution, background IP)
+- Why this model is lean (recruitment organic, costuri reduse)
+
+### [MEDIUM] docs/partners/founder-operators/index.html — Separă rolurile
+- Entrepreneurs in Residence (rol, profil, tranziție)
+- Industry Venture Partners (sector expertise, validation)
+- Growth and marketing experts (positioning, messaging)
+- Advisors (defined roles, written agreements)
+- How collaboration begins
+
+### [LOW] Toate paginile legale — rescrie cu conținut real, nu placeholder
+Vezi propunerile detaliate în H5 de mai sus.
+
+## H7: Probleme de ton și voice
+
+### [MEDIUM] Prea multe fraze pasive și impersonale
+Exemple:
+- "This gives the studio a deeper basis" -> "The studio builds a deeper basis"
+- "That capability matters because" -> "Capability matters because"
+- "That is why Outfinity is focused on" -> "Outfinity focuses on"
+Problema: Tonul pasiv face textul să sune birocratic și lipsit de energie.
+
+### [MEDIUM] Abuz de "that" și "which" — fraze încâlcite
+Exemplu din docs/research/index.html: "Outfinity's venture pipeline grows from applied research, reusable software infrastructure, and technical programs that can support multiple companies over time that have real staying power."
+Problema: Fraze cu "that that" și "which that" fac textul greu de urmărit. Soluția: propoziții mai scurte, un singur "that" per frază.
+
+### [LOW] Terminologie inconsistentă
+- "explorer-circle" vs "Explorer Circle" (uneori cu cratimă, alteori fără)
+- "AI Labs" vs "AI Lab" (uncapitalizat în texte)
+- "NewCo" vs "newco" vs "new company" — inconsistent
+
+### [LOW] "Offering" tone în paginile de contact
+Toate CTA-urile sunt "Request a briefing" cu același link. Pentru un vizitator, e confuz — nu știe ce briefing primește. Pagina de contact ar trebui să aibă CTA-uri diferențiate pe persona (sau măcar să explice ce urmează).
+
+## H8: Bug-uri / erori
+
+### [LOW] docs/investors/index.html — "Tha..." — text tăiat
+La linia 40: "Tha... (line truncated to 2000 chars)" — textul paginii a fost trunchiat la 2000 de caractere și conține "Tha..." în loc de "That". Acesta este un artifact de generație care trebuie corectat — fraza începe cu "Tha..." și continuă trunchiat.
+
+### [LOW] docs/studio/index.html — "concr..." — text tăiat
+La linia 40: "who bring concr... (line truncated to 2000 chars)" — paginile au fost trunchiate la generare. Trebuie verificate și completate.
+
+### [LOW] docs/ventures/index.html — "hosted models..." trunchiat
+La linia 40: "Elastic Agentic Cloud focuses on hosted models... (line truncated to 2000 chars)". Secțiunile trunchiate trebuie completate.
+
+## Scurt rezumat
+
+Total probleme identificate: ~45
+- BLOCKER: 5 (pagini lipsă din instrucțiuni)
+- CRITICAL: 9 (conținut esențial lipsă)
+- HIGH: 6 (structură și concepte lipsă)
+- MEDIUM: 18 (text vag, ton, formulări)
+- LOW: 7 (bug-uri minore, consistență)
+
+Priorități imediate:
+1. Creează "Why Outfinity Is Different" (Chapter 10)
+2. Creează "Work With Outfinity" (Chapter 11)
+3. Creează "Venture Formation and NewCo Creation" (Chapter 6)
+4. Restructurează "How Ventures Are Built" cu 6 etape
+5. Rescrie toate paginile legale (Privacy, Terms, Cookies, Imprint, Disclaimer)
