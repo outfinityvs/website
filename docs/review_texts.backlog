@@ -234,7 +234,112 @@ Problema: Fraze cu "that that" și "which that" fac textul greu de urmărit. Sol
 ### [LOW] "Offering" tone în paginile de contact
 Toate CTA-urile sunt "Request a briefing" cu același link. Pentru un vizitator, e confuz — nu știe ce briefing primește. Pagina de contact ar trebui să aibă CTA-uri diferențiate pe persona (sau măcar să explice ce urmează).
 
-## H8: Bug-uri / erori
+## H8: Venture pages — review secundar (toate 8 pagini)
+
+### [CRITICAL] Toate cele 8 venture pages — conținut generic, subțire, fără tracțiune
+Fiecare pagină follow aceeași structură rigidă (exact 3 secțiuni a câte 2 paragrafe). Conținutul unic per pagină: ~150-250 cuvinte. Extrem de puțin pentru o descriere de venture.
+- Niciun număr, nume de client, tracțiune, venituri, background de echipă sau diferențiere competitivă
+- "Why this team" section lipsește complet — niciun motiv pentru care Outfinity POATE construi aceste venture
+- Nicio mențiune a competiției (Microsoft Copilot, Zoom, LangChain etc.)
+
+### [HIGH] Toate venture pages — timp exclusiv viitor, fără nimic "acum"
+Verbe dominante: "explores", "creates a path for", "the opportunity is", "can emerge", "focuses on", "is designed for". Nimic nu se întâmplă în prezent. Absența completă a unui "we have built X" sau "current prototype does Y" subminează credibilitatea.
+
+### [HIGH] Paginile "Research-Originated Directions" (pages 5-8) — descriu laboratoare, nu venture
+Ploinky, Neuro-Symbolic, Executable Science, Agentic Federated Learning — toate sunt descrise ca laboratoare de cercetare, nu oportunități de business. Lipsește: model de business, mărimea pieței, go-to-market, echipă.
+
+### [MEDIUM] AssistOS Enterprise — text vag, fără specificitate
+"The venture centers on a strong idea" — frază filler. "Enterprise adoption grows when AI workspaces support governance" — afirmație nesuportată. "Deep technical infrastructure" e menționată dar niciodată explicată.
+
+### [MEDIUM] WebAssist Cloud — ușor mai bun, dar încă vag
+Problema e bine enunțată (B2B websites, interacțiune) dar soluția e vagă. "Well positioned for" e hand-wavy. "A large share of B2B websites" — cât de large?
+
+### [MEDIUM] WebMeet AI Collaboration Cloud — nediferențiat
+"Meetings often sit at the center of technical work" e truism. Nu se diferențiază de Zoom, Teams, Miro. "Richer workspace" e vag. "Access to project memory and specialized agents" — jargon.
+
+### [MEDIUM] Elastic Agentic Cloud — "fuller" e greșeală de engleză
+"Fuller operating reality" — ar trebui "fuller operational reality" sau "broader operating reality". Unic avantaj concret: unghiul european / data-locality.
+
+### [MEDIUM] Ploinky Wormhole Network — nume distinctiv, conținut nedescriptiv
+"Distributed AI systems need communication patterns..." — boilerplate pur. "Oriented around" e frază slabă. "Communication becomes part of the system architecture that determines trust" — raționament circular.
+
+### [MEDIUM] Neuro-Symbolic Systems Lab — poate fi orice lab
+"Many enterprise and scientific AI problems benefit from constraints, planning, validation" — se aplică la orice. Acronim neexplicat (MRP-VM). "Product potential wherever reliability and explainability create value" — acoperă aproape orice software.
+
+### [MEDIUM] Executable Science AI Lab — extrem de scurt
+"Scientific results are still primarily published as narrative artifacts" — truism. Secțiunea 2 are doar 2 propoziții și nu spune aproape nimic. "Structured digital objects" se repetă cuvânt cu cuvânt în lead și prima secțiune.
+
+### [MEDIUM] Agentic Federated Learning Lab — cea mai bună pagină, dar tot concept
+Problema e bine enunțată (healthcare, pharma, finance, privacy). Soluția e vagă: "broader system for privacy-aware AI collaboration." "Governed distributed intelligence" e jargon abstract. "Why the opportunity is serious" e prea colocvial ca titlu.
+
+## H9: Conținut suplimentar care contrazice instrucțiunile (review 2)
+
+### [HIGH] docs/index.html (homepage) — Hero section mult mai slab decât instrucțiunile
+Instrucțiunile cer: H1 "# Outfinity Venture Studio", H2 "## Building AI ventures with researchers, AI Labs, entrepreneurs, experts and investors" (lista explicită de parteneri). Pagina are: H1 "Building AI ventures with the right people around the right opportunity" — frază vagă, fără lista explicită de cine caută Outfinity. 
+Lipsește și fraza cheie din instrucțiuni: "We do not treat venture creation as a matter of launching many companies prematurely."
+
+### [HIGH] Lipsește "Public positioning statement" din Chapter 1
+Instrucțiunile definesc: "Outfinity Venture Studio builds AI ventures through structured collaboration. We connect research, software architecture, industry expertise, entrepreneurship and investment discipline." Această frază de poziționare nu apare pe site.
+
+### [HIGH] Lipsește "Call to action" cu lista specifică de persoane
+Instrucțiunile Chapter 1: "If you are an AI Lab, researcher, entrepreneur, industry expert, angel investor, family office or strategic partner interested in building serious AI ventures, Outfinity welcomes selective conversations." Site-ul nu are această listă specifică niciunde.
+
+### [MEDIUM] Instrucțiunile zic "This thesis is not a pitch deck" — pagina nu spune asta
+Chapter 2: "This thesis is not a pitch deck. It is a working document used to attract the right collaborators." Această comparație clară lipsește din how-ventures-are-built.
+
+### [MEDIUM] "A technical prototype is not automatically a venture" — lipsește
+Chapter 4: "A technical prototype is not automatically a venture. Outfinity helps evaluate whether a technical direction has a clear user, a real buyer..." Acest caveat important lipsește din AI Labs page.
+
+### [MEDIUM] "Outfinity avoids vague advisory arrangements" — lipsește
+Chapter 5: "Outfinity avoids vague advisory arrangements where titles are granted without measurable contribution." Această poziție de integritate lipsește din founder-operators.
+
+### [MEDIUM] Relația Outfinity-Axiologic neexplicată
+docs/research/index.html: "Axiologic Research contributes a significant part of this technical grounding." Dar nu se explică: e Axiologic parte din Outfinity? E partener? E acționar? Un vizitator nu poate înțelege relația.
+
+### [LOW] Fără "recommendation-driven network" și "private salons"
+Chapter 9 descrie: recommendation-based recruitment, private salons, venture theses ca recruitment tools. Pagina recruitment-partners e doar despre parteneri de recrutare, nu despre acest model organic.
+
+## H10: Probleme SEO și structură
+
+### [MEDIUM] Meta descriptions prea similare între pagini
+Majoritatea paginilor au meta description care reîncălzește titlul. Example: "Outfinity works with AI Labs that have real technical capability and want a credible route from applied systems work to venture formation" vs titlul "Independent AI Labs". Prea puțin diferențiate.
+
+### [MEDIUM] Fără structured data (schema.org)
+Nu există marcaj JSON-LD pentru Organization, VentureStudio, sau InvestmentFund. Lipsește complet pentru SEO avansat.
+
+### [LOW] Fără sitemap.xml
+Nu există un sitemap.xml în rădăcina site-ului. Motoarele de căutare nu pot descoperi toate paginile ușor.
+
+### [LOW] Locație geografică / jurisdicție neclară
+Site-ul nu menționează niciodată țara de operare, jurisdicția, sau piața geografică. E relevant pentru investitori și parteneri.
+
+## H11: Probleme de consistency cross-site
+
+### [MEDIUM] CTA uniform "Request a briefing" pe toate paginile
+Indiferent de pagină, același CTA cu același link de Google Forms. Un investor, un researcher, un entrepreneur primesc același mesaj. Instrucțiunile cer CTA-uri diferențiate pe persona.
+
+### [MEDIUM] Paginile legale nu menționează Google Forms ca procesator terță parte
+docs/privacy-policy/index.html nu spune că datele din formular trec prin Google Forms (GDPR require acest lucru). E o breșă de conformitate.
+
+### [LOW] Footer descriptions inconsistente
+Fiecare pagină are un text diferit în footer: "Research-backed AI venture formation" (home), "Studio." (studio), "How ventures are built." (how ventures), "Explorer Circle." (explorer). Ar trebui să fie consistent cu brand messaging.
+
+### [LOW] "Explorer Circle" vs "explorer-circle" — inconsistent
+Uneori cu cratimă, alteori fără. În URL e cu cratimă, în text uneori fără.
+
+## H12: Altele minore
+
+### [LOW] Fără FAQ page
+Un model atipic ca venture studio ar beneficia de un FAQ. Întrebări frecvente: "Cum diferă de un accelerator?", "Ce primesc în schimbul equity?", "Cât durează procesul?" Nu există o astfel de pagină.
+
+### [LOW] Nicio pagină "How to start" / getting started
+Nu există un ghid simplu: "First briefing → fit assessment → Explorer Circle → project collaboration → venture formation". Vizitatorul nu știe care e primul pas concret după formular.
+
+### [LOW] Venture pages nu se leagă de operating model pages
+Operational model pages și venture pages nu au linkuri între ele. Un vizitator care citește "how ventures are built" nu poate vedea un exemplu concret dintr-o venture page și invers.
+
+### [LOW] Fraze tautologice în multiple pagini
+"Positive signals from the venture sprint lead to prototypes, demonstrations, validation reports, workflow simulations, open-source components, or controlled pilots. Each of these outputs creates evidence..." — tautologie. "A venture thesis defines the problem, the technical insight, the market context" + "This thesis gives the work a clear center of gravity" — aceeași idee spusă de două ori.
 
 ### [LOW] docs/investors/index.html — "Tha..." — text tăiat
 La linia 40: "Tha... (line truncated to 2000 chars)" — textul paginii a fost trunchiat la 2000 de caractere și conține "Tha..." în loc de "That". Acesta este un artifact de generație care trebuie corectat — fraza începe cu "Tha..." și continuă trunchiat.
@@ -247,12 +352,12 @@ La linia 40: "Elastic Agentic Cloud focuses on hosted models... (line truncated 
 
 ## Scurt rezumat
 
-Total probleme identificate: ~45
+Total probleme identificate: ~85
 - BLOCKER: 5 (pagini lipsă din instrucțiuni)
-- CRITICAL: 9 (conținut esențial lipsă)
-- HIGH: 6 (structură și concepte lipsă)
-- MEDIUM: 18 (text vag, ton, formulări)
-- LOW: 7 (bug-uri minore, consistență)
+- CRITICAL: 11 (conținut esențial lipsă + venture pages generice)
+- HIGH: 12 (structură, concepte, diferențiere competitivă lipsă)
+- MEDIUM: 35 (text vag, ton, formulări, SEO)
+- LOW: 22 (bug-uri minore, consistență, FAQ, getting started)
 
 Priorități imediate:
 1. Creează "Why Outfinity Is Different" (Chapter 10)
