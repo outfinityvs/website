@@ -62,10 +62,14 @@
     ]
   };
 
+  function normalize(p) {
+    return p.replace(/\/$/, "");
+  }
   function renderLinks(arr) {
     var html = "";
+    var p = normalize(path);
     for (var i = 0; i < arr.length; i++) {
-      var active = path === arr[i].href || path.indexOf(arr[i].href.replace(/\/$/, "") + "/") === 0 ? " current" : "";
+      var active = p === normalize(arr[i].href) ? " current" : "";
       html += '<a class="submenu-link' + active + '" href="' + arr[i].href + '">' + arr[i].label + "</a>";
     }
     return html;
