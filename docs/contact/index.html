@@ -9,31 +9,7 @@
 </head>
 <body class="theme-contact">
 
-  <nav class="nav" aria-label="Primary navigation">
-    <div class="nav-inner">
-      <a class="brand" href="/">
-        <img src="/assets/outfinity.svg" alt="Outfinity logo">
-        <span>Outfinity</span>
-      </a>
-      <ul class="menu-groups"><li class="menu-group">
-        <button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-studio">Studio</button>
-        <div class="menu-layer">
-          <div class="menu-panel" id="menu-panel-studio" aria-label="Studio submenu"><div class="menu-section"><p class="menu-section-title">Studio</p><a class="submenu-link" href="/studio/">Studio Model</a><a class="submenu-link" href="/studio/why-outfinity-is-different/">Why Outfinity Is Different</a><a class="submenu-link" href="/studio/how-ventures-are-built/">How Ventures Are Built</a><a class="submenu-link" href="/studio/explorer-circle/">Explorer Circle</a></div><div class="menu-section"><p class="menu-section-title">Investors</p><a class="submenu-link" href="/investors/">Investor Participation</a><a class="submenu-link" href="/investors/studio-level-participation/">Studio-Level Participation</a><a class="submenu-link" href="/investors/venture-specific-participation/">Venture-Specific Participation</a></div><div class="menu-section"><p class="menu-section-title">Operating Model</p><a class="submenu-link" href="/operating-model/">Operating Model</a><a class="submenu-link" href="/operating-model/collaboration-process/">Collaboration Process</a><a class="submenu-link" href="/operating-model/venture-formation-and-newco-creation/">Venture Formation and NewCo Creation</a><a class="submenu-link" href="/operating-model/legal-ip/">Legal and IP Principles</a></div></div>
-        </div>
-      </li><li class="menu-group">
-        <button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-ventures">Ventures</button>
-        <div class="menu-layer">
-          <div class="menu-panel" id="menu-panel-ventures" aria-label="Ventures submenu"><div class="menu-section"><p class="menu-section-title">Current Ventures</p><a class="submenu-link" href="/ventures/">Ventures Overview</a><a class="submenu-link" href="/ventures/assistos-enterprise/">AssistOS Enterprise</a><a class="submenu-link" href="/ventures/webassist-cloud/">WebAssist Cloud</a><a class="submenu-link" href="/ventures/webmeet-ai-collaboration-cloud/">WebMeet AI Collaboration Cloud</a><a class="submenu-link" href="/ventures/elastic-agentic-cloud/">Elastic Agentic Cloud</a><a class="submenu-link" href="/ventures/soptrace-gxp/">SOPTrace GxP</a><a class="submenu-link" href="/ventures/outfinity-works/">Outfinity Works</a></div><div class="menu-section"><p class="menu-section-title">Research-Originated Directions</p><a class="submenu-link" href="/ventures/ploinky-wormhole-network/">Ploinky Wormhole Network</a><a class="submenu-link" href="/ventures/neuro-symbolic-systems-lab/">Neuro-Symbolic Systems Lab</a><a class="submenu-link" href="/ventures/executable-science-ai-lab/">Executable Science AI Lab</a><a class="submenu-link" href="/ventures/agentic-federated-learning-lab/">Agentic Federated Learning Lab</a><a class="submenu-link" href="/ai-thesis/">AI Thesis</a><a class="submenu-link" href="/research/">Research Base</a></div></div>
-        </div>
-      </li><li class="menu-group is-current">
-        <button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-partners">Partners</button>
-        <div class="menu-layer">
-          <div class="menu-panel" id="menu-panel-partners" aria-label="Partners submenu"><div class="menu-section"><p class="menu-section-title">Partners</p><a class="submenu-link" href="/partners/">Partners Overview</a><a class="submenu-link" href="/partners/work-with-outfinity/">Work With Outfinity</a><a class="submenu-link" href="/partners/ai-labs/">AI Labs</a><a class="submenu-link" href="/partners/founder-operators/">Founder-Operators</a><a class="submenu-link" href="/partners/strategic-enterprises/">Strategic Enterprises</a><a class="submenu-link" href="/partners/research-partners/">Research Partners</a><a class="submenu-link" href="/partners/recruitment-partners/">Recruitment Partners</a></div><div class="menu-section"><p class="menu-section-title">Contact</p><a class="submenu-link current" href="/contact/">Contact Form</a></div></div>
-        </div>
-      </li></ul>
-      <a class="nav-cta" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Request a briefing</a>
-    </div>
-  </nav>
+  <nav id="nav" aria-label="Primary navigation"></nav>
   <main class="page-main">
     <div class="page-shell">
       <header class="page-hero">
@@ -91,118 +67,7 @@
       <div class="footer-links"><a href="/legal-disclaimer/">Legal Disclaimer</a><a href="/privacy-policy/">Privacy Policy</a><a href="/imprint/">Imprint</a><a href="/terms/">Terms</a><a href="/cookies/">Cookies</a></div>
     </div>
   </footer>
-<script>
-  (() => {
-    const nav = document.querySelector(".nav");
-    if (!nav) {
-      return;
-    }
 
-    const groups = Array.from(nav.querySelectorAll(".menu-group"));
-    if (!groups.length) {
-      return;
-    }
-
-    let closeTimer = null;
-    let lockedGroup = null;
-
-    const clearCloseTimer = () => {
-      if (closeTimer) {
-        window.clearTimeout(closeTimer);
-        closeTimer = null;
-      }
-    };
-
-    const setOpenGroup = (nextGroup) => {
-      groups.forEach((group) => {
-        const isOpen = group === nextGroup;
-        group.classList.toggle("is-open", isOpen);
-        const trigger = group.querySelector(".menu-trigger");
-        if (trigger) {
-          trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
-        }
-      });
-    };
-
-    const scheduleClose = () => {
-      clearCloseTimer();
-      closeTimer = window.setTimeout(() => {
-        if (!lockedGroup) {
-          setOpenGroup(null);
-        }
-      }, 280);
-    };
-
-    groups.forEach((group) => {
-      const trigger = group.querySelector(".menu-trigger");
-
-      group.addEventListener("pointerenter", () => {
-        clearCloseTimer();
-        if (lockedGroup && lockedGroup !== group) {
-          lockedGroup = null;
-        }
-        setOpenGroup(group);
-      });
-
-      group.addEventListener("pointerleave", () => {
-        if (lockedGroup !== group) {
-          scheduleClose();
-        }
-      });
-
-      group.addEventListener("focusin", () => {
-        clearCloseTimer();
-        setOpenGroup(group);
-      });
-
-      group.addEventListener("focusout", () => {
-        window.requestAnimationFrame(() => {
-          if (!group.contains(document.activeElement) && !lockedGroup) {
-            scheduleClose();
-          }
-        });
-      });
-
-      trigger?.addEventListener("click", (event) => {
-        event.preventDefault();
-        clearCloseTimer();
-
-        if (lockedGroup === group) {
-          lockedGroup = null;
-          setOpenGroup(null);
-          return;
-        }
-
-        lockedGroup = group;
-        setOpenGroup(group);
-      });
-    });
-
-    nav.addEventListener("pointerenter", clearCloseTimer);
-    nav.addEventListener("pointerleave", () => {
-      if (!lockedGroup) {
-        scheduleClose();
-      }
-    });
-
-    document.addEventListener("click", (event) => {
-      if (nav.contains(event.target)) {
-        return;
-      }
-
-      lockedGroup = null;
-      clearCloseTimer();
-      setOpenGroup(null);
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        lockedGroup = null;
-        clearCloseTimer();
-        setOpenGroup(null);
-      }
-    });
-  })();
-  </script>
+<script src="/js/nav.js"></script>
 </body>
 </html>
