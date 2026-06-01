@@ -993,6 +993,10 @@ main {
     font-size: 0.71rem;
   }
 
+  .page-main {
+    padding-top: 5rem;
+  }
+
   .home-hero {
     padding: 4.2rem 0 3.4rem;
   }

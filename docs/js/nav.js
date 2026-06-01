@@ -117,7 +117,7 @@
     "</div></div></div>" +
     "</li>" +
     "</ul>" +
-    '<a class="nav-cta" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Request a briefing</a>' +
+    '<a class="nav-cta" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Contact</a>' +
     "</div>" +
     "</nav>";
 
