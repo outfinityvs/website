@@ -18,61 +18,65 @@
   }
   detectBasePath();
 
-  function isCurrent(prefix) {
-    return path === prefix || path.indexOf(prefix + "/") === 0 ? " current" : "";
+  function isCurrent(href) {
+    var hrefPath = href.replace(/^\//, "");
+    var currentPath = path.replace(/^\//, "");
+    return currentPath === hrefPath ? " current" : "";
   }
 
-  function inGroup(prefixes) {
-    for (var i = 0; i < prefixes.length; i++) {
-      if (path === prefixes[i] || path.indexOf(prefixes[i] + "/") === 0) return " is-current";
+  function inGroup(groups) {
+    var currentPath = path.replace(/^\//, "");
+    for (var i = 0; i < groups.length; i++) {
+      var group = groups[i].replace(/^\//, "").replace(/\.html$/, "");
+      if (currentPath === group + ".html" || currentPath.indexOf(group + "/") === 0) return " is-current";
     }
     return "";
   }
 
   var links = {
     studio: [
-      { href: "/studio/", label: "Studio Model" },
-      { href: "/studio/why-outfinity-is-different/", label: "Why Outfinity Is Different" },
-      { href: "/studio/how-ventures-are-built/", label: "How Ventures Are Built" },
-      { href: "/studio/explorer-circle/", label: "Explorer Circle" }
+      { href: "/studio.html", label: "Studio Model" },
+      { href: "/studio/why-outfinity-is-different.html", label: "Why Outfinity Is Different" },
+      { href: "/studio/how-ventures-are-built.html", label: "How Ventures Are Built" },
+      { href: "/studio/explorer-circle.html", label: "Explorer Circle" }
     ],
     investors: [
-      { href: "/investors/", label: "Investor Participation" },
-      { href: "/investors/studio-level-participation/", label: "Studio-Level Participation" },
-      { href: "/investors/venture-specific-participation/", label: "Venture-Specific Participation" }
+      { href: "/investors.html", label: "Investor Participation" },
+      { href: "/investors/studio-level-participation.html", label: "Studio-Level Participation" },
+      { href: "/investors/venture-specific-participation.html", label: "Venture-Specific Participation" }
     ],
     operating: [
-      { href: "/operating-model/", label: "Operating Model" },
-      { href: "/operating-model/collaboration-process/", label: "Collaboration Process" },
-      { href: "/operating-model/venture-formation-and-newco-creation/", label: "Venture Formation and NewCo Creation" },
-      { href: "/operating-model/legal-ip/", label: "Legal and IP Principles" }
+      { href: "/operating-model.html", label: "Operating Model" },
+      { href: "/operating-model/collaboration-process.html", label: "Collaboration Process" },
+      { href: "/operating-model/venture-formation-and-newco-creation.html", label: "Venture Formation and NewCo Creation" },
+      { href: "/operating-model/legal-ip.html", label: "Legal and IP Principles" }
     ],
     ventures: [
-      { href: "/ventures/", label: "Ventures Overview" },
-      { href: "/ventures/assistos-enterprise/", label: "AssistOS Enterprise" },
-      { href: "/ventures/webassist-cloud/", label: "WebAssist Cloud" },
-      { href: "/ventures/webmeet-ai-collaboration-cloud/", label: "WebMeet AI Collaboration Cloud" },
-      { href: "/ventures/elastic-agentic-cloud/", label: "Elastic Agentic Cloud" },
-      { href: "/ventures/soptrace-gxp/", label: "SOPTrace GxP" },
-      { href: "/ventures/outfinity-works/", label: "Outfinity Works" },
-      { href: "/ventures/scripta/", label: "SCRIPTA" }
+      { href: "/ventures.html", label: "Ventures Overview" },
+      { href: "/ventures/assistos-enterprise.html", label: "AssistOS Enterprise" },
+      { href: "/ventures/webassist-cloud.html", label: "WebAssist Cloud" },
+      { href: "/ventures/webmeet-ai-collaboration-cloud.html", label: "WebMeet AI Collaboration Cloud" },
+      { href: "/ventures/elastic-agentic-cloud.html", label: "Elastic Agentic Cloud" },
+      { href: "/ventures/soptrace-gxp.html", label: "SOPTrace GxP" },
+      { href: "/ventures/outfinity-works.html", label: "Outfinity Works" },
+      { href: "/ventures/scripta.html", label: "SCRIPTA" }
     ],
     research: [
-      { href: "/ventures/ploinky-wormhole-network/", label: "Ploinky Wormhole Network" },
-      { href: "/ventures/neuro-symbolic-systems-lab/", label: "Neuro-Symbolic Systems Lab" },
-      { href: "/ventures/executable-science-ai-lab/", label: "Executable Science AI Lab" },
-      { href: "/ventures/cryptography-and-privacy-lab/", label: "Cryptography and Privacy Lab" },
-      { href: "/ai-thesis/", label: "AI Thesis" },
-      { href: "/research/", label: "Research Base" }
+      { href: "/ventures/ploinky-wormhole-network.html", label: "Ploinky Wormhole Network" },
+      { href: "/ventures/neuro-symbolic-systems-lab.html", label: "Neuro-Symbolic Systems Lab" },
+      { href: "/ventures/executable-science-ai-lab.html", label: "Executable Science AI Lab" },
+      { href: "/ventures/cryptography-and-privacy-lab.html", label: "Cryptography and Privacy Lab" },
+      { href: "/ai-thesis.html", label: "AI Thesis" },
+      { href: "/research.html", label: "Research Base" }
     ],
     partners: [
-      { href: "/partners/", label: "Partners Overview" },
-      { href: "/partners/work-with-outfinity/", label: "Work With Outfinity" },
-      { href: "/partners/ai-labs/", label: "AI Labs" },
-      { href: "/partners/founder-operators/", label: "Founder-Operators" },
-      { href: "/partners/strategic-enterprises/", label: "Strategic Enterprises" },
-      { href: "/partners/research-partners/", label: "Research Partners" },
-      { href: "/partners/recruitment-partners/", label: "Recruitment Partners" }
+      { href: "/partners.html", label: "Partners Overview" },
+      { href: "/partners/work-with-outfinity.html", label: "Work With Outfinity" },
+      { href: "/partners/ai-labs.html", label: "AI Labs" },
+      { href: "/partners/founder-operators.html", label: "Founder-Operators" },
+      { href: "/partners/strategic-enterprises.html", label: "Strategic Enterprises" },
+      { href: "/partners/research-partners.html", label: "Research Partners" },
+      { href: "/partners/recruitment-partners.html", label: "Recruitment Partners" }
     ],
     resources: [
       { href: "https://www.axiologic.net", label: "Axiologic Research" },
@@ -80,7 +84,7 @@
       { href: "https://agisystem2.com/", label: "Neuro-Symbolic AI" }
     ],
     contact: [
-      { href: "/contact/", label: "Contact Form" }
+      { href: "/contact.html", label: "Contact Form" }
     ]
   };
 

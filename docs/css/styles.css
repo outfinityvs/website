@@ -1103,6 +1103,10 @@ main {
     text-justify: inter-word;
 }
 
+.page-section p + p {
+    text-indent: 1.5em;
+}
+
 .theme-investors .page-hero .lead,
 .theme-operating .page-hero .lead,
 .theme-legal .page-hero .lead,
@@ -1113,10 +1117,6 @@ main {
 .theme-operating .page-cta p,
 .theme-legal .page-cta p {
     color: rgba(13, 17, 17, 0.72);
-}
-
-.page-section p + p {
-    margin-top: 0.82rem;
 }
 
 .page-copy p a,
