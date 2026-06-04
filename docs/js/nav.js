@@ -1,5 +1,22 @@
 (function () {
   var path = window.location.pathname;
+  var basePath = "";
+  
+  function detectBasePath() {
+    var scripts = document.getElementsByTagName("script");
+    for (var i = 0; i < scripts.length; i++) {
+      var src = scripts[i].src || scripts[i].getAttribute("src");
+      if (src && src.indexOf("nav.js") !== -1) {
+        var match = src.match(/^(.*?)js\/nav\.js/);
+        if (match) {
+          basePath = match[1];
+          return;
+        }
+      }
+    }
+    basePath = "";
+  }
+  detectBasePath();
 
   function isCurrent(prefix) {
     return path === prefix || path.indexOf(prefix + "/") === 0 ? " current" : "";
@@ -44,7 +61,7 @@
       { href: "/ventures/ploinky-wormhole-network/", label: "Ploinky Wormhole Network" },
       { href: "/ventures/neuro-symbolic-systems-lab/", label: "Neuro-Symbolic Systems Lab" },
       { href: "/ventures/executable-science-ai-lab/", label: "Executable Science AI Lab" },
-      { href: "/ventures/agentic-federated-learning-lab/", label: "Agentic Federated Learning Lab" },
+      { href: "/ventures/cryptography-and-privacy-lab/", label: "Cryptography and Privacy Lab" },
       { href: "/ai-thesis/", label: "AI Thesis" },
       { href: "/research/", label: "Research Base" }
     ],
@@ -73,6 +90,11 @@
   function normalize(p) {
     return p.replace(/\/$/, "");
   }
+  function getRelativePath(href) {
+    if (isExternal(href)) return href;
+    var cleanHref = href.replace(/^\//, "");
+    return basePath + cleanHref;
+  }
   function renderLinks(arr) {
     var html = "";
     var p = normalize(path);
@@ -80,7 +102,8 @@
       var ext = isExternal(arr[i].href);
       var active = !ext && p === normalize(arr[i].href) ? " current" : "";
       var target = ext ? ' target="_blank" rel="noreferrer"' : "";
-      html += '<a class="submenu-link' + active + '" href="' + arr[i].href + '"' + target + '>' + arr[i].label + "</a>";
+      var linkHref = ext ? arr[i].href : getRelativePath(arr[i].href);
+      html += '<a class="submenu-link' + active + '" href="' + linkHref + '"' + target + '>' + arr[i].label + "</a>";
     }
     return html;
   }
@@ -89,11 +112,14 @@
   var v = inGroup(["/ventures", "/ai-thesis", "/research"]);
   var p = inGroup(["/partners", "/contact"]);
 
+  var brandHref = getRelativePath("/");
+  var logoSrc = getRelativePath("/assets/outfinity.svg");
+
   var navHtml =
     '<nav class="nav" aria-label="Primary navigation">' +
     '<div class="nav-inner">' +
-    '<a class="brand" href="/">' +
-    '<img src="/assets/outfinity.svg" alt="Outfinity logo">' +
+    '<a class="brand" href="' + brandHref + '">' +
+    '<img src="' + logoSrc + '" alt="Outfinity logo">' +
     "<span>Outfinity</span>" +
     "</a>" +
     '<ul class="menu-groups">' +
