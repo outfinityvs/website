@@ -34,6 +34,15 @@
   }
 
   var links = {
+    services: [
+      { href: "/services.html", label: "Services Overview" },
+      { href: "/services/technical-advisory.html", label: "Technical Advisory" },
+      { href: "/services/venture-exploration-memo.html", label: "Venture Exploration Memo" },
+      { href: "/services/validation-sprint.html", label: "Validation Sprint" },
+      { href: "/services/private-venture-intelligence-retainer.html", label: "Private Venture Intelligence Retainer" },
+      { href: "/services/technical-due-diligence.html", label: "Technical Due Diligence" },
+      { href: "/services/prototype-and-feasibility.html", label: "Prototype & Feasibility Package" }
+    ],
     studio: [
       { href: "/studio.html", label: "Studio Model" },
       { href: "/studio/why-outfinity-is-different.html", label: "Why Outfinity Is Different" },
@@ -42,8 +51,8 @@
     ],
     investors: [
       { href: "/investors.html", label: "Investor Participation" },
-      { href: "/investors/studio-level-participation.html", label: "Studio-Level Participation" },
-      { href: "/investors/venture-specific-participation.html", label: "Venture-Specific Participation" }
+      { href: "/investors/studio-level-participation.html", label: "Ecosystem Partnership" },
+      { href: "/investors/venture-specific-participation.html", label: "Venture Participation" }
     ],
     operating: [
       { href: "/operating-model.html", label: "Operating Model" },
@@ -58,7 +67,7 @@
       { href: "/ventures/webmeet-ai-collaboration-cloud.html", label: "WebMeet AI Collaboration Cloud" },
       { href: "/ventures/elastic-agentic-cloud.html", label: "Elastic Agentic Cloud" },
       { href: "/ventures/soptrace-gxp.html", label: "SOPTrace GxP" },
-      { href: "/ventures/outfinity-works.html", label: "Outfinity Works" },
+      { href: "/ventures/outfinity-works.html", label: "Outfinity Works Marketplace" },
       { href: "/ventures/scripta.html", label: "SCRIPTA" }
     ],
     research: [
@@ -66,6 +75,7 @@
       { href: "/ventures/neuro-symbolic-systems-lab.html", label: "Neuro-Symbolic Systems Lab" },
       { href: "/ventures/executable-science-ai-lab.html", label: "Executable Science AI Lab" },
       { href: "/ventures/cryptography-and-privacy-lab.html", label: "Cryptography and Privacy Lab" },
+      { href: "/ventures/genetic-data-ai-lab.html", label: "Genetic Data AI Lab" },
       { href: "/ai-thesis.html", label: "AI Thesis" },
       { href: "/research.html", label: "Research Base" }
     ],
@@ -112,7 +122,7 @@
     return html;
   }
 
-  var s = inGroup(["/studio", "/investors", "/operating-model"]);
+  var s = inGroup(["/studio", "/investors", "/operating-model", "/services"]);
   var v = inGroup(["/ventures", "/ai-thesis", "/research"]);
   var p = inGroup(["/partners", "/contact"]);
 
@@ -130,7 +140,9 @@
     '<li class="menu-group' + s + '">' +
     '<button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-studio">Studio</button>' +
     '<div class="menu-layer"><div class="menu-panel" id="menu-panel-studio" aria-label="Studio submenu">' +
-    '<div class="menu-section"><p class="menu-section-title">Studio</p>' +
+    '<div class="menu-section"><p class="menu-section-title">Services</p>' +
+    renderLinks(links.services) +
+    '</div><div class="menu-section"><p class="menu-section-title">Studio</p>' +
     renderLinks(links.studio) +
     '</div><div class="menu-section"><p class="menu-section-title">Investors</p>' +
     renderLinks(links.investors) +
@@ -153,7 +165,7 @@
     '<div class="menu-section"><p class="menu-section-title">Partners</p>' +
     renderLinks(links.partners) +
     '</div><div class="menu-section-group">' +
-    '<div class="menu-section"><p class="menu-section-title">Resources</p>' +
+    '<div class="menu-section"><p class="menu-section-title">External Links</p>' +
     renderLinks(links.resources) +
     '</div><div class="menu-section"><p class="menu-section-title">Contact</p>' +
     renderLinks(links.contact) +
