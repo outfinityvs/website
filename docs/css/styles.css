@@ -1233,6 +1233,20 @@ main {
     background: var(--ink-950);
 }
 
+body.legal-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.legal-page .page-main {
+    flex: 1;
+}
+
+body.legal-page .footer {
+    margin-top: auto;
+}
+
 .footer .container {
     width: var(--container);
     margin: 0 auto;
