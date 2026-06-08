@@ -363,19 +363,12 @@ main {
 .home-hero .eyebrow,
 .home-floor--dark .eyebrow,
 .page-cta .eyebrow,
-.theme-studio .eyebrow,
-.theme-ventures .eyebrow,
-.theme-partners .eyebrow,
-.theme-thesis .eyebrow,
-.theme-research .eyebrow,
-.theme-contact .eyebrow {
+.theme-dark .eyebrow,
+.theme-green .eyebrow {
     color: var(--gold-soft);
 }
 
-.home-floor--light .eyebrow,
-.theme-investors .eyebrow,
-.theme-operating .eyebrow,
-.theme-legal .eyebrow {
+.theme-light .eyebrow {
     color: var(--green-700);
 }
 
@@ -415,18 +408,10 @@ main {
 .hero-support,
 .section-intro,
 .teaser-card p,
-.theme-studio .page-section p,
-.theme-ventures .page-section p,
-.theme-partners .page-section p,
-.theme-thesis .page-section p,
-.theme-research .page-section p,
-.theme-contact .page-section p,
-.theme-studio .page-cta p,
-.theme-ventures .page-cta p,
-.theme-partners .page-cta p,
-.theme-thesis .page-cta p,
-.theme-research .page-cta p,
-.theme-contact .page-cta p {
+.theme-dark .page-section p,
+.theme-green .page-section p,
+.theme-dark .page-cta p,
+.theme-green .page-cta p {
     color: rgba(247, 249, 249, 0.84);
     text-align: justify;
     text-justify: inter-word;
@@ -437,18 +422,10 @@ main {
 .home-hero-copy p,
 .hero-support,
 .page-hero .lead,
-.theme-studio .page-section p,
-.theme-ventures .page-section p,
-.theme-partners .page-section p,
-.theme-thesis .page-section p,
-.theme-research .page-section p,
-.theme-contact .page-section p,
-.theme-studio .page-cta p,
-.theme-ventures .page-cta p,
-.theme-partners .page-cta p,
-.theme-thesis .page-cta p,
-.theme-research .page-cta p,
-.theme-contact .page-cta p {
+.theme-dark .page-section p,
+.theme-green .page-section p,
+.theme-dark .page-cta p,
+.theme-green .page-cta p {
     text-align: justify;
     text-justify: inter-word;
 }
@@ -862,8 +839,8 @@ main {
 }
 
 .home-floor--research {
-    --floor-bg: var(--ink-920);
-    background: var(--ink-920);
+    --floor-bg: var(--green-800);
+    background: var(--green-800);
 }
 
 .home-floor--operating {
@@ -995,41 +972,23 @@ main {
     padding: 3.8rem 0 4.9rem;
 }
 
-.theme-studio,
-.theme-contact {
+.theme-dark {
     background: var(--ink-950);
     color: var(--paper);
 }
 
-.theme-thesis {
-    background: var(--ink-920);
-    color: var(--paper);
-}
-
-.theme-ventures {
-    background: var(--ink-920);
-    color: var(--paper);
-}
-
-.theme-partners,
-.theme-research {
-    background: var(--green-900);
-    color: var(--paper);
-}
-
-.theme-investors,
-.theme-operating,
-.theme-legal {
+.theme-light {
     background: var(--paper);
     color: var(--ink-950);
 }
 
-.theme-studio,
-.theme-contact,
-.theme-thesis,
-.theme-ventures,
-.theme-partners,
-.theme-research {
+.theme-green {
+    background: var(--green-900);
+    color: var(--paper);
+}
+
+.theme-dark,
+.theme-green {
     --panel-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
     --panel-card-surface: rgba(255, 255, 255, 0.035);
     --panel-card-hover: rgba(255, 255, 255, 0.075);
@@ -1040,9 +999,7 @@ main {
     --panel-shadow-color: rgba(6, 10, 10, 0.28);
 }
 
-.theme-investors,
-.theme-operating,
-.theme-legal {
+.theme-light {
     --panel-surface: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.9));
     --panel-card-surface: rgba(65, 103, 102, 0.06);
     --panel-card-hover: rgba(65, 103, 102, 0.1);
@@ -1063,9 +1020,7 @@ main {
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.theme-investors .page-hero,
-.theme-operating .page-hero,
-.theme-legal .page-hero {
+.theme-light .page-hero {
     border-bottom-color: rgba(13, 17, 17, 0.1);
 }
 
@@ -1136,15 +1091,9 @@ main {
     text-indent: 1.8em;
 }
 
-.theme-investors .page-hero .lead,
-.theme-operating .page-hero .lead,
-.theme-legal .page-hero .lead,
-.theme-investors .page-section p,
-.theme-operating .page-section p,
-.theme-legal .page-section p,
-.theme-investors .page-cta p,
-.theme-operating .page-cta p,
-.theme-legal .page-cta p {
+.theme-light .page-hero .lead,
+.theme-light .page-section p,
+.theme-light .page-cta p {
     color: rgba(13, 17, 17, 0.72);
 }
 
@@ -1197,7 +1146,6 @@ main {
 }
 
 .page-cta.page-card-panel p.page-card-panel__copy {
-    max-width: 46rem;
     margin-top: 0.95rem;
     font-size: 1.03rem;
     color: var(--panel-copy);

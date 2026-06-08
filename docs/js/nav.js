@@ -71,13 +71,14 @@
       { href: "/ventures/scripta.html", label: "SCRIPTA" }
     ],
     research: [
-      { href: "/ventures/ploinky-wormhole-network.html", label: "Ploinky Wormhole Network" },
+      { href: "/ai-thesis.html", label: "AI Thesis" },
+      { href: "/research.html", label: "Research Base" },
       { href: "/ventures/neuro-symbolic-systems-lab.html", label: "Neuro-Symbolic Systems Lab" },
       { href: "/ventures/executable-science-ai-lab.html", label: "Executable Science AI Lab" },
       { href: "/ventures/cryptography-and-privacy-lab.html", label: "Cryptography and Privacy Lab" },
       { href: "/ventures/genetic-data-ai-lab.html", label: "Genetic Data AI Lab" },
-      { href: "/ai-thesis.html", label: "AI Thesis" },
-      { href: "/research.html", label: "Research Base" }
+      { href: "/ventures/ploinky-wormhole-network.html", label: "Ploinky Wormhole Network" },
+      { href: "/ventures/social-technologies-research.html", label: "Social Technologies Research" }
     ],
     partners: [
       { href: "/partners.html", label: "Partners Overview" },
@@ -91,7 +92,7 @@
     resources: [
       { href: "https://www.axiologic.net", label: "Axiologic Research" },
       { href: "https://www.assistos.org/", label: "AssistOS" },
-      { href: "https://agisystem2.com/", label: "Neuro-Symbolic AI" }
+      { href: "https://agisystem2.com/", label: "Our Neuro-symbolic Scientific Blog" }
     ],
     contact: [
       { href: "/contact.html", label: "Contact Form" }
