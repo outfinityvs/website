@@ -41,7 +41,11 @@
       { href: "/services/validation-sprint.html", label: "Validation Sprint" },
       { href: "/services/private-venture-intelligence-retainer.html", label: "Private Venture Intelligence Retainer" },
       { href: "/services/technical-due-diligence.html", label: "Technical Due Diligence" },
-      { href: "/services/prototype-and-feasibility.html", label: "Prototype & Feasibility Package" }
+      { href: "/services/prototype-and-feasibility.html", label: "Prototype & Feasibility Package" },
+      { href: "/services/research-project-writing.html", label: "Research Project Writing Consulting" },
+      { href: "/services/technical-ip-consulting.html", label: "Technical IP Consulting" },
+      { href: "/services/private-equity-services.html", label: "Private Equity Oriented Services" },
+      { href: "/services/regulated-industry-rd.html", label: "Regulated Industry R&D" }
     ],
     studio: [
       { href: "/studio.html", label: "Studio Model" },
