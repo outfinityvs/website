@@ -160,7 +160,7 @@
     '<li class="menu-group' + v + '">' +
     '<button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-ventures">Ventures</button>' +
     '<div class="menu-layer"><div class="menu-panel" id="menu-panel-ventures" aria-label="Ventures submenu">' +
-    '<div class="menu-section"><p class="menu-section-title">Current Ventures</p>' +
+    '<div class="menu-section"><p class="menu-section-title">Public Research Ventures</p>' +
     renderLinks(links.ventures) +
     '</div><div class="menu-section"><p class="menu-section-title">Research-Originated Directions</p>' +
     renderLinks(links.research) +

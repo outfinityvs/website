@@ -15,10 +15,9 @@
     <section class="home-hero">
       <div class="section-shell home-hero-grid">
         <div class="home-hero-copy">
-          <p class="eyebrow">Outfinity Venture Studio</p>
+          <p class="eyebrow"><a href="studio.html">Outfinity Venture Studio</a></p>
           <h1>AI ventures, built through structured collaboration.</h1>
-          <p class="lead">Outfinity combines research, software development, industry expertise, entrepreneurship, and investment discipline to transform technical innovation into scalable companies with clear market relevance. Through paid research and validation services, we also help investors and strategic partners evaluate opportunities before they become ventures.</p>
-          <p class="hero-support">We validate opportunities before incorporation, safeguard intellectual property through transparent agreements, and launch ventures only when there is a credible path to product-market fit, commercial traction, and financing. Potential investors and partners can engage us early through small service contracts, a venture memo, a technical review, an advisory session, and build the trust that grows into long-term investment relationships on both sides.</p>
+          <p class="hero-intro">Outfinity combines research, software development, industry expertise, entrepreneurship, and investment discipline to transform technical innovation into scalable companies with clear market relevance. Through paid research and validation services, we also help investors and strategic partners evaluate opportunities<span class="full-text"> before they become independent ventures. We validate opportunities before incorporation, safeguard intellectual property through transparent agreements, and launch ventures only when there is a credible path to product-market fit, commercial traction, and financing. Potential investors and partners can engage us early through small service contracts, a venture memo, a technical review, an advisory session, and build the trust that grows into long-term investment relationships on both sides.</span> <button class="hero-text-toggle" data-target="all" type="button">&hellip;</button></p>
           <div class="hero-process-cards" aria-label="Outfinity venture-building path">
             <a class="hero-process-card" href="studio.html">
               <span class="hero-process-icon" aria-hidden="true">
@@ -64,9 +63,8 @@
             <span></span>
           </div>
           <p class="eyebrow">Positioning</p>
-          <h2>Why Outfinity Is Different</h2>
-          <p>Outfinity combines thesis design, technical depth, and company formation in one structured path. Unlike traditional venture capital, we do not wait for a polished pitch deck. We engage at the formation layer, where a technical idea needs validation, a research result needs a commercial direction, and an investor needs evidence before committing capital. Our paid research and validation services, venture exploration memos, technical due diligence, and advisory engagements give investors and strategic partners a professional way to assess opportunities early, reduce risk, and build relationships that can grow into long-term participation. For academic research groups and independent labs, we provide a direct route from published work to venture-ready products without requiring researchers to become founders overnight.</p>
-          <a class="gold-link" href="studio/why-outfinity-is-different.html">See more <span aria-hidden="true">→</span></a>
+          <h2><a href="studio/why-outfinity-is-different.html" class="hero-panel-title-link">Why Outfinity Is Different</a></h2>
+          <p class="hero-panel-text">Outfinity combines thesis design, technical depth, and company formation in one structured path. Unlike traditional venture capital, we do not wait for a polished pitch deck. We engage at the formation layer, where a technical idea needs validation, a research result needs a commercial direction, and an investor needs evidence before committing capital.<span class="full-text"> Our paid research and validation services, venture exploration memos, technical due diligence, and advisory engagements give investors and strategic partners a professional way to assess opportunities early, reduce risk, and build relationships that can grow into long-term participation. For academic research groups and independent labs, we provide a direct route from published work to venture-ready products without requiring researchers to become founders overnight.</span> <button class="hero-text-toggle" data-target="all" type="button">&hellip;</button></p>
         </aside>
       </div>
     </section>
@@ -180,5 +178,20 @@
   </footer>
 
 <script src="js/nav.js"></script>
+<script>
+(function() {
+  document.querySelectorAll('.hero-text-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var heroGrid = document.querySelector('.home-hero-grid');
+      if (!heroGrid) return;
+      var expanded = heroGrid.classList.toggle('is-expanded');
+      var toggles = heroGrid.querySelectorAll('.hero-text-toggle');
+      toggles.forEach(function(t) {
+        t.innerHTML = expanded ? 'See less \u2190' : '\u2026';
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
