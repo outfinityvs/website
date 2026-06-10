@@ -45,7 +45,9 @@
       { href: "/services/research-project-writing.html", label: "Research Project Writing Consulting" },
       { href: "/services/technical-ip-consulting.html", label: "Technical IP Consulting" },
       { href: "/services/private-equity-services.html", label: "Private Equity Oriented Services" },
-      { href: "/services/regulated-industry-rd.html", label: "Regulated Industry R&D" }
+      { href: "/services/regulated-industry-rd.html", label: "Regulated Industry R&D" },
+      { href: "/services/blockchain-privacy-consulting.html", label: "Blockchain & Privacy Technologies" },
+      { href: "/services/ai-consultancy.html", label: "AI Consultancy" }
     ],
     studio: [
       { href: "/studio.html", label: "Studio Model" },
