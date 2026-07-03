@@ -1286,6 +1286,137 @@ main {
     margin-top: auto;
 }
 
+.related-card--plain p {
+    text-align: left;
+    text-indent: 0;
+}
+
+.article-shell {
+    max-width: 960px;
+}
+
+.article-hero h1 {
+    margin-top: 1rem;
+    max-width: 860px;
+    font-size: clamp(1.45rem, 2.6vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: 0;
+    color: var(--green-700);
+}
+
+.article-date {
+    margin-top: 0.75rem;
+    font-size: 0.94rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-700);
+}
+
+.article-copy .page-section {
+    padding-top: 2.2rem;
+    margin-top: 2.2rem;
+}
+
+.article-copy .page-section:first-child {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.article-copy .page-section h2 {
+    font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+    line-height: 1.18;
+}
+
+.article-copy .page-section p {
+    text-align: justify;
+    text-justify: inter-word;
+    text-indent: 1.35rem;
+    hyphens: auto;
+}
+
+.article-copy blockquote {
+    margin: 1.25rem 0;
+    padding: 1rem 1.15rem;
+    border-left: 4px solid var(--green-700);
+    border-radius: 0 var(--radius-tight) var(--radius-tight) 0;
+    background: rgba(65, 103, 102, 0.08);
+}
+
+.article-copy blockquote p {
+    text-indent: 0;
+    text-align: left;
+    color: var(--ink-950);
+}
+
+.table-scroll {
+    margin: 1.35rem 0;
+    overflow-x: auto;
+    border: 1px solid var(--panel-border-soft);
+    border-radius: var(--radius-tight);
+    background: rgba(255, 255, 255, 0.72);
+}
+
+.article-table {
+    width: 100%;
+    min-width: 720px;
+    border-collapse: collapse;
+    color: var(--ink-950);
+}
+
+.article-table th,
+.article-table td {
+    padding: 0.85rem 0.95rem;
+    border-bottom: 1px solid var(--panel-border-soft);
+    vertical-align: top;
+    text-align: left;
+}
+
+.article-table th {
+    background: rgba(65, 103, 102, 0.1);
+    font-size: 0.82rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.article-table tr:last-child td {
+    border-bottom: 0;
+}
+
+.article-table--investor {
+    min-width: 0;
+    table-layout: fixed;
+}
+
+.article-table--investor th,
+.article-table--investor td {
+    overflow-wrap: anywhere;
+}
+
+.article-table--investor td:first-child {
+    font-weight: 800;
+}
+
+.article-references .reference-list {
+    display: grid;
+    gap: 0.95rem;
+    margin-left: 1.25rem;
+    color: rgba(13, 17, 17, 0.72);
+}
+
+.article-references .reference-list li {
+    padding-left: 0.25rem;
+    font-size: 0.98rem;
+    line-height: 1.62;
+}
+
+.article-references .reference-list a {
+    overflow-wrap: anywhere;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+    text-decoration-color: rgba(212, 175, 55, 0.45);
+}
+
 .page-cta--home {
     max-width: 760px;
     margin-top: 1.95rem;
@@ -1555,6 +1686,15 @@ body.legal-page .footer {
 
     .related-grid {
         grid-template-columns: 1fr;
+    }
+
+    .article-hero h1 {
+        font-size: clamp(1.32rem, 6vw, 1.75rem);
+    }
+
+    .article-copy .page-section {
+        padding-top: 1.65rem;
+        margin-top: 1.65rem;
     }
 
     .menu-panel {
