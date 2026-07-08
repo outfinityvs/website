@@ -5,7 +5,7 @@
   function detectBasePath() {
     var scripts = document.getElementsByTagName("script");
     for (var i = 0; i < scripts.length; i++) {
-      var src = scripts[i].src || scripts[i].getAttribute("src");
+      var src = scripts[i].getAttribute("src") || scripts[i].src;
       if (src && src.indexOf("nav.js") !== -1) {
         var match = src.match(/^(.*?)js\/nav\.js/);
         if (match) {
@@ -18,14 +18,22 @@
   }
   detectBasePath();
 
+  function getPagePath() {
+    var cleanPath = path.split("?")[0].replace(/\/+$/, "");
+    var docsMarker = "/docs/";
+    var docsIndex = cleanPath.lastIndexOf(docsMarker);
+    if (docsIndex !== -1) return cleanPath.slice(docsIndex + docsMarker.length);
+    return cleanPath.replace(/^\//, "");
+  }
+
   function isCurrent(href) {
     var hrefPath = href.replace(/^\//, "");
-    var currentPath = path.replace(/^\//, "");
+    var currentPath = getPagePath();
     return currentPath === hrefPath ? " current" : "";
   }
 
   function inGroup(groups) {
-    var currentPath = path.replace(/^\//, "");
+    var currentPath = getPagePath();
     for (var i = 0; i < groups.length; i++) {
       var group = groups[i].replace(/^\//, "").replace(/\.html$/, "");
       if (currentPath === group + ".html" || currentPath.indexOf(group + "/") === 0) return " is-current";
@@ -35,65 +43,65 @@
 
   var links = {
     services: [
-      { href: "/services.html", label: "Services Overview" },
-      { href: "/services/technical-advisory.html", label: "Technical Advisory" },
-      { href: "/services/venture-exploration-memo.html", label: "Venture Exploration Memo" },
-      { href: "/services/validation-sprint.html", label: "Validation Sprint" },
-      { href: "/services/private-venture-intelligence-retainer.html", label: "Private Venture Intelligence Retainer" },
-      { href: "/services/technical-due-diligence.html", label: "Technical Due Diligence" },
-      { href: "/services/prototype-and-feasibility.html", label: "Prototype & Feasibility Package" },
-      { href: "/services/research-project-writing.html", label: "Research Project Writing Consulting" },
-      { href: "/services/technical-ip-consulting.html", label: "Technical IP Consulting" },
-      { href: "/services/private-equity-services.html", label: "Private Equity Oriented Services" },
-      { href: "/services/regulated-industry-rd.html", label: "Regulated Industry R&D" },
-      { href: "/services/blockchain-privacy-consulting.html", label: "Blockchain & Privacy Technologies" },
-      { href: "/services/ai-consultancy.html", label: "AI Consultancy" }
+      { href: "services.html", label: "Services Overview" },
+      { href: "services/technical-advisory.html", label: "Technical Advisory" },
+      { href: "services/venture-exploration-memo.html", label: "Venture Exploration Memo" },
+      { href: "services/validation-sprint.html", label: "Validation Sprint" },
+      { href: "services/private-venture-intelligence-retainer.html", label: "Private Venture Intelligence Retainer" },
+      { href: "services/technical-due-diligence.html", label: "Technical Due Diligence" },
+      { href: "services/prototype-and-feasibility.html", label: "Prototype & Feasibility Package" },
+      { href: "services/research-project-writing.html", label: "Research Project Writing Consulting" },
+      { href: "services/technical-ip-consulting.html", label: "Technical IP Consulting" },
+      { href: "services/private-equity-services.html", label: "Private Equity Oriented Services" },
+      { href: "services/regulated-industry-rd.html", label: "Regulated Industry R&D" },
+      { href: "services/blockchain-privacy-consulting.html", label: "Blockchain & Privacy Technologies" },
+      { href: "services/ai-consultancy.html", label: "AI Consultancy" }
     ],
     studio: [
-      { href: "/studio.html", label: "Studio Model" },
-      { href: "/studio/why-outfinity-is-different.html", label: "Why Outfinity Is Different" },
-      { href: "/studio/how-ventures-are-built.html", label: "How Ventures Are Built" },
-      { href: "/studio/explorer-circle.html", label: "Explorer Circle" }
+      { href: "studio.html", label: "Studio Model" },
+      { href: "studio/why-outfinity-is-different.html", label: "Why Outfinity Is Different" },
+      { href: "studio/how-ventures-are-built.html", label: "How Ventures Are Built" },
+      { href: "studio/explorer-circle.html", label: "Explorer Circle" }
     ],
     investors: [
-      { href: "/investors.html", label: "Investor Participation" },
-      { href: "/investors/studio-level-participation.html", label: "Ecosystem Partnership" },
-      { href: "/investors/venture-specific-participation.html", label: "Venture Participation" }
+      { href: "investors.html", label: "Investor Participation" },
+      { href: "investors/studio-level-participation.html", label: "Ecosystem Partnership" },
+      { href: "investors/venture-specific-participation.html", label: "Venture Participation" }
     ],
     operating: [
-      { href: "/operating-model.html", label: "Operating Model" },
-      { href: "/operating-model/collaboration-process.html", label: "Collaboration Process" },
-      { href: "/operating-model/venture-formation-and-newco-creation.html", label: "Venture Formation and NewCo Creation" },
-      { href: "/operating-model/legal-ip.html", label: "Legal and IP Principles" }
+      { href: "operating-model.html", label: "Operating Model" },
+      { href: "operating-model/collaboration-process.html", label: "Collaboration Process" },
+      { href: "operating-model/venture-formation-and-newco-creation.html", label: "Venture Formation and NewCo Creation" },
+      { href: "operating-model/legal-ip.html", label: "Legal and IP Principles" }
     ],
     ventures: [
-      { href: "/ventures.html", label: "Ventures Overview" },
-      { href: "/ventures/assistos-enterprise.html", label: "AssistOS Enterprise" },
-      { href: "/ventures/webassist-cloud.html", label: "WebAssist Cloud" },
-      { href: "/ventures/webmeet-ai-collaboration-cloud.html", label: "WebMeet AI Collaboration Cloud" },
-      { href: "/ventures/elastic-agentic-cloud.html", label: "Elastic Agentic Cloud" },
-      { href: "/ventures/soptrace-gxp.html", label: "SOPTrace GxP" },
-      { href: "/ventures/outfinity-works.html", label: "Outfinity Works Marketplace" },
-      { href: "/ventures/scripta.html", label: "SCRIPTA" }
+      { href: "ventures.html", label: "Ventures Overview" },
+      { href: "ventures/assistos-enterprise.html", label: "AssistOS Enterprise" },
+      { href: "ventures/webassist-cloud.html", label: "WebAssist Cloud" },
+      { href: "ventures/webmeet-ai-collaboration-cloud.html", label: "WebMeet AI Collaboration Cloud" },
+      { href: "ventures/elastic-agentic-cloud.html", label: "Elastic Agentic Cloud" },
+      { href: "ventures/soptrace-gxp.html", label: "SOPTrace GxP" },
+      { href: "ventures/outfinity-works.html", label: "Outfinity Works Marketplace" },
+      { href: "ventures/scripta.html", label: "SCRIPTA" }
     ],
     research: [
-      { href: "/ai-thesis.html", label: "AI Thesis" },
-      { href: "/research.html", label: "Research Base" },
-      { href: "/ventures/neuro-symbolic-systems-lab.html", label: "Neuro-Symbolic Systems Lab" },
-      { href: "/ventures/executable-science-ai-lab.html", label: "Executable Science AI Lab" },
-      { href: "/ventures/cryptography-and-privacy-lab.html", label: "Cryptography and Privacy Lab" },
-      { href: "/ventures/genetic-data-ai-lab.html", label: "Genomics Data AI Lab" },
-      { href: "/ventures/ploinky-wormhole-network.html", label: "Ploinky Wormhole Network" },
-      { href: "/ventures/social-technologies-research.html", label: "Social Technologies Research" }
+      { href: "ai-thesis.html", label: "AI Thesis" },
+      { href: "research.html", label: "Research Base" },
+      { href: "ventures/neuro-symbolic-systems-lab.html", label: "Neuro-Symbolic Systems Lab" },
+      { href: "ventures/executable-science-ai-lab.html", label: "Executable Science AI Lab" },
+      { href: "ventures/cryptography-and-privacy-lab.html", label: "Cryptography and Privacy Lab" },
+      { href: "ventures/genetic-data-ai-lab.html", label: "Genomics Data AI Lab" },
+      { href: "ventures/ploinky-wormhole-network.html", label: "Ploinky Wormhole Network" },
+      { href: "ventures/social-technologies-research.html", label: "Social Technologies Research" }
     ],
     partners: [
-      { href: "/partners.html", label: "Partners Overview" },
-      { href: "/partners/work-with-outfinity.html", label: "Work With Outfinity" },
-      { href: "/partners/ai-labs.html", label: "AI Labs" },
-      { href: "/partners/founder-operators.html", label: "Founder-Operators" },
-      { href: "/partners/strategic-enterprises.html", label: "Strategic Enterprises" },
-      { href: "/partners/research-partners.html", label: "Research Partners" },
-      { href: "/partners/recruitment-partners.html", label: "Recruitment Partners" }
+      { href: "partners.html", label: "Partners Overview" },
+      { href: "partners/work-with-outfinity.html", label: "Work With Outfinity" },
+      { href: "partners/ai-labs.html", label: "AI Labs" },
+      { href: "partners/founder-operators.html", label: "Founder-Operators" },
+      { href: "partners/strategic-enterprises.html", label: "Strategic Enterprises" },
+      { href: "partners/research-partners.html", label: "Research Partners" },
+      { href: "partners/recruitment-partners.html", label: "Recruitment Partners" }
     ],
     resources: [
       { href: "https://www.axiologic.net", label: "Axiologic Research" },
@@ -102,7 +110,7 @@
       { href: "https://quiz.outfinity.ch", label: "Entrepreneur Quiz" }
     ],
     contact: [
-      { href: "/contact.html", label: "Contact Form" }
+      { href: "contact.html", label: "Contact Form" }
     ]
   };
 
@@ -115,14 +123,16 @@
   function getRelativePath(href) {
     if (isExternal(href)) return href;
     var cleanHref = href.replace(/^\//, "");
+    if (!cleanHref) return basePath + "index.html";
     return basePath + cleanHref;
   }
   function renderLinks(arr) {
     var html = "";
-    var p = normalize(path);
+    var p = normalize(getPagePath());
     for (var i = 0; i < arr.length; i++) {
       var ext = isExternal(arr[i].href);
-      var active = !ext && p === normalize(arr[i].href) ? " current" : "";
+      var itemPath = normalize(arr[i].href.replace(/^\//, ""));
+      var active = !ext && p === itemPath ? " current" : "";
       var target = ext ? ' target="_blank" rel="noreferrer"' : "";
       var linkHref = ext ? arr[i].href : getRelativePath(arr[i].href);
       html += '<a class="submenu-link' + active + '" href="' + linkHref + '"' + target + '>' + arr[i].label + "</a>";
@@ -135,7 +145,10 @@
   var p = inGroup(["/partners", "/contact"]);
 
   var brandHref = getRelativePath("/");
-  var logoSrc = getRelativePath("/assets/outfinity.svg");
+  var logoSrc = getRelativePath("assets/outfinity.svg");
+  var currentPath = getPagePath();
+  var homeCurrent = currentPath === "" || currentPath === "index.html" ? " current" : "";
+  var towerCurrent = currentPath === "tower.html" ? " current" : "";
 
   var navHtml =
     '<nav class="nav" aria-label="Primary navigation">' +
@@ -145,7 +158,9 @@
     "<span>Outfinity</span>" +
     "</a>" +
     '<ul class="menu-groups">' +
-    '<li class="menu-group' + s + '">' +
+    '<li class="menu-direct-item"><a class="menu-direct' + homeCurrent + '" href="' + getRelativePath("/") + '">Home</a></li>' +
+    '<li class="menu-direct-item"><a class="menu-direct' + towerCurrent + '" href="' + getRelativePath("tower.html") + '">Tower</a></li>' +
+    '<li class="menu-group menu-group--studio' + s + '">' +
     '<button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-studio">Studio</button>' +
     '<div class="menu-layer"><div class="menu-panel" id="menu-panel-studio" aria-label="Studio submenu">' +
     '<div class="menu-section"><p class="menu-section-title">Services</p>' +
@@ -167,7 +182,7 @@
     renderLinks(links.research) +
     "</div></div></div>" +
     "</li>" +
-    '<li class="menu-group' + p + '">' +
+    '<li class="menu-group menu-group--partners' + p + '">' +
     '<button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-partners">Partners</button>' +
     '<div class="menu-layer"><div class="menu-panel" id="menu-panel-partners" aria-label="Partners submenu">' +
     '<div class="menu-section"><p class="menu-section-title">Partners</p>' +
