@@ -539,6 +539,7 @@
   function render() {
     var view = views[state.currentView] || views.V0;
     renderToken += 1;
+    radarMusicStyle = createRadarMusicStyle(view);
     app.dataset.view = state.currentView;
     app.dataset.tone = view.tone || "neutral";
     state.completedViews.add(state.currentView);
@@ -669,6 +670,7 @@
   var radarLastAngle = null;
   var radarCycleMs = 4800;
   var radarSweepOffset = -Math.PI / 3;
+  var radarMusicStyle = null;
 
   function toggleSound() {
     state.soundEnabled = !state.soundEnabled;
@@ -788,37 +790,203 @@
     node.classList.add("is-audible");
     window.setTimeout(function () {
       node.classList.remove("is-audible");
-    }, 190);
+    }, 360);
     playRadarPing(index, count);
   }
 
   function playRadarPing(index, count) {
     if (!state.soundEnabled || !audioContext || audioContext.state !== "running") return;
     var now = audioContext.currentTime;
-    var base = 620 + (index % Math.max(count, 1)) * 54;
+    if (!radarMusicStyle) radarMusicStyle = createRadarMusicStyle(views[state.currentView] || views.V0);
+    var melody = generateRadarMelody(index, count, radarMusicStyle);
+    scheduleRadarClick(now, index);
+    melody.notes.forEach(function (step, noteIndex) {
+      var noteStart = now + melody.offsets[noteIndex];
+      var frequency = noteFrequency(melody.scale, step + melody.shift);
+      scheduleRadarTone(noteStart, frequency, noteIndex, index, melody);
+    });
+  }
+
+  function createRadarMusicStyle(view) {
+    var profiles = [
+      {
+        scale: [523.25, 587.33, 659.25, 783.99, 880, 1046.5],
+        stable: [0, 2, 4],
+        intervals: [-1, 1, 1, 2],
+        contour: "rise",
+        gap: 0.104,
+        swing: 0.018,
+        duration: 0.24,
+        accent: 0.9,
+        glide: 1.01,
+        timbre: "sine"
+      },
+      {
+        scale: [523.25, 587.33, 622.25, 698.46, 783.99, 932.33, 1046.5],
+        stable: [0, 3, 4],
+        intervals: [-2, -1, 1, 2],
+        contour: "arch",
+        gap: 0.118,
+        swing: 0.026,
+        duration: 0.27,
+        accent: 0.82,
+        glide: 1.014,
+        timbre: "triangle"
+      },
+      {
+        scale: [493.88, 554.37, 659.25, 739.99, 830.61, 987.77],
+        stable: [0, 2, 4],
+        intervals: [-1, 1, 2, -2],
+        contour: "wave",
+        gap: 0.11,
+        swing: 0.022,
+        duration: 0.25,
+        accent: 0.86,
+        glide: 1.012,
+        timbre: "sine"
+      },
+      {
+        scale: [440, 523.25, 587.33, 659.25, 783.99, 880],
+        stable: [0, 3, 5],
+        intervals: [-2, -1, 1, 1, 3],
+        contour: "fall",
+        gap: 0.124,
+        swing: 0.016,
+        duration: 0.29,
+        accent: 0.78,
+        glide: 1.009,
+        timbre: "triangle"
+      }
+    ];
+    var profile = profiles[Math.floor(Math.random() * profiles.length)];
+    var startStep = profile.stable[Math.floor(Math.random() * profile.stable.length)];
+    var viewLift = view && view.tone === "researcher" ? 1 : view && view.tone === "investor" ? 2 : 0;
+    return {
+      scale: profile.scale.slice(),
+      stable: profile.stable.slice(),
+      intervals: profile.intervals.slice(),
+      contour: profile.contour,
+      gap: profile.gap + Math.random() * 0.014,
+      swing: profile.swing,
+      duration: profile.duration + Math.random() * 0.035,
+      accent: profile.accent + Math.random() * 0.18,
+      glide: profile.glide,
+      timbre: profile.timbre,
+      currentStep: startStep + viewLift,
+      phraseIndex: 0,
+      noteCount: Math.random() > 0.45 ? 5 : 4,
+      cadenceEvery: 3 + Math.floor(Math.random() * 3),
+      minStep: -2,
+      maxStep: profile.scale.length + 5
+    };
+  }
+
+  function generateRadarMelody(index, count, style) {
+    var noteCount = style.noteCount + (Math.random() > 0.72 ? 1 : 0);
+    var current = typeof style.currentStep === "number" ? style.currentStep : style.stable[0];
+    var notes = [current];
+    for (var i = 1; i < noteCount - 1; i += 1) {
+      current += chooseMelodicInterval(style, i, noteCount);
+      current = Math.max(style.minStep, Math.min(current, style.maxStep));
+      notes.push(current);
+    }
+    var target = chooseCadenceStep(style, current);
+    notes.push(target);
+    style.currentStep = target + (Math.random() > 0.62 ? chooseMelodicInterval(style, 1, noteCount) : 0);
+    style.currentStep = Math.max(style.minStep, Math.min(style.currentStep, style.maxStep));
+    style.phraseIndex += 1;
+    return {
+      scale: style.scale,
+      notes: notes,
+      offsets: melodyOffsets(noteCount, style),
+      shift: Math.floor(index / Math.max(count || 1, 1)),
+      accent: style.accent,
+      duration: style.duration,
+      glide: style.glide,
+      timbre: style.timbre
+    };
+  }
+
+  function chooseMelodicInterval(style, noteIndex, noteCount) {
+    var interval = style.intervals[Math.floor(Math.random() * style.intervals.length)];
+    if (style.contour === "rise" && interval < 0 && Math.random() > 0.28) interval = Math.abs(interval);
+    if (style.contour === "fall" && interval > 0 && Math.random() > 0.28) interval = -interval;
+    if (style.contour === "arch" && noteIndex > noteCount / 2 && interval > 0) interval = -interval;
+    if (style.contour === "arch" && noteIndex <= noteCount / 2 && interval < 0 && Math.random() > 0.35) interval = Math.abs(interval);
+    if (style.contour === "wave" && (style.phraseIndex + noteIndex) % 2 && Math.random() > 0.35) interval = -interval;
+    return interval || 1;
+  }
+
+  function chooseCadenceStep(style, current) {
+    var stable = style.stable[Math.floor(Math.random() * style.stable.length)];
+    var octave = Math.round(current / style.scale.length);
+    var target = stable + octave * style.scale.length;
+    if ((style.phraseIndex + 1) % style.cadenceEvery === 0) {
+      target = style.stable[0] + Math.max(0, octave) * style.scale.length;
+    }
+    if (Math.abs(target - current) > 4) {
+      target += target > current ? -style.scale.length : style.scale.length;
+    }
+    return Math.max(style.minStep, Math.min(target, style.maxStep));
+  }
+
+  function melodyOffsets(noteCount, style) {
+    var offsets = [0];
+    var cursor = 0;
+    for (var i = 1; i < noteCount; i += 1) {
+      cursor += style.gap + (i % 2 ? style.swing : 0) + Math.random() * 0.012;
+      offsets.push(cursor);
+    }
+    return offsets;
+  }
+
+  function noteFrequency(scale, step) {
+    var octave = Math.floor(step / scale.length);
+    var wrapped = ((step % scale.length) + scale.length) % scale.length;
+    return scale[wrapped] * Math.pow(2, octave);
+  }
+
+  function scheduleRadarClick(startTime, index) {
+    var chirp = audioContext.createOscillator();
+    var chirpGain = audioContext.createGain();
+    chirp.type = "sine";
+    chirp.frequency.setValueAtTime(1180 + index * 18, startTime);
+    chirp.frequency.exponentialRampToValueAtTime(760 + index * 10, startTime + 0.055);
+    chirpGain.gain.setValueAtTime(0.0001, startTime);
+    chirpGain.gain.exponentialRampToValueAtTime(0.018, startTime + 0.006);
+    chirpGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.07);
+    chirp.connect(chirpGain);
+    connectAudio(chirpGain);
+    chirp.start(startTime);
+    chirp.stop(startTime + 0.08);
+  }
+
+  function scheduleRadarTone(startTime, frequency, noteIndex, nodeIndex, melody) {
     var oscillator = audioContext.createOscillator();
     var overtone = audioContext.createOscillator();
     var gain = audioContext.createGain();
     var overtoneGain = audioContext.createGain();
+    var duration = melody.duration + noteIndex * 0.012;
+    var peak = Math.max(0.016, (0.036 - noteIndex * 0.004) * melody.accent);
     oscillator.type = "sine";
-    overtone.type = "triangle";
-    oscillator.frequency.setValueAtTime(base, now);
-    oscillator.frequency.exponentialRampToValueAtTime(base * 1.08, now + 0.11);
-    overtone.frequency.setValueAtTime(base * 1.5, now);
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(0.07, now + 0.012);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.13);
-    overtoneGain.gain.setValueAtTime(0.0001, now);
-    overtoneGain.gain.exponentialRampToValueAtTime(0.018, now + 0.012);
-    overtoneGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+    overtone.type = noteIndex % 2 ? melody.timbre : "sine";
+    oscillator.frequency.setValueAtTime(frequency, startTime);
+    oscillator.frequency.exponentialRampToValueAtTime(frequency * (melody.glide + nodeIndex * 0.001), startTime + duration);
+    overtone.frequency.setValueAtTime(frequency * 2, startTime);
+    gain.gain.setValueAtTime(0.0001, startTime);
+    gain.gain.exponentialRampToValueAtTime(peak, startTime + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+    overtoneGain.gain.setValueAtTime(0.0001, startTime);
+    overtoneGain.gain.exponentialRampToValueAtTime(peak * 0.22, startTime + 0.014);
+    overtoneGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration * 0.82);
     oscillator.connect(gain);
     overtone.connect(overtoneGain);
     connectAudio(gain);
     connectAudio(overtoneGain);
-    oscillator.start(now);
-    overtone.start(now);
-    oscillator.stop(now + 0.14);
-    overtone.stop(now + 0.11);
+    oscillator.start(startTime);
+    overtone.start(startTime);
+    oscillator.stop(startTime + duration + 0.02);
+    overtone.stop(startTime + duration);
   }
 
   if (state.reducedMotion) {
