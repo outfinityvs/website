@@ -1644,7 +1644,7 @@ body.legal-page .footer {
 .arena-shell {
     position: relative;
     z-index: 2;
-    width: min(100% - 3rem, 1180px);
+    width: min(100% - 3rem, 1280px);
     min-height: calc(100vh - 82px);
     margin: 0 auto;
     display: grid;
@@ -1654,8 +1654,8 @@ body.legal-page .footer {
 
 .arena-scene {
     display: grid;
-    grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.86fr);
-    gap: clamp(1.4rem, 4vw, 3.4rem);
+    grid-template-columns: minmax(0, 1.18fr) minmax(330px, 0.74fr);
+    gap: clamp(1.2rem, 3vw, 2.4rem);
     align-items: stretch;
 }
 
@@ -1664,7 +1664,7 @@ body.legal-page .footer {
     gap: 1rem;
     align-content: center;
     min-width: 0;
-    max-width: 780px;
+    max-width: 900px;
     min-height: min(62vh, 560px);
     padding: clamp(0.8rem, 2vw, 1.2rem) 0;
 }
@@ -1673,18 +1673,23 @@ body.legal-page .footer {
     display: grid;
     gap: 0.08em;
     margin: 0;
-    max-width: min(100%, 24ch);
+    max-width: min(100%, 34ch);
     font-size: clamp(2rem, 4.2vw, 3.75rem);
     line-height: 1.02;
     letter-spacing: 0;
     overflow-wrap: normal;
     word-break: normal;
+    white-space: nowrap;
 }
 
 .arena-line {
     display: block;
     overflow-wrap: normal;
     word-break: normal;
+}
+
+.arena-headline .arena-line {
+    white-space: nowrap;
 }
 
 .arena-subtitle,
@@ -1703,8 +1708,8 @@ body.legal-page .footer {
     font-weight: 650;
     line-height: 1.55;
     letter-spacing: 0;
-    text-align: left;
-    text-align-last: auto;
+    text-align: justify;
+    text-align-last: left;
     text-wrap: pretty;
 }
 
@@ -1815,12 +1820,14 @@ body.legal-page .footer {
 .arena-tower-link {
     position: relative;
     order: 200;
-    flex: 0 1 230px;
-    min-width: 190px;
-    min-height: 44px;
+    flex: 0 0 auto;
+    min-width: 136px;
+    min-height: 46px;
     gap: 0.52rem;
+    padding-inline: 0.74rem;
     border-color: rgba(231, 202, 114, 0.58);
     background: rgba(231, 202, 114, 0.09);
+    white-space: nowrap;
 }
 
 .arena-tower-link small {
@@ -2512,17 +2519,6 @@ a.arena-radar-node:focus-visible {
     border-color: rgba(159, 140, 255, 0.34);
 }
 
-.arena-terminal {
-    justify-self: end;
-    padding: 0.42rem 0.58rem;
-    border: 1px solid rgba(84, 231, 226, 0.24);
-    border-radius: var(--radius-tight);
-    background: rgba(7, 16, 17, 0.8);
-    color: var(--arena-signal);
-    font-size: 0.72rem;
-    font-weight: 900;
-}
-
 .arena-noscript {
     position: relative;
     z-index: 3;
@@ -2611,8 +2607,20 @@ a.arena-radar-node:focus-visible {
         padding-top: 5.4rem;
     }
 
+    .arena-visual {
+        min-height: 0;
+        padding: 0;
+        background: none;
+        overflow: visible;
+    }
+
+    .arena-visual::before,
     .arena-radar {
-        min-height: 430px;
+        display: none;
+    }
+
+    .arena-radar {
+        min-height: 0;
     }
 }
 
@@ -2640,6 +2648,12 @@ a.arena-radar-node:focus-visible {
 
     .arena-headline {
         font-size: clamp(1.82rem, 10vw, 3rem);
+        max-width: 100%;
+        white-space: normal;
+    }
+
+    .arena-headline .arena-line {
+        white-space: normal;
     }
 
     .arena-subtitle,
@@ -2653,7 +2667,8 @@ a.arena-radar-node:focus-visible {
     .arena-punchline-list p {
         font-size: 0.98rem;
         line-height: 1.42;
-        text-align: left;
+        text-align: justify;
+        text-align-last: left;
     }
 
     .arena-copy {
@@ -2695,8 +2710,15 @@ a.arena-radar-node:focus-visible {
     }
 
     .arena-visual {
-        min-height: auto;
-        padding: 0.78rem;
+        min-height: 0;
+        padding: 0;
+        background: none;
+        overflow: visible;
+    }
+
+    .arena-visual::before,
+    .arena-radar {
+        display: none;
     }
 
     .arena-radar {

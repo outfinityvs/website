@@ -45,12 +45,6 @@
       subtitle: [
         "There is no future for startups without research. Outfinity connects research, venture formation, and capital before the story gets expensive."
       ],
-      microcopy: [
-        "Research base identified.",
-        "Formation risk visible.",
-        "Investor uncertainty reduced.",
-        "Full details are available."
-      ],
       graphic: {
         type: "scanner",
         items: [
@@ -337,7 +331,6 @@
     var html = '<div class="arena-visual arena-visual--radar arena-visual--' + escapeHtml(graphic.type) + '">';
     html += renderSoundToggle();
     html += renderRadar(view, graphic);
-    if (view.microcopy) html += '<div class="arena-terminal" data-terminal>' + escapeHtml(view.microcopy[0]) + "</div>";
     html += "</div>";
     return html;
   }
@@ -503,7 +496,6 @@
   }
 
   var renderToken = 0;
-  var terminalTimer = null;
 
   function loadStoredState() {
     try {
@@ -550,7 +542,6 @@
     app.dataset.view = state.currentView;
     app.dataset.tone = view.tone || "neutral";
     state.completedViews.add(state.currentView);
-    clearTerminal();
     var html = '<article class="arena-scene arena-scene--' + escapeHtml(view.tone || "neutral") + '">';
     html += renderCopy(view);
     html += renderGraphic(view);
@@ -558,7 +549,6 @@
     host.innerHTML = html;
     updateSoundButtons();
     typewrite(renderToken);
-    rotateTerminal(view);
     startRadarSweep(renderToken);
     saveStoredState();
   }
@@ -588,21 +578,6 @@
       window.setTimeout(tick, item.headline ? 105 : 36);
     }
     tick();
-  }
-
-  function rotateTerminal(view) {
-    var terminal = host.querySelector("[data-terminal]");
-    if (!terminal || !view.microcopy || !view.microcopy.length || state.reducedMotion) return;
-    var index = 0;
-    terminalTimer = window.setInterval(function () {
-      index = (index + 1) % view.microcopy.length;
-      terminal.textContent = view.microcopy[index];
-    }, 2200);
-  }
-
-  function clearTerminal() {
-    if (terminalTimer) window.clearInterval(terminalTimer);
-    terminalTimer = null;
   }
 
   function go(nextView, silent) {
