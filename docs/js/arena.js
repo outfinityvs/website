@@ -810,79 +810,183 @@
   function createRadarMusicStyle(view) {
     var profiles = [
       {
+        name: "samba",
         scale: [523.25, 587.33, 659.25, 783.99, 880, 1046.5],
         stable: [0, 2, 4],
-        intervals: [-1, 1, 1, 2],
+        intervals: [1, 1, 2, -1, 3],
         contour: "rise",
-        gap: 0.104,
+        rhythm: [0.064, 0.046, 0.082],
+        gap: 0.072,
         swing: 0.018,
-        duration: 0.24,
-        accent: 0.9,
-        glide: 1.01,
-        timbre: "sine"
+        duration: 0.17,
+        accent: 1.08,
+        glide: 1.018,
+        timbre: "triangle",
+        noteCounts: [3, 4, 4]
       },
       {
-        scale: [523.25, 587.33, 622.25, 698.46, 783.99, 932.33, 1046.5],
-        stable: [0, 3, 4],
-        intervals: [-2, -1, 1, 2],
-        contour: "arch",
-        gap: 0.118,
-        swing: 0.026,
-        duration: 0.27,
-        accent: 0.82,
-        glide: 1.014,
-        timbre: "triangle"
-      },
-      {
-        scale: [493.88, 554.37, 659.25, 739.99, 830.61, 987.77],
+        name: "salsa",
+        scale: [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.5],
         stable: [0, 2, 4],
-        intervals: [-1, 1, 2, -2],
-        contour: "wave",
-        gap: 0.11,
-        swing: 0.022,
-        duration: 0.25,
-        accent: 0.86,
-        glide: 1.012,
-        timbre: "sine"
+        intervals: [1, 2, -1, 2, 3],
+        contour: "arch",
+        rhythm: [0.058, 0.058, 0.092],
+        gap: 0.074,
+        swing: 0.024,
+        duration: 0.16,
+        accent: 1.06,
+        glide: 1.015,
+        timbre: "triangle",
+        noteCounts: [4, 4, 5]
       },
       {
-        scale: [440, 523.25, 587.33, 659.25, 783.99, 880],
-        stable: [0, 3, 5],
-        intervals: [-2, -1, 1, 1, 3],
-        contour: "fall",
-        gap: 0.124,
-        swing: 0.016,
-        duration: 0.29,
-        accent: 0.78,
-        glide: 1.009,
-        timbre: "triangle"
+        name: "calypso",
+        scale: [493.88, 554.37, 622.25, 739.99, 830.61, 987.77],
+        stable: [0, 2, 4],
+        intervals: [1, 2, -1, 1, 3],
+        contour: "wave",
+        rhythm: [0.072, 0.048, 0.076],
+        gap: 0.078,
+        swing: 0.03,
+        duration: 0.18,
+        accent: 1.03,
+        glide: 1.017,
+        timbre: "sine",
+        noteCounts: [3, 4, 4]
+      },
+      {
+        name: "afrobeat",
+        scale: [440, 493.88, 554.37, 659.25, 739.99, 880],
+        stable: [0, 2, 3],
+        intervals: [1, 1, 2, -1, 2],
+        contour: "wave",
+        rhythm: [0.052, 0.07, 0.052, 0.086],
+        gap: 0.068,
+        swing: 0.02,
+        duration: 0.15,
+        accent: 1.1,
+        glide: 1.014,
+        timbre: "triangle",
+        noteCounts: [4, 4, 5]
+      },
+      {
+        name: "disco",
+        scale: [523.25, 587.33, 659.25, 698.46, 783.99, 880, 987.77, 1046.5],
+        stable: [0, 2, 4],
+        intervals: [1, 1, 2, 2, -1],
+        contour: "rise",
+        rhythm: [0.06, 0.06, 0.06, 0.078],
+        gap: 0.066,
+        swing: 0.01,
+        duration: 0.15,
+        accent: 1.12,
+        glide: 1.012,
+        timbre: "sine",
+        noteCounts: [4, 4, 4]
+      },
+      {
+        name: "funk",
+        scale: [523.25, 587.33, 659.25, 698.46, 783.99, 880, 932.33, 1046.5],
+        stable: [0, 2, 4, 6],
+        intervals: [1, -1, 2, 1, 3],
+        contour: "wave",
+        rhythm: [0.046, 0.074, 0.048],
+        gap: 0.062,
+        swing: 0.026,
+        duration: 0.14,
+        accent: 1.14,
+        glide: 1.011,
+        timbre: "triangle",
+        noteCounts: [3, 4, 4]
+      },
+      {
+        name: "k-pop",
+        scale: [587.33, 659.25, 739.99, 880, 987.77, 1174.66],
+        stable: [0, 2, 4],
+        intervals: [1, 2, 2, -1, 3],
+        contour: "rise",
+        rhythm: [0.052, 0.052, 0.07],
+        gap: 0.06,
+        swing: 0.008,
+        duration: 0.14,
+        accent: 1.16,
+        glide: 1.016,
+        timbre: "sine",
+        noteCounts: [4, 4, 5]
+      },
+      {
+        name: "cumbia",
+        scale: [523.25, 587.33, 659.25, 783.99, 880, 1046.5],
+        stable: [0, 2, 4],
+        intervals: [1, -1, 2, 1, 2],
+        contour: "arch",
+        rhythm: [0.084, 0.052, 0.064],
+        gap: 0.078,
+        swing: 0.028,
+        duration: 0.17,
+        accent: 1.04,
+        glide: 1.013,
+        timbre: "triangle",
+        noteCounts: [3, 4, 4]
+      },
+      {
+        name: "bhangra",
+        scale: [587.33, 659.25, 739.99, 880, 987.77, 1174.66],
+        stable: [0, 2, 4],
+        intervals: [1, 2, -1, 2, 3],
+        contour: "rise",
+        rhythm: [0.052, 0.052, 0.082, 0.052],
+        gap: 0.064,
+        swing: 0.014,
+        duration: 0.15,
+        accent: 1.18,
+        glide: 1.018,
+        timbre: "triangle",
+        noteCounts: [4, 4, 5]
+      },
+      {
+        name: "highlife",
+        scale: [493.88, 554.37, 622.25, 739.99, 830.61, 987.77],
+        stable: [0, 2, 4],
+        intervals: [1, 2, 1, -1, 3],
+        contour: "wave",
+        rhythm: [0.058, 0.074, 0.052],
+        gap: 0.07,
+        swing: 0.022,
+        duration: 0.16,
+        accent: 1.08,
+        glide: 1.015,
+        timbre: "sine",
+        noteCounts: [3, 4, 4]
       }
     ];
     var profile = profiles[Math.floor(Math.random() * profiles.length)];
     var startStep = profile.stable[Math.floor(Math.random() * profile.stable.length)];
     var viewLift = view && view.tone === "researcher" ? 1 : view && view.tone === "investor" ? 2 : 0;
     return {
+      name: profile.name,
       scale: profile.scale.slice(),
       stable: profile.stable.slice(),
       intervals: profile.intervals.slice(),
       contour: profile.contour,
-      gap: profile.gap + Math.random() * 0.014,
+      rhythm: profile.rhythm ? profile.rhythm.slice() : null,
+      gap: profile.gap + Math.random() * 0.008,
       swing: profile.swing,
-      duration: profile.duration + Math.random() * 0.035,
-      accent: profile.accent + Math.random() * 0.18,
+      duration: profile.duration + Math.random() * 0.02,
+      accent: profile.accent + Math.random() * 0.14,
       glide: profile.glide,
       timbre: profile.timbre,
       currentStep: startStep + viewLift,
       phraseIndex: 0,
-      noteCount: Math.random() > 0.45 ? 5 : 4,
-      cadenceEvery: 3 + Math.floor(Math.random() * 3),
-      minStep: -2,
-      maxStep: profile.scale.length + 5
+      noteCount: profile.noteCounts[Math.floor(Math.random() * profile.noteCounts.length)],
+      cadenceEvery: 2 + Math.floor(Math.random() * 3),
+      minStep: 0,
+      maxStep: profile.scale.length + 6
     };
   }
 
   function generateRadarMelody(index, count, style) {
-    var noteCount = style.noteCount + (Math.random() > 0.72 ? 1 : 0);
+    var noteCount = Math.min(5, style.noteCount + (Math.random() > 0.88 ? 1 : 0));
     var current = typeof style.currentStep === "number" ? style.currentStep : style.stable[0];
     var notes = [current];
     for (var i = 1; i < noteCount - 1; i += 1) {
@@ -934,7 +1038,8 @@
     var offsets = [0];
     var cursor = 0;
     for (var i = 1; i < noteCount; i += 1) {
-      cursor += style.gap + (i % 2 ? style.swing : 0) + Math.random() * 0.012;
+      var rhythmGap = style.rhythm ? style.rhythm[(i - 1) % style.rhythm.length] : style.gap;
+      cursor += rhythmGap + (i % 2 ? style.swing : 0) + Math.random() * 0.008;
       offsets.push(cursor);
     }
     return offsets;
