@@ -1,6 +1,8 @@
 (function () {
   var app = document.getElementById("arena-app");
   var host = document.getElementById("arena-view");
+  var videoModal = document.querySelector("[data-video-modal]");
+  var videoFrame = document.querySelector("[data-video-frame]");
   if (!app || !host) return;
 
   var storageKey = "outfinity.quickPresentation.state.v1";
@@ -269,6 +271,7 @@
       main +
       choiceActions +
       '<a class="arena-control arena-tower-link" href="' + towerUrl + '" target="_blank" rel="noopener noreferrer" title="Open the full site" data-intent="tower">' + buttonIcon("details") + '<span>Visit Site</span></a>' +
+      '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
       "</div>";
   }
 
@@ -299,6 +302,7 @@
       capital: '<path d="M4 17 9 9l4 5 3-7 4 10"></path>',
       research: '<path d="M6 4h8l4 4v12H6z"></path><path d="M14 4v5h5"></path><path d="M9 14h6M9 17h4"></path>',
       process: '<path d="M5 12a7 7 0 0 1 12-5"></path><path d="M17 4v4h-4"></path><path d="M19 12a7 7 0 0 1-12 5"></path><path d="M7 20v-4h4"></path>',
+      video: '<rect x="3" y="5" width="14" height="14" rx="2"></rect><path d="m17 10 4-2v8l-4-2z"></path><path d="m9 9 4 3-4 3z"></path>',
       details: '<path d="M6 7h12M6 12h12M6 17h8"></path>'
     };
     return '<svg class="arena-button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + (icons[name] || icons.details) + "</svg>";
@@ -616,6 +620,12 @@
   }, true);
 
   host.addEventListener("click", function (event) {
+    var videoAction = event.target.closest("[data-video-open]");
+    if (videoAction) {
+      event.preventDefault();
+      openVideo(videoAction);
+      return;
+    }
     var soundAction = event.target.closest("[data-sound-toggle]");
     if (soundAction) {
       event.preventDefault();
@@ -683,6 +693,38 @@
   var radarCycleMs = 4800;
   var radarSweepOffset = -Math.PI / 3;
   var radarMusicStyle = null;
+  var videoTrigger = null;
+
+  function openVideo(trigger) {
+    if (!videoModal || !videoFrame) return;
+    videoTrigger = trigger;
+    videoFrame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/mnqr5L0RNE8?autoplay=1&controls=0&disablekb=1&fs=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0" title="Outfinity presentation film" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    if (typeof videoModal.showModal === "function") videoModal.showModal();
+    else videoModal.setAttribute("open", "");
+    track("presentation_video_opened");
+  }
+
+  function closeVideo() {
+    if (!videoModal || !videoModal.hasAttribute("open")) return;
+    if (typeof videoModal.close === "function") videoModal.close();
+    else videoModal.removeAttribute("open");
+  }
+
+  function clearVideo() {
+    if (videoFrame) videoFrame.innerHTML = "";
+    if (videoTrigger && videoTrigger.isConnected) videoTrigger.focus();
+    videoTrigger = null;
+  }
+
+  if (videoModal) {
+    videoModal.addEventListener("click", function (event) {
+      if (event.target === videoModal || event.target.closest("[data-video-close]")) closeVideo();
+    });
+    videoModal.addEventListener("close", clearVideo);
+    videoModal.addEventListener("cancel", function () {
+      window.setTimeout(clearVideo, 0);
+    });
+  }
 
   function enableSoundFromInteraction() {
     if (state.soundEnabled || state.soundPreference === "off") return;

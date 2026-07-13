@@ -6,9 +6,9 @@
   <title>Outfinity Quick Presentation | Outfinity</title>
   <meta name="description" content="Outfinity Quick Presentation is a short interactive guide into venture validation for the AI age.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/styles.css?v=20260708-arena">
+  <link rel="stylesheet" href="css/styles.css?v=20260713-mobile-equal-bands">
 </head>
-<body>
+<body class="arena-page">
 
   <nav id="nav" aria-label="Primary navigation"></nav>
   <main class="arena-main">
@@ -26,6 +26,13 @@
     </section>
   </main>
 
+  <dialog class="arena-video-modal" data-video-modal aria-label="Outfinity presentation film">
+    <button class="arena-video-close" type="button" data-video-close aria-label="Close film" title="Close film">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"></path></svg>
+    </button>
+    <div class="arena-video-frame" data-video-frame></div>
+  </dialog>
+
   <footer class="footer">
     <div class="container">
       <p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p>
@@ -34,6 +41,6 @@
   </footer>
 
 <script src="js/nav.js"></script>
-<script src="js/arena.js"></script>
+<script src="js/arena.js?v=20260713-video-4"></script>
 </body>
 </html>
