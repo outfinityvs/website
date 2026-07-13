@@ -11,7 +11,8 @@
     role: "",
     branchChoice: "",
     currentView: "V0",
-    soundEnabled: true,
+    soundEnabled: false,
+    soundPreference: "",
     reducedMotion: window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     completedViews: new Set(),
     history: [],
@@ -507,7 +508,12 @@
       state.role = typeof saved.role === "string" ? saved.role : "";
       state.branchChoice = typeof saved.branchChoice === "string" ? saved.branchChoice : "";
       state.started = !!saved.started;
-      if (typeof saved.soundEnabled === "boolean") state.soundEnabled = saved.soundEnabled;
+      if (saved.soundPreference === "on" || saved.soundPreference === "off") {
+        state.soundPreference = saved.soundPreference;
+      } else if (saved.soundEnabled === false) {
+        // Before soundPreference existed, false could only result from an explicit toggle.
+        state.soundPreference = "off";
+      }
       if (Array.isArray(saved.history)) {
         state.history = saved.history.filter(function (viewId) {
           return !!views[viewId];
@@ -530,6 +536,7 @@
         branchChoice: state.branchChoice,
         started: state.started,
         soundEnabled: state.soundEnabled,
+        soundPreference: state.soundPreference,
         history: state.history.slice(-12),
         completedViews: Array.from(state.completedViews)
       }));
@@ -603,6 +610,11 @@
     render();
   }
 
+  document.addEventListener("click", function (event) {
+    if (event.target.closest("[data-sound-toggle]")) return;
+    enableSoundFromInteraction();
+  }, true);
+
   host.addEventListener("click", function (event) {
     var soundAction = event.target.closest("[data-sound-toggle]");
     if (soundAction) {
@@ -672,8 +684,17 @@
   var radarSweepOffset = -Math.PI / 3;
   var radarMusicStyle = null;
 
+  function enableSoundFromInteraction() {
+    if (state.soundEnabled || state.soundPreference === "off") return;
+    state.soundEnabled = true;
+    updateSoundButtons();
+    saveStoredState();
+    playWhenAudioReady(ensureAudio());
+  }
+
   function toggleSound() {
     state.soundEnabled = !state.soundEnabled;
+    state.soundPreference = state.soundEnabled ? "on" : "off";
     updateSoundButtons();
     saveStoredState();
     track("sound_toggled");
