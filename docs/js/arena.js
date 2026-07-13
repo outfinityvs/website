@@ -3,6 +3,7 @@
   var host = document.getElementById("arena-view");
   var videoModal = document.querySelector("[data-video-modal]");
   var videoFrame = document.querySelector("[data-video-frame]");
+  var videoConfirm = document.querySelector("[data-video-confirm]");
   if (!app || !host) return;
 
   var storageKey = "outfinity.quickPresentation.state.v1";
@@ -721,6 +722,17 @@
     track("presentation_video_opened");
   }
 
+  function showVideoConfirm() {
+    if (!videoConfirm || !videoConfirm.hidden) return;
+    videoConfirm.hidden = false;
+    var cancel = videoConfirm.querySelector("[data-video-cancel]");
+    if (cancel) cancel.focus();
+  }
+
+  function hideVideoConfirm() {
+    if (videoConfirm) videoConfirm.hidden = true;
+  }
+
   function closeVideo() {
     if (!videoModal || !videoModal.hasAttribute("open")) return;
     if (typeof videoModal.close === "function") videoModal.close();
@@ -729,12 +741,22 @@
 
   function clearVideo() {
     if (videoFrame) videoFrame.innerHTML = "";
+    hideVideoConfirm();
     if (videoTrigger && videoTrigger.isConnected) videoTrigger.focus();
     videoTrigger = null;
   }
 
   if (videoModal) {
     videoModal.addEventListener("click", function (event) {
+      if (event.target.closest("[data-video-cancel]")) {
+        hideVideoConfirm();
+        return;
+      }
+      if (event.target.closest("[data-video-youtube]")) {
+        hideVideoConfirm();
+        track("presentation_video_youtube_opened");
+        return;
+      }
       if (event.target === videoModal || event.target.closest("[data-video-close]")) closeVideo();
     });
     videoModal.addEventListener("close", clearVideo);
@@ -742,6 +764,8 @@
       window.setTimeout(clearVideo, 0);
     });
   }
+
+  if (videoFrame) videoFrame.addEventListener("click", showVideoConfirm);
 
   function enableSoundFromInteraction() {
     if (state.soundEnabled || state.soundPreference === "off") return;

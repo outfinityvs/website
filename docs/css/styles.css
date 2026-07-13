@@ -1954,6 +1954,8 @@ body.legal-page .footer {
 }
 
 .arena-video-modal {
+    --arena-signal: #54e7e2;
+    --arena-gold: #e7ca72;
     width: min(88vw, 430px);
     max-width: none;
     margin: auto;
@@ -1969,11 +1971,11 @@ body.legal-page .footer {
     backdrop-filter: blur(5px);
 }
 
-.arena-video-close {
+.arena-video-close,
+.arena-video-youtube {
     position: absolute;
     top: 0.55rem;
-    right: 0.55rem;
-    z-index: 2;
+    z-index: 4;
     display: grid;
     place-items: center;
     width: 38px;
@@ -1987,14 +1989,25 @@ body.legal-page .footer {
     cursor: pointer;
 }
 
+.arena-video-close {
+    right: 0.55rem;
+}
+
+.arena-video-youtube {
+    right: 3.25rem;
+}
+
 .arena-video-close:hover,
-.arena-video-close:focus-visible {
+.arena-video-close:focus-visible,
+.arena-video-youtube:hover,
+.arena-video-youtube:focus-visible {
     color: var(--arena-gold);
     background: rgba(0, 0, 0, 0.92);
     outline: none;
 }
 
-.arena-video-close svg {
+.arena-video-close svg,
+.arena-video-youtube svg {
     width: 22px;
     height: 22px;
     fill: none;
@@ -2005,12 +2018,14 @@ body.legal-page .footer {
 
 .arena-video-frame {
     position: relative;
+    z-index: 1;
     width: 100%;
     aspect-ratio: 9 / 16;
     background: #000;
     border-radius: var(--radius-tight);
     overflow: hidden;
     box-shadow: 0 28px 90px rgba(0, 0, 0, 0.72);
+    cursor: pointer;
 }
 
 .arena-video-frame iframe {
@@ -2023,6 +2038,70 @@ body.legal-page .footer {
     border: 0;
     transform: translateX(-50%);
     pointer-events: none;
+}
+
+.arena-video-confirm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    width: min(calc(100% - 2rem), 340px);
+    padding: 1.15rem;
+    border: 1px solid rgba(84, 231, 226, 0.3);
+    border-radius: var(--radius-tight);
+    background: rgba(7, 16, 17, 0.96);
+    box-shadow: 0 18px 54px rgba(0, 0, 0, 0.65);
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.arena-video-confirm[hidden] {
+    display: none;
+}
+
+.arena-video-confirm p {
+    margin: 0;
+    color: var(--paper);
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.arena-video-confirm-actions {
+    display: flex;
+    justify-content: center;
+    gap: 0.65rem;
+    margin-top: 1rem;
+}
+
+.arena-video-confirm-actions a,
+.arena-video-confirm-actions button {
+    min-height: 40px;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: var(--radius-tight);
+    background: transparent;
+    color: var(--paper);
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.arena-video-confirm-actions a {
+    display: inline-flex;
+    align-items: center;
+    border-color: var(--arena-gold);
+    background: var(--arena-gold);
+    color: var(--ink-950);
+}
+
+.arena-video-confirm-actions a:hover,
+.arena-video-confirm-actions a:focus-visible,
+.arena-video-confirm-actions button:hover,
+.arena-video-confirm-actions button:focus-visible {
+    border-color: var(--arena-signal);
+    outline: none;
 }
 
 .arena-back,
