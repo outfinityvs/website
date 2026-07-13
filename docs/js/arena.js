@@ -695,10 +695,27 @@
   var radarMusicStyle = null;
   var videoTrigger = null;
 
+  function disableVideoCaptions(frame) {
+    var message = JSON.stringify({
+      event: "command",
+      func: "setOption",
+      args: ["captions", "track", {}]
+    });
+    [0, 500, 1500, 3000].forEach(function (delay) {
+      window.setTimeout(function () {
+        if (frame.isConnected && frame.contentWindow) {
+          frame.contentWindow.postMessage(message, "https://www.youtube-nocookie.com");
+        }
+      }, delay);
+    });
+  }
+
   function openVideo(trigger) {
     if (!videoModal || !videoFrame) return;
     videoTrigger = trigger;
-    videoFrame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/2FwHgugXZko?autoplay=1&controls=0&disablekb=1&fs=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0" title="Outfinity presentation film" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    videoFrame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/2FwHgugXZko?autoplay=1&controls=0&disablekb=1&fs=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1" title="Outfinity presentation film" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    var frame = videoFrame.querySelector("iframe");
+    if (frame) frame.addEventListener("load", function () { disableVideoCaptions(frame); }, { once: true });
     if (typeof videoModal.showModal === "function") videoModal.showModal();
     else videoModal.setAttribute("open", "");
     track("presentation_video_opened");
