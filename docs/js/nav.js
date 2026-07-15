@@ -77,6 +77,7 @@
     ventures: [
       { href: "ventures.html", label: "Ventures Overview" },
       { href: "ventures/assistos-enterprise.html", label: "AssistOS Enterprise" },
+      { href: "ventures/scientific-workbench.html", label: "Scientific Workbench" },
       { href: "ventures/webassist-cloud.html", label: "WebAssist Cloud" },
       { href: "ventures/webmeet-ai-collaboration-cloud.html", label: "WebMeet AI Collaboration Cloud" },
       { href: "ventures/elastic-agentic-cloud.html", label: "Elastic Agentic Cloud" },
