@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <title>Founding Partner Proposal | Outfinity Capital SAGL</title>
+  <meta name="description" content="A private founding partner proposal for building Outfinity Capital SAGL.">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    :root {
+      --ink: #0d1111;
+      --ink-2: #111919;
+      --green: #062e2d;
+      --green-2: #073c3a;
+      --teal: #00cfc8;
+      --teal-dark: #007c78;
+      --gold: #ffc928;
+      --gold-soft: #ffdc68;
+      --studio: #00cfc8;
+      --capital: #ffc928;
+      --paper: #f7f9f9;
+      --muted: #aab8b7;
+      --deck-width: 1600px;
+      --deck-height: 900px;
+      --shell: min(100% - 3rem, 1320px);
+      --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      min-width: 320px;
+      display: grid;
+      grid-template-rows: 72px auto 56px minmax(0, 1fr);
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; }
+    button { color: inherit; }
+
+    .site-header {
+      grid-row: 1;
+      z-index: 20;
+      background: #fff;
+      border-bottom: 1px solid rgba(13, 17, 17, 0.09);
+      color: var(--ink);
+    }
+
+    .site-header__inner {
+      width: var(--shell);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 1.25rem;
+      font-weight: 850;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+
+    .brand img { width: 54px; height: auto; display: block; }
+
+    .private-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #806200;
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .private-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(255, 201, 40, 0.8);
+    }
+
+    .contents {
+      grid-row: 2;
+      z-index: 20;
+      background: var(--green);
+      border-bottom: 1px solid rgba(0, 207, 200, 0.25);
+    }
+
+    .contents__inner {
+      width: var(--shell);
+      min-height: 58px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .contents__label {
+      flex: 0 0 auto;
+      color: rgba(247, 249, 249, 0.62);
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contents a.contents__label {
+      padding: 1.15rem 0;
+      color: rgba(247, 249, 249, 0.62);
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .contents a.contents__label:hover,
+    .contents a.contents__label.is-active { color: var(--gold-soft); }
+
+    .contents__links {
+      display: flex;
+      align-items: center;
+      gap: 1.45rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .contents__links::-webkit-scrollbar { display: none; }
+    .contents a {
+      position: relative;
+      flex: 0 0 auto;
+      padding: 1.15rem 0;
+      color: rgba(247, 249, 249, 0.7);
+      font-size: 0.84rem;
+      font-weight: 760;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 150ms ease;
+    }
+
+    .contents a::after {
+      content: "";
+      position: absolute;
+      right: 100%;
+      bottom: 0.55rem;
+      left: 0;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--gold);
+      transition: right 180ms ease;
+    }
+
+    .contents a:hover, .contents a.is-active { color: var(--gold-soft); }
+    .contents a.is-active::after { right: 0; }
+
+    .deck-viewport {
+      position: relative;
+      grid-row: 4;
+      min-height: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(0, 207, 200, 0.08), transparent 30%),
+        radial-gradient(circle at 12% 82%, rgba(255, 201, 40, 0.055), transparent 24%),
+        var(--ink);
+    }
+
+    .deck-canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: var(--deck-width);
+      height: var(--deck-height);
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale, 1));
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        radial-gradient(circle at 78% 20%, rgba(0, 207, 200, 0.085), transparent 34%),
+        var(--ink);
+      background-size: 80px 80px, 80px 80px, auto, auto;
+      transform-origin: center;
+    }
+
+    .deck-slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+    }
+
+    .deck-slide.is-active {
+      display: block;
+      animation: slide-enter 260ms ease both;
+    }
+
+    @keyframes slide-enter {
+      from { transform: translateX(22px); }
+      to { transform: translateX(0); }
+    }
+
+    .slide-header {
+      position: absolute;
+      top: 62px;
+      left: 110px;
+      right: 110px;
+      z-index: 4;
+      display: block;
+    }
+
+    .slide-number { display: none; }
+
+    .slide-title h2 {
+      max-width: 1360px;
+      font-size: 52px;
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+    }
+
+    #proposal-title,
+    #process-title,
+    #service-title,
+    #next-title { font-size: 43px; }
+    #partnership-title { font-size: 50px; }
+
+    .slide-title p {
+      max-width: 1320px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.42;
+      white-space: nowrap;
+    }
+
+    .diagram {
+      position: absolute;
+      top: 205px;
+      left: 90px;
+      width: 1420px;
+      height: 600px;
+    }
+
+    .diagram-lines {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .diagram-line {
+      fill: none;
+      stroke: rgba(0, 207, 200, 0.58);
+      stroke-width: 3;
+    }
+
+    .diagram-line--gold { stroke: rgba(255, 201, 40, 0.72); }
+    .diagram-line--soft { stroke: rgba(247, 249, 249, 0.18); stroke-dasharray: 10 10; }
+
+    .visual-node {
+      position: absolute;
+      z-index: 2;
+      border: 2px solid rgba(0, 207, 200, 0.48);
+      border-radius: 10px;
+      background: rgba(13, 25, 25, 0.96);
+      color: var(--paper);
+      text-align: left;
+      cursor: pointer;
+      transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .visual-node:hover, .visual-node:focus-visible {
+      border-color: var(--teal);
+      background: var(--green);
+      transform: translateY(-3px);
+      outline: none;
+    }
+
+    .visual-node--gold { border-color: rgba(255, 201, 40, 0.72); }
+    .visual-node--gold:hover, .visual-node--gold:focus-visible { border-color: var(--gold); }
+
+    .visual-node__tag {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .visual-node--gold .visual-node__tag { color: var(--gold); }
+    .visual-node__title {
+      display: block;
+      font-size: 25px;
+      font-weight: 850;
+      line-height: 1.15;
+      letter-spacing: -0.025em;
+    }
+
+    .visual-node__text {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.38;
+    }
+
+    .node-box { padding: 24px 26px; }
+    .node-circle {
+      display: grid;
+      place-content: center;
+      padding: 34px;
+      border-radius: 50%;
+      text-align: center;
+    }
+    .node-circle .visual-node__text { max-width: 210px; }
+
+    .node-pill {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 30px;
+      border-radius: 999px;
+      text-align: center;
+    }
+
+    .click-hint {
+      position: absolute;
+      left: 95px;
+      bottom: 42px;
+      color: rgba(247, 249, 249, 0.48);
+      font-size: 15px;
+      font-weight: 720;
+      letter-spacing: 0.04em;
+    }
+
+    .click-hint::before { content: "→"; margin-right: 8px; color: var(--teal); }
+
+    /* Cover */
+    .cover__content {
+      position: absolute;
+      top: 50%;
+      left: 120px;
+      z-index: 2;
+      width: 830px;
+      transform: translateY(-52%);
+    }
+
+    .cover__eyebrow {
+      margin-bottom: 24px;
+      color: var(--teal);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .cover h1 {
+      font-size: 88px;
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      text-wrap: balance;
+    }
+
+    .cover h1 span { color: var(--teal); }
+    .cover__lead {
+      max-width: 800px;
+      margin-top: 38px;
+      color: #b9c3c2;
+      font-size: 28px;
+      line-height: 1.48;
+      font-style: italic;
+    }
+
+    .cover__visual {
+      position: absolute;
+      top: 170px;
+      right: 90px;
+      z-index: 1;
+      width: 520px;
+      height: 520px;
+      filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.38));
+      animation: cover-float 7s ease-in-out infinite;
+    }
+
+    .cover__visual svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .cover-orbit {
+      transform-origin: 280px 280px;
+      animation: cover-spin 28s linear infinite;
+    }
+    .cover-orbit--reverse { animation-duration: 38s; animation-direction: reverse; }
+    .cover-flow {
+      stroke-dasharray: 12 12;
+      animation: cover-flow 3.2s linear infinite;
+    }
+    .cover-node { transform-box: fill-box; transform-origin: center; animation: cover-pulse 3.6s ease-in-out infinite; }
+    .cover-node--2 { animation-delay: -.9s; }
+    .cover-node--3 { animation-delay: -1.8s; }
+    .cover-node--4 { animation-delay: -2.7s; }
+    .cover-core { transform-box: fill-box; transform-origin: center; animation: cover-core 4.5s ease-in-out infinite; }
+    .cover-visual__label { fill: #f7f9f9; font: 800 13px var(--font); letter-spacing: .07em; text-anchor: middle; }
+    .cover-visual__micro { fill: #93aaa8; font: 700 10px var(--font); letter-spacing: .06em; text-anchor: middle; text-transform: uppercase; }
+
+    @keyframes cover-spin { to { transform: rotate(360deg); } }
+    @keyframes cover-flow { to { stroke-dashoffset: -48; } }
+    @keyframes cover-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes cover-pulse { 0%, 100% { opacity: .68; } 50% { opacity: 1; } }
+    @keyframes cover-core { 0%, 100% { transform: scale(.98); } 50% { transform: scale(1.035); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cover__visual,
+      .cover-orbit,
+      .cover-flow,
+      .cover-node,
+      .cover-core { animation: none !important; }
+    }
+
+    .cover__rule { width: 130px; height: 6px; margin-top: 42px; border: 0; border-radius: 5px; background: linear-gradient(90deg, var(--gold), var(--teal)); }
+
+    /* Diagram-specific visual language */
+    .partnership-studio { left: 10px; top: 125px; width: 390px; height: 310px; border-color: var(--studio); }
+    .partnership-partner { left: 535px; top: 5px; width: 350px; height: 150px; border-color: rgba(247,249,249,.42); }
+    .partnership-capital {
+      left: 520px;
+      top: 190px;
+      width: 380px;
+      height: 255px;
+      border-color: var(--capital);
+      border-width: 3px;
+      box-shadow: 0 0 0 12px rgba(255,201,40,.035), 0 24px 65px rgba(0,0,0,.3);
+    }
+    .partnership-investors { left: 1020px; top: 125px; width: 390px; height: 310px; border-color: var(--capital); }
+    .partnership-service { left: 415px; top: 500px; width: 590px; height: 78px; border-color: rgba(0,207,200,.45); }
+    .partnership-capital .visual-node__tag { color: var(--capital); }
+    .investor-list { display: grid; gap: 10px; margin-top: 18px; }
+    .investor-list span {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 13px;
+      border: 1px solid rgba(255,201,40,.2);
+      border-radius: 7px;
+      color: #c5cfce;
+      font-size: 15px;
+      font-weight: 760;
+    }
+    .investor-list span::before { content: "→"; color: var(--gold); font-weight: 950; }
+
+    .about-hub { left: 570px; top: 155px; width: 280px; height: 280px; }
+    .about-a { left: 10px; top: 10px; width: 380px; height: 185px; }
+    .about-b { left: 10px; top: 405px; width: 380px; height: 185px; }
+    .about-c { left: 1030px; top: 10px; width: 380px; height: 185px; }
+    .about-d { left: 1030px; top: 405px; width: 380px; height: 185px; }
+
+    .proposal-source { top: 98px; width: 370px; height: 315px; }
+    .proposal-source--left { left: 20px; }
+    .proposal-source--right { right: 20px; }
+    .proposal-hub { left: 535px; top: 125px; width: 350px; height: 220px; }
+    .proposal-gate { left: 480px; top: 445px; width: 460px; height: 105px; }
+    .source-list { margin-top: 18px; display: grid; gap: 9px; color: var(--muted); font-size: 17px; }
+    .source-list span::before { content: "→"; margin-right: 9px; color: var(--teal); }
+
+    .process-node { top: 195px; width: 250px; height: 240px; padding: 20px 22px; }
+    .process-node:nth-of-type(1) { left: 5px; }
+    .process-node:nth-of-type(2) { left: 295px; }
+    .process-node:nth-of-type(3) { left: 585px; }
+    .process-node:nth-of-type(4) { left: 875px; }
+    .process-node:nth-of-type(5) { left: 1165px; }
+    .process-number { display: block; margin-bottom: 22px; color: var(--gold); font-size: 42px; font-weight: 900; line-height: 1; }
+
+    .process-lanes {
+      position: absolute;
+      top: 68px;
+      left: 245px;
+      z-index: 3;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .process-legend {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 18px;
+      border: 1px solid currentColor;
+      border-radius: 999px;
+      background: rgba(13, 25, 25, 0.94);
+      font-size: 14px;
+      font-weight: 850;
+      letter-spacing: .03em;
+    }
+
+    .process-legend::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: currentColor; box-shadow: 0 0 14px currentColor; }
+    .process-legend--studio { color: var(--studio); }
+    .process-legend--capital { color: var(--capital); }
+    .process-legend-arrow { color: rgba(247,249,249,.4); font-size: 24px; }
+
+    .role-label {
+      position: absolute;
+      right: 14px;
+      bottom: 13px;
+      left: 14px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .075em;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    .role-open { border-color: rgba(247,249,249,.28); }
+    .role-open .role-label { color: rgba(247,249,249,.62); }
+    .role-studio { border-color: var(--studio); box-shadow: inset 0 4px 0 rgba(0,207,200,.18); }
+    .role-studio .role-label { color: var(--studio); }
+    .role-capital { border-color: var(--capital); box-shadow: inset 0 4px 0 rgba(255,201,40,.18); }
+    .role-capital .role-label { color: var(--capital); }
+    .role-joint {
+      border-color: transparent;
+      background: linear-gradient(var(--ink-2), var(--ink-2)) padding-box, linear-gradient(90deg, var(--studio), var(--capital)) border-box;
+      box-shadow: inset 0 4px 0 rgba(0,207,200,.12), inset 0 -4px 0 rgba(255,201,40,.12);
+    }
+    .role-joint .role-label { color: var(--paper); }
+    .role-joint .role-label::before { content: ""; display: inline-block; width: 32px; height: 4px; margin-right: 8px; border-radius: 4px; background: linear-gradient(90deg, var(--studio), var(--capital)); vertical-align: middle; }
+    .process-node .visual-node__text { margin-top: 7px; font-size: 15px; line-height: 1.3; }
+    .process-node .process-number { margin-bottom: 12px; font-size: 34px; }
+
+    .service-source-a { left: 10px; top: 45px; width: 330px; height: 185px; }
+    .service-source-b { left: 10px; top: 330px; width: 330px; height: 185px; }
+    .service-studio { left: 405px; top: 145px; width: 270px; height: 270px; border-color: var(--studio); }
+    .service-capital { left: 745px; top: 145px; width: 270px; height: 270px; border-color: var(--capital); }
+    .service-investor-a { left: 1080px; top: 45px; width: 330px; height: 185px; }
+    .service-investor-b { left: 1080px; top: 330px; width: 330px; height: 185px; }
+    .service-freedom { left: 505px; top: 485px; width: 410px; height: 78px; border-color: rgba(247,249,249,.3); }
+    .service-studio .visual-node__tag { color: var(--studio); }
+    .service-capital .visual-node__tag { color: var(--capital); }
+
+    .phase-node { width: 300px; height: 210px; }
+    .phase-1 { left: 15px; top: 385px; }
+    .phase-2 { left: 385px; top: 285px; }
+    .phase-3 { left: 755px; top: 185px; }
+    .phase-4 { left: 1115px; top: 85px; }
+    .phase-caption { position: absolute; left: 40px; top: 45px; color: rgba(247,249,249,.35); font-size: 82px; font-weight: 900; letter-spacing: -.06em; }
+
+    .ownership-hub { left: 555px; top: 155px; width: 310px; height: 310px; border-width: 3px; }
+    .ownership-node { width: 345px; height: 165px; padding: 20px 24px; }
+    .ownership-a { left: 10px; top: 10px; }
+    .ownership-b { left: 10px; top: 218px; }
+    .ownership-c { left: 10px; top: 425px; }
+    .ownership-d { left: 1065px; top: 10px; }
+    .ownership-e { left: 1065px; top: 218px; }
+    .ownership-f { left: 1065px; top: 425px; }
+    .ownership-node .visual-node__title { font-size: 21px; }
+    .ownership-node .visual-node__text { margin-top: 7px; font-size: 14px; line-height: 1.3; }
+    .negotiable { display: inline-block; margin-top: 7px; color: var(--gold); font-size: 10px; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+
+    .next-track { display: none; }
+    .next-node { top: 165px; width: 300px; height: 240px; }
+    .next-a { left: 10px; }
+    .next-b { left: 380px; }
+    .next-c { left: 750px; }
+    .next-d { left: 1120px; border-radius: 50%; width: 270px; height: 270px; top: 150px; }
+    .next-outcome { position: absolute; left: 20px; top: 470px; width: 1380px; padding: 22px 30px; border-left: 5px solid var(--gold); background: rgba(255, 201, 40, 0.07); font-size: 22px; line-height: 1.42; text-align: left; }
+
+    .detail-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      display: none;
+      place-items: center;
+      padding: 100px;
+      background: rgba(5, 12, 12, 0.82);
+      backdrop-filter: blur(14px);
+    }
+
+    .detail-overlay.is-open { display: grid; }
+    .detail-panel {
+      position: relative;
+      width: min(980px, 100%);
+      padding: 58px 64px;
+      border: 2px solid rgba(0, 207, 200, 0.5);
+      border-radius: 20px;
+      background: var(--ink-2);
+      box-shadow: 0 35px 90px rgba(0, 0, 0, 0.55);
+    }
+
+    .detail-panel__eyebrow { color: var(--teal); font-size: 14px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .detail-panel h3 { margin-top: 14px; font-size: 44px; line-height: 1.08; letter-spacing: -.04em; }
+    .detail-panel p { margin-top: 24px; color: #bdc8c7; font-size: 23px; line-height: 1.62; }
+    .detail-close {
+      position: absolute; top: 24px; right: 24px; width: 46px; height: 46px;
+      border: 1px solid rgba(247,249,249,.2); border-radius: 50%; background: transparent;
+      font-size: 24px; cursor: pointer;
+    }
+    .detail-close:hover, .detail-close:focus-visible { border-color: var(--gold); color: var(--gold); outline: none; }
+
+    .deck-controls {
+      position: relative;
+      grid-row: 3;
+      width: 100%;
+      height: 56px;
+      margin: 0;
+      z-index: 60;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px var(--deck-content-gutter, 3rem);
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .deck-button {
+      min-width: 102px;
+      height: 46px;
+      padding: 0 17px;
+      border: 1px solid rgba(0,207,200,.35);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--paper);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .deck-button:hover, .deck-button:focus-visible { border-color: var(--teal); background: rgba(0,207,200,.1); outline: none; }
+    .deck-button--next { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+    .deck-button--next:hover, .deck-button--next:focus-visible { border-color: var(--gold-soft); background: var(--gold-soft); }
+    .deck-button:disabled { opacity: .32; cursor: default; }
+    .deck-counter {
+      min-width: 120px;
+      margin-right: auto;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    .fullscreen-button { min-width: 46px; width: 46px; padding: 0; font-size: 18px; }
+
+    .rotate-note { display: none; }
+
+    @media (max-width: 760px) {
+      body { grid-template-rows: 64px auto 52px minmax(0, 1fr); }
+      .site-header__inner, .contents__inner { width: calc(100% - 2rem); }
+      .brand { font-size: 1rem; }
+      .brand img { width: 44px; }
+      .private-label { font-size: .58rem; }
+      .contents__inner { min-height: 74px; align-items: flex-start; flex-direction: column; gap: 0; padding: 9px 0 0; }
+      .contents__links { width: 100%; gap: 1.15rem; }
+      .contents a { padding: .75rem 0 1rem; font-size: .78rem; }
+      .contents a::after { bottom: .45rem; }
+      .deck-controls { width: 100%; height: 52px; margin: 0; padding: 5px 1rem; transform: none; }
+      .deck-button { min-width: 84px; height: 42px; padding-inline: 12px; }
+      .deck-counter { min-width: 70px; font-size: 10px; }
+      .fullscreen-button { display: none; }
+      .rotate-note {
+        position: absolute; left: 50%; bottom: 18px; z-index: 5; display: block;
+        transform: translateX(-50%); color: rgba(247,249,249,.48); font-size: 11px; white-space: nowrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .deck-slide.is-active { animation: none; }
+      * { scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="https://www.outfinity.ch" aria-label="Visit the Outfinity website"><img src="assets/outfinity.svg" alt="" width="54" height="54"><span>Outfinity</span></a>
+      <span class="private-label">Private proposal · Share only with relevant parties</span>
+    </div>
+  </header>
+
+  <nav class="contents" aria-label="Proposal sections">
+    <div class="contents__inner">
+      <a class="contents__label" id="menu-start" href="#start">Start</a>
+      <div class="contents__links">
+        <a href="#partnership">Partnership</a><a href="#about">About</a><a href="#proposal">Proposal</a><a href="#investment-process">Investment process</a><a href="#investor-service">Investor service</a><a href="#co-founding">Co-founding path</a><a href="#ownership">Ownership</a><a href="#next-step">Next step</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="deck-controls" aria-label="Presentation controls">
+    <span class="deck-counter" id="deck-counter" aria-live="polite">Start</span><button class="deck-button" id="deck-start" type="button" aria-label="Return to start">Start</button><button class="deck-button" id="deck-back" type="button" aria-label="Previous slide">← Back</button><button class="deck-button deck-button--next" id="deck-next" type="button" aria-label="Next slide">Next →</button><button class="deck-button fullscreen-button" id="deck-fullscreen" type="button" aria-label="Enter full screen">⛶</button>
+  </div>
+
+  <div class="deck-viewport" id="deck-viewport">
+    <div class="deck-canvas" id="deck-canvas">
+      <svg width="0" height="0" aria-hidden="true"><defs>
+        <marker id="arrow-teal" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L8,4.5 L0,8 z" fill="#00cfc8"/></marker>
+        <marker id="arrow-gold" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L8,4.5 L0,8 z" fill="#ffc928"/></marker>
+      </defs></svg>
+
+      <section class="deck-slide cover is-active" id="start" data-slide="0" aria-labelledby="cover-title">
+        <div class="cover__content"><p class="cover__eyebrow">Founding Partner Proposal</p><h1 id="cover-title">Co-found <span>Outfinity Capital</span> SAGL</h1><p class="cover__lead">Build the investor network and financing process that turns Outfinity's validated technologies into independently financed ventures.</p><hr class="cover__rule"></div>
+        <div class="cover__visual" aria-hidden="true">
+          <svg viewBox="0 0 560 560" role="img">
+            <defs>
+              <radialGradient id="cover-halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#00cfc8" stop-opacity=".18"/><stop offset=".55" stop-color="#00cfc8" stop-opacity=".05"/><stop offset="1" stop-color="#00cfc8" stop-opacity="0"/></radialGradient>
+              <linearGradient id="cover-core-gradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00cfc8"/><stop offset=".5" stop-color="#16a6a1"/><stop offset="1" stop-color="#ffc928"/></linearGradient>
+              <filter id="cover-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            </defs>
+            <circle cx="280" cy="280" r="270" fill="url(#cover-halo)"/>
+            <g class="cover-orbit" fill="none">
+              <circle cx="280" cy="280" r="242" stroke="#00cfc8" stroke-opacity=".25" stroke-width="2" stroke-dasharray="4 13"/>
+              <circle cx="280" cy="38" r="8" fill="#ffc928" stroke="none" filter="url(#cover-glow)"/>
+              <circle cx="280" cy="522" r="5" fill="#00cfc8" stroke="none"/>
+            </g>
+            <g class="cover-orbit cover-orbit--reverse" fill="none">
+              <ellipse cx="280" cy="280" rx="255" ry="174" stroke="#ffc928" stroke-opacity=".18" stroke-width="2" stroke-dasharray="20 16" transform="rotate(-24 280 280)"/>
+              <circle cx="522" cy="205" r="6" fill="#00cfc8" stroke="none" filter="url(#cover-glow)"/>
+            </g>
+            <g fill="none" stroke-width="3" stroke-linecap="round">
+              <path class="cover-flow" d="M143 160 L222 226" stroke="#00cfc8" stroke-opacity=".7"/>
+              <path class="cover-flow" d="M417 147 L338 226" stroke="#00cfc8" stroke-opacity=".7"/>
+              <path class="cover-flow" d="M420 409 L342 334" stroke="#ffc928" stroke-opacity=".75"/>
+              <path class="cover-flow" d="M140 420 L218 334" stroke="#ffc928" stroke-opacity=".55"/>
+            </g>
+            <g class="cover-node" transform="translate(105 125)"><circle r="49" fill="#0d1919" stroke="#00cfc8" stroke-width="2"/><circle r="40" fill="none" stroke="#00cfc8" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">RESEARCH</text><text class="cover-visual__micro" y="17">evidence</text></g>
+            <g class="cover-node cover-node--2" transform="translate(455 112)"><circle r="49" fill="#0d1919" stroke="#00cfc8" stroke-width="2"/><circle r="40" fill="none" stroke="#00cfc8" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">STUDIO</text><text class="cover-visual__micro" y="17">build</text></g>
+            <g class="cover-node cover-node--3" transform="translate(458 430)"><circle r="52" fill="#0d1919" stroke="#ffc928" stroke-width="2"/><circle r="43" fill="none" stroke="#ffc928" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">CAPITAL</text><text class="cover-visual__micro" y="17">finance</text></g>
+            <g class="cover-node cover-node--4" transform="translate(100 443)"><circle r="49" fill="#0d1919" stroke="#ffc928" stroke-width="2"/><circle r="40" fill="none" stroke="#ffc928" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">VENTURE</text><text class="cover-visual__micro" y="17">scale</text></g>
+            <g class="cover-core">
+              <circle cx="280" cy="280" r="116" fill="#071313" stroke="url(#cover-core-gradient)" stroke-width="3"/>
+              <circle cx="280" cy="280" r="96" fill="none" stroke="#f7f9f9" stroke-opacity=".09"/>
+              <path d="M280 211 L340 246 L340 314 L280 349 L220 314 L220 246 Z" fill="none" stroke="url(#cover-core-gradient)" stroke-width="3"/>
+              <circle cx="280" cy="280" r="16" fill="#00cfc8" fill-opacity=".14" stroke="#00cfc8" stroke-width="2" filter="url(#cover-glow)"/>
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="deck-slide" id="partnership" data-slide="1" aria-labelledby="partnership-title">
+        <header class="slide-header"><span class="slide-number">01 / 08</span><div class="slide-title"><h2 id="partnership-title">Outfinity Capital is the new company we want to co-found</h2><p>Outfinity SAGL brings venture validation and building; the Founding Partner brings investor relationships and financing execution.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M400 280 L520 280"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M710 155 L710 190"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M900 280 L1020 280"/><path class="diagram-line--soft diagram-line" d="M710 445 L710 500"/></svg>
+          <button class="visual-node node-box partnership-studio" data-title="Outfinity SAGL — existing Venture Studio" data-detail="Outfinity SAGL supplies research and external opportunities, performs technical and market validation, structures intellectual property, forms venture teams and supports product and commercial execution. Its technology scope includes AI and agentic software, blockchain and trusted data, social technologies and other deep-tech directions."><span class="visual-node__tag">Existing company · Venture Studio</span><span class="visual-node__title">Outfinity SAGL</span><span class="source-list"><span>Research and opportunity pipeline</span><span>Technical, product and market validation</span><span>Venture design, teams and execution</span><span>AI, blockchain, social and other deep tech</span></span></button>
+          <button class="visual-node node-box partnership-partner" data-title="The Founding Partner we are seeking" data-detail="The Founding Partner builds qualified relationships with venture capital investors, family offices, angel investors and strategic investors; understands their mandates; helps shape transactions; and supports follow-on financing."><span class="visual-node__tag">Partner sought</span><span class="visual-node__title">Founding Partner</span><span class="visual-node__text">Investor network → mandates → deal execution</span></button>
+          <button class="visual-node node-circle partnership-capital" data-title="Outfinity Capital SAGL — the new joint company" data-detail="Outfinity Capital SAGL is the new investor-facing company at the centre of this proposal. It is incorporated with the Founding Partner after the collaboration proves a credible financing milestone. It presents jointly approved ventures, structures direct or SPV-based transactions, coordinates investor communication and supports future financing."><span class="visual-node__tag">New joint company</span><span class="visual-node__title">Outfinity Capital SAGL</span><span class="visual-node__text">Investor service → transaction structure → financing coordination</span></button>
+          <button class="visual-node node-box partnership-investors" data-title="Who Outfinity Capital serves" data-detail="Outfinity Capital provides transaction-by-transaction access to technically reviewed and actively supported venture opportunities. Each investor retains control of every investment decision; the company is not initially a pooled investment fund."><span class="visual-node__tag">Investor clients</span><span class="visual-node__title">Investor Clients</span><span class="investor-list"><span>Venture Capital</span><span>Family Offices</span><span>Angel Investors</span><span>Corporate &amp; Strategic</span></span></button>
+          <button class="visual-node node-pill partnership-service" data-title="The service delivered" data-detail="The combined service sources opportunities, validates technology and market assumptions, forms and builds the venture, prepares a credible financing case, structures the transaction and supports investors after capital is deployed."><span class="visual-node__title">Service Flow</span></button>
+        </div><p class="click-hint">Select an element to see its role</p>
+      </section>
+
+      <section class="deck-slide" id="about" data-slide="2" aria-labelledby="about-title">
+        <header class="slide-header"><span class="slide-number">02 / 08</span><div class="slide-title"><h2 id="about-title">What Outfinity already brings to the partnership</h2><p>A Swiss venture studio, a proven research base, a deep-tech pipeline and hands-on company-building capability.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M390 103 L570 248"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M390 498 L570 342"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M1030 103 L850 248"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M850 342 L1030 498"/></svg>
+          <button class="visual-node node-circle about-hub visual-node--gold" data-title="Outfinity SAGL" data-detail="A Swiss venture studio established in Ticino to turn promising research and technical ideas into validated, financeable and independently operated companies."><span class="visual-node__tag">Venture Studio</span><span class="visual-node__title">Outfinity SAGL</span><span class="visual-node__text">Diligence → validation → IP → teams → execution</span></button>
+          <button class="visual-node node-box about-a" data-title="Research foundation" data-detail="Built on Axiologic Research, founded in 2003, with extensive European research experience and industrial collaboration with major pharmaceutical companies including Novartis, MSD and GSK."><span class="visual-node__tag">Research base</span><span class="visual-node__title">Axiologic Research</span><span class="visual-node__text">European R&amp;D and pharmaceutical collaboration since 2003</span></button>
+          <button class="visual-node node-box about-b" data-title="Founder experience" data-detail="Axiologic and Outfinity are led by Sînică Alboaie, PhD, with more than 25 years of software and research experience and more than 35 authored or co-authored scientific articles and books."><span class="visual-node__tag">Leadership</span><span class="visual-node__title">Experienced Leadership</span><span class="visual-node__text">25+ years in software, research and scientific publishing</span></button>
+          <button class="visual-node node-box about-c" data-title="Technology base" data-detail="Technologies produced through research initiatives representing more than EUR 10 million in cumulative R&amp;D investment across artificial intelligence, blockchain, trusted data sharing and agentic software, including an active European project."><span class="visual-node__tag">Technology assets</span><span class="visual-node__title">Deep-Tech Portfolio</span><span class="visual-node__text">AI → trusted data → blockchain → agentic software</span></button>
+          <button class="visual-node node-box about-d visual-node--gold" data-title="The commercial opportunity" data-detail="Several technologies are ready for focused market validation, productization, company formation and commercial deployment. Outfinity Capital provides the investor relationships and financing capability required for that transition."><span class="visual-node__tag">Ready now</span><span class="visual-node__title">Venture Candidates</span><span class="visual-node__text">Validate demand → productize → finance a NewCo</span></button>
+        </div><p class="click-hint">Select any element for context</p>
+      </section>
+
+      <section class="deck-slide" id="proposal" data-slide="3" aria-labelledby="proposal-title">
+        <header class="slide-header"><span class="slide-number">03 / 08</span><div class="slide-title"><h2 id="proposal-title">The Founding Partner builds the investor side of Outfinity Capital</h2><p>Outfinity supplies and builds validated ventures; the partner develops investor relationships and converts them into financings.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M390 255 L535 235"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M1030 255 L885 235"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M710 345 L710 445"/></svg>
+          <button class="visual-node node-box proposal-source proposal-source--left" data-title="What Outfinity contributes" data-detail="A research-backed pipeline, technical due diligence, product and market validation, intellectual property and software foundations, venture design, team formation, and continuing execution support after investment."><span class="visual-node__tag">Outfinity Venture Studio</span><span class="visual-node__title">Venture Creation</span><span class="source-list"><span>Supplies the opportunity pipeline</span><span>Validates technology, product and market</span><span>Structures IP, teams and execution</span></span></button>
+          <button class="visual-node node-circle proposal-hub visual-node--gold" data-title="Outfinity Capital" data-detail="A Swiss venture-financing and investor-services company that presents jointly approved opportunities and structures individual transactions. It will not initially pool investor capital or operate as an investment fund; every investor retains control of each decision."><span class="visual-node__tag">Joint company</span><span class="visual-node__title">Outfinity Capital SAGL</span><span class="visual-node__text">Approved venture → suitable investor → direct deal or SPV</span></button>
+          <button class="visual-node node-box proposal-source proposal-source--right" data-title="The Founding Partner" data-detail="One entrepreneurial individual or partner-led organization that learns investor mandates, builds trusted relationships, shapes credible transactions and supports follow-on financing. The role is operational and long-term, not an introduction service."><span class="visual-node__tag">Founding Partner</span><span class="visual-node__title">Investor Development</span><span class="source-list"><span>Maps mandates and decision-makers</span><span>Develops qualified relationships</span><span>Shapes deals and follow-on financing</span></span></button>
+          <button class="visual-node node-pill proposal-gate visual-node--gold" data-title="Proof before incorporation" data-detail="The parties first work under a focused collaboration agreement. Outfinity Capital SAGL is incorporated only after tangible proof: normally a signed investment commitment, capital ready to deploy or a completed first financing."><span class="visual-node__title">Incorporation Trigger</span></button>
+        </div><p class="click-hint">Select any element for context</p>
+      </section>
+
+      <section class="deck-slide" id="investment-process" data-slide="4" aria-labelledby="process-title">
+        <header class="slide-header"><span class="slide-number">04 / 08</span><div class="slide-title"><h2 id="process-title">Who does what from opportunity sourcing to investor reporting</h2><p>The Venture Studio owns validation and execution; Outfinity Capital owns financing coordination and investor service.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M255 315 L295 315"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M545 315 L585 315"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M835 315 L875 315"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1125 315 L1165 315"/></svg>
+          <div class="process-lanes" aria-label="Responsibility legend"><span class="process-legend process-legend--studio">Outfinity Venture Studio: validation &amp; execution</span><span class="process-legend-arrow">→</span><span class="process-legend process-legend--capital">Outfinity Capital: financing &amp; investor service</span></div>
+          <button class="visual-node node-box process-node role-open" data-title="Originate" data-detail="Candidates may come from Outfinity research, the Founding Partner, investors, universities, corporations or external founding teams. Origin does not determine approval."><span class="process-number">01</span><span class="visual-node__title">Source</span><span class="visual-node__text">Accept candidates from Outfinity and external sources</span><span class="role-label">Open pipeline</span></button>
+          <button class="visual-node node-box process-node role-studio" data-title="Validate" data-detail="Outfinity Venture Studio produces technical, product and market evidence. The Founding Partner separately tests investor relevance, strategic fit and access to customers and later-stage capital."><span class="process-number">02</span><span class="visual-node__title">Validate</span><span class="visual-node__text">Studio tests technology, product and demand</span><span class="role-label">Led by Venture Studio</span></button>
+          <button class="visual-node node-box process-node role-joint" data-title="Approve together" data-detail="Outfinity Venture Studio and the Founding Partner jointly decide whether the evidence and financing logic are strong enough to present the opportunity under the Outfinity Capital name. No project is automatically approved."><span class="process-number">03</span><span class="visual-node__title">Approve</span><span class="visual-node__text">Both parties authorize investor presentation</span><span class="role-label">Joint quality gate</span></button>
+          <button class="visual-node node-box process-node role-capital" data-title="Structure and invest" data-detail="Outfinity Capital prepares the direct investment or dedicated SPV and coordinates the transaction. Each investor independently decides whether to participate and how much capital to commit."><span class="process-number">04</span><span class="visual-node__title">Structure</span><span class="visual-node__text">Capital prepares the direct deal or SPV</span><span class="role-label">Led by Outfinity Capital</span></button>
+          <button class="visual-node node-box process-node role-joint" data-title="Execute and report" data-detail="Outfinity Venture Studio drives product, team and commercial execution. Outfinity Capital handles investor reporting, governance coordination and preparation for follow-on financing."><span class="process-number">05</span><span class="visual-node__title">Execute</span><span class="visual-node__text">Studio builds → Capital reports and finances</span><span class="role-label">Studio &amp; Capital</span></button>
+        </div><p class="click-hint">Select a stage for context</p>
+      </section>
+
+      <section class="deck-slide" id="investor-service" data-slide="5" aria-labelledby="service-title">
+        <header class="slide-header"><span class="slide-number">05 / 08</span><div class="slide-title"><h2 id="service-title">How the Venture Studio and Outfinity Capital serve investors</h2><p>The Studio makes selected ventures financeable; Capital matches them with investors and manages the financing relationship.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M340 138 L405 245"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M340 423 L405 315"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M675 280 L745 280"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1015 245 L1080 138"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1015 315 L1080 423"/><path class="diagram-line--soft diagram-line" d="M540 415 L640 500 M880 415 L780 500"/></svg>
+          <button class="visual-node node-box service-source-a" data-title="Outfinity-originated opportunities" data-detail="Research and technology candidates from the Outfinity ecosystem enter the same validation and joint approval process as external opportunities. They receive no automatic financing preference."><span class="visual-node__tag">Opportunity source</span><span class="visual-node__title">Outfinity Pipeline</span><span class="visual-node__text">Research technologies that may become NewCos</span></button>
+          <button class="visual-node node-box service-source-b" data-title="External opportunities are welcome" data-detail="The Founding Partner, investors and external founders may introduce opportunities. If both parties approve them, the Venture Studio can validate them and Outfinity Capital can coordinate financing."><span class="visual-node__tag">Opportunity source</span><span class="visual-node__title">External Pipeline</span><span class="visual-node__text">Deals introduced by investors, founders or partners</span></button>
+          <button class="visual-node node-circle service-studio" data-title="Outfinity Venture Studio" data-detail="The Venture Studio performs technical diligence, validates product and market assumptions, structures IP, forms the operating team and defines the execution plan before and after financing."><span class="visual-node__tag">Outfinity Venture Studio</span><span class="visual-node__title">Venture Building</span><span class="visual-node__text">Evidence → team → execution plan</span></button>
+          <button class="visual-node node-circle service-capital" data-title="Outfinity Capital" data-detail="Outfinity Capital identifies suitable investors, aligns the deal with their mandates, structures the transaction, coordinates reporting and governance, and prepares follow-on financing."><span class="visual-node__tag">Outfinity Capital</span><span class="visual-node__title">Investor Financing</span><span class="visual-node__text">Investor match → transaction → reporting</span></button>
+          <button class="visual-node node-box service-investor-a" data-title="For venture capital" data-detail="Venture capital investors receive technically reviewed opportunities, a defined venture-creation plan and continuing execution support before and after investment."><span class="visual-node__tag">Investor</span><span class="visual-node__title">Venture Capital</span><span class="visual-node__text">Reviewed deal flow with a concrete build plan</span></button>
+          <button class="visual-node node-box service-investor-b" data-title="For family offices" data-detail="Family offices receive understandable transaction-specific opportunities with explicit risks, milestones, governance and the freedom to decide on each investment independently."><span class="visual-node__tag">Investor</span><span class="visual-node__title">Family Offices</span><span class="visual-node__text">Deal-by-deal choice with risks and milestones</span></button>
+          <button class="visual-node node-pill service-freedom" data-title="Commercial freedom" data-detail="Both parties may reject weak opportunities. External opportunities are pursued through Outfinity Capital only when both parties agree; otherwise they remain subject to confidentiality and conflict-of-interest rules."><span class="visual-node__title">Commercial Freedom</span></button>
+        </div><p class="click-hint">Select any participant for context</p>
+      </section>
+
+      <section class="deck-slide" id="co-founding" data-slide="6" aria-labelledby="path-title">
+        <header class="slide-header"><span class="slide-number">06 / 08</span><div class="slide-title"><h2 id="path-title">Incorporate only after the first financing is credible</h2><p>A 90-day collaboration tests investor demand and the working relationship before permanent ownership is negotiated.</p></div></header>
+        <div class="diagram">
+          <span class="phase-caption" aria-hidden="true">PROOF → SCALE</span>
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M315 490 L385 390"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M685 390 L755 290"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1055 290 L1115 190"/></svg>
+          <button class="visual-node node-box phase-node phase-1" data-title="Phase 1 — Align" data-detail="Sign a focused 90-day collaboration and agree the investor proposition, target investor profiles, responsibilities, approval rules, confidentiality, conflicts and the initial opportunity shortlist."><span class="visual-node__tag">Phase 1</span><span class="visual-node__title">Align Terms</span><span class="visual-node__text">Targets → roles → rules → first shortlist</span></button>
+          <button class="visual-node node-box phase-node phase-2" data-title="Phase 2 — Prove" data-detail="Build qualified investor relationships, choose the first transaction, prepare its evidence and financing case, and pursue a credible commitment. Introductions alone do not earn permanent company equity."><span class="visual-node__tag">Phase 2</span><span class="visual-node__title">Prove Demand</span><span class="visual-node__text">Investor meetings → investment case → commitment</span></button>
+          <button class="visual-node node-box phase-node phase-3 visual-node--gold" data-title="Phase 3 — Incorporate" data-detail="After a signed credible capital commitment or completed financing, establish Outfinity Capital SAGL and negotiate ownership, vesting, governance and operating responsibilities around demonstrated contribution."><span class="visual-node__tag">Phase 3</span><span class="visual-node__title">Incorporate Company</span><span class="visual-node__text">Commitment → shareholders' agreement → vesting</span></button>
+          <button class="visual-node node-box phase-node phase-4" data-title="Phase 4 — Scale" data-detail="Repeat the investor service across direct and SPV-based transactions, support financed ventures and build recurring revenue. Consider a regulated pooled fund only if real investor demand and committed capital justify it."><span class="visual-node__tag">Phase 4</span><span class="visual-node__title">Scale Service</span><span class="visual-node__text">More deals → portfolio support → recurring revenue</span></button>
+        </div><p class="click-hint">Select a phase for context</p>
+      </section>
+
+      <section class="deck-slide" id="ownership" data-slide="7" aria-labelledby="ownership-title">
+        <header class="slide-header"><span class="slide-number">07 / 08</span><div class="slide-title"><h2 id="ownership-title">Ownership is negotiated after contribution is proven</h2><p>No fixed percentages upfront: economics follow capital formation, operating responsibility, venture work and deal-level results.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line--soft diagram-line" d="M355 93 L555 235 M355 301 L555 305 M355 508 L555 385 M865 235 L1065 93 M865 305 L1065 301 M865 385 L1065 508"/></svg>
+          <button class="visual-node node-circle ownership-hub visual-node--gold" data-title="The governing principle" data-detail="Final ownership and benefit sharing should reflect measurable value creation, governance responsibility, capital formation, long-term operating contribution and applicable Swiss legal, tax and regulatory advice."><span class="visual-node__tag">Core principle</span><span class="visual-node__title">Earned Ownership</span><span class="visual-node__text">Aligned → earned → transaction-aware</span></button>
+          <button class="visual-node node-box ownership-node ownership-a" data-title="Studio independence" data-detail="Outfinity SAGL remains founder-owned at the outset. Any future participation by Outfinity Capital is discussed later only if strategically useful and after sustained, measurable value has been created. There is no automatic entitlement."><span class="visual-node__title">Studio Independence</span><span class="visual-node__text">Any future Capital participation is optional and earned later.</span><span class="negotiable">No automatic entitlement</span></button>
+          <button class="visual-node node-box ownership-node ownership-b" data-title="Founding ownership" data-detail="Outfinity SAGL and the Founding Partner negotiate Outfinity Capital ownership at incorporation, based on demonstrated capital formation, governance responsibility and long-term operating contribution. Capacity for future key people may be reserved if useful."><span class="visual-node__title">Capital Ownership</span><span class="visual-node__text">Partner participation is earned through financing and operating milestones.</span><span class="negotiable">Negotiated at incorporation</span></button>
+          <button class="visual-node node-box ownership-node ownership-c" data-title="Transparent economics" data-detail="Outfinity SAGL may earn approved fees or venture equity for technical validation and venture building. Outfinity Capital earns investor-service, transaction-coordination and portfolio-support revenue. Each payment must correspond to substantive work."><span class="visual-node__title">Transparent Economics</span><span class="visual-node__text">Studio: validation and building. Capital: financing and investor service.</span><span class="negotiable">Transparent venture budgets</span></button>
+          <button class="visual-node node-box ownership-node ownership-d" data-title="Reward measurable outcomes" data-detail="When the Founding Partner materially originates and closes a transaction, additional fees or investment upside may be negotiated for that deal. Concrete results are rewarded without repeatedly changing permanent ownership."><span class="visual-node__title">Deal Rewards</span><span class="visual-node__text">Additional economics are tied to a transaction actually originated and closed.</span><span class="negotiable">Agreed deal by deal</span></button>
+          <button class="visual-node node-box ownership-node ownership-e" data-title="Investor-first SPVs" data-detail="Investors normally own each special-purpose vehicle according to the capital they commit. Any sponsor participation or performance-based upside is negotiated for the specific transaction, with investor alignment, risk and regulation in mind."><span class="visual-node__title">Investor SPVs</span><span class="visual-node__text">Investors own by contribution; sponsor economics fit the specific deal.</span><span class="negotiable">Investor-aligned structure</span></button>
+          <button class="visual-node node-box ownership-node ownership-f" data-title="Venture-level ownership" data-detail="New ventures are structured around who builds, funds, contributes technology and carries execution responsibility. External founders retain a clear operating position; Outfinity receives only economics justified by real work and added value."><span class="visual-node__title">Venture Equity</span><span class="visual-node__text">Technology, execution, capital and operating responsibility determine allocation.</span><span class="negotiable">No automatic claim</span></button>
+        </div><p class="click-hint">Select a principle for context</p>
+      </section>
+
+      <section class="deck-slide" id="next-step" data-slide="8" aria-labelledby="next-title">
+        <header class="slide-header"><span class="slide-number">08 / 08</span><div class="slide-title"><h2 id="next-title">The first 90 days must produce one credible investment commitment</h2><p>The collaboration maps investors, selects one venture, prepares its case and tests whether the partnership can close financing.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M310 285 L380 285"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M680 285 L750 285"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1050 285 L1120 285"/></svg>
+          <button class="visual-node node-box next-node next-a" data-title="Map the network" data-detail="The Founding Partner builds a prioritized list of relevant venture capital investors, family offices and corporate investors, records their mandates and identifies realistic paths to warm access."><span class="process-number">01</span><span class="visual-node__title">Investor Mapping</span><span class="visual-node__text">Prioritized targets → mandates → access paths</span></button>
+          <button class="visual-node node-box next-node next-b" data-title="Select the first venture" data-detail="Outfinity and the Founding Partner jointly choose one venture after reviewing technical evidence, market readiness, financing need and fit with the target investors."><span class="process-number">02</span><span class="visual-node__title">Venture Selection</span><span class="visual-node__text">Evidence + readiness + investor fit</span></button>
+          <button class="visual-node node-box next-node next-c" data-title="Build the investment case" data-detail="The Venture Studio provides diligence, milestones, team and execution plans. Outfinity Capital shapes the financing logic, governance proposal and investor materials for the selected venture."><span class="process-number">03</span><span class="visual-node__title">Investment Case</span><span class="visual-node__text">Diligence → milestones → terms → investor material</span></button>
+          <button class="visual-node node-circle next-node next-d visual-node--gold" data-title="Secure proof" data-detail="The parties pursue a signed investment commitment, capital ready to deploy or a completed financing. This remains a non-binding business proposal—not an offer of securities, a fund prospectus or investment advice. Final arrangements require Swiss legal, tax and regulatory review."><span class="visual-node__tag">Required outcome</span><span class="visual-node__title">Capital Commitment</span></button>
+          <div class="next-outcome"><strong>A credible commitment triggers incorporation:</strong> the parties then negotiate the shareholders' agreement, governance, vesting and transaction economics for Outfinity Capital SAGL.</div>
+        </div>
+        <p class="click-hint">Select a milestone for context</p>
+      </section>
+
+      <div class="detail-overlay" id="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-copy">
+        <div class="detail-panel"><button class="detail-close" id="detail-close" type="button" aria-label="Close detail">×</button><p class="detail-panel__eyebrow">Context</p><h3 id="detail-title"></h3><p id="detail-copy"></p></div>
+      </div>
+    </div>
+    <span class="rotate-note">For the full presentation view, rotate your device</span>
+  </div>
+
+  <script>
+    (() => {
+      const viewport = document.getElementById('deck-viewport');
+      const canvas = document.getElementById('deck-canvas');
+      const slides = [...document.querySelectorAll('.deck-slide')];
+      const links = [...document.querySelectorAll('.contents__links a')];
+      const menuStart = document.getElementById('menu-start');
+      const linkStrip = document.querySelector('.contents__links');
+      const back = document.getElementById('deck-back');
+      const next = document.getElementById('deck-next');
+      const start = document.getElementById('deck-start');
+      const counter = document.getElementById('deck-counter');
+      const fullscreen = document.getElementById('deck-fullscreen');
+      const overlay = document.getElementById('detail-overlay');
+      const detailTitle = document.getElementById('detail-title');
+      const detailCopy = document.getElementById('detail-copy');
+      const detailClose = document.getElementById('detail-close');
+      let current = 0;
+      let detailTrigger = null;
+
+      const scaleDeck = () => {
+        const scale = Math.min(viewport.clientWidth / 1600, viewport.clientHeight / 900);
+        canvas.style.setProperty('--deck-scale', Math.max(0.01, scale));
+        const gutter = (viewport.clientWidth - 1600 * scale) / 2 + 110 * scale;
+        document.documentElement.style.setProperty('--deck-content-gutter', `${Math.max(16, gutter)}px`);
+      };
+
+      const closeDetail = () => {
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        if (detailTrigger) detailTrigger.focus();
+        detailTrigger = null;
+      };
+
+      const showSlide = (index, updateHash = true) => {
+        closeDetail();
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, i) => {
+          const active = i === current;
+          slide.classList.toggle('is-active', active);
+          slide.setAttribute('aria-hidden', String(!active));
+        });
+        links.forEach((link, i) => {
+          const active = i + 1 === current;
+          link.classList.toggle('is-active', active);
+          if (active) {
+            link.setAttribute('aria-current', 'page');
+            linkStrip.scrollTo({ left: link.offsetLeft - (linkStrip.clientWidth - link.offsetWidth) / 2, behavior: 'smooth' });
+          } else link.removeAttribute('aria-current');
+        });
+        menuStart.classList.toggle('is-active', current === 0);
+        if (current === 0) menuStart.setAttribute('aria-current', 'page');
+        else menuStart.removeAttribute('aria-current');
+        back.disabled = current === 0;
+        next.disabled = current === slides.length - 1;
+        counter.textContent = current === 0 ? 'Start' : `${String(current).padStart(2, '0')} / 08`;
+        if (updateHash) history.replaceState(null, '', slides[current].id ? `#${slides[current].id}` : location.pathname);
+      };
+
+      document.querySelectorAll('.visual-node').forEach((node) => {
+        node.addEventListener('click', () => {
+          detailTrigger = node;
+          detailTitle.textContent = node.dataset.title;
+          detailCopy.textContent = node.dataset.detail;
+          overlay.classList.add('is-open');
+          overlay.removeAttribute('aria-hidden');
+          detailClose.focus();
+        });
+      });
+
+      links.forEach((link, i) => link.addEventListener('click', (event) => { event.preventDefault(); showSlide(i + 1); }));
+      menuStart.addEventListener('click', (event) => { event.preventDefault(); showSlide(0); });
+      start.addEventListener('click', () => showSlide(0));
+      back.addEventListener('click', () => showSlide(current - 1));
+      next.addEventListener('click', () => showSlide(current + 1));
+      detailClose.addEventListener('click', closeDetail);
+      overlay.addEventListener('click', (event) => { if (event.target === overlay) closeDetail(); });
+      fullscreen.addEventListener('click', () => {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && overlay.classList.contains('is-open')) { closeDetail(); return; }
+        if (overlay.classList.contains('is-open') || event.target.closest('button, a')) return;
+        if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === ' ') { event.preventDefault(); showSlide(current + 1); }
+        if (event.key === 'ArrowLeft' || event.key === 'PageUp') { event.preventDefault(); showSlide(current - 1); }
+        if (event.key === 'Home') showSlide(0);
+        if (event.key === 'End') showSlide(slides.length - 1);
+      });
+
+      new ResizeObserver(scaleDeck).observe(viewport);
+      window.addEventListener('resize', scaleDeck);
+      scaleDeck();
+      const hashIndex = slides.findIndex((slide) => slide.id && `#${slide.id}` === location.hash);
+      showSlide(hashIndex >= 0 ? hashIndex : 0, false);
+    })();
+  </script>
+</body>
+</html>
