@@ -235,6 +235,7 @@
     #service-title,
     #next-title { font-size: 43px; }
     #partnership-title { font-size: 50px; }
+    #partner-profile-title { font-size: 46px; }
 
     .slide-title p {
       max-width: 1320px;
@@ -465,14 +466,75 @@
     .cover-signal--3 { animation-delay: -2.7s; }
     .cover-signal--4 { animation-delay: -4.05s; }
     .cover-planet {
+      --planet-glow: rgba(0, 207, 200, .68);
+      --planet-x: 116px;
+      --planet-y: 178px;
+      --ring-speed: 2.2s;
+      --ring-direction: normal;
       transform-box: fill-box;
       transform-origin: center;
       animation: cover-planet-drift 8s ease-in-out infinite;
+      cursor: pointer;
+      pointer-events: bounding-box;
     }
-    .cover-planet--2 { animation-delay: -2.1s; animation-duration: 9.5s; }
-    .cover-planet--3 { animation-delay: -4.4s; animation-duration: 10.5s; }
-    .cover-planet--4 { animation-delay: -6.3s; animation-duration: 9s; }
+    .cover-planet--2 { --planet-x: 430px; --planet-y: 111px; --ring-speed: 2.65s; --ring-direction: reverse; animation-delay: -2.1s; animation-duration: 9.5s; }
+    .cover-planet--3 { --planet-glow: rgba(255, 201, 40, .68); --planet-x: 466px; --planet-y: 365px; --ring-speed: 2.85s; animation-delay: -4.4s; animation-duration: 10.5s; }
+    .cover-planet--4 { --planet-glow: rgba(255, 201, 40, .68); --planet-x: 132px; --planet-y: 421px; --ring-speed: 2.45s; --ring-direction: reverse; animation-delay: -6.3s; animation-duration: 9s; }
+    .cover-planet__surface {
+      transform-box: fill-box;
+      transform-origin: center;
+      filter: drop-shadow(0 0 5px var(--planet-glow));
+      transition: stroke-opacity 180ms ease, filter 180ms ease;
+    }
+    .cover-planet__ring,
+    .cover-planet__front-ring {
+      transform-box: view-box;
+      transform-origin: var(--planet-x) var(--planet-y);
+      animation-name: cover-ring-spin;
+      animation-duration: var(--ring-speed);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      animation-direction: var(--ring-direction);
+      animation-play-state: running;
+      filter: drop-shadow(0 0 3px var(--planet-glow));
+      transition: opacity 180ms ease, filter 180ms ease, stroke-opacity 180ms ease;
+      will-change: transform, filter;
+    }
+    .cover-planet-copy strong,
+    .cover-planet-copy span { transition: color 180ms ease; }
+    .cover-planet:hover .cover-planet__surface {
+      stroke-opacity: 1;
+      filter: drop-shadow(0 0 8px var(--planet-glow));
+      animation: cover-planet-hover 900ms ease-in-out infinite alternate;
+    }
+    .cover-planet:hover .cover-planet__ring,
+    .cover-planet:hover .cover-planet__front-ring {
+      stroke-opacity: .82;
+      filter: drop-shadow(0 0 6px var(--planet-glow));
+      animation-play-state: paused;
+    }
+    .cover-planet:hover .cover-planet-copy strong { color: #fff; }
+    .cover-planet:hover .cover-planet-copy span { color: #b8cecc; }
     .cover-core { transform-box: fill-box; transform-origin: center; animation: cover-core 7.5s ease-in-out infinite; }
+    .cover-core__hexagon {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: cover-hex-spin 2.1s linear infinite;
+      animation-direction: reverse;
+      animation-play-state: running;
+      cursor: pointer;
+      filter: drop-shadow(0 0 4px rgba(0, 207, 200, .6)) drop-shadow(0 0 7px rgba(255, 201, 40, .25));
+      transition: filter 220ms ease;
+      will-change: transform, filter;
+    }
+    .cover-core__hexagon:hover {
+      animation-play-state: paused;
+      filter: drop-shadow(0 0 5px rgba(0, 207, 200, .72)) drop-shadow(0 0 9px rgba(255, 201, 40, .34));
+    }
+    .cover-core__hexagon-line { transition: stroke-opacity 220ms ease, stroke 220ms ease; }
+    .cover-core__hexagon:hover .cover-core__hexagon-line { stroke: #d9fffd; stroke-opacity: .72; }
+    .cover-core__hexagon-node { filter: url(#cover-glow); transition: filter 220ms ease, r 220ms ease; }
+    .cover-core__hexagon:hover .cover-core__hexagon-node { r: 5px; }
     .cover-planet-copy {
       width: 100%;
       height: 100%;
@@ -503,7 +565,10 @@
     @keyframes cover-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
     @keyframes cover-signal { 0%, 100% { opacity: .46; transform: scale(.82); } 50% { opacity: 1; transform: scale(1); } }
     @keyframes cover-planet-drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(2px, -5px); } }
+    @keyframes cover-planet-hover { from { transform: scale(1); } to { transform: scale(1.045); } }
+    @keyframes cover-ring-spin { to { transform: rotate(360deg); } }
     @keyframes cover-core { 0%, 100% { transform: scale(.992); } 50% { transform: scale(1.014); } }
+    @keyframes cover-hex-spin { to { transform: rotate(360deg); } }
 
     @media (prefers-reduced-motion: reduce) {
       .cover__visual,
@@ -511,6 +576,10 @@
       .cover-flow,
       .cover-signal,
       .cover-planet,
+      .cover-planet__surface,
+      .cover-planet__ring,
+      .cover-planet__front-ring,
+      .cover-core__hexagon,
       .cover-core { animation: none !important; }
     }
 
@@ -550,6 +619,16 @@
     .about-b { left: 10px; top: 405px; width: 380px; height: 185px; }
     .about-c { left: 1030px; top: 10px; width: 380px; height: 185px; }
     .about-d { left: 1030px; top: 405px; width: 380px; height: 185px; }
+
+    .partner-profile-hub { left: 550px; top: 140px; width: 320px; height: 320px; border-color: var(--gold); border-width: 3px; }
+    .partner-profile-node { width: 350px; height: 140px; padding: 19px 22px; }
+    .partner-profile-node .visual-node__title { font-size: 21px; }
+    .partner-profile-node .visual-node__text { margin-top: 7px; font-size: 13.5px; }
+    .profile-placement { left: 10px; top: 10px; }
+    .profile-family { left: 10px; top: 230px; }
+    .profile-angels { left: 10px; top: 450px; }
+    .profile-growth { left: 1060px; top: 90px; border-color: rgba(255, 201, 40, .68); }
+    .profile-advisers { left: 1060px; top: 370px; border-color: rgba(255, 201, 40, .68); }
 
     .proposal-source { top: 98px; width: 370px; height: 315px; }
     .proposal-source--left { left: 20px; }
@@ -732,7 +811,7 @@
       z-index: 300;
       display: grid;
       place-items: center;
-      padding: 18px;
+      padding: clamp(8px, 2.2vmin, 18px);
       background: rgba(4, 10, 10, .84);
       opacity: 0;
       backdrop-filter: blur(16px);
@@ -742,9 +821,9 @@
     .viewport-warning.is-open { opacity: 1; }
     .viewport-warning__panel {
       width: min(520px, 100%);
-      max-height: calc(100dvh - 36px);
-      padding: 38px 40px 34px;
-      overflow-y: auto;
+      max-height: calc(100dvh - 16px);
+      padding: clamp(18px, 4vh, 38px) clamp(18px, 5vw, 40px) clamp(18px, 3.6vh, 34px);
+      overflow: hidden;
       border: 1px solid rgba(0, 207, 200, .34);
       border-radius: 20px;
       background: linear-gradient(145deg, rgba(8, 38, 37, .98), rgba(13, 20, 20, .99));
@@ -752,26 +831,26 @@
       text-align: center;
     }
     .viewport-warning__icon {
-      width: 64px;
-      height: 52px;
-      margin: 0 auto 22px;
+      width: clamp(42px, 8vh, 64px);
+      height: clamp(34px, 6.5vh, 52px);
+      margin: 0 auto clamp(10px, 2.6vh, 22px);
       color: var(--teal);
     }
     .viewport-warning__icon path,
     .viewport-warning__icon rect { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-    .viewport-warning__eyebrow { color: var(--gold); font-size: 11px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
-    .viewport-warning h2 { margin-top: 10px; font-size: 34px; line-height: 1.08; letter-spacing: -.04em; }
-    .viewport-warning p:not(.viewport-warning__eyebrow) { margin-top: 17px; color: #b9c5c4; font-size: 16px; line-height: 1.55; }
+    .viewport-warning__eyebrow { color: var(--gold); font-size: clamp(9px, 1.45vh, 11px); font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .viewport-warning h2 { margin-top: clamp(5px, 1.2vh, 10px); font-size: clamp(22px, 4.2vh, 34px); line-height: 1.08; letter-spacing: -.04em; }
+    .viewport-warning p:not(.viewport-warning__eyebrow) { margin-top: clamp(9px, 2vh, 17px); color: #b9c5c4; font-size: clamp(12px, 2vh, 16px); line-height: 1.42; }
     .viewport-warning__ok {
-      min-width: 108px;
-      height: 44px;
-      margin-top: 26px;
-      padding: 0 24px;
+      min-width: clamp(82px, 14vw, 108px);
+      height: clamp(36px, 5.2vh, 44px);
+      margin-top: clamp(14px, 3vh, 26px);
+      padding: 0 clamp(18px, 4vw, 24px);
       border: 0;
       border-radius: 999px;
       background: var(--gold);
       color: var(--ink);
-      font-size: 13px;
+      font-size: clamp(11px, 1.6vh, 13px);
       font-weight: 900;
       letter-spacing: .08em;
       cursor: pointer;
@@ -947,6 +1026,7 @@
       #process-title,
       #service-title,
       #next-title,
+      #partner-profile-title,
       #partnership-title {
         max-width: none;
         font-size: clamp(27px, 7.4vw, 38px);
@@ -1098,14 +1178,12 @@
       .detail-panel h3 { margin-top: 10px; font-size: 28px; }
       .detail-panel p { margin-top: 16px; font-size: 16px; line-height: 1.5; }
       .detail-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 19px; }
-      .viewport-warning__panel { padding: 30px 24px 26px; border-radius: 16px; }
-      .viewport-warning__icon { width: 52px; height: 42px; margin-bottom: 17px; }
-      .viewport-warning h2 { font-size: 28px; }
-      .viewport-warning p:not(.viewport-warning__eyebrow) { font-size: 14.5px; }
+      .viewport-warning__panel { border-radius: 16px; }
     }
 
     @media (max-width: 560px) {
       .private-label { display: none; }
+      .viewport-warning__panel { padding-inline: clamp(16px, 6vw, 24px); }
     }
 
     @media (max-height: 600px) and (orientation: landscape) {
@@ -1149,6 +1227,7 @@
       #process-title,
       #service-title,
       #next-title,
+      #partner-profile-title,
       #partnership-title { font-size: clamp(25px, 4.4vw, 34px); }
       .slide-title p { font-size: 12.5px; }
       .diagram { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
@@ -1156,6 +1235,43 @@
       .diagram .node-box,
       .diagram .node-circle,
       .diagram .node-pill { min-height: 122px; }
+
+      .viewport-warning { padding: 8px; }
+      .viewport-warning__panel {
+        width: min(760px, 100%);
+        max-height: calc(100dvh - 16px);
+        display: grid;
+        grid-template-columns: clamp(42px, 8vw, 64px) minmax(0, 1fr) auto;
+        grid-template-rows: auto auto auto;
+        align-items: center;
+        column-gap: clamp(14px, 3vw, 28px);
+        padding: clamp(13px, 3vh, 22px) clamp(16px, 3vw, 30px);
+        text-align: left;
+      }
+      .viewport-warning__icon {
+        grid-column: 1;
+        grid-row: 1 / 4;
+        width: 100%;
+        height: auto;
+        margin: 0;
+      }
+      .viewport-warning__eyebrow { grid-column: 2; grid-row: 1; }
+      .viewport-warning h2 { grid-column: 2; grid-row: 2; margin-top: 4px; font-size: clamp(21px, 4.8vh, 28px); }
+      .viewport-warning p:not(.viewport-warning__eyebrow) {
+        grid-column: 2;
+        grid-row: 3;
+        margin-top: 7px;
+        font-size: clamp(11px, 2.9vh, 14px);
+        line-height: 1.34;
+      }
+      .viewport-warning__ok {
+        grid-column: 3;
+        grid-row: 1 / 4;
+        min-width: 76px;
+        height: 38px;
+        margin: 0;
+        align-self: center;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1177,7 +1293,7 @@
       <a class="contents__label" id="menu-start" href="#start">Start</a>
       <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open presentation menu" aria-expanded="false" aria-controls="proposal-menu"><span></span><span></span><span></span></button>
       <div class="contents__links" id="proposal-menu">
-        <a href="#partnership">Partnership</a><a href="#investor-service">Investor service</a><a href="#about">About</a><a href="#proposal">Proposal</a><a href="#investment-process">Investment process</a><a href="#co-founding">Co-founding path</a><a href="#ownership">Ownership</a><a href="#next-step">Next step</a>
+        <a href="#partnership">Partnership</a><a href="#investor-service">Investor service</a><a href="#about">About</a><a href="#partner-profile">Partner profile</a><a href="#proposal">Proposal</a><a href="#investment-process">Investment process</a><a href="#co-founding">Co-founding path</a><a href="#ownership">Ownership</a><a href="#next-step">Next step</a>
       </div>
     </div>
   </nav>
@@ -1223,52 +1339,55 @@
             </g>
             <g class="cover-planet">
               <g class="cover-planet__ring"><ellipse cx="116" cy="178" rx="57" ry="16" fill="none" stroke="#00cfc8" stroke-opacity=".3" transform="rotate(-18 116 178)"/><path d="M64 161 C92 177 143 188 168 193" fill="none" stroke="#00cfc8" stroke-opacity=".1"/></g>
-              <circle cx="116" cy="178" r="43" fill="url(#cover-planet-teal)" stroke="#00cfc8" stroke-opacity=".62" stroke-width="1.4"/>
+              <circle class="cover-planet__surface" cx="116" cy="178" r="43" fill="url(#cover-planet-teal)" stroke="#00cfc8" stroke-opacity=".62" stroke-width="1.4"/>
               <path d="M84 164 C104 149 135 149 151 170" fill="none" stroke="#f7f9f9" stroke-opacity=".09"/>
               <circle cx="101" cy="160" r="4" fill="#00cfc8" fill-opacity=".22"/>
-              <path d="M59 178 A57 16 0 0 0 173 178" fill="none" stroke="#00cfc8" stroke-opacity=".48" stroke-width="1.2" transform="rotate(-18 116 178)"/>
+              <g class="cover-planet__front-ring"><path d="M59 178 A57 16 0 0 0 173 178" fill="none" stroke="#00cfc8" stroke-opacity=".48" stroke-width="1.2" transform="rotate(-18 116 178)"/></g>
               <foreignObject x="76" y="153" width="80" height="50"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>RESEARCH</strong><span>EVIDENCE</span></div></foreignObject>
             </g>
             <g class="cover-planet cover-planet--2">
               <g class="cover-planet__ring"><ellipse cx="430" cy="111" rx="48" ry="13" fill="none" stroke="#00cfc8" stroke-opacity=".28" transform="rotate(21 430 111)"/></g>
-              <circle cx="430" cy="111" r="36" fill="url(#cover-planet-teal)" stroke="#00cfc8" stroke-opacity=".56" stroke-width="1.3"/>
+              <circle class="cover-planet__surface" cx="430" cy="111" r="36" fill="url(#cover-planet-teal)" stroke="#00cfc8" stroke-opacity=".56" stroke-width="1.3"/>
               <path d="M405 99 C423 90 444 94 455 107" fill="none" stroke="#f7f9f9" stroke-opacity=".1"/>
-              <path d="M382 111 A48 13 0 0 0 478 111" fill="none" stroke="#00cfc8" stroke-opacity=".44" stroke-width="1.1" transform="rotate(21 430 111)"/>
+              <g class="cover-planet__front-ring"><path d="M382 111 A48 13 0 0 0 478 111" fill="none" stroke="#00cfc8" stroke-opacity=".44" stroke-width="1.1" transform="rotate(21 430 111)"/></g>
               <circle class="cover-signal cover-signal--2" cx="462" cy="87" r="3" fill="#00cfc8" filter="url(#cover-glow)"/>
               <foreignObject x="395" y="87" width="70" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>STUDIO</strong><span>BUILD</span></div></foreignObject>
             </g>
             <g class="cover-planet cover-planet--3">
               <g class="cover-planet__ring"><ellipse cx="466" cy="365" rx="70" ry="19" fill="none" stroke="#ffc928" stroke-opacity=".34" transform="rotate(16 466 365)"/><ellipse cx="466" cy="365" rx="61" ry="13" fill="none" stroke="#ffc928" stroke-opacity=".1" transform="rotate(16 466 365)"/></g>
-              <circle cx="466" cy="365" r="49" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".68" stroke-width="1.5"/>
+              <circle class="cover-planet__surface" cx="466" cy="365" r="49" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".68" stroke-width="1.5"/>
               <path d="M429 350 C451 332 485 335 500 354" fill="none" stroke="#f7f9f9" stroke-opacity=".1"/>
-              <path d="M396 365 A70 19 0 0 0 536 365" fill="none" stroke="#ffc928" stroke-opacity=".54" stroke-width="1.3" transform="rotate(16 466 365)"/>
+              <g class="cover-planet__front-ring"><path d="M396 365 A70 19 0 0 0 536 365" fill="none" stroke="#ffc928" stroke-opacity=".54" stroke-width="1.3" transform="rotate(16 466 365)"/></g>
               <circle class="cover-signal cover-signal--3" cx="514" cy="318" r="3.5" fill="#ffc928" filter="url(#cover-glow)"/>
               <foreignObject x="421" y="338" width="90" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>CAPITAL</strong><span>FINANCE</span></div></foreignObject>
             </g>
             <g class="cover-planet cover-planet--4">
               <g class="cover-planet__ring"><ellipse cx="132" cy="421" rx="52" ry="15" fill="none" stroke="#ffc928" stroke-opacity=".28" transform="rotate(-25 132 421)"/></g>
-              <circle cx="132" cy="421" r="40" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".58" stroke-width="1.3"/>
+              <circle class="cover-planet__surface" cx="132" cy="421" r="40" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".58" stroke-width="1.3"/>
               <path d="M104 410 C122 397 147 399 159 414" fill="none" stroke="#f7f9f9" stroke-opacity=".09"/>
-              <path d="M80 421 A52 15 0 0 0 184 421" fill="none" stroke="#ffc928" stroke-opacity=".46" stroke-width="1.15" transform="rotate(-25 132 421)"/>
+              <g class="cover-planet__front-ring"><path d="M80 421 A52 15 0 0 0 184 421" fill="none" stroke="#ffc928" stroke-opacity=".46" stroke-width="1.15" transform="rotate(-25 132 421)"/></g>
               <circle class="cover-signal cover-signal--4" cx="93" cy="382" r="3" fill="#ffc928" filter="url(#cover-glow)"/>
               <foreignObject x="94" y="396" width="76" height="50"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>VENTURE</strong><span>SCALE</span></div></foreignObject>
             </g>
             <g class="cover-core">
               <circle cx="280" cy="280" r="96" fill="url(#cover-core-surface)" stroke="url(#cover-core-gradient)" stroke-width="1.6"/>
               <circle cx="280" cy="280" r="78" fill="none" stroke="#f7f9f9" stroke-opacity=".075"/>
-              <path d="M280 236 L318 258 L318 302 L280 324 L242 302 L242 258 Z" fill="none" stroke="#f7f9f9" stroke-opacity=".22" stroke-width="1.2"/>
-              <path d="M280 280 L280 236 M280 280 L318 302 M280 280 L242 302" fill="none" stroke="#f7f9f9" stroke-opacity=".14"/>
-              <circle cx="280" cy="236" r="4" fill="#00cfc8"/>
-              <circle cx="318" cy="302" r="4" fill="#ffc928"/>
-              <circle cx="242" cy="302" r="4" fill="#00cfc8"/>
-              <circle cx="280" cy="280" r="7" fill="#0d2827" stroke="#00cfc8" stroke-width="1.5" filter="url(#cover-glow)"/>
+              <g class="cover-core__hexagon">
+                <path d="M280 236 L318 258 L318 302 L280 324 L242 302 L242 258 Z" fill="#00cfc8" fill-opacity=".001"/>
+                <path class="cover-core__hexagon-line" d="M280 236 L318 258 L318 302 L280 324 L242 302 L242 258 Z" fill="none" stroke="#f7f9f9" stroke-opacity=".22" stroke-width="1.2"/>
+                <path class="cover-core__hexagon-line" d="M280 280 L280 236 M280 280 L318 302 M280 280 L242 302" fill="none" stroke="#f7f9f9" stroke-opacity=".14"/>
+                <circle class="cover-core__hexagon-node" cx="280" cy="236" r="4" fill="#00cfc8"/>
+                <circle class="cover-core__hexagon-node" cx="318" cy="302" r="4" fill="#ffc928"/>
+                <circle class="cover-core__hexagon-node" cx="242" cy="302" r="4" fill="#00cfc8"/>
+                <circle cx="280" cy="280" r="7" fill="#0d2827" stroke="#00cfc8" stroke-width="1.5" filter="url(#cover-glow)"/>
+              </g>
             </g>
           </svg>
         </div>
       </section>
 
       <section class="deck-slide" id="partnership" data-slide="1" aria-labelledby="partnership-title">
-        <header class="slide-header"><span class="slide-number">01 / 08</span><div class="slide-title"><h2 id="partnership-title">Outfinity Capital is the new company we want to co-found</h2><p>Outfinity Venture Studio brings venture validation and building; the Founding Partner brings investor relationships and financing execution.</p></div></header>
+        <header class="slide-header"><span class="slide-number">01 / 09</span><div class="slide-title"><h2 id="partnership-title">Partner with Outfinity Venture Studio to co-found Outfinity Capital</h2><p>Combine Outfinity's venture-building capability with your investor relationships and financing execution in one jointly owned company.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M400 280 L520 280"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M710 155 L710 190"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M900 280 L1020 280"/><path class="diagram-line--soft diagram-line" d="M710 445 L710 500"/></svg>
           <button class="visual-node node-box partnership-studio" data-title="Outfinity — existing Venture Studio" data-detail="Outfinity Venture Studio supplies research and external opportunities, performs technical and market validation, structures intellectual property, forms venture teams and supports product and commercial execution. Its technology scope includes AI and agentic software, blockchain and trusted data, social technologies and other deep-tech directions."><span class="visual-node__tag">Existing company · Venture Studio</span><span class="visual-node__title">Outfinity Venture Studio</span><span class="source-list"><span>Research and opportunity pipeline</span><span>Technical, product and market validation</span><span>Venture design, teams and execution</span><span>AI, blockchain, social and other deep tech</span></span></button>
@@ -1280,7 +1399,7 @@
       </section>
 
       <section class="deck-slide" id="investor-service" data-slide="2" aria-labelledby="service-title">
-        <header class="slide-header"><span class="slide-number">02 / 08</span><div class="slide-title"><h2 id="service-title">How the Venture Studio and Outfinity Capital serve investors</h2><p>The Studio makes selected ventures financeable; Capital matches them with investors and manages the financing relationship.</p></div></header>
+        <header class="slide-header"><span class="slide-number">02 / 09</span><div class="slide-title"><h2 id="service-title">How the Venture Studio and Outfinity Capital serve investors</h2><p>The Studio makes selected ventures financeable; Capital matches them with investors and manages the financing relationship.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M340 138 L405 245"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M340 423 L405 315"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M675 280 L745 280"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1015 245 L1080 138"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1015 315 L1080 423"/><path class="diagram-line--soft diagram-line" d="M540 415 L640 500 M880 415 L780 500"/></svg>
           <button class="visual-node node-box service-source-a" data-title="Outfinity-originated opportunities" data-detail="Research and technology candidates from the Outfinity ecosystem enter the same validation and joint approval process as external opportunities. They receive no automatic financing preference."><span class="visual-node__tag">Opportunity source</span><span class="visual-node__title">Outfinity Pipeline</span><span class="visual-node__text">Research technologies that may become NewCos</span></button>
@@ -1294,7 +1413,7 @@
       </section>
 
       <section class="deck-slide" id="about" data-slide="3" aria-labelledby="about-title">
-        <header class="slide-header"><span class="slide-number">03 / 08</span><div class="slide-title"><h2 id="about-title">What Outfinity already brings to the partnership</h2><p>A Swiss venture studio, a proven research base, a deep-tech pipeline and hands-on company-building capability.</p></div></header>
+        <header class="slide-header"><span class="slide-number">03 / 09</span><div class="slide-title"><h2 id="about-title">What Outfinity already brings to the partnership</h2><p>A Swiss venture studio, a proven research base, a deep-tech pipeline and hands-on company-building capability.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M390 103 L570 248"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M390 498 L570 342"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M1030 103 L850 248"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M850 342 L1030 498"/></svg>
           <button class="visual-node node-circle about-hub visual-node--gold" data-title="Outfinity Venture Studio" data-detail="A Swiss venture studio established in Ticino to turn promising research and technical ideas into validated, financeable and independently operated companies."><span class="visual-node__tag">Venture Studio</span><span class="visual-node__title">Outfinity</span><span class="visual-node__text">Diligence → validation → IP → teams → execution</span></button>
@@ -1305,8 +1424,21 @@
         </div><p class="click-hint">Click any element for details</p>
       </section>
 
-      <section class="deck-slide" id="proposal" data-slide="4" aria-labelledby="proposal-title">
-        <header class="slide-header"><span class="slide-number">04 / 08</span><div class="slide-title"><h2 id="proposal-title">The Founding Partner builds the investor side of Outfinity Capital</h2><p>Outfinity supplies and builds validated ventures; the partner develops investor relationships and converts them into financings.</p></div></header>
+      <section class="deck-slide" id="partner-profile" data-slide="4" aria-labelledby="partner-profile-title">
+        <header class="slide-header"><span class="slide-number">04 / 09</span><div class="slide-title"><h2 id="partner-profile-title">Who could become the Founding Capital Partner</h2><p>We seek one accountable partner: either a senior individual or a specialist company able to own investor development and financing execution.</p></div></header>
+        <div class="diagram">
+          <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M360 80 L550 220"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M360 300 L550 285"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M360 520 L550 380"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1060 160 L870 225"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1060 440 L870 355"/></svg>
+          <button class="visual-node node-circle partner-profile-hub visual-node--gold" data-title="The ideal Founding Capital Partner" data-detail="Outfinity is looking for one accountable co-founder on the capital side. This may be a senior individual or a specialist company, provided the partner can build investor relationships, shape transactions, coordinate financing and remain operationally involved over the long term."><span class="visual-node__tag">Senior individual or specialist company</span><span class="visual-node__title">Ideal Partner</span><span class="visual-node__text">Investor development → financing execution → long-term relationships</span></button>
+          <button class="visual-node node-box partner-profile-node profile-placement" data-title="Boutique placement agents and private-capital fundraisers" data-detail="Boutique placement or fundraising companies with trusted private-capital relationships, mandate knowledge and the ability to develop qualified investor conversations beyond simple introductions."><span class="visual-node__tag">Ideal profile 01</span><span class="visual-node__title">Placement Boutiques</span><span class="visual-node__text">Placement agents and private-capital fundraisers</span></button>
+          <button class="visual-node node-box partner-profile-node profile-family" data-title="Multi-family offices and outsourced investment-office boutiques" data-detail="Multi-family offices or outsourced investment-office teams that understand private-market allocation, can assess transaction fit and maintain trusted relationships with families and co-investors."><span class="visual-node__tag">Ideal profile 02</span><span class="visual-node__title">Investment Offices</span><span class="visual-node__text">Multi-Family Offices and outsourced investment-office boutiques</span></button>
+          <button class="visual-node node-box partner-profile-node profile-angels" data-title="Angel syndicate operators and investor-club leaders" data-detail="Operators who already organize experienced private investors, understand syndication and can turn a relevant opportunity into a structured, informed investment process."><span class="visual-node__tag">Ideal profile 03</span><span class="visual-node__title">Syndicate Leaders</span><span class="visual-node__text">Angel syndicate operators and investor-club leaders</span></button>
+          <button class="visual-node node-box partner-profile-node profile-growth visual-node--gold" data-title="Technology-focused corporate-finance and growth-capital boutiques" data-detail="Specialist corporate-finance or growth-capital companies with technology expertise, transaction-shaping capability and access to strategic, corporate or growth investors."><span class="visual-node__tag">Ideal profile 04</span><span class="visual-node__title">Growth Boutiques</span><span class="visual-node__text">Technology-focused corporate finance and growth capital</span></button>
+          <button class="visual-node node-box partner-profile-node profile-advisers visual-node--gold" data-title="Senior independent advisers and former bankers" data-detail="Experienced independent advisers or former bankers who bring credibility, disciplined transaction judgment and a relevant network—and who want an active co-founding role rather than occasional advisory work."><span class="visual-node__tag">Ideal profile 05</span><span class="visual-node__title">Senior Advisers</span><span class="visual-node__text">Independent advisers and former bankers</span></button>
+        </div><p class="click-hint">Click any element for details</p>
+      </section>
+
+      <section class="deck-slide" id="proposal" data-slide="5" aria-labelledby="proposal-title">
+        <header class="slide-header"><span class="slide-number">05 / 09</span><div class="slide-title"><h2 id="proposal-title">The Founding Partner builds the investor side of Outfinity Capital</h2><p>Outfinity supplies and builds validated ventures; the partner develops investor relationships and converts them into financings.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M390 255 L535 235"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M1030 255 L885 235"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M710 345 L710 445"/></svg>
           <button class="visual-node node-box proposal-source proposal-source--left" data-title="What Outfinity contributes" data-detail="A research-backed pipeline, technical due diligence, product and market validation, intellectual property and software foundations, venture design, team formation, and continuing execution support after investment."><span class="visual-node__tag">Outfinity Venture Studio</span><span class="visual-node__title">Venture Creation</span><span class="source-list"><span>Supplies the opportunity pipeline</span><span>Validates technology, product and market</span><span>Structures IP, teams and execution</span></span></button>
@@ -1316,8 +1448,8 @@
         </div><p class="click-hint">Click any element for details</p>
       </section>
 
-      <section class="deck-slide" id="investment-process" data-slide="5" aria-labelledby="process-title">
-        <header class="slide-header"><span class="slide-number">05 / 08</span><div class="slide-title"><h2 id="process-title">Who does what from opportunity sourcing to investor reporting</h2><p>The Venture Studio owns validation and execution; Outfinity Capital owns financing coordination and investor service.</p></div></header>
+      <section class="deck-slide" id="investment-process" data-slide="6" aria-labelledby="process-title">
+        <header class="slide-header"><span class="slide-number">06 / 09</span><div class="slide-title"><h2 id="process-title">Who does what from opportunity sourcing to investor reporting</h2><p>The Venture Studio owns validation and execution; Outfinity Capital owns financing coordination and investor service.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M255 315 L295 315"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M545 315 L585 315"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M835 315 L875 315"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1125 315 L1165 315"/></svg>
           <div class="process-lanes" aria-label="Responsibility legend"><span class="process-legend process-legend--studio">Outfinity Venture Studio: validation &amp; execution</span><span class="process-legend-arrow">→</span><span class="process-legend process-legend--capital">Outfinity Capital: financing &amp; investor service</span></div>
@@ -1329,8 +1461,8 @@
         </div><p class="click-hint">Click any element for details</p>
       </section>
 
-      <section class="deck-slide" id="co-founding" data-slide="6" aria-labelledby="path-title">
-        <header class="slide-header"><span class="slide-number">06 / 08</span><div class="slide-title"><h2 id="path-title">Incorporate only after the first financing is credible</h2><p>A 90-day collaboration tests investor demand and the working relationship before permanent ownership is negotiated.</p></div></header>
+      <section class="deck-slide" id="co-founding" data-slide="7" aria-labelledby="path-title">
+        <header class="slide-header"><span class="slide-number">07 / 09</span><div class="slide-title"><h2 id="path-title">Incorporate only after the first financing is credible</h2><p>A 90-day collaboration tests investor demand and the working relationship before permanent ownership is negotiated.</p></div></header>
         <div class="diagram">
           <span class="phase-caption" aria-hidden="true"><span>Proof</span><i></i><span>Scale</span></span>
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M315 490 L385 390"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M685 390 L755 290"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1055 290 L1115 190"/></svg>
@@ -1341,8 +1473,8 @@
         </div><p class="click-hint">Click any element for details</p>
       </section>
 
-      <section class="deck-slide" id="ownership" data-slide="7" aria-labelledby="ownership-title">
-        <header class="slide-header"><span class="slide-number">07 / 08</span><div class="slide-title"><h2 id="ownership-title">Ownership is negotiated after contribution is proven</h2><p>No fixed percentages upfront: economics follow capital formation, operating responsibility, venture work and deal-level results.</p></div></header>
+      <section class="deck-slide" id="ownership" data-slide="8" aria-labelledby="ownership-title">
+        <header class="slide-header"><span class="slide-number">08 / 09</span><div class="slide-title"><h2 id="ownership-title">Ownership structure is negotiated early in the collaboration</h2><p>No fixed percentages upfront: economics follow capital formation, operating responsibility, venture work and deal-level results.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line--soft diagram-line" d="M355 93 L555 235 M355 301 L555 305 M355 508 L555 385 M865 235 L1065 93 M865 305 L1065 301 M865 385 L1065 508"/></svg>
           <button class="visual-node node-circle ownership-hub visual-node--gold" data-title="The governing principle" data-detail="Final ownership and benefit sharing should reflect measurable value creation, governance responsibility, capital formation, long-term operating contribution and applicable Swiss legal, tax and regulatory advice."><span class="visual-node__tag">Core principle</span><span class="visual-node__title">Earned Ownership</span><span class="visual-node__text">Aligned → earned → transaction-aware</span></button>
@@ -1355,8 +1487,8 @@
         </div><p class="click-hint">Click any element for details</p>
       </section>
 
-      <section class="deck-slide" id="next-step" data-slide="8" aria-labelledby="next-title">
-        <header class="slide-header"><span class="slide-number">08 / 08</span><div class="slide-title"><h2 id="next-title">The first 90 days must produce one credible investment commitment</h2><p>The collaboration maps investors, selects one venture, prepares its case and tests whether the partnership can close financing.</p></div></header>
+      <section class="deck-slide" id="next-step" data-slide="9" aria-labelledby="next-title">
+        <header class="slide-header"><span class="slide-number">09 / 09</span><div class="slide-title"><h2 id="next-title">The first 90 days must produce one credible investment commitment</h2><p>The collaboration maps investors, selects one venture, prepares its case and tests whether the partnership can close financing.</p></div></header>
         <div class="diagram">
           <svg class="diagram-lines" viewBox="0 0 1420 600" aria-hidden="true"><path class="diagram-line" marker-end="url(#arrow-teal)" d="M310 285 L380 285"/><path class="diagram-line" marker-end="url(#arrow-teal)" d="M680 285 L750 285"/><path class="diagram-line diagram-line--gold" marker-end="url(#arrow-gold)" d="M1050 285 L1120 285"/></svg>
           <button class="visual-node node-box next-node next-a" data-title="Map the network" data-detail="The Founding Partner builds a prioritized list of relevant venture capital investors, family offices and corporate investors, records their mandates and identifies realistic paths to warm access."><span class="process-number">01</span><span class="visual-node__title">Investor Mapping</span><span class="visual-node__text">Prioritized targets → mandates → access paths</span></button>
@@ -1495,7 +1627,7 @@
         next.disabled = current === slides.length - 1;
         edgeBack.disabled = current === 0;
         edgeNext.disabled = current === slides.length - 1;
-        counter.textContent = current === 0 ? 'Start' : `${String(current).padStart(2, '0')} / 08`;
+        counter.textContent = current === 0 ? 'Start' : `${String(current).padStart(2, '0')} / 09`;
         if (updateHash) history.replaceState(null, '', slides[current].id ? `#${slides[current].id}` : location.pathname);
       };
 
