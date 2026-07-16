@@ -464,7 +464,6 @@
     }
     .cover-signal--2 { animation-delay: -1.35s; }
     .cover-signal--3 { animation-delay: -2.7s; }
-    .cover-signal--4 { animation-delay: -4.05s; }
     .cover-planet {
       --planet-glow: rgba(0, 207, 200, .68);
       --planet-x: 116px;
@@ -477,9 +476,8 @@
       cursor: pointer;
       pointer-events: bounding-box;
     }
-    .cover-planet--2 { --planet-x: 430px; --planet-y: 111px; --ring-speed: 2.65s; --ring-direction: reverse; animation-delay: -2.1s; animation-duration: 9.5s; }
-    .cover-planet--3 { --planet-glow: rgba(255, 201, 40, .68); --planet-x: 466px; --planet-y: 365px; --ring-speed: 2.85s; animation-delay: -4.4s; animation-duration: 10.5s; }
-    .cover-planet--4 { --planet-glow: rgba(255, 201, 40, .68); --planet-x: 132px; --planet-y: 421px; --ring-speed: 2.45s; --ring-direction: reverse; animation-delay: -6.3s; animation-duration: 9s; }
+    .cover-planet--2 { --planet-x: 444px; --planet-y: 178px; --ring-speed: 2.45s; --ring-direction: reverse; animation-delay: -2.1s; animation-duration: 9.5s; }
+    .cover-planet--3 { --planet-glow: rgba(255, 201, 40, .68); --planet-x: 280px; --planet-y: 450px; --ring-speed: 2.85s; animation-delay: -4.4s; animation-duration: 10.5s; }
     .cover-planet__surface {
       transform-box: fill-box;
       transform-origin: center;
@@ -1333,9 +1331,8 @@
             </g>
             <g fill="none" stroke-width="1.5" stroke-linecap="round">
               <path class="cover-flow" d="M202 254 C176 241 153 221 136 197" stroke="#00cfc8" stroke-opacity=".38"/>
-              <path class="cover-flow" d="M325 205 C350 171 380 145 407 128" stroke="#00cfc8" stroke-opacity=".38"/>
-              <path class="cover-flow" d="M208 329 C182 355 161 382 145 407" stroke="#ffc928" stroke-opacity=".34"/>
-              <path class="cover-flow" d="M356 306 C390 321 416 336 437 351" stroke="#ffc928" stroke-opacity=".4"/>
+              <path class="cover-flow" d="M358 254 C385 238 410 216 424 197" stroke="#00cfc8" stroke-opacity=".38"/>
+              <path class="cover-flow" d="M280 356 C280 380 280 405 280 423" stroke="#ffc928" stroke-opacity=".4"/>
             </g>
             <g class="cover-planet">
               <g class="cover-planet__ring"><ellipse cx="116" cy="178" rx="57" ry="16" fill="none" stroke="#00cfc8" stroke-opacity=".3" transform="rotate(-18 116 178)"/><path d="M64 161 C92 177 143 188 168 193" fill="none" stroke="#00cfc8" stroke-opacity=".1"/></g>
@@ -1346,28 +1343,20 @@
               <foreignObject x="76" y="153" width="80" height="50"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>RESEARCH</strong><span>EVIDENCE</span></div></foreignObject>
             </g>
             <g class="cover-planet cover-planet--2">
-              <g class="cover-planet__ring"><ellipse cx="430" cy="111" rx="48" ry="13" fill="none" stroke="#00cfc8" stroke-opacity=".28" transform="rotate(21 430 111)"/></g>
-              <circle class="cover-planet__surface" cx="430" cy="111" r="36" fill="url(#cover-planet-teal)" stroke="#00cfc8" stroke-opacity=".56" stroke-width="1.3"/>
-              <path d="M405 99 C423 90 444 94 455 107" fill="none" stroke="#f7f9f9" stroke-opacity=".1"/>
-              <g class="cover-planet__front-ring"><path d="M382 111 A48 13 0 0 0 478 111" fill="none" stroke="#00cfc8" stroke-opacity=".44" stroke-width="1.1" transform="rotate(21 430 111)"/></g>
-              <circle class="cover-signal cover-signal--2" cx="462" cy="87" r="3" fill="#00cfc8" filter="url(#cover-glow)"/>
-              <foreignObject x="395" y="87" width="70" height="48"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>STUDIO</strong><span>BUILD</span></div></foreignObject>
+              <g class="cover-planet__ring"><ellipse cx="444" cy="178" rx="52" ry="15" fill="none" stroke="#00cfc8" stroke-opacity=".3" transform="rotate(25 444 178)"/></g>
+              <circle class="cover-planet__surface" cx="444" cy="178" r="40" fill="url(#cover-planet-teal)" stroke="#00cfc8" stroke-opacity=".62" stroke-width="1.3"/>
+              <path d="M416 167 C434 154 459 156 471 171" fill="none" stroke="#f7f9f9" stroke-opacity=".09"/>
+              <g class="cover-planet__front-ring"><path d="M392 178 A52 15 0 0 0 496 178" fill="none" stroke="#00cfc8" stroke-opacity=".48" stroke-width="1.15" transform="rotate(25 444 178)"/></g>
+              <circle class="cover-signal cover-signal--2" cx="405" cy="139" r="3" fill="#00cfc8" filter="url(#cover-glow)"/>
+              <foreignObject x="406" y="153" width="76" height="50"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>VENTURE</strong><span>SCALE</span></div></foreignObject>
             </g>
             <g class="cover-planet cover-planet--3">
-              <g class="cover-planet__ring"><ellipse cx="466" cy="365" rx="70" ry="19" fill="none" stroke="#ffc928" stroke-opacity=".34" transform="rotate(16 466 365)"/><ellipse cx="466" cy="365" rx="61" ry="13" fill="none" stroke="#ffc928" stroke-opacity=".1" transform="rotate(16 466 365)"/></g>
-              <circle class="cover-planet__surface" cx="466" cy="365" r="49" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".68" stroke-width="1.5"/>
-              <path d="M429 350 C451 332 485 335 500 354" fill="none" stroke="#f7f9f9" stroke-opacity=".1"/>
-              <g class="cover-planet__front-ring"><path d="M396 365 A70 19 0 0 0 536 365" fill="none" stroke="#ffc928" stroke-opacity=".54" stroke-width="1.3" transform="rotate(16 466 365)"/></g>
-              <circle class="cover-signal cover-signal--3" cx="514" cy="318" r="3.5" fill="#ffc928" filter="url(#cover-glow)"/>
-              <foreignObject x="421" y="338" width="90" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>CAPITAL</strong><span>FINANCE</span></div></foreignObject>
-            </g>
-            <g class="cover-planet cover-planet--4">
-              <g class="cover-planet__ring"><ellipse cx="132" cy="421" rx="52" ry="15" fill="none" stroke="#ffc928" stroke-opacity=".28" transform="rotate(-25 132 421)"/></g>
-              <circle class="cover-planet__surface" cx="132" cy="421" r="40" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".58" stroke-width="1.3"/>
-              <path d="M104 410 C122 397 147 399 159 414" fill="none" stroke="#f7f9f9" stroke-opacity=".09"/>
-              <g class="cover-planet__front-ring"><path d="M80 421 A52 15 0 0 0 184 421" fill="none" stroke="#ffc928" stroke-opacity=".46" stroke-width="1.15" transform="rotate(-25 132 421)"/></g>
-              <circle class="cover-signal cover-signal--4" cx="93" cy="382" r="3" fill="#ffc928" filter="url(#cover-glow)"/>
-              <foreignObject x="94" y="396" width="76" height="50"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>VENTURE</strong><span>SCALE</span></div></foreignObject>
+              <g class="cover-planet__ring"><ellipse cx="280" cy="450" rx="70" ry="19" fill="none" stroke="#ffc928" stroke-opacity=".34" transform="rotate(16 280 450)"/><ellipse cx="280" cy="450" rx="61" ry="13" fill="none" stroke="#ffc928" stroke-opacity=".1" transform="rotate(16 280 450)"/></g>
+              <circle class="cover-planet__surface" cx="280" cy="450" r="49" fill="url(#cover-planet-gold)" stroke="#ffc928" stroke-opacity=".68" stroke-width="1.5"/>
+              <path d="M243 435 C265 417 299 420 314 439" fill="none" stroke="#f7f9f9" stroke-opacity=".1"/>
+              <g class="cover-planet__front-ring"><path d="M210 450 A70 19 0 0 0 350 450" fill="none" stroke="#ffc928" stroke-opacity=".54" stroke-width="1.3" transform="rotate(16 280 450)"/></g>
+              <circle class="cover-signal cover-signal--3" cx="328" cy="403" r="3.5" fill="#ffc928" filter="url(#cover-glow)"/>
+              <foreignObject x="235" y="423" width="90" height="54"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-planet-copy"><strong>CAPITAL</strong><span>FINANCE</span></div></foreignObject>
             </g>
             <g class="cover-core">
               <circle cx="280" cy="280" r="96" fill="url(#cover-core-surface)" stroke="url(#cover-core-gradient)" stroke-width="1.6"/>
