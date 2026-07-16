@@ -389,44 +389,70 @@
 
     .cover__visual {
       position: absolute;
-      top: 170px;
-      right: 90px;
+      top: 182px;
+      right: 105px;
       z-index: 1;
-      width: 520px;
-      height: 520px;
-      filter: drop-shadow(0 28px 60px rgba(0, 0, 0, 0.38));
-      animation: cover-float 7s ease-in-out infinite;
+      width: 495px;
+      height: 495px;
+      filter: drop-shadow(0 24px 52px rgba(0, 0, 0, 0.28));
+      animation: cover-float 10s ease-in-out infinite;
     }
 
     .cover__visual svg { display: block; width: 100%; height: 100%; overflow: visible; }
     .cover-orbit {
       transform-origin: 280px 280px;
-      animation: cover-spin 28s linear infinite;
+      animation: cover-spin 46s linear infinite;
     }
-    .cover-orbit--reverse { animation-duration: 38s; animation-direction: reverse; }
+    .cover-orbit--reverse { animation-duration: 62s; animation-direction: reverse; }
     .cover-flow {
-      stroke-dasharray: 12 12;
-      animation: cover-flow 3.2s linear infinite;
+      stroke-dasharray: 5 12;
+      animation: cover-flow 5.8s linear infinite;
     }
-    .cover-node { transform-box: fill-box; transform-origin: center; animation: cover-pulse 3.6s ease-in-out infinite; }
-    .cover-node--2 { animation-delay: -.9s; }
-    .cover-node--3 { animation-delay: -1.8s; }
-    .cover-node--4 { animation-delay: -2.7s; }
-    .cover-core { transform-box: fill-box; transform-origin: center; animation: cover-core 4.5s ease-in-out infinite; }
-    .cover-visual__label { fill: #f7f9f9; font: 800 13px var(--font); letter-spacing: .07em; text-anchor: middle; }
-    .cover-visual__micro { fill: #93aaa8; font: 700 10px var(--font); letter-spacing: .06em; text-anchor: middle; text-transform: uppercase; }
+    .cover-signal {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: cover-signal 5.4s ease-in-out infinite;
+    }
+    .cover-signal--2 { animation-delay: -1.35s; }
+    .cover-signal--3 { animation-delay: -2.7s; }
+    .cover-signal--4 { animation-delay: -4.05s; }
+    .cover-core { transform-box: fill-box; transform-origin: center; animation: cover-core 7.5s ease-in-out infinite; }
+    .cover-card-copy {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1;
+      text-align: center;
+    }
+    .cover-card-copy strong {
+      color: #f7f9f9;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .055em;
+    }
+    .cover-card-copy span {
+      margin-top: 8px;
+      color: #879c9a;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .075em;
+    }
 
     @keyframes cover-spin { to { transform: rotate(360deg); } }
-    @keyframes cover-flow { to { stroke-dashoffset: -48; } }
-    @keyframes cover-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-    @keyframes cover-pulse { 0%, 100% { opacity: .68; } 50% { opacity: 1; } }
-    @keyframes cover-core { 0%, 100% { transform: scale(.98); } 50% { transform: scale(1.035); } }
+    @keyframes cover-flow { to { stroke-dashoffset: -51; } }
+    @keyframes cover-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+    @keyframes cover-signal { 0%, 100% { opacity: .46; transform: scale(.82); } 50% { opacity: 1; transform: scale(1); } }
+    @keyframes cover-core { 0%, 100% { transform: scale(.992); } 50% { transform: scale(1.014); } }
 
     @media (prefers-reduced-motion: reduce) {
       .cover__visual,
       .cover-orbit,
       .cover-flow,
-      .cover-node,
+      .cover-signal,
       .cover-core { animation: none !important; }
     }
 
@@ -719,35 +745,60 @@
         <div class="cover__visual" aria-hidden="true">
           <svg viewBox="0 0 560 560" role="img">
             <defs>
-              <radialGradient id="cover-halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#00cfc8" stop-opacity=".18"/><stop offset=".55" stop-color="#00cfc8" stop-opacity=".05"/><stop offset="1" stop-color="#00cfc8" stop-opacity="0"/></radialGradient>
+              <radialGradient id="cover-halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#00cfc8" stop-opacity=".13"/><stop offset=".58" stop-color="#00cfc8" stop-opacity=".035"/><stop offset="1" stop-color="#00cfc8" stop-opacity="0"/></radialGradient>
+              <radialGradient id="cover-core-surface" cx="42%" cy="36%" r="70%"><stop stop-color="#15302f"/><stop offset=".52" stop-color="#0a1a1a"/><stop offset="1" stop-color="#061111"/></radialGradient>
               <linearGradient id="cover-core-gradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00cfc8"/><stop offset=".5" stop-color="#16a6a1"/><stop offset="1" stop-color="#ffc928"/></linearGradient>
-              <filter id="cover-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="7" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="cover-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             </defs>
-            <circle cx="280" cy="280" r="270" fill="url(#cover-halo)"/>
+            <circle cx="280" cy="280" r="238" fill="url(#cover-halo)"/>
             <g class="cover-orbit" fill="none">
-              <circle cx="280" cy="280" r="242" stroke="#00cfc8" stroke-opacity=".25" stroke-width="2" stroke-dasharray="4 13"/>
-              <circle cx="280" cy="38" r="8" fill="#ffc928" stroke="none" filter="url(#cover-glow)"/>
-              <circle cx="280" cy="522" r="5" fill="#00cfc8" stroke="none"/>
+              <circle cx="280" cy="280" r="218" stroke="#00cfc8" stroke-opacity=".14" stroke-width="1" stroke-dasharray="3 15"/>
+              <circle cx="280" cy="62" r="4" fill="#ffc928" stroke="none" filter="url(#cover-glow)"/>
+              <circle cx="280" cy="498" r="2.5" fill="#00cfc8" stroke="none"/>
             </g>
             <g class="cover-orbit cover-orbit--reverse" fill="none">
-              <ellipse cx="280" cy="280" rx="255" ry="174" stroke="#ffc928" stroke-opacity=".18" stroke-width="2" stroke-dasharray="20 16" transform="rotate(-24 280 280)"/>
-              <circle cx="522" cy="205" r="6" fill="#00cfc8" stroke="none" filter="url(#cover-glow)"/>
+              <ellipse cx="280" cy="280" rx="232" ry="156" stroke="#ffc928" stroke-opacity=".1" stroke-width="1" stroke-dasharray="17 21" transform="rotate(-22 280 280)"/>
+              <circle cx="499" cy="206" r="3.5" fill="#00cfc8" stroke="none" filter="url(#cover-glow)"/>
             </g>
-            <g fill="none" stroke-width="3" stroke-linecap="round">
-              <path class="cover-flow" d="M143 160 L222 226" stroke="#00cfc8" stroke-opacity=".7"/>
-              <path class="cover-flow" d="M417 147 L338 226" stroke="#00cfc8" stroke-opacity=".7"/>
-              <path class="cover-flow" d="M420 409 L342 334" stroke="#ffc928" stroke-opacity=".75"/>
-              <path class="cover-flow" d="M140 420 L218 334" stroke="#ffc928" stroke-opacity=".55"/>
+            <g fill="none" stroke-width="1.5" stroke-linecap="round">
+              <path class="cover-flow" d="M177 157 C215 178 236 205 251 232" stroke="#00cfc8" stroke-opacity=".48"/>
+              <path class="cover-flow" d="M383 157 C345 178 324 205 309 232" stroke="#00cfc8" stroke-opacity=".48"/>
+              <path class="cover-flow" d="M383 403 C345 382 324 355 309 328" stroke="#ffc928" stroke-opacity=".46"/>
+              <path class="cover-flow" d="M177 403 C215 382 236 355 251 328" stroke="#ffc928" stroke-opacity=".38"/>
             </g>
-            <g class="cover-node" transform="translate(105 125)"><circle r="49" fill="#0d1919" stroke="#00cfc8" stroke-width="2"/><circle r="40" fill="none" stroke="#00cfc8" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">RESEARCH</text><text class="cover-visual__micro" y="17">evidence</text></g>
-            <g class="cover-node cover-node--2" transform="translate(455 112)"><circle r="49" fill="#0d1919" stroke="#00cfc8" stroke-width="2"/><circle r="40" fill="none" stroke="#00cfc8" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">STUDIO</text><text class="cover-visual__micro" y="17">build</text></g>
-            <g class="cover-node cover-node--3" transform="translate(458 430)"><circle r="52" fill="#0d1919" stroke="#ffc928" stroke-width="2"/><circle r="43" fill="none" stroke="#ffc928" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">CAPITAL</text><text class="cover-visual__micro" y="17">finance</text></g>
-            <g class="cover-node cover-node--4" transform="translate(100 443)"><circle r="49" fill="#0d1919" stroke="#ffc928" stroke-width="2"/><circle r="40" fill="none" stroke="#ffc928" stroke-opacity=".18"/><text class="cover-visual__label" y="-2">VENTURE</text><text class="cover-visual__micro" y="17">scale</text></g>
+            <g class="cover-node">
+              <rect x="44" y="119" width="138" height="72" rx="16" fill="#0a1717" fill-opacity=".92" stroke="#00cfc8" stroke-opacity=".42"/>
+              <path d="M61 136 V174" stroke="#00cfc8" stroke-opacity=".35"/>
+              <circle class="cover-signal" cx="61" cy="155" r="4" fill="#00cfc8" filter="url(#cover-glow)"/>
+              <foreignObject x="70" y="126" width="102" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-card-copy"><strong>RESEARCH</strong><span>EVIDENCE</span></div></foreignObject>
+            </g>
+            <g class="cover-node">
+              <rect x="378" y="119" width="138" height="72" rx="16" fill="#0a1717" fill-opacity=".92" stroke="#00cfc8" stroke-opacity=".42"/>
+              <path d="M499 136 V174" stroke="#00cfc8" stroke-opacity=".35"/>
+              <circle class="cover-signal cover-signal--2" cx="499" cy="155" r="4" fill="#00cfc8" filter="url(#cover-glow)"/>
+              <foreignObject x="387" y="126" width="102" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-card-copy"><strong>STUDIO</strong><span>BUILD</span></div></foreignObject>
+            </g>
+            <g class="cover-node">
+              <rect x="378" y="369" width="138" height="72" rx="16" fill="#0a1717" fill-opacity=".92" stroke="#ffc928" stroke-opacity=".42"/>
+              <path d="M499 386 V424" stroke="#ffc928" stroke-opacity=".35"/>
+              <circle class="cover-signal cover-signal--3" cx="499" cy="405" r="4" fill="#ffc928" filter="url(#cover-glow)"/>
+              <foreignObject x="387" y="376" width="102" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-card-copy"><strong>CAPITAL</strong><span>FINANCE</span></div></foreignObject>
+            </g>
+            <g class="cover-node">
+              <rect x="44" y="369" width="138" height="72" rx="16" fill="#0a1717" fill-opacity=".92" stroke="#ffc928" stroke-opacity=".42"/>
+              <path d="M61 386 V424" stroke="#ffc928" stroke-opacity=".35"/>
+              <circle class="cover-signal cover-signal--4" cx="61" cy="405" r="4" fill="#ffc928" filter="url(#cover-glow)"/>
+              <foreignObject x="70" y="376" width="102" height="58"><div xmlns="http://www.w3.org/1999/xhtml" class="cover-card-copy"><strong>VENTURE</strong><span>SCALE</span></div></foreignObject>
+            </g>
             <g class="cover-core">
-              <circle cx="280" cy="280" r="116" fill="#071313" stroke="url(#cover-core-gradient)" stroke-width="3"/>
-              <circle cx="280" cy="280" r="96" fill="none" stroke="#f7f9f9" stroke-opacity=".09"/>
-              <path d="M280 211 L340 246 L340 314 L280 349 L220 314 L220 246 Z" fill="none" stroke="url(#cover-core-gradient)" stroke-width="3"/>
-              <circle cx="280" cy="280" r="16" fill="#00cfc8" fill-opacity=".14" stroke="#00cfc8" stroke-width="2" filter="url(#cover-glow)"/>
+              <circle cx="280" cy="280" r="96" fill="url(#cover-core-surface)" stroke="url(#cover-core-gradient)" stroke-width="1.6"/>
+              <circle cx="280" cy="280" r="78" fill="none" stroke="#f7f9f9" stroke-opacity=".075"/>
+              <path d="M280 236 L318 258 L318 302 L280 324 L242 302 L242 258 Z" fill="none" stroke="#f7f9f9" stroke-opacity=".22" stroke-width="1.2"/>
+              <path d="M280 280 L280 236 M280 280 L318 302 M280 280 L242 302" fill="none" stroke="#f7f9f9" stroke-opacity=".14"/>
+              <circle cx="280" cy="236" r="4" fill="#00cfc8"/>
+              <circle cx="318" cy="302" r="4" fill="#ffc928"/>
+              <circle cx="242" cy="302" r="4" fill="#00cfc8"/>
+              <circle cx="280" cy="280" r="7" fill="#0d2827" stroke="#00cfc8" stroke-width="1.5" filter="url(#cover-glow)"/>
             </g>
           </svg>
         </div>
