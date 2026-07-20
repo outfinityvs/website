@@ -2142,11 +2142,11 @@ body.legal-page .footer {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     position: relative;
-    gap: 0;
+    gap: .35rem;
     max-width: 100%;
     min-height: 105px;
     margin-top: 1.1rem;
-    padding: 0 .1rem;
+    padding: 0 .25rem;
 }
 
 .arena-mini-role-actions::before {
@@ -2161,14 +2161,13 @@ body.legal-page .footer {
     pointer-events: none;
 }
 
-.arena-mini-role-actions button {
+.arena-role-control {
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 39px 20px minmax(14px, 1fr);
     align-items: center;
-    justify-content: flex-start;
-    gap: .38rem;
+    justify-items: center;
     min-width: 0;
     min-height: 104px;
     padding: 0;
@@ -2183,17 +2182,17 @@ body.legal-page .footer {
     transition: color 160ms ease, transform 160ms ease;
 }
 
-.arena-mini-role-actions button::after { content:""; width:11px; height:11px; margin-top:4px; border:2px solid var(--tone); border-radius:50%; background:var(--ink-950); box-shadow:0 0 0 4px rgba(13,17,17,.92),0 0 14px rgba(84,231,226,.35); transition:background 160ms ease,transform 160ms ease; }.arena-mini-role-actions button:nth-child(2)::after,.arena-mini-role-actions button:nth-child(3)::after { border-color:var(--arena-gold); }.arena-mini-role-actions button span { order:3; color:rgba(247,249,249,.45); font-size:.48rem; font-variant-numeric:tabular-nums; letter-spacing:.1em; }.arena-mini-role-actions button strong { min-width:0; font:inherit; overflow:visible; text-align:center; text-overflow:clip; white-space:normal; }
+.arena-role-control::after { content:""; grid-row:2; width:11px; height:11px; border:2px solid var(--tone); border-radius:50%; background:var(--ink-950); box-shadow:0 0 0 4px rgba(13,17,17,.92),0 0 14px rgba(84,231,226,.35); transition:background 160ms ease,transform 160ms ease; }.arena-role-control:nth-child(2)::after,.arena-role-control:nth-child(3)::after { border-color:var(--arena-gold); }.arena-role-control__label { grid-row:1; align-self:center; min-width:0; font:inherit; overflow:visible; text-align:center; text-overflow:clip; white-space:normal; }.arena-role-control__index { grid-row:3; align-self:start; color:rgba(247,249,249,.45); font-size:.48rem; font-variant-numeric:tabular-nums; letter-spacing:.1em; }
 
-.arena-mini-role-actions button:hover,
-.arena-mini-role-actions button:focus-visible {
+.arena-role-control:hover,
+.arena-role-control:focus-visible {
     color:var(--tone);
     outline: none;
     transform: translateY(-3px);
 }
 
-.arena-mini-role-actions button:hover::after,
-.arena-mini-role-actions button:focus-visible::after { background:var(--tone); transform:scale(1.25); }.arena-mini-role-actions button:nth-child(2):hover::after,.arena-mini-role-actions button:nth-child(3):hover::after { background:var(--arena-gold); }
+.arena-role-control:hover::after,
+.arena-role-control:focus-visible::after { background:var(--tone); transform:scale(1.25); }.arena-role-control:nth-child(2):hover::after,.arena-role-control:nth-child(3):hover::after { background:var(--arena-gold); }
 
 .arena-mini-slide__link {
     display: inline-flex;
@@ -2692,16 +2691,25 @@ body.legal-page .footer {
 }
 
 .arena-back,
+.arena-forward,
 .arena-home {
     order: 0;
     flex: 0 0 auto;
 }
 
 .arena-back:disabled,
+.arena-forward:disabled,
 .arena-home:disabled {
     cursor: not-allowed;
     opacity: 0.42;
     transform: none;
+}
+
+.arena-presentation-controls {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    flex: 0 0 auto;
 }
 
 .arena-choice-action {
@@ -3385,6 +3393,7 @@ a.arena-radar-node:focus-visible {
 
     .arena-experience[data-view] .arena-scene {
         grid-template-columns: 620px minmax(330px, 0.74fr);
+        gap: clamp(2.6rem, 6vw, 4.8rem);
         min-height: 500px;
         align-items: start;
     }
@@ -3406,20 +3415,11 @@ a.arena-radar-node:focus-visible {
 
     .arena-experience[data-view="V2"] .arena-scene {
         grid-template-columns: 620px minmax(330px, 0.74fr);
-        gap: clamp(1.2rem, 3vw, 2.4rem);
-    }
-
-    .arena-experience[data-view="V2"] .arena-action-zone {
-        gap: 0.3rem;
+        gap: clamp(2.6rem, 6vw, 4.8rem);
     }
 
     .arena-experience[data-view="V2"] .arena-choice-action {
         padding-inline: 0.7rem;
-    }
-
-    .arena-experience[data-view="V2"] .arena-tower-link,
-    .arena-experience[data-view="V2"] .arena-video-toggle {
-        min-width: 128px;
     }
 
     .arena-experience[data-view="V2"] .arena-visual {
@@ -3657,9 +3657,10 @@ a.arena-radar-node:focus-visible {
 
     .arena-mini-role-actions { grid-template-columns:repeat(2,minmax(0,1fr)); gap:.2rem; min-height:66px; margin-top:.45rem; padding:0; }
     .arena-mini-role-actions::before { top:50%; right:18%; left:18%; }
-    .arena-mini-role-actions button { min-height:32px; flex-direction:row; justify-content:center; gap:.2rem; font-size:.46rem; }
-    .arena-mini-role-actions button::after { order:-1; width:7px; height:7px; margin:0; border-width:1px; box-shadow:0 0 0 2px rgba(13,17,17,.92),0 0 8px rgba(84,231,226,.3); }
-    .arena-mini-role-actions button span { font-size:.38rem; }.arena-mini-role-actions button strong { overflow:visible; text-overflow:clip; white-space:normal; }
+    .arena-role-control { min-height:32px; grid-template-rows:1fr; grid-template-columns:auto minmax(0,1fr) auto; column-gap:.2rem; font-size:.46rem; }
+    .arena-role-control::after { grid-column:1; grid-row:1; width:7px; height:7px; border-width:1px; box-shadow:0 0 0 2px rgba(13,17,17,.92),0 0 8px rgba(84,231,226,.3); }
+    .arena-role-control__label { grid-column:2; grid-row:1; overflow:visible; text-overflow:clip; white-space:normal; }
+    .arena-role-control__index { grid-column:3; grid-row:1; align-self:center; font-size:.38rem; }
 
     .arena-mini-deck__controls {
         gap: 0.25rem;
@@ -3679,6 +3680,8 @@ a.arena-radar-node:focus-visible {
         gap: 0.3rem;
         margin-top: 0.2rem;
     }
+
+    .arena-presentation-controls { gap: 0.3rem; }
 
     .arena-action,
     .arena-control {
@@ -3960,6 +3963,9 @@ a.arena-radar-node:focus-visible {
         height: 36px;
         flex-basis: 36px;
     }
+
+    .arena-presentation-controls { gap: 0.4rem; }
+
 }
 
 @media (max-width: 720px) {

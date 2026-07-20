@@ -28,7 +28,7 @@
       subtitle: [
         "Social legitimacy and early validation are scarce assets. Start the Quick Presentation for a fast Outfinity scan, watch the Video Pitch, or visit the classical site."
       ],
-      slideLink: { label: "Visit Classical Site", href: "tower.html" },
+      slideLink: { label: "AI ventures, built through structured collaboration.", href: "tower.html" },
       graphic: {
         type: "gate",
         items: [
@@ -49,7 +49,7 @@
       subtitle: [
         "There is no future for startups without research. Outfinity connects research, venture formation, and capital before the story gets expensive."
       ],
-      slideLink: { label: "Our Research Ventures", href: "research.html" },
+      slideLink: { label: "Research and Technical Base", href: "research.html" },
       graphic: {
         type: "scanner",
         items: [
@@ -107,7 +107,7 @@
       tone: "builder",
       headline: ["For Entrepreneurs"],
       subtitle: ["Outfinity turns a thesis, capability, or market access into venture material by clarifying PMF, rights, evidence, team gaps, and capital readiness early."],
-      slideLink: { label: "Open Venture Studio", href: "studio/how-ventures-are-built.html" },
+      slideLink: { label: "How Outfinity Builds Ventures", href: "studio/how-ventures-are-built.html" },
       graphic: {
         type: "graph",
         items: [
@@ -125,7 +125,7 @@
       tone: "investor",
       headline: ["For Investors"],
       subtitle: ["Outfinity helps investors assess technical truth, market signal, defensibility, rights clarity, and a real formation path—a sharper interface with evidence before capital follows the story."],
-      slideLink: { label: "Open Investors", href: "investors.html" },
+      slideLink: { label: "Investor Participation", href: "investors.html" },
       graphic: {
         type: "scores",
         items: [
@@ -145,7 +145,7 @@
       tone: "researcher",
       headline: ["For Researchers"],
       subtitle: ["Outfinity helps serious research move from papers and prototypes into systems, partners, rights clarity, ventures, or institutions by deciding what to build, who should validate it, and what structure can carry it into the world."],
-      slideLink: { label: "Our Research Ventures", href: "research.html" },
+      slideLink: { label: "Research and Technical Base", href: "research.html" },
       graphic: {
         type: "graph",
         items: [
@@ -163,7 +163,7 @@
       tone: "investor",
       headline: ["For Future Partners"],
       subtitle: ["Outfinity Capital is a founding-partner route for people and firms that can develop investor relationships and help validated ventures reach credible financing."],
-      slideLink: { label: "Open Outfinity Capital", href: "outfinity-capital.html" },
+      slideLink: { label: "Co-Founder Opportunity", href: "outfinity-capital.html" },
       graphic: {
         type: "formation",
         items: [
@@ -179,7 +179,7 @@
       tone: "neutral",
       headline: ["Venture Validation Studio"],
       subtitle: ["We test technical truth, market signal, rights, and formation risk before capital, teams, and public narratives commit—so investors can fund, investigate, reshape, or stop before the expensive phase."],
-      slideLink: { label: "Visit Classical Site", href: "tower.html" },
+      slideLink: { label: "AI ventures, built through structured collaboration.", href: "tower.html" },
       graphic: {
         type: "formation",
         items: [
@@ -197,7 +197,7 @@
       tone: "researcher",
       headline: ["Our Books"],
       subtitle: ["Explore Outfinity's books on intelligence, power, institutions, and possible futures; selected titles are available to read free online, with published editions on Amazon."],
-      slideLink: { label: "Read Our Free Books", href: "cultural-artefacts.html" },
+      slideLink: { label: "Our Books", href: "cultural-artefacts.html" },
       graphic: {
         type: "map",
         items: [
@@ -310,7 +310,7 @@
 
   function renderMiniChoiceActions(view) {
     return '<div class="arena-mini-role-actions">' + view.choices.map(function (choice, index) {
-      return '<button type="button" data-next="' + escapeHtml(choice.next) + '" data-role="' + escapeHtml(choice.role) + '"><strong>' + escapeHtml(choice.buttonLabel) + '</strong><span>0' + String(index + 1) + '</span></button>';
+      return '<button type="button" class="arena-role-control" data-next="' + escapeHtml(choice.next) + '" data-role="' + escapeHtml(choice.role) + '" data-state="idle" aria-label="Choose ' + escapeHtml(choice.buttonLabel) + '"><strong class="arena-role-control__label">' + escapeHtml(choice.buttonLabel) + '</strong><span class="arena-role-control__index">0' + String(index + 1) + '</span></button>';
     }).join("") + '</div>';
   }
 
@@ -362,9 +362,11 @@
 
   function renderActions(view) {
     var actions = view.actions;
-    var choiceActions = "";
-    var back = state.history.length ? '<button class="arena-control arena-back arena-icon-only" type="button" data-back aria-label="Back" title="Back">' + buttonIcon("back") + "</button>" : "";
-    var home = state.history.length ? '<button class="arena-control arena-home arena-icon-only" type="button" data-home aria-label="Home" title="Home">' + buttonIcon("home") + "</button>" : "";
+    var slideIndex = presentationOrder.indexOf(state.currentView);
+    var nextSlide = slideIndex >= 0 && slideIndex < presentationOrder.length - 1 ? presentationOrder[slideIndex + 1] : "";
+    var back = '<button class="arena-control arena-back arena-icon-only" type="button" data-back aria-label="Back" title="Back"' + (state.history.length ? "" : " disabled") + '>' + buttonIcon("back") + "</button>";
+    var forward = '<button class="arena-control arena-forward arena-icon-only" type="button" data-deck-step="' + nextSlide + '" aria-label="Next presentation slide" title="Next presentation slide"' + (nextSlide ? "" : " disabled") + '>' + buttonIcon("forward") + "</button>";
+    var home = '<button class="arena-control arena-home arena-icon-only" type="button" data-home aria-label="Home" title="Home"' + (state.currentView === "V0" ? " disabled" : "") + '>' + buttonIcon("home") + "</button>";
     var main = actions && actions.length ? actions.map(function (action) {
       var classes = ["arena-action"];
       if (action.primary) classes.push("arena-action-primary");
@@ -375,14 +377,8 @@
       return '<button class="' + classes.join(" ") + '" type="button" data-next="' + escapeHtml(action.next) + '"' + (action.start ? ' data-start="true"' : "") + ">" + actionContent(action) + "</button>";
     }).join("") : "";
     return '<div class="arena-action-zone" aria-label="Quick Presentation actions">' +
-      back +
-      home +
+      '<div class="arena-presentation-controls" aria-label="Presentation navigation">' + back + forward + home + "</div>" +
       main +
-      '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
-      "</div>";
-      choiceActions +
-      '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
-      "</div>";
       '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
       "</div>";
   }
@@ -406,6 +402,7 @@
   function buttonIcon(name) {
     var icons = {
       back: '<path d="M15 6 9 12l6 6"></path><path d="M10 12h10"></path>',
+      forward: '<path d="m9 6 6 6-6 6"></path><path d="M14 12H4"></path>',
       home: '<path d="M4 11 12 4l8 7"></path><path d="M6 10v10h12V10"></path><path d="M10 20v-6h4v6"></path>',
       enter: '<path d="M6 18 18 6M8 6h10v10"></path>',
       continue: '<path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path>',
@@ -770,6 +767,16 @@
       var homeAudio = prepareAudioForInteraction();
       goHome();
       playWhenAudioReady(homeAudio);
+      return;
+    }
+    var deckStep = event.target.closest("[data-deck-step]");
+    if (deckStep) {
+      event.preventDefault();
+      if (!deckStep.disabled && deckStep.dataset.deckStep) {
+        var stepAudio = prepareAudioForInteraction();
+        go(deckStep.dataset.deckStep);
+        playWhenAudioReady(stepAudio);
+      }
       return;
     }
     var action = event.target.closest("[data-next]");
