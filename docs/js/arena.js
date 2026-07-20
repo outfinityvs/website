@@ -8,6 +8,9 @@
 
   var storageKey = "outfinity.quickPresentation.state.v1";
   var legacyStorageKey = "outfinity.navigator.state.v1";
+  var autoPlayDuration = 6500;
+  var autoPlayTimer = null;
+  var autoPlayLoopStart = "V1";
 
   var state = {
     role: "",
@@ -18,7 +21,8 @@
     reducedMotion: window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     completedViews: new Set(),
     history: [],
-    started: false
+    started: false,
+    autoPlayEnabled: false
   };
 
   var views = {
@@ -26,7 +30,7 @@
       tone: "neutral",
       headline: ["AI Builds Fast"],
       subtitle: [
-        "Social legitimacy and early validation are scarce assets. Start the Quick Presentation for a fast Outfinity scan, watch the Video Pitch, or visit the classical site."
+        "Social legitimacy and early validation are now the scarce assets. Start the Quick Presentation for a concise Outfinity overview, watch the Video Pitch, then visit the classical site for deeper material, public research, and selected free books."
       ],
       slideLink: { label: "AI ventures, built through structured collaboration.", href: "tower.html" },
       graphic: {
@@ -612,6 +616,29 @@
 
   var renderToken = 0;
 
+  function stopAutoPlay() {
+    state.autoPlayEnabled = false;
+    if (autoPlayTimer) window.clearTimeout(autoPlayTimer);
+    autoPlayTimer = null;
+    app.dataset.autoplay = "off";
+  }
+
+  function syncAutoPlay() {
+    if (autoPlayTimer) window.clearTimeout(autoPlayTimer);
+    autoPlayTimer = null;
+    var slideIndex = presentationOrder.indexOf(state.currentView);
+    var nextView = slideIndex >= 0 && slideIndex < presentationOrder.length - 1 ? presentationOrder[slideIndex + 1] : autoPlayLoopStart;
+    var canPlay = state.autoPlayEnabled && state.started && !state.reducedMotion && state.currentView !== "V0";
+    if (!canPlay) {
+      app.dataset.autoplay = "off";
+      return;
+    }
+    app.dataset.autoplay = "playing";
+    autoPlayTimer = window.setTimeout(function () {
+      if (state.autoPlayEnabled && state.currentView !== "V0") go(nextView, true);
+    }, autoPlayDuration);
+  }
+
   function loadStoredState() {
     try {
       var raw = window.localStorage && (window.localStorage.getItem(storageKey) || window.localStorage.getItem(legacyStorageKey));
@@ -672,6 +699,7 @@
     updateSoundButtons();
     typewrite(renderToken);
     startRadarSweep(renderToken);
+    syncAutoPlay();
     saveStoredState();
   }
 
@@ -737,7 +765,10 @@
     var slideNavigation = event.target.closest("[data-slide-view]");
     if (slideNavigation) {
       event.preventDefault();
-      if (!slideNavigation.disabled && slideNavigation.dataset.slideView) go(slideNavigation.dataset.slideView);
+      if (!slideNavigation.disabled && slideNavigation.dataset.slideView) {
+        stopAutoPlay();
+        go(slideNavigation.dataset.slideView);
+      }
       return;
     }
     var videoAction = event.target.closest("[data-video-open]");
@@ -756,6 +787,7 @@
     if (backAction) {
       event.preventDefault();
       if (!backAction.disabled) {
+        stopAutoPlay();
         var backAudio = prepareAudioForInteraction();
         goBack();
         playWhenAudioReady(backAudio);
@@ -765,6 +797,7 @@
     var homeAction = event.target.closest("[data-home]");
     if (homeAction) {
       event.preventDefault();
+      stopAutoPlay();
       var homeAudio = prepareAudioForInteraction();
       goHome();
       playWhenAudioReady(homeAudio);
@@ -774,6 +807,7 @@
     if (deckStep) {
       event.preventDefault();
       if (!deckStep.disabled && deckStep.dataset.deckStep) {
+        stopAutoPlay();
         var stepAudio = prepareAudioForInteraction();
         go(deckStep.dataset.deckStep);
         playWhenAudioReady(stepAudio);
@@ -784,9 +818,14 @@
     if (!action) return;
     event.preventDefault();
     var audioReady = prepareAudioForInteraction();
-    if (action.dataset.start && !state.started) {
-      state.started = true;
-      track("arena_started");
+    if (action.dataset.start) {
+      if (!state.started) {
+        state.started = true;
+        track("arena_started");
+      }
+      state.autoPlayEnabled = true;
+    } else {
+      stopAutoPlay();
     }
     if (action.dataset.role) {
       state.role = action.dataset.role;
@@ -811,6 +850,7 @@
   var audioContext = null;
   var masterGain = null;
   var radarFrameId = 0;
+  var radarLastFrameTime = 0;
   var radarLastAngle = null;
   var radarCycleMs = 4800;
   var radarSweepOffset = -Math.PI / 3;
@@ -957,6 +997,11 @@
 
     function frame(now) {
       if (token !== renderToken) return;
+      if (now - radarLastFrameTime < 32) {
+        radarFrameId = window.requestAnimationFrame(frame);
+        return;
+      }
+      radarLastFrameTime = now;
       var nodes = Array.from(host.querySelectorAll(".arena-radar-node"));
       if (!nodes.length) return;
       var elapsed = (now - startTime) % radarCycleMs;
@@ -981,6 +1026,7 @@
     if (radarFrameId) window.cancelAnimationFrame(radarFrameId);
     radarFrameId = 0;
     radarLastAngle = null;
+    radarLastFrameTime = 0;
   }
 
   function getRadarNodeAngles(nodes, radar) {
@@ -1339,6 +1385,8 @@
     var dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     var labels = ["Noise", "Claim", "Signal", "Failure", "Validated"];
     var running = true;
+    var particleFrameId = 0;
+    var particleLastFrameTime = 0;
 
     function resize() {
       width = app.clientWidth;
@@ -1352,15 +1400,15 @@
     }
 
     function makeParticles() {
-      var count = width < 720 ? 110 : 200;
+      var count = width < 720 ? 80 : 120;
       particles = [];
       for (var i = 0; i < count; i += 1) {
         var validated = Math.random() > 0.7;
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
+          vx: (Math.random() - 0.5) * 0.34,
+          vy: (Math.random() - 0.5) * 0.34,
           r: validated ? 1.8 + Math.random() * 1.8 : 0.8 + Math.random() * 1.2,
           alpha: validated ? 0.65 + Math.random() * 0.35 : 0.08 + Math.random() * 0.22,
           validated: validated,
@@ -1369,8 +1417,14 @@
       }
     }
 
-    function draw() {
+    function draw(now) {
+      particleFrameId = 0;
       if (!running) return;
+      if (now && now - particleLastFrameTime < 32) {
+        particleFrameId = window.requestAnimationFrame(draw);
+        return;
+      }
+      particleLastFrameTime = now || performance.now();
       ctx.clearRect(0, 0, width, height);
       ctx.save();
       ctx.globalAlpha = 0.9;
@@ -1414,15 +1468,19 @@
         ctx.stroke();
       });
       ctx.restore();
-      window.requestAnimationFrame(draw);
+      particleFrameId = window.requestAnimationFrame(draw);
     }
 
     document.addEventListener("visibilitychange", function () {
       running = !document.hidden;
-      if (running) draw();
+      if (!running && particleFrameId) {
+        window.cancelAnimationFrame(particleFrameId);
+        particleFrameId = 0;
+      }
+      if (running && !particleFrameId) particleFrameId = window.requestAnimationFrame(draw);
     });
     window.addEventListener("resize", resize);
     resize();
-    draw();
+    particleFrameId = window.requestAnimationFrame(draw);
   }
 })();

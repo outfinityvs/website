@@ -1861,8 +1861,9 @@ body.legal-page .footer {
 .arena-mini-slide__copy .arena-micro,
 .arena-mini-slide__copy .arena-punchline-list p {
     max-width: 50ch;
-    font-size: clamp(0.84rem, 1.04vw, 0.98rem);
-    line-height: 1.36;
+    font-size: clamp(0.92rem, 1.12vw, 1.02rem);
+    font-weight: 500;
+    line-height: 1.44;
 }
 
 .arena-mini-slide__copy .arena-subtitle {
@@ -2200,9 +2201,9 @@ body.legal-page .footer {
     gap: 0.35rem;
     margin-top: 0.9rem;
     color: var(--arena-gold);
-    font-size: 0.78rem;
-    font-weight: 900;
-    line-height: 1.2;
+    font-size: clamp(0.92rem, 1.12vw, 1.02rem);
+    font-weight: 500;
+    line-height: 1.44;
     text-decoration: none;
 }
 
@@ -2265,6 +2266,7 @@ body.legal-page .footer {
 }
 
 .arena-mini-deck__step {
+    position: relative;
     width: clamp(15px, 2.6vw, 26px);
     height: 3px;
     padding: 0;
@@ -2272,15 +2274,38 @@ body.legal-page .footer {
     border-radius: 999px;
     background: rgba(247, 249, 249, 0.2);
     cursor: pointer;
+    overflow: hidden;
     transition: width 160ms ease, background 160ms ease;
+}
+
+.arena-mini-deck__step::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--tone);
+    transform: scaleX(0);
+    transform-origin: left center;
 }
 
 .arena-mini-deck__step:hover,
 .arena-mini-deck__step:focus-visible,
 .arena-mini-deck__step.is-active {
     width: clamp(22px, 3.6vw, 34px);
-    background: var(--tone);
+    background: color-mix(in srgb, var(--tone) 28%, rgba(247, 249, 249, 0.2));
     outline: none;
+}
+
+.arena-experience[data-autoplay="playing"] .arena-mini-deck__step.is-active::before {
+    animation: arena-slide-progress 6.5s linear forwards;
+}
+
+.arena-experience[data-autoplay="complete"] .arena-mini-deck__step.is-active::before {
+    transform: scaleX(1);
+}
+
+@keyframes arena-slide-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
 }
 
 @keyframes arena-caret {
@@ -3601,6 +3626,11 @@ a.arena-radar-node:focus-visible {
     .arena-mini-slide__copy .arena-infographic-text,
     .arena-mini-slide__copy .arena-micro,
     .arena-mini-slide__copy .arena-punchline-list p {
+        font-size: 0.62rem;
+        line-height: 1.22;
+    }
+
+    .arena-mini-slide__link {
         font-size: 0.62rem;
         line-height: 1.22;
     }
