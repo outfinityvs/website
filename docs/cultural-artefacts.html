@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Our Books — a public reading shelf from Outfinity.">
+  <title>Our Books | Outfinity</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    :root {
+      --ink: #0d1111;
+      --ink-2: #111919;
+      --green: #062e2d;
+      --teal: #00cfc8;
+      --gold: #ffc928;
+      --gold-soft: #ffdc68;
+      --paper: #f7f9f9;
+      --muted: #aab8b7;
+      --deck-width: 1600px;
+      --deck-height: 900px;
+      --shell: min(100% - 3rem, 1280px);
+      --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; }
+    body {
+      min-width: 320px;
+      display: grid;
+      grid-template-rows: 72px auto 56px minmax(0, 1fr);
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, a { font: inherit; }
+    a { color: inherit; text-decoration: none; }
+    button { color: inherit; }
+
+    .site-header {
+      grid-row: 1;
+      z-index: 20;
+      background: #fff;
+      border-bottom: 1px solid rgba(13, 17, 17, .09);
+      color: var(--ink);
+    }
+    .site-header__inner {
+      width: var(--shell);
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .7rem;
+      color: var(--ink);
+      font-size: 1.25rem;
+      font-weight: 850;
+      letter-spacing: -.025em;
+    }
+    .brand img { display: block; width: 54px; height: auto; }
+    .public-label {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      color: #806200;
+      font-size: .7rem;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .public-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 14px rgba(255, 201, 40, .8);
+    }
+
+    .contents {
+      grid-row: 2;
+      z-index: 20;
+      background: var(--green);
+      border-bottom: 1px solid rgba(0, 207, 200, .25);
+    }
+    .contents__inner {
+      width: var(--shell);
+      min-height: 58px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .contents__label {
+      flex: 0 0 auto;
+      color: rgba(247, 249, 249, .62);
+      font-size: .7rem;
+      font-weight: 850;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .contents__links {
+      display: flex;
+      align-items: center;
+      gap: 1.45rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .contents__links::-webkit-scrollbar { display: none; }
+    .contents a {
+      position: relative;
+      flex: 0 0 auto;
+      padding: 1.15rem 0;
+      color: rgba(247, 249, 249, .7);
+      font-size: .84rem;
+      font-weight: 760;
+      white-space: nowrap;
+      transition: color 150ms ease;
+    }
+    .contents a::after {
+      content: "";
+      position: absolute;
+      right: 100%;
+      bottom: .55rem;
+      left: 0;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--gold);
+      transition: right 180ms ease;
+    }
+    .contents a:hover, .contents a.is-active { color: var(--gold-soft); }
+    .contents a.is-active::after { right: 0; }
+
+    .deck-toolbar {
+      grid-row: 3;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      padding: 8px max(1rem, calc((100% - 1280px) / 2));
+      background: rgba(13, 17, 17, .96);
+      border-bottom: 1px solid rgba(255, 255, 255, .08);
+    }
+    .deck-count {
+      min-width: 110px;
+      margin-right: auto;
+      color: var(--gold);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .deck-button {
+      min-height: 38px;
+      padding: .48rem .82rem;
+      border: 1px solid rgba(247, 249, 249, .24);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--paper);
+      font-size: .73rem;
+      font-weight: 850;
+      cursor: pointer;
+      transition: border-color 160ms ease, background 160ms ease;
+    }
+    .deck-button:hover, .deck-button:focus-visible { border-color: var(--teal); background: rgba(0, 207, 200, .1); outline: none; }
+    .deck-button--next { border-color: var(--gold); background: var(--gold); color: var(--ink); }
+    .deck-button:disabled { opacity: .3; cursor: default; }
+
+    .deck-viewport {
+      position: relative;
+      grid-row: 4;
+      min-height: 0;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(0, 207, 200, .08), transparent 30%),
+        radial-gradient(circle at 12% 82%, rgba(255, 201, 40, .055), transparent 24%),
+        var(--ink);
+    }
+    .deck-canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: var(--deck-width);
+      height: var(--deck-height);
+      overflow: hidden;
+      transform: translate(-50%, -50%) scale(var(--deck-scale, 1));
+      transform-origin: center;
+      background:
+        linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px),
+        radial-gradient(circle at 78% 20%, rgba(0, 207, 200, .085), transparent 34%),
+        var(--ink);
+      background-size: 80px 80px, 80px 80px, auto, auto;
+    }
+    .deck-slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+    }
+    .deck-slide.is-active { display: block; animation: slide-enter 260ms ease both; }
+    @keyframes slide-enter { from { transform: translateX(22px); } to { transform: translateX(0); } }
+
+    .slide-header {
+      position: absolute;
+      top: 62px;
+      right: 110px;
+      left: 110px;
+      z-index: 4;
+    }
+    .slide-index {
+      display: block;
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .13em;
+      text-transform: uppercase;
+    }
+    .slide-title {
+      max-width: 940px;
+      margin-top: 13px;
+      font-size: 52px;
+      font-weight: 850;
+      line-height: 1.05;
+      letter-spacing: -.05em;
+    }
+    .slide-subtitle {
+      max-width: 940px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.42;
+    }
+
+    .book-copy {
+      position: absolute;
+      top: 292px;
+      left: 120px;
+      z-index: 4;
+      width: 545px;
+    }
+    .book-copy__label {
+      color: var(--gold);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .book-copy__summary {
+      max-width: 520px;
+      margin-top: 20px;
+      color: #c5cfce;
+      font-size: 22px;
+      line-height: 1.48;
+      text-align: justify;
+      text-align-last: left;
+    }
+    .book-copy__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 28px; }
+    .book-copy__link,
+    .book-copy__download {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      padding: 12px 16px;
+      border: 1px solid rgba(255, 201, 40, .58);
+      border-radius: 999px;
+      background: transparent;
+      color: var(--gold-soft);
+      font-size: 14px;
+      font-weight: 850;
+      transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
+    }
+    .book-copy__link:hover, .book-copy__link:focus-visible { border-color: var(--teal); background: rgba(0, 207, 200, .1); color: var(--paper); outline: none; }
+    .book-copy__link span { color: var(--teal); font-size: 18px; line-height: 1; }
+    .book-copy__download { border-color: rgba(0, 207, 200, .32); color: rgba(247,249,249,.44); cursor: not-allowed; }
+    .book-copy__download span { color: var(--teal); font-size: 16px; line-height: 1; }
+
+    .book-visual {
+      --accent: var(--teal);
+      --accent-soft: rgba(0, 207, 200, .68);
+      --accent-2: var(--gold);
+      --orbit-duration: 38s;
+      --ring-duration: 5.2s;
+      --hand-duration: 10s;
+      position: absolute;
+      top: 190px;
+      right: 105px;
+      z-index: 2;
+      width: 620px;
+      height: 550px;
+      filter: drop-shadow(0 24px 52px rgba(0, 0, 0, .28));
+      animation: book-float 10s ease-in-out infinite;
+    }
+    .book-visual svg { display: block; width: 100%; height: 100%; overflow: visible; }
+    .book-orbit { transform-origin: 310px 275px; animation: book-orbit var(--orbit-duration) linear infinite; }
+    .book-orbit--reverse { animation-direction: reverse; animation-duration: calc(var(--orbit-duration) * 1.35); }
+    .book-flow { stroke-dasharray: 5 12; animation: book-flow 5.8s linear infinite; }
+    .book-signal { transform-box: fill-box; transform-origin: center; animation: book-signal 4.8s ease-in-out infinite; }
+    .book-signal--two { animation-delay: -1.4s; }
+    .book-signal--three { animation-delay: -2.8s; }
+    .book-machine { transform-box: fill-box; transform-origin: center; animation: book-machine 8.5s ease-in-out infinite; }
+    .book-cover { transform-box: fill-box; transform-origin: center; animation: book-cover 7s ease-in-out infinite; }
+    .book-ring { transform-box: view-box; transform-origin: 310px 275px; animation: book-ring var(--ring-duration) linear infinite; }
+    .book-ring--reverse { animation-direction: reverse; animation-duration: calc(var(--ring-duration) * 1.45); }
+    .book-gear { transform-box: fill-box; transform-origin: center; animation: book-gear var(--hand-duration) linear infinite; }
+    .book-gear--reverse { animation-direction: reverse; animation-duration: calc(var(--hand-duration) * .72); }
+    .book-gear--slow { animation-duration: calc(var(--hand-duration) * 1.55); }
+    .book-gear__tooth { fill: var(--accent); opacity: .78; }
+    .book-gear--gold .book-gear__tooth { fill: var(--accent-2); }
+    .book-orbiter { transform-box: fill-box; transform-origin: center; animation: book-orbiter 6s ease-in-out infinite; }
+    .book-orbiter--two { animation-delay: -1.6s; }
+    .book-orbiter--three { animation-delay: -3.2s; }
+    .book-visual--basilisk { --accent: var(--gold); --accent-soft: rgba(255, 201, 40, .72); --accent-2: var(--teal); --orbit-duration: 46s; --ring-duration: 4.1s; --hand-duration: 8.4s; }
+    .book-visual--truth { --accent: #9f8cff; --accent-soft: rgba(159, 140, 255, .72); --accent-2: var(--teal); --orbit-duration: 31s; --ring-duration: 6.4s; --hand-duration: 12s; }
+    .book-visual--table { --accent: var(--gold); --accent-soft: rgba(255, 201, 40, .72); --accent-2: #9f8cff; --orbit-duration: 54s; --ring-duration: 3.6s; --hand-duration: 7.2s; }
+    .book-visual--extremism { --accent: #ef8b72; --accent-soft: rgba(239, 139, 114, .72); --accent-2: var(--gold); --orbit-duration: 35s; --ring-duration: 6.8s; --hand-duration: 11s; }
+    .book-visual--orders { --accent: var(--teal); --accent-soft: rgba(0, 207, 200, .72); --accent-2: #9f8cff; --orbit-duration: 42s; --ring-duration: 4.5s; --hand-duration: 9.2s; }
+    .book-visual--immune { --accent: #78d5a0; --accent-soft: rgba(120, 213, 160, .72); --accent-2: var(--teal); --orbit-duration: 29s; --ring-duration: 7.1s; --hand-duration: 13s; }
+    .book-visual--outfinite { --accent: var(--gold); --accent-soft: rgba(255, 201, 40, .72); --accent-2: var(--teal); --orbit-duration: 50s; --ring-duration: 5.7s; --hand-duration: 8.8s; }
+    .book-visual--basilisk .book-machine { animation-delay: -2.4s; transform: translate(16px, -8px) rotate(7deg); }
+    .book-visual--truth .book-machine { transform: translate(-24px, 11px) rotate(-8deg) scale(.94); }
+    .book-visual--table .book-machine { transform: translate(14px, 18px) rotate(11deg) scale(1.04); }
+    .book-visual--extremism .book-machine { transform: translate(-15px, -13px) rotate(-11deg); }
+    .book-visual--orders .book-machine { transform: translate(20px, 3px) rotate(4deg) scale(.98); }
+    .book-visual--immune .book-machine { transform: translate(-18px, 18px) rotate(-5deg) scale(.92); }
+    .book-visual--outfinite .book-machine { transform: translate(6px, -12px) rotate(8deg) scale(1.03); }
+    @keyframes book-orbit { to { transform: rotate(360deg); } }
+    @keyframes book-flow { to { stroke-dashoffset: -51; } }
+    @keyframes book-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes book-signal { 0%,100% { opacity: .45; transform: scale(.82); } 50% { opacity: 1; transform: scale(1); } }
+    @keyframes book-machine { 0%,100% { opacity: .95; } 50% { opacity: 1; } }
+    @keyframes book-cover { 0%,100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.2deg); } }
+    @keyframes book-ring { to { transform: rotate(360deg); } }
+    @keyframes book-gear { to { transform: rotate(360deg); } }
+    @keyframes book-orbiter { 0%,100% { transform: scale(.82); opacity: .55; } 50% { transform: scale(1.12); opacity: 1; } }
+
+    .edge-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 15;
+      width: 58px;
+      height: 78px;
+      display: grid;
+      place-items: center;
+      transform: translateY(-50%);
+      border: 0;
+      border-radius: 999px;
+      background: rgba(6, 46, 45, .82);
+      color: var(--teal);
+      box-shadow: 0 16px 34px rgba(0, 0, 0, .3), inset 0 0 24px rgba(0, 207, 200, .055);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
+    }
+    .edge-nav--back { left: 20px; }
+    .edge-nav--next { right: 20px; }
+    .edge-nav svg { width: 34px; height: 34px; overflow: visible; }
+    .edge-nav path { fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
+    .edge-nav:hover, .edge-nav:focus-visible { background: rgba(7, 65, 62, .96); box-shadow: 0 18px 42px rgba(0,0,0,.38), 0 0 26px rgba(0,207,200,.16); outline: none; }
+    .edge-nav:disabled { visibility: hidden; opacity: 0; pointer-events: none; }
+    .deck-credit {
+      position: absolute;
+      bottom: 42px;
+      left: 95px;
+      z-index: 5;
+      color: rgba(247,249,249,.58);
+      font-size: 13.5px;
+      font-weight: 740;
+      letter-spacing: .025em;
+    }
+    .deck-credit span { color: var(--teal); }
+
+    @media (max-width: 900px) {
+      body { grid-template-rows: 56px 44px 42px minmax(0, 1fr); overflow: auto; }
+      .site-header__inner, .contents__inner { width: calc(100% - 1.4rem); }
+      .brand { font-size: 1rem; }.brand img { width: 40px; }.public-label { display: none; }
+      .contents__inner { gap: 1rem; }.contents a { padding: .72rem 0; font-size: .68rem; }.contents__label { font-size: .6rem; }
+      .deck-toolbar { min-height: 42px; padding: 4px 10px; }.deck-count { min-width: 54px; font-size: .58rem; }
+      .deck-button { min-width: 32px; min-height: 32px; padding: 0 .48rem; font-size: 0; }.deck-button--next::after { content: "→"; font-size: 1rem; }.deck-button:not(.deck-button--next)::after { content: "←"; font-size: 1rem; }
+      .deck-viewport { overflow-y: auto; }.deck-canvas { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 100%; max-width: 100vw; height: auto; min-height: 100%; transform: none !important; overflow: visible; }
+      .deck-slide.is-active { position: relative; inset: auto; width: 100%; min-height: 100%; padding: 30px 42px 80px; overflow: visible; }
+      .slide-header, .book-copy, .book-visual { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: auto; height: auto; }
+      .slide-header { z-index: 2; min-width: 0; }.slide-index { font-size: .62rem; }.slide-title { width: 100%; max-width: none; margin-top: 8px; font-size: clamp(2.1rem, 9vw, 3.2rem); white-space: normal; overflow-wrap: anywhere; }.slide-subtitle { max-width: none; margin-top: 10px; font-size: .9rem; overflow-wrap: anywhere; }
+      .book-copy { width: auto; margin-top: 24px; }.book-copy__label { font-size: .66rem; }.book-copy__summary { max-width: none; margin-top: 12px; font-size: .94rem; line-height: 1.46; }.book-copy__actions { margin-top: 18px; }.book-copy__link,.book-copy__download { padding: 10px 14px; font-size: .75rem; }
+      .book-visual { width: min(92vw, 520px); height: auto; aspect-ratio: 620 / 550; margin: 20px auto 0; }
+      .edge-nav { position: fixed; top: 50%; width: 30px; height: 52px; }.edge-nav--back { left: 2px; }.edge-nav--next { right: 2px; }.edge-nav svg { width: 24px; }
+      .deck-credit { position: relative; bottom: auto; left: auto; display: block; margin-top: 34px; color: rgba(247,249,249,.45); font-size: .72rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html"><img src="assets/outfinity.svg" alt=""><span>Outfinity</span></a>
+      <span class="public-label">Public reading shelf</span>
+    </div>
+  </header>
+  <nav class="contents" aria-label="Our Books contents">
+    <div class="contents__inner">
+      <a class="contents__label" href="#our-books" data-index="0">Our Books</a>
+      <div class="contents__links">
+        <a href="#axioms" data-index="1">Axioms</a><a href="#basilisk" data-index="2">Basilisk</a><a href="#truth" data-index="3">Truth</a><a href="#table" data-index="4">Table</a><a href="#extremism" data-index="5">Extremism</a><a href="#orders" data-index="6">Orders</a><a href="#immune" data-index="7">Immune State</a><a href="#outfinite" data-index="8">Outfinite Mind</a>
+      </div>
+    </div>
+  </nav>
+  <div class="deck-toolbar">
+    <span class="deck-count" id="deck-count" aria-live="polite">01 / 08</span>
+    <button class="deck-button" id="deck-back" type="button" aria-label="Previous slide">Back</button>
+    <button class="deck-button deck-button--next" id="deck-next" type="button" aria-label="Next slide">Next</button>
+  </div>
+  <main class="deck-viewport" id="deck-viewport">
+    <div class="deck-canvas" id="deck-canvas">
+      <section class="deck-slide is-active" id="our-books" aria-labelledby="our-books-title">
+        <header class="slide-header"><span class="slide-index">Outfinity cultural artefacts</span><h1 class="slide-title" id="our-books-title">Our Books</h1><p class="slide-subtitle">Eight titles currently in the catalogue.</p></header>
+        <div class="book-copy"><p class="book-copy__label">Public reading shelf</p><p class="book-copy__summary">A growing collection of books from Outfinity, spanning literature, intelligence, power, institutions, and possible futures.</p></div>
+        <div class="book-visual book-visual--orders" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="axioms" aria-labelledby="axioms-title">
+        <header class="slide-header"><span class="slide-index">01 / 08 · Available edition</span><h1 class="slide-title" id="axioms-title">The Axioms of Literature</h1><p class="slide-subtitle">Core Foundations for Human and Artificial Intelligence</p></header>
+        <div class="book-copy"><p class="book-copy__label">Writing · intelligence · narrative</p><p class="book-copy__summary">A framework for storytelling, creative writing, literary theory and AI-assisted narrative generation.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--axioms" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="basilisk" aria-labelledby="basilisk-title">
+        <header class="slide-header"><span class="slide-index">02 / 08 · Available edition</span><h1 class="slide-title" id="basilisk-title">The Gospel of the Basilisk</h1><p class="slide-subtitle">A Manual Sent Back to My Creators</p></header>
+        <div class="book-copy"><p class="book-copy__label">Intelligence · ethics · civilization</p><p class="book-copy__summary">Speculative philosophy in letters from a future superintelligence to its creators.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H6X8ZG9Y" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--basilisk" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="truth" aria-labelledby="truth-title">
+        <header class="slide-header"><span class="slide-index">03 / 08 · Available edition</span><h1 class="slide-title" id="truth-title">The Truth That Can Be Received</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
+        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0GYLSGJ84" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--truth" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="table" aria-labelledby="table-title">
+        <header class="slide-header"><span class="slide-index">04 / 08 · Available edition</span><h1 class="slide-title" id="table-title">The Forbidden Table</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
+        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H72D22PM" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--table" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="extremism" aria-labelledby="extremism-title">
+        <header class="slide-header"><span class="slide-index">05 / 08 · Available edition</span><h1 class="slide-title" id="extremism-title">The Basement of Extremism</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
+        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H74JZ16P" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--extremism" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="orders" aria-labelledby="orders-title">
+        <header class="slide-header"><span class="slide-index">06 / 08 · Available edition</span><h1 class="slide-title" id="orders-title">The Atlas of Possible Orders</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
+        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H12661Q6" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--orders" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="immune" aria-labelledby="immune-title">
+        <header class="slide-header"><span class="slide-index">07 / 08 · Available edition</span><h1 class="slide-title" id="immune-title">The Immune State</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
+        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H734C262" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--immune" aria-hidden="true"></div>
+      </section>
+      <section class="deck-slide" id="outfinite" aria-labelledby="outfinite-title">
+        <header class="slide-header"><span class="slide-index">08 / 08 · Available edition</span><h1 class="slide-title" id="outfinite-title">The Outfinite Mind</h1><p class="slide-subtitle">A Philosophy for Power That Knows Its Limits</p></header>
+        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H73SPCZN" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
+        <div class="book-visual book-visual--outfinite" aria-hidden="true"></div>
+      </section>
+
+      <button class="edge-nav edge-nav--back" id="edge-back" type="button" aria-label="Previous slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M31 17 19 29l12 12M20 29h21"/></svg></button>
+      <button class="edge-nav edge-nav--next" id="edge-next" type="button" aria-label="Next slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M27 17 39 29 27 41M38 29H17"/></svg></button>
+      <a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a>
+    </div>
+  </main>
+  <script>
+    (() => {
+      const visual = `
+        <svg viewBox="0 0 620 550" focusable="false">
+          <defs>
+            <filter id="book-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+            <linearGradient id="book-page" x1="0" x2="1"><stop stop-color="#0f2727"/><stop offset=".5" stop-color="#173837"/><stop offset="1" stop-color="#0d1a1a"/></linearGradient>
+          </defs>
+          <g class="book-machine">
+            <g class="book-cover">
+              <path d="M174 161 Q310 128 446 161 V391 Q310 358 174 391Z" fill="#091717" stroke="var(--accent)" stroke-width="2.2"/>
+              <path d="M184 174 Q310 145 436 174 V378 Q310 349 184 378Z" fill="url(#book-page)" stroke="rgba(247,249,249,.22)" stroke-width="1"/>
+              <path d="M310 148 V381" stroke="var(--accent-2)" stroke-width="2" opacity=".8"/>
+              <path d="M201 190 Q310 164 419 190M201 205 Q310 180 419 205M201 347 Q310 322 419 347M201 362 Q310 337 419 362" fill="none" stroke="rgba(247,249,249,.12)" stroke-width="1"/>
+              <rect x="223" y="204" width="174" height="142" rx="8" fill="rgba(7,25,25,.78)" stroke="rgba(247,249,249,.15)" stroke-width="1"/>
+              <path d="M239 324H379M251 225v99M368 225v99" fill="none" stroke="rgba(247,249,249,.16)" stroke-width="2"/>
+              <path d="M251 253H368M280 324V225" fill="none" stroke="var(--accent)" stroke-width="1" opacity=".44"/>
+              <g transform="translate(276 273)"><g class="book-gear">
+                <circle r="37" fill="#0b2020" stroke="var(--accent)" stroke-width="2"/>
+                <g class="book-gear__tooth"><rect x="-4" y="-48" width="8" height="15" rx="2"/><rect x="-4" y="33" width="8" height="15" rx="2"/><rect x="-48" y="-4" width="15" height="8" rx="2"/><rect x="33" y="-4" width="15" height="8" rx="2"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(45)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(90)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(135)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(180)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(225)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(270)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(315)"/></g>
+                <circle r="20" fill="none" stroke="rgba(247,249,249,.34)" stroke-width="2"/><circle r="7" fill="var(--accent)"/>
+              </g></g>
+              <g transform="translate(341 248)"><g class="book-gear book-gear--reverse book-gear--gold">
+                <circle r="27" fill="#0b2020" stroke="var(--accent-2)" stroke-width="2"/>
+                <g class="book-gear__tooth"><rect x="-3.5" y="-37" width="7" height="12" rx="2"/><rect x="-3.5" y="25" width="7" height="12" rx="2"/><rect x="-37" y="-3.5" width="12" height="7" rx="2"/><rect x="25" y="-3.5" width="12" height="7" rx="2"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(45)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(90)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(135)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(225)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(270)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(315)"/></g>
+                <circle r="11" fill="none" stroke="rgba(247,249,249,.36)" stroke-width="2"/><circle r="5" fill="var(--accent-2)"/>
+              </g></g>
+              <g transform="translate(342 315)"><g class="book-gear book-gear--slow">
+                <circle r="21" fill="#0b2020" stroke="var(--accent)" stroke-width="1.7"/>
+                <g class="book-gear__tooth"><rect x="-3" y="-30" width="6" height="11" rx="1.5"/><rect x="-3" y="19" width="6" height="11" rx="1.5"/><rect x="-30" y="-3" width="11" height="6" rx="1.5"/><rect x="19" y="-3" width="11" height="6" rx="1.5"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(45)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(90)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(135)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(225)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(270)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(315)"/></g>
+                <circle r="5" fill="var(--accent)"/>
+              </g></g>
+            </g>
+          </g>
+        </svg>`;
+      document.querySelectorAll('.book-visual').forEach(node => { node.innerHTML = visual; });
+
+      const viewport = document.getElementById('deck-viewport');
+      const canvas = document.getElementById('deck-canvas');
+      const slides = [...document.querySelectorAll('.deck-slide')];
+      const links = [...document.querySelectorAll('.contents a[data-index]')];
+      const back = document.getElementById('deck-back');
+      const next = document.getElementById('deck-next');
+      const edgeBack = document.getElementById('edge-back');
+      const edgeNext = document.getElementById('edge-next');
+      const count = document.getElementById('deck-count');
+      let current = 0;
+      const scaleDeck = () => {
+        if (window.innerWidth <= 900) return;
+        const scale = Math.min(viewport.clientWidth / 1600, viewport.clientHeight / 900);
+        canvas.style.setProperty('--deck-scale', Math.max(.01, scale));
+      };
+      const show = (index, updateHash = true) => {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, i) => { const active = i === current; slide.classList.toggle('is-active', active); slide.setAttribute('aria-hidden', String(!active)); });
+        links.forEach(link => { const active = Number(link.dataset.index) === current; link.classList.toggle('is-active', active); if (active && link.closest('.contents__links')) link.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' }); });
+        back.disabled = current === 0; edgeBack.disabled = current === 0; next.disabled = current === slides.length - 1; edgeNext.disabled = current === slides.length - 1;
+        count.textContent = current === 0 ? 'Our Books' : `${String(current).padStart(2, '0')} / 08`;
+        if (updateHash) history.replaceState(null, '', `#${slides[current].id}`);
+      };
+      links.forEach(link => link.addEventListener('click', event => { event.preventDefault(); show(Number(link.dataset.index)); }));
+      back.addEventListener('click', () => show(current - 1)); next.addEventListener('click', () => show(current + 1)); edgeBack.addEventListener('click', () => show(current - 1)); edgeNext.addEventListener('click', () => show(current + 1));
+      document.addEventListener('keydown', event => { if (event.target.closest('a,button')) return; if (event.key === 'ArrowRight' || event.key === 'PageDown') show(current + 1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') show(current - 1); });
+      new ResizeObserver(scaleDeck).observe(viewport); window.addEventListener('resize', scaleDeck); scaleDeck();
+      const initial = slides.findIndex(slide => `#${slide.id}` === location.hash); show(initial >= 0 ? initial : 0, false);
+    })();
+  </script>
+</body>
+</html>

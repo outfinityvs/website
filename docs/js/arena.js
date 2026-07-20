@@ -8,7 +8,6 @@
 
   var storageKey = "outfinity.quickPresentation.state.v1";
   var legacyStorageKey = "outfinity.navigator.state.v1";
-  var towerUrl = "tower.html";
 
   var state = {
     role: "",
@@ -27,8 +26,9 @@
       tone: "neutral",
       headline: ["AI Builds Fast"],
       subtitle: [
-        "Social Legitimacy and Early Validation is the scarce asset. Start the Quick Presentation for a fast Outfinity scan, or visit the full site."
+        "Social legitimacy and early validation are scarce assets. Start the Quick Presentation for a fast Outfinity scan, watch the Video Pitch, or visit the classical site."
       ],
+      slideLink: { label: "Visit Classical Site", href: "tower.html" },
       graphic: {
         type: "gate",
         items: [
@@ -49,6 +49,7 @@
       subtitle: [
         "There is no future for startups without research. Outfinity connects research, venture formation, and capital before the story gets expensive."
       ],
+      slideLink: { label: "Our Research Ventures", href: "research.html" },
       graphic: {
         type: "scanner",
         items: [
@@ -60,29 +61,12 @@
           { label: "Prototype", href: "services/prototype-and-feasibility.html" }
         ]
       },
-      actions: [{ label: "Continue", next: "V3", primary: true, icon: "continue" }]
-    },
-    V3: {
-      tone: "neutral",
-      headline: ["See The Wider Stakes"],
-      subtitle: ["AI ventures shape work, science, finance, trust, coordination, and governance. Outfinity helps test what deserves to become real before it asks for belief."],
-      graphic: {
-        type: "map",
-        items: [
-          { label: "Work", href: "ventures/outfinity-works.html" },
-          { label: "Science", href: "ventures/executable-science-ai-lab.html" },
-          { label: "Finance", href: "investors.html" },
-          { label: "Trust", href: "ventures/legitimacy-ventures-ai-abundant-societies.html" },
-          { label: "Coordination", href: "ventures/webmeet-ai-collaboration-cloud.html" },
-          { label: "Governance", href: "ventures/social-technologies-research.html" }
-        ]
-      },
-      actions: [{ label: "Choose your role", next: "V2", primary: true, icon: "roles" }]
+      actions: []
     },
     V2: {
       tone: "neutral",
-      headline: ["Choose Your Role"],
-      subtitle: ["Choose the lens that fits you: entrepreneur, investor, or researcher. Quick Presentation gives the short version; the full site has the details."],
+      headline: ["Visitor Perspectives"],
+      subtitle: ["Choose the lens that fits you: entrepreneur, investor, researcher, or future partner."],
       choices: [
         {
           role: "builder",
@@ -101,6 +85,12 @@
           next: "R1",
           title: "Researcher",
           buttonLabel: "Researcher"
+        },
+        {
+          role: "partner",
+          next: "P1",
+          title: "Future Partner",
+          buttonLabel: "Future Partner"
         }
       ],
       graphic: {
@@ -108,15 +98,16 @@
         items: [
           { label: "Entrepreneur", href: "partners/founder-operators.html" },
           { label: "Investor", href: "investors.html" },
-          { label: "Researcher", href: "partners/research-partners.html" }
+          { label: "Researcher", href: "partners/research-partners.html" },
+          { label: "Partner", href: "outfinity-capital.html" }
         ]
       }
     },
     B1: {
       tone: "builder",
       headline: ["For Entrepreneurs"],
-      subtitle: ["Outfinity helps entrepreneurs turn a thesis, capability, or market access into validated venture material before the company gets expensive."],
-      statement: "We clarify PMF, rights, prototype evidence, team gaps, and capital readiness.",
+      subtitle: ["Outfinity turns a thesis, capability, or market access into venture material by clarifying PMF, rights, evidence, team gaps, and capital readiness early."],
+      slideLink: { label: "Open Venture Studio", href: "studio/how-ventures-are-built.html" },
       graphic: {
         type: "graph",
         items: [
@@ -128,15 +119,13 @@
           { label: "Capital", href: "investors/venture-specific-participation.html" }
         ]
       },
-      actions: [
-        { label: "Continue", next: "V6", primary: true, icon: "continue" }
-      ]
+      actions: []
     },
     I1: {
       tone: "investor",
       headline: ["For Investors"],
-      subtitle: ["Outfinity helps investors see whether an AI opportunity has technical truth, market signal, defensibility, rights clarity, and a real formation path."],
-      statement: "The goal is not another pitch review. It is a sharper interface with evidence before capital follows the story.",
+      subtitle: ["Outfinity helps investors assess technical truth, market signal, defensibility, rights clarity, and a real formation path—a sharper interface with evidence before capital follows the story."],
+      slideLink: { label: "Open Investors", href: "investors.html" },
       graphic: {
         type: "scores",
         items: [
@@ -150,15 +139,13 @@
           { label: "Ploinky", href: "ventures/ploinky-wormhole-network.html" }
         ]
       },
-      actions: [
-        { label: "Continue", next: "V6", primary: true, icon: "continue" }
-      ]
+      actions: []
     },
     R1: {
       tone: "researcher",
       headline: ["For Researchers"],
-      subtitle: ["Outfinity helps serious research move from papers and prototypes into systems, partners, rights clarity, ventures, or institutions."],
-      statement: "The work is translation: what should be built, who should validate it, and what structure can carry it into the world.",
+      subtitle: ["Outfinity helps serious research move from papers and prototypes into systems, partners, rights clarity, ventures, or institutions by deciding what to build, who should validate it, and what structure can carry it into the world."],
+      slideLink: { label: "Our Research Ventures", href: "research.html" },
       graphic: {
         type: "graph",
         items: [
@@ -170,15 +157,29 @@
           { label: "Genomics", href: "ventures/genetic-data-ai-lab.html" }
         ]
       },
-      actions: [
-        { label: "Continue", next: "V6", primary: true, icon: "continue" }
-      ]
+      actions: []
+    },
+    P1: {
+      tone: "investor",
+      headline: ["For Future Partners"],
+      subtitle: ["Outfinity Capital is a founding-partner route for people and firms that can develop investor relationships and help validated ventures reach credible financing."],
+      slideLink: { label: "Open Outfinity Capital", href: "outfinity-capital.html" },
+      graphic: {
+        type: "formation",
+        items: [
+          { label: "Studio", href: "studio.html" },
+          { label: "Partners", href: "partners/work-with-outfinity.html" },
+          { label: "Capital", href: "outfinity-capital.html" },
+          { label: "Investors", href: "investors.html" }
+        ]
+      },
+      actions: []
     },
     V6: {
       tone: "neutral",
       headline: ["Venture Validation Studio"],
-      subtitle: ["Outfinity reduces uncertainty before capital, teams, and public narratives commit. We test technical truth, market signal, rights, and formation risk early."],
-      statement: "For investors, validation means clearer decisions: fund, investigate, reshape, or stop before the expensive phase.",
+      subtitle: ["We test technical truth, market signal, rights, and formation risk before capital, teams, and public narratives commit—so investors can fund, investigate, reshape, or stop before the expensive phase."],
+      slideLink: { label: "Visit Classical Site", href: "tower.html" },
       graphic: {
         type: "formation",
         items: [
@@ -188,6 +189,22 @@
           { label: "Diligence", href: "services/technical-due-diligence.html" },
           { label: "Prototype", href: "services/prototype-and-feasibility.html" },
           { label: "Legal", href: "operating-model/legal-ip.html" }
+        ]
+      },
+      actions: []
+    },
+    C1: {
+      tone: "researcher",
+      headline: ["Our Books"],
+      subtitle: ["Explore Outfinity's books on intelligence, power, institutions, and possible futures; selected titles are available to read free online, with published editions on Amazon."],
+      slideLink: { label: "Read Our Free Books", href: "cultural-artefacts.html" },
+      graphic: {
+        type: "map",
+        items: [
+          { label: "Literature", href: "cultural-artefacts.html" },
+          { label: "Intelligence", href: "cultural-artefacts.html" },
+          { label: "Power", href: "cultural-artefacts.html" },
+          { label: "Orders", href: "cultural-artefacts.html" }
         ]
       },
       actions: []
@@ -231,8 +248,15 @@
   }
 
   function renderCopy(view) {
+    var html = '<div class="arena-copy">';
+    html += renderMiniDeck(view);
+    html += renderActions(view);
+    html += "</div>";
+    return html;
+  }
+
+  function renderSlideContent(view) {
     var html = "";
-    html += '<div class="arena-copy">';
     html += renderHeadline(view.headline);
     html += renderLines(view.subtitle, "arena-subtitle");
     if (view.between) html += renderLines(view.between, "arena-between");
@@ -245,17 +269,102 @@
       }).join("") + "</div>";
     }
     if (view.micro) html += '<p class="arena-micro">' + escapeHtml(view.micro).replace(/\n/g, "<br>") + "</p>";
-    html += renderActions(view);
-    html += "</div>";
+    if (view.slideLink) html += '<a class="arena-mini-slide__link" href="' + escapeHtml(view.slideLink.href) + '" target="_blank" rel="noopener noreferrer">' + escapeHtml(view.slideLink.label) + ' <span aria-hidden="true">↗</span></a>';
     return html;
+  }
+
+  function renderMiniDeck(view) {
+    var slide = miniSlideFor(view);
+    var currentIndex = presentationOrder.indexOf(state.currentView);
+    var previous = currentIndex > 0 ? presentationOrder[currentIndex - 1] : "";
+    var next = currentIndex >= 0 && currentIndex < presentationOrder.length - 1 ? presentationOrder[currentIndex + 1] : "";
+    var roleActions = view.choices ? renderMiniChoiceActions(view) : "";
+    return '<section class="arena-mini-deck" aria-label="Presentation slide ' + String(currentIndex + 1) + ' of ' + String(presentationOrder.length) + '">' +
+      '<div class="arena-mini-deck__header"><span>' + escapeHtml(slide.kicker) + '</span><span class="arena-mini-deck__count">' + String(currentIndex + 1).padStart(2, "0") + ' / ' + String(presentationOrder.length).padStart(2, "0") + '</span></div>' +
+      '<article class="arena-mini-slide"><div class="arena-mini-slide__copy">' + renderSlideContent(view) + roleActions + '</div>' + renderMiniDiagram(slide) + '</article>' +
+      '<button type="button" class="arena-mini-deck__arrow arena-mini-deck__arrow--back" data-slide-view="' + previous + '" aria-label="Previous presentation slide"' + (previous ? "" : " disabled") + '>‹</button>' +
+      '<button type="button" class="arena-mini-deck__arrow arena-mini-deck__arrow--next" data-slide-view="' + next + '" aria-label="Next presentation slide"' + (next ? "" : " disabled") + '>›</button>' +
+      '<nav class="arena-mini-deck__controls" aria-label="Presentation navigation">' +
+      '<div class="arena-mini-deck__progress" role="tablist" aria-label="Presentation slides">' + presentationOrder.map(function (viewId, index) {
+        var active = viewId === state.currentView;
+        return '<button type="button" class="arena-mini-deck__step' + (active ? ' is-active' : '') + '" data-slide-view="' + viewId + '" role="tab" aria-label="Go to slide ' + String(index + 1) + '" aria-selected="' + (active ? 'true' : 'false') + '"></button>';
+      }).join("") + '</div></nav></section>';
+  }
+
+  var presentationOrder = ["V0", "V1", "C1", "V2", "B1", "I1", "R1", "P1", "V6"];
+
+  function miniSlideFor(view) {
+    var slides = {
+      V0: { kicker: "Research → venture", stages: ["Signal", "Validate", "Form"], accent: "cyan" },
+      V1: { kicker: "Research → validation", stages: ["Research", "Validate", "Form"], accent: "gold" },
+      C1: { kicker: "Books → public shelf", stages: ["Read", "Reflect", "Share"], accent: "violet" },
+      V2: { kicker: "Choose a lens", stages: ["Build", "Invest", "Research", "Partner"], accent: "mixed" },
+      B1: { kicker: "Thesis → proof", stages: ["Thesis", "Validate", "Launch"], accent: "mint" },
+      I1: { kicker: "Evidence → decision", stages: ["Truth", "Signal", "Decision"], accent: "gold" },
+      R1: { kicker: "Research → reality", stages: ["Paper", "Prototype", "System"], accent: "violet" },
+      P1: { kicker: "Partner → capital", stages: ["Partner", "Mandate", "Capital"], accent: "warm" },
+      V6: { kicker: "Signal → outcome", stages: ["Test", "Shape", "Decide"], accent: "cyan" }
+    };
+    return slides[state.currentView] || slides.V0;
+  }
+
+  function renderMiniChoiceActions(view) {
+    return '<div class="arena-mini-role-actions">' + view.choices.map(function (choice, index) {
+      return '<button type="button" data-next="' + escapeHtml(choice.next) + '" data-role="' + escapeHtml(choice.role) + '"><strong>' + escapeHtml(choice.buttonLabel) + '</strong><span>0' + String(index + 1) + '</span></button>';
+    }).join("") + '</div>';
+  }
+
+  function renderMiniDiagram(slide) {
+    if (slide && slide.stages) {
+      return '<div class="arena-mini-diagram arena-mini-diagram--progress-ladder arena-mini-diagram--progress-' + escapeHtml(slide.accent || "cyan") + '" aria-hidden="true">' + slide.stages.map(function (stage) {
+        return '<span><b>' + escapeHtml(stage) + '</b><i></i></span>';
+      }).join("") + '</div>';
+    }
+    var kind = slide && slide.diagram ? slide.diagram : slide;
+    if (kind === "origin-signal") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--origin-signal" aria-hidden="true"><i></i><i></i><i></i><b></b><span>Signal</span></div>';
+    }
+    if (kind === "research-ladder") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--research-ladder" aria-hidden="true"><span><b>Research</b><i></i></span><span><b>Validate</b><i></i></span><span><b>Form</b><i></i></span></div>';
+    }
+    if (kind === "impact-grid") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--impact-grid" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>';
+    }
+    if (kind === "book-stack") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--book-stack" aria-hidden="true"><i></i><i></i><i></i><i></i><span>Public shelf</span></div>';
+    }
+    if (kind === "perspectives") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--perspectives" aria-hidden="true"><span>Build</span><span>Invest</span><span>Research</span><span>Partner</span><i></i></div>';
+    }
+    if (kind === "venture-stages") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--venture-stages" aria-hidden="true"><span>Thesis</span><i></i><span>Proof</span><i></i><span>Venture</span></div>';
+    }
+    if (kind === "investor-score") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--investor-score" aria-hidden="true"><span><b>Truth</b><i></i></span><span><b>Signal</b><i></i></span><span><b>Rights</b><i></i></span><span><b>Path</b><i></i></span></div>';
+    }
+    if (kind === "research-translation") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--research-translation" aria-hidden="true"><span>Paper</span><i></i><span>Prototype</span><i></i><span>System</span></div>';
+    }
+    if (kind === "capital-flow") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--capital-flow" aria-hidden="true"><span>Partner</span><i></i><span>Mandate</span><i></i><span>Capital</span></div>';
+    }
+    if (kind === "decision-gate") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--decision-gate" aria-hidden="true"><span>Test</span><i></i><span>Shape</span><i></i><span>Decide</span></div>';
+    }
+    if (kind === "bars") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--bars" aria-hidden="true"><i></i><i></i><i></i><i></i><span></span></div>';
+    }
+    if (kind === "nodes") {
+      return '<div class="arena-mini-diagram arena-mini-diagram--nodes" aria-hidden="true"><i></i><i></i><i></i><b></b><span></span></div>';
+    }
+    return '<div class="arena-mini-diagram arena-mini-diagram--trace" aria-hidden="true"><svg viewBox="0 0 136 68" focusable="false"><path d="M5 52 C22 48 25 39 38 43 S57 48 69 30 S88 21 100 28 S116 18 131 9"></path><path d="M5 58 H131"></path><circle cx="38" cy="43" r="3"></circle><circle cx="69" cy="30" r="3"></circle><circle cx="100" cy="28" r="3"></circle><circle cx="131" cy="9" r="3"></circle></svg></div>';
   }
 
   function renderActions(view) {
     var actions = view.actions;
-    var choiceActions = view.choices ? renderChoiceActions(view) : "";
+    var choiceActions = "";
     var back = state.history.length ? '<button class="arena-control arena-back arena-icon-only" type="button" data-back aria-label="Back" title="Back">' + buttonIcon("back") + "</button>" : "";
     var home = state.history.length ? '<button class="arena-control arena-home arena-icon-only" type="button" data-home aria-label="Home" title="Home">' + buttonIcon("home") + "</button>" : "";
-    var roleShortcut = state.currentView !== "V0" ? '<button class="arena-control arena-role-shortcut arena-icon-only" type="button" data-choose-role aria-label="Choose Your Role" title="Choose Your Role">' + buttonIcon("roles") + "</button>" : "";
     var main = actions && actions.length ? actions.map(function (action) {
       var classes = ["arena-action"];
       if (action.primary) classes.push("arena-action-primary");
@@ -268,10 +377,12 @@
     return '<div class="arena-action-zone" aria-label="Quick Presentation actions">' +
       back +
       home +
-      roleShortcut +
       main +
+      '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
+      "</div>";
       choiceActions +
-      '<a class="arena-control arena-tower-link" href="' + towerUrl + '" target="_blank" rel="noopener noreferrer" title="Open the full site" data-intent="tower">' + buttonIcon("details") + '<span>Visit Site</span></a>' +
+      '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
+      "</div>";
       '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
       "</div>";
   }
@@ -574,11 +685,12 @@
       var text = span.getAttribute("data-full") || "";
       queue.push({
         el: span,
-        tokens: text.match(/\S+\s*/g) || [text],
+        tokens: span.closest(".arena-headline") ? Array.from(text) : (text.match(/\S+\s*/g) || [text]),
         index: 0,
         headline: !!span.closest(".arena-headline")
       });
       span.textContent = "";
+      span.classList.add("is-typing");
     });
     var itemIndex = 0;
     function tick() {
@@ -587,8 +699,11 @@
       if (!item) return;
       item.el.textContent += item.tokens[item.index] || "";
       item.index += 1;
-      if (item.index >= item.tokens.length) itemIndex += 1;
-      window.setTimeout(tick, item.headline ? 105 : 36);
+      if (item.index >= item.tokens.length) {
+        item.el.classList.remove("is-typing");
+        itemIndex += 1;
+      }
+      window.setTimeout(tick, item.headline ? 24 : 36);
     }
     tick();
   }
@@ -621,6 +736,12 @@
   }, true);
 
   host.addEventListener("click", function (event) {
+    var slideNavigation = event.target.closest("[data-slide-view]");
+    if (slideNavigation) {
+      event.preventDefault();
+      if (!slideNavigation.disabled && slideNavigation.dataset.slideView) go(slideNavigation.dataset.slideView);
+      return;
+    }
     var videoAction = event.target.closest("[data-video-open]");
     if (videoAction) {
       event.preventDefault();
@@ -649,14 +770,6 @@
       var homeAudio = prepareAudioForInteraction();
       goHome();
       playWhenAudioReady(homeAudio);
-      return;
-    }
-    var roleShortcut = event.target.closest("[data-choose-role]");
-    if (roleShortcut) {
-      event.preventDefault();
-      var roleAudio = prepareAudioForInteraction();
-      if (state.currentView !== "V2") go("V2");
-      playWhenAudioReady(roleAudio);
       return;
     }
     var action = event.target.closest("[data-next]");

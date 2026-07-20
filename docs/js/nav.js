@@ -98,6 +98,7 @@
     partners: [
       { href: "partners.html", label: "Partners Overview" },
       { href: "partners/work-with-outfinity.html", label: "Work With Outfinity" },
+      { href: "outfinity-capital.html", label: "Outfinity Capital" },
       { href: "partners/ai-labs.html", label: "AI Labs" },
       { href: "partners/founder-operators.html", label: "Founder-Operators" },
       { href: "partners/strategic-enterprises.html", label: "Strategic Enterprises" },
@@ -109,6 +110,9 @@
       { href: "https://www.assistos.org/", label: "AssistOS" },
       { href: "https://agisystem2.com/", label: "Our Neuro-symbolic Scientific Blog" },
       { href: "https://quiz.outfinity.ch", label: "Entrepreneur Quiz" }
+    ],
+    books: [
+      { href: "cultural-artefacts.html", label: "Explore Our Books" }
     ],
     contact: [
       { href: "contact.html", label: "Contact Form" }
@@ -191,6 +195,8 @@
     '</div><div class="menu-section-group">' +
     '<div class="menu-section"><p class="menu-section-title">External Links</p>' +
     renderLinks(links.resources) +
+    '</div><div class="menu-section menu-section--books"><p class="menu-section-title">Our Books</p>' +
+    renderLinks(links.books) +
     '</div><div class="menu-section"><p class="menu-section-title">Contact</p>' +
     renderLinks(links.contact) +
     '</div></div>' +
