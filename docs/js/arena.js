@@ -364,6 +364,7 @@
     var actions = view.actions;
     var slideIndex = presentationOrder.indexOf(state.currentView);
     var nextSlide = slideIndex >= 0 && slideIndex < presentationOrder.length - 1 ? presentationOrder[slideIndex + 1] : "";
+    var isHomeView = state.currentView === "V0";
     var back = '<button class="arena-control arena-back arena-icon-only" type="button" data-back aria-label="Back" title="Back"' + (state.history.length ? "" : " disabled") + '>' + buttonIcon("back") + "</button>";
     var forward = '<button class="arena-control arena-forward arena-icon-only" type="button" data-deck-step="' + nextSlide + '" aria-label="Next presentation slide" title="Next presentation slide"' + (nextSlide ? "" : " disabled") + '>' + buttonIcon("forward") + "</button>";
     var home = '<button class="arena-control arena-home arena-icon-only" type="button" data-home aria-label="Home" title="Home"' + (state.currentView === "V0" ? " disabled" : "") + '>' + buttonIcon("home") + "</button>";
@@ -377,7 +378,7 @@
       return '<button class="' + classes.join(" ") + '" type="button" data-next="' + escapeHtml(action.next) + '"' + (action.start ? ' data-start="true"' : "") + ">" + actionContent(action) + "</button>";
     }).join("") : "";
     return '<div class="arena-action-zone" aria-label="Quick Presentation actions">' +
-      '<div class="arena-presentation-controls" aria-label="Presentation navigation">' + back + forward + home + "</div>" +
+      (isHomeView ? "" : '<div class="arena-presentation-controls" aria-label="Presentation navigation">' + back + forward + home + "</div>") +
       main +
       '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
       "</div>";

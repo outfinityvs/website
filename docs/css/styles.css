@@ -1861,7 +1861,7 @@ body.legal-page .footer {
 .arena-mini-slide__copy .arena-micro,
 .arena-mini-slide__copy .arena-punchline-list p {
     max-width: 50ch;
-    font-size: clamp(0.76rem, 0.94vw, 0.9rem);
+    font-size: clamp(0.84rem, 1.04vw, 0.98rem);
     line-height: 1.36;
 }
 
@@ -3409,30 +3409,37 @@ a.arena-radar-node:focus-visible {
         min-height: 500px;
     }
 
-    .arena-experience[data-view="V2"] .arena-shell {
-        width: min(100% - 3rem, 1280px);
+}
+
+@media (min-width: 1200px) {
+    .arena-experience[data-view] .arena-scene {
+        grid-template-columns: 730px minmax(330px, 1fr);
+        min-height: 522px;
     }
 
-    .arena-experience[data-view="V2"] .arena-scene {
-        grid-template-columns: 620px minmax(330px, 0.74fr);
-        gap: clamp(2.6rem, 6vw, 4.8rem);
+    .arena-experience[data-view] .arena-copy {
+        width: 730px;
+        max-width: 730px;
+        height: auto;
+        min-height: 522px;
+        padding: 0;
+        grid-template-rows: 460px auto;
+        gap: 1rem;
     }
 
-    .arena-experience[data-view="V2"] .arena-choice-action {
-        padding-inline: 0.7rem;
+    .arena-experience[data-view] .arena-mini-deck {
+        height: 460px;
     }
 
-    .arena-experience[data-view="V2"] .arena-visual {
-        padding-inline: 0;
+    .arena-experience[data-view] .arena-visual {
+        height: 460px;
+        min-height: 460px;
+        padding: 0;
+        align-items: start;
     }
 
-    .arena-experience[data-view="V2"] .arena-radar {
-        width: min(100%, 380px);
-        min-height: 380px;
-    }
-
-    .arena-experience[data-view="V2"] .arena-radar-node {
-        transform: rotate(calc((360deg / var(--count)) * var(--i))) translate(150px) rotate(calc((-360deg / var(--count)) * var(--i))) translate(-50%, -50%);
+    .arena-experience[data-view] .arena-radar {
+        margin: 0 auto;
     }
 }
 
