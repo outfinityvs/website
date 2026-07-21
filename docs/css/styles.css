@@ -22,16 +22,6 @@
     --editorial: min(100% - 3rem, 920px);
 }
 
-@media (max-width: 720px) {
-    .arena-action-zone--home > .arena-video-toggle,
-    .arena-action-zone--home > .arena-full-presentation {
-        width: auto;
-        min-width: 0;
-        max-width: none;
-        flex: 1 1 0;
-    }
-}
-
 body:not(.arena-page) {
     --site-teal: #00cfc8;
     --site-teal-dark: #007c78;
@@ -1509,7 +1499,7 @@ body.legal-page .footer {
     margin: 0 auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 0.8rem;
 }
@@ -2396,8 +2386,10 @@ body.legal-page .footer {
 
 .arena-action-zone {
     display: flex;
+    width: 100%;
     flex-wrap: wrap;
     align-items: flex-start;
+    justify-content: flex-start;
     gap: 0.55rem;
     margin-top: 0.6rem;
 }
@@ -2602,16 +2594,12 @@ body.legal-page .footer {
     background: rgba(84, 231, 226, 0.15);
 }
 
-/* On the home slide, the three destination actions align with the mini-deck above. */
-.arena-action-zone--home {
-    width: 100%;
-    justify-content: space-between;
-}
-
-.arena-action-zone--home > .arena-video-toggle,
-.arena-action-zone--home > .arena-full-presentation {
+/* Destination actions grow to fill the slide; the gap remains constant. */
+.arena-action-zone > .arena-video-toggle,
+.arena-action-zone > .arena-full-presentation {
     flex: 1 1 0;
     min-width: 0;
+    max-width: none;
 }
 
 .arena-video-toggle:hover,
