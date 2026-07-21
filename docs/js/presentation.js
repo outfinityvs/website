@@ -267,7 +267,10 @@
     }
 
     articleTitle(title) {
-      return title || this.dataset.articleTitle || document.title.replace(/\s*\|\s*Outfinity\s*$/i, '').trim() || 'Article';
+      return (title || this.dataset.articleTitle || document.title || 'Article')
+        .replace(/\s*\|\s*Outfinity\s*$/i, '')
+        .replace(/\s*[—-]\s*Article\s*$/i, '')
+        .trim() || 'Article';
     }
 
     showArticleLoading() {
@@ -341,7 +344,7 @@
         return { source: source, title: documentSource.title };
       }).then(function (result) {
         if (result.source && result.source.alternate) throw new Error('Article unavailable');
-        self.renderArticle(result.source, (result.title || '').replace(/\s*\|\s*Outfinity\s*$/i, '').trim());
+        self.renderArticle(result.source, self.articleTitle(result.title));
       }).catch(function () {
         self.renderArticle(null, 'Article unavailable');
       });
