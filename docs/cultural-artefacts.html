@@ -40,6 +40,78 @@
     .book-grid--social { grid-template-columns:repeat(4,220px); }
     @media (max-width:900px) { .book-grid--social { grid-template-columns:1fr; } }
   </style>
+  <style>
+    @media (max-width: 900px) {
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr);
+        height: calc(100dvh - 120px);
+        min-height: 0;
+        padding: 18px 24px 20px;
+        overflow: hidden;
+      }
+
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid,
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--two,
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--three,
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--one {
+        position: relative;
+        top: auto;
+        left: auto;
+        width: 100%;
+        height: 100%;
+        min-height: 0;
+        margin-top: 14px;
+        padding: 4px 10px 12px 4px;
+        grid-template-columns: 1fr;
+        gap: 14px;
+        align-content: start;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-y;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 207, 200, 0.54) transparent;
+      }
+
+      .cultural-deck .book-card {
+        width: min(210px, 100%);
+        min-height: 200px;
+        padding: 18px 14px 15px 24px;
+      }
+
+      .cultural-deck .book-card h3 { font-size: 17px; }
+      .cultural-deck .book-card p { font-size: 11.5px; }
+      .cultural-deck .book-card__actions { padding-top: 9px; }
+    }
+
+    @media (max-width: 900px) and (max-height: 720px) {
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) {
+        padding-top: 14px;
+        padding-bottom: 14px;
+      }
+
+      .cultural-deck .slide-title h2 { font-size: clamp(1.85rem, 8vw, 2.3rem); }
+      .cultural-deck .slide-title p { font-size: .86rem; line-height: 1.32; }
+
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid,
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--two,
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--three,
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--one {
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .cultural-deck .book-card {
+        min-height: 150px;
+        padding: 14px 12px 12px 21px;
+      }
+
+      .cultural-deck .book-card h3 { margin-top: 8px; font-size: 15px; }
+      .cultural-deck .book-card p { margin-top: 6px; font-size: 10.5px; }
+      .cultural-deck .book-card__actions { padding-top: 6px; }
+    }
+  </style>
 </head>
 <body class="presentation-page">
   <nav id="nav" aria-label="Primary navigation"></nav>
