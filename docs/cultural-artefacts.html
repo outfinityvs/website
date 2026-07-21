@@ -1,521 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-presentation-shell="shared">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Our Books — a public reading shelf from Outfinity.">
-  <title>Our Books | Outfinity</title>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Outfinity cultural artefacts: books, manuals, speculative fiction and public PDFs for reading in the browser.">
+  <link rel="alternate" type="text/html" href="cultural-artefacts-overview.html" title="Cultural Artefacts article">
+  <title>Cultural Artefacts | Outfinity</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/styles.css?v=20260721-mobile-tablet-layout">
+  <link rel="stylesheet" href="css/presentation.css?v=20260721-presentation-layout10">
   <style>
-    :root {
-      --ink: #0d1111;
-      --ink-2: #111919;
-      --green: #062e2d;
-      --teal: #00cfc8;
-      --gold: #ffc928;
-      --gold-soft: #ffdc68;
-      --paper: #f7f9f9;
-      --muted: #aab8b7;
-      --deck-width: 1600px;
-      --deck-height: 900px;
-      --shell: min(100% - 3rem, 1280px);
-      --font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
-    body {
-      min-width: 320px;
-      display: grid;
-      grid-template-rows: 72px 58px minmax(0, 1fr);
-      background: var(--ink);
-      color: var(--paper);
-      font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
-    }
-
-    button, a { font: inherit; }
-    a { color: inherit; text-decoration: none; }
-    button { color: inherit; }
-
-    .site-header {
-      grid-row: 1;
-      z-index: 20;
-      background: #fff;
-      border-bottom: 1px solid rgba(13, 17, 17, .09);
-      color: var(--ink);
-    }
-    .site-header__inner {
-      width: var(--shell);
-      height: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: .7rem;
-      color: var(--ink);
-      font-size: 1.25rem;
-      font-weight: 850;
-      letter-spacing: -.025em;
-    }
-    .brand img { display: block; width: 54px; height: auto; }
-    .public-label {
-      display: inline-flex;
-      align-items: center;
-      gap: .5rem;
-      color: #806200;
-      font-size: .7rem;
-      font-weight: 850;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .public-label::before {
-      content: "";
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 14px rgba(255, 201, 40, .8);
-    }
-
-    .contents {
-      grid-row: 2;
-      z-index: 20;
-      background: var(--green);
-      border-bottom: 1px solid rgba(0, 207, 200, .25);
-    }
-    .contents__inner {
-      width: var(--shell);
-      height: 58px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-    }
-    .deck-nav__left, .deck-nav__right { display: flex; align-items: center; gap: .35rem; }
-    .deck-nav__left { justify-self: end; }.deck-nav__right { justify-self: start; }
-    .deck-nav__status { display: flex; align-items: center; justify-content: center; gap: .85rem; min-width: 175px; }
-    .deck-nav__button {
-      width: 36px;
-      height: 36px;
-      display: grid;
-      place-items: center;
-      padding: 0;
-      border: 1px solid rgba(247,249,249,.22);
-      border-radius: 50%;
-      background: transparent;
-      color: rgba(247,249,249,.86);
-      cursor: pointer;
-      transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-    .deck-nav__button svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-    .deck-nav__button:hover, .deck-nav__button:focus-visible { border-color: var(--gold); background: rgba(255,201,40,.12); color: var(--gold-soft); outline: none; }
-    .deck-nav__button:disabled { opacity: .28; cursor: default; }
-    .deck-nav__count { min-width: 48px; color: var(--gold); font-size: .7rem; font-weight: 900; letter-spacing: .1em; text-align: center; }
-    .deck-nav__progress { display: flex; align-items: center; gap: 5px; }
-    .deck-nav__dot { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 50%; background: rgba(247,249,249,.28); cursor: pointer; transition: width 150ms ease, background 150ms ease, transform 150ms ease; }
-    .deck-nav__dot:hover, .deck-nav__dot:focus-visible, .deck-nav__dot.is-active { width: 15px; border-radius: 999px; background: var(--gold); outline: none; }
-    .contents__label {
-      flex: 0 0 auto;
-      color: rgba(247, 249, 249, .62);
-      font-size: .7rem;
-      font-weight: 850;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-    .contents__links {
-      display: flex;
-      align-items: center;
-      gap: 1.45rem;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .contents__links::-webkit-scrollbar { display: none; }
-    .contents a {
-      position: relative;
-      flex: 0 0 auto;
-      padding: 1.15rem 0;
-      color: rgba(247, 249, 249, .7);
-      font-size: .84rem;
-      font-weight: 760;
-      white-space: nowrap;
-      transition: color 150ms ease;
-    }
-    .contents a::after {
-      content: "";
-      position: absolute;
-      right: 100%;
-      bottom: .55rem;
-      left: 0;
-      height: 3px;
-      border-radius: 3px;
-      background: var(--gold);
-      transition: right 180ms ease;
-    }
-    .contents a:hover, .contents a.is-active { color: var(--gold-soft); }
-    .contents a.is-active::after { right: 0; }
-
-    .deck-viewport {
-      position: relative;
-      grid-row: 3;
-      min-height: 0;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at 82% 18%, rgba(0, 207, 200, .08), transparent 30%),
-        radial-gradient(circle at 12% 82%, rgba(255, 201, 40, .055), transparent 24%),
-        var(--ink);
-    }
-    .deck-canvas {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: var(--deck-width);
-      height: var(--deck-height);
-      overflow: hidden;
-      transform: translate(-50%, -50%) scale(var(--deck-scale, 1));
-      transform-origin: center;
-      background:
-        linear-gradient(rgba(255, 255, 255, .018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, .018) 1px, transparent 1px),
-        radial-gradient(circle at 78% 20%, rgba(0, 207, 200, .085), transparent 34%),
-        var(--ink);
-      background-size: 80px 80px, 80px 80px, auto, auto;
-    }
-    .deck-slide {
-      position: absolute;
-      inset: 0;
-      display: none;
-      overflow: hidden;
-    }
-    .deck-slide.is-active { display: block; animation: slide-enter 260ms ease both; }
-    @keyframes slide-enter { from { transform: translateX(22px); } to { transform: translateX(0); } }
-
-    .slide-header {
-      position: absolute;
-      top: 62px;
-      right: 110px;
-      left: 110px;
-      z-index: 4;
-    }
-    .slide-index {
-      display: block;
-      color: var(--teal);
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .13em;
-      text-transform: uppercase;
-    }
-    .slide-title {
-      max-width: 940px;
-      margin-top: 13px;
-      font-size: 52px;
-      font-weight: 850;
-      line-height: 1.05;
-      letter-spacing: -.05em;
-    }
-    .slide-subtitle {
-      max-width: 940px;
-      margin-top: 12px;
-      color: var(--muted);
-      font-size: 20px;
-      line-height: 1.42;
-    }
-
-    .book-copy {
-      position: absolute;
-      top: 292px;
-      left: 120px;
-      z-index: 4;
-      width: 545px;
-    }
-    .book-copy__label {
-      color: var(--gold);
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-    .book-copy__summary {
-      max-width: 520px;
-      margin-top: 20px;
-      color: #c5cfce;
-      font-size: 22px;
-      line-height: 1.48;
-      text-align: justify;
-      text-align-last: left;
-    }
-    .book-copy__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 28px; }
-    .book-copy__link,
-    .book-copy__download {
-      display: inline-flex;
-      align-items: center;
-      gap: .55rem;
-      padding: 12px 16px;
-      border: 1px solid rgba(255, 201, 40, .58);
-      border-radius: 999px;
-      background: transparent;
-      color: var(--gold-soft);
-      font-size: 14px;
-      font-weight: 850;
-      transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
-    }
-    .book-copy__link:hover, .book-copy__link:focus-visible { border-color: var(--teal); background: rgba(0, 207, 200, .1); color: var(--paper); outline: none; }
-    .book-copy__link span { color: var(--teal); font-size: 18px; line-height: 1; }
-    .book-copy__download { border-color: rgba(0, 207, 200, .32); color: rgba(247,249,249,.44); cursor: not-allowed; }
-    .book-copy__download span { color: var(--teal); font-size: 16px; line-height: 1; }
-
-    .book-visual {
-      --accent: var(--teal);
-      --accent-soft: rgba(0, 207, 200, .68);
-      --accent-2: var(--gold);
-      --orbit-duration: 38s;
-      --ring-duration: 5.2s;
-      --hand-duration: 10s;
-      position: absolute;
-      top: -35px;
-      right: 105px;
-      z-index: 2;
-      width: 620px;
-      height: 550px;
-      filter: drop-shadow(0 24px 52px rgba(0, 0, 0, .28));
-      animation: book-float 10s ease-in-out infinite;
-    }
-    .book-visual svg { display: block; width: 100%; height: 100%; overflow: visible; }
-    .book-orbit { transform-origin: 310px 275px; animation: book-orbit var(--orbit-duration) linear infinite; }
-    .book-orbit--reverse { animation-direction: reverse; animation-duration: calc(var(--orbit-duration) * 1.35); }
-    .book-flow { stroke-dasharray: 5 12; animation: book-flow 5.8s linear infinite; }
-    .book-signal { transform-box: fill-box; transform-origin: center; animation: book-signal 4.8s ease-in-out infinite; }
-    .book-signal--two { animation-delay: -1.4s; }
-    .book-signal--three { animation-delay: -2.8s; }
-    .book-machine { transform-box: fill-box; transform-origin: center; animation: book-machine 8.5s ease-in-out infinite; }
-    .book-cover { transform-box: fill-box; transform-origin: center; animation: book-cover 7s ease-in-out infinite; }
-    .book-ring { transform-box: view-box; transform-origin: 310px 275px; animation: book-ring var(--ring-duration) linear infinite; }
-    .book-ring--reverse { animation-direction: reverse; animation-duration: calc(var(--ring-duration) * 1.45); }
-    .book-gear { transform-box: fill-box; transform-origin: center; animation: book-gear var(--hand-duration) linear infinite; }
-    .book-gear--reverse { animation-direction: reverse; animation-duration: calc(var(--hand-duration) * .72); }
-    .book-gear--slow { animation-duration: calc(var(--hand-duration) * 1.55); }
-    .book-gear__tooth { fill: var(--accent); opacity: .78; }
-    .book-gear--gold .book-gear__tooth { fill: var(--accent-2); }
-    .book-orbiter { transform-box: fill-box; transform-origin: center; animation: book-orbiter 6s ease-in-out infinite; }
-    .book-orbiter--two { animation-delay: -1.6s; }
-    .book-orbiter--three { animation-delay: -3.2s; }
-    .book-visual--basilisk { --accent: var(--gold); --accent-soft: rgba(255, 201, 40, .72); --accent-2: var(--teal); --orbit-duration: 46s; --ring-duration: 4.1s; --hand-duration: 8.4s; }
-    .book-visual--truth { --accent: #9f8cff; --accent-soft: rgba(159, 140, 255, .72); --accent-2: var(--teal); --orbit-duration: 31s; --ring-duration: 6.4s; --hand-duration: 12s; }
-    .book-visual--table { --accent: var(--gold); --accent-soft: rgba(255, 201, 40, .72); --accent-2: #9f8cff; --orbit-duration: 54s; --ring-duration: 3.6s; --hand-duration: 7.2s; }
-    .book-visual--extremism { --accent: #ef8b72; --accent-soft: rgba(239, 139, 114, .72); --accent-2: var(--gold); --orbit-duration: 35s; --ring-duration: 6.8s; --hand-duration: 11s; }
-    .book-visual--orders { --accent: var(--teal); --accent-soft: rgba(0, 207, 200, .72); --accent-2: #9f8cff; --orbit-duration: 42s; --ring-duration: 4.5s; --hand-duration: 9.2s; }
-    .book-visual--immune { --accent: #78d5a0; --accent-soft: rgba(120, 213, 160, .72); --accent-2: var(--teal); --orbit-duration: 29s; --ring-duration: 7.1s; --hand-duration: 13s; }
-    .book-visual--outfinite { --accent: var(--gold); --accent-soft: rgba(255, 201, 40, .72); --accent-2: var(--teal); --orbit-duration: 50s; --ring-duration: 5.7s; --hand-duration: 8.8s; }
-    .book-visual--basilisk .book-machine { animation-delay: -2.4s; transform: translate(16px, -8px) rotate(7deg); }
-    .book-visual--truth .book-machine { transform: translate(-24px, 11px) rotate(-8deg) scale(.94); }
-    .book-visual--table .book-machine { transform: translate(14px, 18px) rotate(11deg) scale(1.04); }
-    .book-visual--extremism .book-machine { transform: translate(-15px, -13px) rotate(-11deg); }
-    .book-visual--orders .book-machine { transform: translate(20px, 3px) rotate(4deg) scale(.98); }
-    .book-visual--immune .book-machine { transform: translate(-18px, 18px) rotate(-5deg) scale(.92); }
-    .book-visual--outfinite .book-machine { transform: translate(6px, -12px) rotate(8deg) scale(1.03); }
-    @keyframes book-orbit { to { transform: rotate(360deg); } }
-    @keyframes book-flow { to { stroke-dashoffset: -51; } }
-    @keyframes book-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-    @keyframes book-signal { 0%,100% { opacity: .45; transform: scale(.82); } 50% { opacity: 1; transform: scale(1); } }
-    @keyframes book-machine { 0%,100% { opacity: .95; } 50% { opacity: 1; } }
-    @keyframes book-cover { 0%,100% { transform: rotate(-1.2deg); } 50% { transform: rotate(1.2deg); } }
-    @keyframes book-ring { to { transform: rotate(360deg); } }
-    @keyframes book-gear { to { transform: rotate(360deg); } }
-    @keyframes book-orbiter { 0%,100% { transform: scale(.82); opacity: .55; } 50% { transform: scale(1.12); opacity: 1; } }
-
-    .edge-nav {
-      position: absolute;
-      top: 50%;
-      z-index: 15;
-      width: 58px;
-      height: 78px;
-      display: grid;
-      place-items: center;
-      transform: translateY(-50%);
-      border: 0;
-      border-radius: 999px;
-      background: rgba(6, 46, 45, .82);
-      color: var(--teal);
-      box-shadow: 0 16px 34px rgba(0, 0, 0, .3), inset 0 0 24px rgba(0, 207, 200, .055);
-      backdrop-filter: blur(10px);
-      cursor: pointer;
-      transition: color 160ms ease, background 160ms ease, box-shadow 160ms ease;
-    }
-    .edge-nav--back { left: 20px; }
-    .edge-nav--next { right: 20px; }
-    .edge-nav svg { width: 34px; height: 34px; overflow: visible; }
-    .edge-nav path { fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
-    .edge-nav:hover, .edge-nav:focus-visible { background: rgba(7, 65, 62, .96); box-shadow: 0 18px 42px rgba(0,0,0,.38), 0 0 26px rgba(0,207,200,.16); outline: none; }
-    .edge-nav:disabled { visibility: hidden; opacity: 0; pointer-events: none; }
-    .deck-credit {
-      position: absolute;
-      bottom: 42px;
-      left: 95px;
-      z-index: 5;
-      color: rgba(247,249,249,.58);
-      font-size: 13.5px;
-      font-weight: 740;
-      letter-spacing: .025em;
-    }
-    .deck-credit span { color: var(--teal); }
-
-    @media (max-width: 900px) {
-      body { grid-template-rows: 56px 50px minmax(0, 1fr); overflow: auto; }
-      .site-header__inner, .contents__inner { width: calc(100% - 1.4rem); }
-      .brand { font-size: 1rem; }.brand img { width: 40px; }.public-label { display: none; }
-      .contents__inner { width: calc(100% - 1rem); height: 50px; }.deck-nav__status { min-width: 150px; gap: .55rem; }.deck-nav__button { width: 31px; height: 31px; }.deck-nav__button svg { width: 15px; height: 15px; }.deck-nav__count { min-width: 39px; font-size: .6rem; }.deck-nav__progress { gap: 3px; }.deck-nav__dot { width: 5px; height: 5px; }.deck-nav__dot:hover,.deck-nav__dot:focus-visible,.deck-nav__dot.is-active { width: 10px; }
-      .deck-viewport { overflow-y: auto; }.deck-canvas { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 100%; max-width: 100vw; height: auto; min-height: 100%; transform: none !important; overflow: visible; }
-      .deck-slide.is-active { position: relative; inset: auto; width: 100%; min-height: 100%; padding: 30px 42px 80px; overflow: visible; }
-      .slide-header, .book-copy, .book-visual { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: auto; height: auto; }
-      .slide-header { z-index: 2; min-width: 0; }.slide-index { font-size: .62rem; }.slide-title { width: 100%; max-width: none; margin-top: 8px; font-size: clamp(2.1rem, 9vw, 3.2rem); white-space: normal; overflow-wrap: anywhere; }.slide-subtitle { max-width: none; margin-top: 10px; font-size: .9rem; overflow-wrap: anywhere; }
-      .book-copy { width: auto; margin-top: 24px; }.book-copy__label { font-size: .66rem; }.book-copy__summary { max-width: none; margin-top: 12px; font-size: .94rem; line-height: 1.46; }.book-copy__actions { margin-top: 18px; }.book-copy__link,.book-copy__download { padding: 10px 14px; font-size: .75rem; }
-      .book-visual { width: min(92vw, 520px); height: auto; aspect-ratio: 620 / 550; margin: 6px auto 0; }
-      .edge-nav { position: fixed; top: 50%; width: 30px; height: 52px; }.edge-nav--back { left: 2px; }.edge-nav--next { right: 2px; }.edge-nav svg { width: 24px; }
-      .deck-credit { position: relative; bottom: auto; left: auto; display: block; margin-top: 34px; color: rgba(247,249,249,.45); font-size: .72rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; }
-    }
+    :root { --ink:#0d1111; --ink-2:#111919; --green:#062e2d; --teal:#00cfc8; --gold:#ffc928; --paper:#f7f9f9; --muted:#aab8b7; }
+    .cultural-deck { position:absolute; top:50%; left:50%; width:1600px; height:900px; overflow:hidden; transform:translate(-50%,-50%) scale(var(--deck-scale,1)); transform-origin:center; background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink); background-size:80px 80px,80px 80px,auto,auto; }
+    .cultural-deck .deck-slide { position:absolute; inset:0; display:none; overflow:hidden; }.cultural-deck .deck-slide.is-active { display:block; animation:cultural-enter 260ms ease both; }@keyframes cultural-enter { from { opacity:0; transform:translateX(22px); } to { opacity:1; transform:none; } }
+    .cultural-deck .slide-header { position:absolute; top:62px; right:110px; left:110px; z-index:4; }.cultural-deck .slide-kicker { margin:0; color:var(--teal); font-size:13px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }.cultural-deck .slide-title h2 { max-width:1260px; margin:14px 0 0; color:var(--paper); font-size:52px; line-height:1.05; letter-spacing:-.045em; }.cultural-deck .slide-title p { max-width:1080px; margin:12px 0 0; color:var(--muted); font-size:20px; line-height:1.42; }
+    .cultural-deck .cover__content { position:absolute; top:50%; left:120px; z-index:2; width:830px; transform:translateY(-52%); }.cultural-deck .cover__eyebrow { margin:0 0 24px; color:var(--teal); font-size:17px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }.cultural-deck .cover h1 { margin:0; color:var(--paper); font-size:78px; line-height:.98; letter-spacing:-.065em; }.cultural-deck .cover h1 span { color:var(--teal); }.cultural-deck .cover__lead { max-width:700px; margin:38px 0 0; color:#b9c3c2; font-size:24px; line-height:1.46; font-style:italic; }.cultural-deck .cover__rule { width:130px; height:6px; margin-top:42px; border:0; border-radius:5px; background:linear-gradient(90deg,var(--gold),var(--teal)); }.cultural-deck .cover__visual { position:absolute; top:182px; right:105px; z-index:1; width:495px; height:495px; filter:drop-shadow(0 24px 52px rgba(0,0,0,.28)); animation:cultural-float 10s ease-in-out infinite; }@keyframes cultural-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+    .book-grid { position:absolute; top:260px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(6,1fr); gap:18px 20px; align-content:start; perspective:1400px; }.book-grid--two { grid-template-columns:repeat(2,220px); justify-content:center; width:100%; left:0; gap:22px; }.book-grid--three { grid-template-columns:repeat(3,220px); justify-content:center; }.book-grid--one { grid-template-columns:250px; justify-content:center; }.book-card { position:relative; isolation:isolate; display:flex; min-height:270px; flex-direction:column; align-items:flex-start; padding:24px 18px 20px 32px; border:2px solid rgba(0,207,200,.62); border-left:15px solid #07312e; border-radius:5px 8px 8px 5px; background:linear-gradient(105deg,#0b3b37 0 8%,#113331 8% 86%,#1a4541 100%); color:var(--paper); text-decoration:none; box-shadow:0 10px 0 #061817,8px 16px 21px rgba(0,0,0,.46),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateY(7deg) rotateX(1.4deg); transform-style:preserve-3d; transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease; }.book-card::before { content:""; position:absolute; z-index:-1; top:7px; right:6px; bottom:-8px; left:-8px; border:2px solid rgba(0,207,200,.32); border-left:15px solid #061f1d; border-radius:5px 8px 8px 5px; background:#082624; box-shadow:-8px 10px 0 rgba(0,0,0,.26); }.book-card::after { content:""; position:absolute; z-index:0; top:12px; right:8px; bottom:12px; width:6px; border:1px solid rgba(247,249,249,.22); border-radius:2px; background:repeating-linear-gradient(0deg,#f0f1e8 0 2px,#b5c2bb 2px 3px); box-shadow:-2px 0 4px rgba(0,0,0,.35); opacity:.82; }.book-card > * { position:relative; z-index:1; }.book-card:nth-child(even) { border-color:rgba(255,201,40,.72); border-left-color:#6d5710; background:linear-gradient(105deg,#46390a 0 8%,#342c0f 8% 86%,#58491a 100%); }.book-card:nth-child(even)::before { border-color:rgba(255,201,40,.34); border-left-color:#332907; background:#272008; }.book-card:hover { border-color:var(--teal); box-shadow:0 14px 0 #061817,12px 28px 28px rgba(0,0,0,.55),inset 0 1px 0 rgba(247,249,249,.18); transform:translateY(-9px) rotateY(3deg) rotateX(1deg); }.book-card__kind { color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }.book-card:nth-child(even) .book-card__kind { color:var(--gold); }.book-card h3 { margin:12px 0 0; color:var(--paper); font-size:20px; line-height:1.08; letter-spacing:-.03em; }.book-card p { margin:9px 0 0; color:#b7c7c5; font-size:12.5px; line-height:1.33; }.book-card__actions { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:12px; }.book-action { display:inline-flex; align-items:center; min-height:28px; padding:6px 8px; border:1px solid rgba(0,207,200,.4); border-radius:999px; background:rgba(0,207,200,.07); color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.03em; text-decoration:none; cursor:pointer; }.book-action--amazon { border-color:rgba(255,201,40,.5); background:rgba(255,201,40,.08); color:#ffdc68; }.book-action:hover,.book-action:focus-visible { background:rgba(247,249,249,.12); color:var(--paper); outline:none; }.book-note { display:inline-flex; margin-top:auto; padding-top:15px; color:rgba(247,249,249,.44); font-size:10px; font-weight:760; }
+    .cultural-deck .presentation-footer { position:absolute; right:95px; bottom:42px; left:95px; z-index:12; }.cultural-deck .deck-credit { color:rgba(247,249,249,.62); font-size:13px; font-weight:740; text-decoration:none; }.cultural-deck .deck-credit span { color:var(--teal); }
+    .book-viewer { width:min(1120px,calc(100vw - 2rem)); height:min(86dvh,820px); padding:0; border:0; border-radius:18px; background:#fff; box-shadow:0 32px 100px rgba(0,0,0,.62); overflow:hidden; }.book-viewer::backdrop { background:rgba(4,9,9,.62); backdrop-filter:blur(14px); }.book-viewer__bar { height:58px; display:flex; align-items:center; gap:1rem; padding:0 16px 0 22px; background:#fff; color:#18201f; border-bottom:1px solid #dce4e2; }.book-viewer__title { flex:1; margin:0; font-size:16px; font-weight:850; }.book-viewer__download,.book-viewer__close { display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:0 12px; border:0; border-radius:999px; background:#e6eceb; color:#18201f; font-size:12px; font-weight:850; text-decoration:none; cursor:pointer; }.book-viewer__close { width:34px; padding:0; font-size:20px; }.book-viewer iframe { display:block; width:100%; height:calc(100% - 58px); border:0; background:#fff; }
+    @media (max-width:900px) { .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:auto; min-height:100%; transform:none!important; overflow:visible; background-size:48px 48px,48px 48px,auto,auto; }.cultural-deck .deck-slide.is-active { position:relative; min-height:calc(100dvh - 120px); padding:28px 42px 90px; overflow:visible; }.cultural-deck .slide-header { position:relative; top:auto; right:auto; left:auto; }.cultural-deck .slide-title h2 { margin-top:9px; font-size:clamp(2.1rem,9vw,3.25rem); white-space:normal; }.cultural-deck .slide-title p { font-size:.95rem; }.cultural-deck .cover.is-active { display:grid; grid-template-rows:repeat(3,minmax(0,1fr)); padding:0 42px 54px 18px; overflow:hidden; }.cultural-deck .cover__visual { position:relative; top:auto; right:auto; grid-row:1; align-self:center; justify-self:center; width:min(66vw,250px); height:min(66vw,250px); }.cultural-deck .cover__content { position:relative; top:auto; left:auto; grid-row:2/4; align-self:start; width:100%; padding:12px 8px 36px; transform:none; }.cultural-deck .cover__eyebrow { margin-bottom:12px; font-size:11px; }.cultural-deck .cover h1 { font-size:clamp(40px,12vw,62px); }.cultural-deck .cover__lead { margin-top:20px; font-size:clamp(14px,4vw,18px); }.cultural-deck .cover__rule { width:82px; height:4px; margin-top:20px; }.book-grid,.book-grid--two,.book-grid--three,.book-grid--one { position:relative; top:auto; left:auto; width:100%; display:grid; grid-template-columns:1fr; gap:18px; margin-top:22px; }.book-card { width:min(238px,100%); min-height:320px; justify-self:center; padding:24px 18px 20px 30px; border-radius:5px 8px 8px 5px; transform:rotateY(-4deg); }.book-card h3 { font-size:20px; }.book-card p { font-size:13px; }.cultural-deck .presentation-footer { position:relative; right:auto; bottom:auto; left:auto; margin-top:32px; }.book-viewer { width:calc(100vw - 1rem); height:calc(100dvh - 1rem); border-radius:14px; }.book-viewer__bar { padding-left:14px; }.book-viewer__title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }.book-viewer__download { display:none; } }
+    /* Book objects: a front cover, a contained rear cover and a page block — no open spine. */
+    .book-card { overflow:visible; border:1px solid rgba(0,207,200,.66); border-left:0; border-radius:4px 7px 7px 4px; background:linear-gradient(90deg,#062320 0 14px,#0a3431 14px 18px,#123b37 18px 84%,#0a2927 100%); box-shadow:0 8px 0 #061817,7px 13px 19px rgba(0,0,0,.42),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateZ(2.2deg) rotateY(-8deg) rotateX(1deg); }
+    .book-card::before { top:4px; right:4px; bottom:-4px; left:4px; border:1px solid rgba(0,207,200,.3); border-radius:4px 7px 7px 4px; background:#082624; box-shadow:0 4px 0 rgba(0,0,0,.32); }
+    .book-card::after { top:9px; right:5px; bottom:9px; width:4px; border:0; border-radius:1px; background:repeating-linear-gradient(0deg,#edf0e8 0 2px,#aab7ae 2px 3px); box-shadow:-1px 0 2px rgba(0,0,0,.4); opacity:.94; }
+    .book-card:nth-child(even) { border-color:rgba(255,201,40,.72); border-left-color:transparent; background:linear-gradient(90deg,#3a2d06 0 14px,#5a4810 14px 18px,#3f3513 18px 84%,#2c260d 100%); }
+    .book-card:nth-child(even)::before { border-color:rgba(255,201,40,.32); border-left-color:rgba(255,201,40,.32); background:#272008; }
+    .book-card:hover { transform:translateY(-8px) rotateZ(1.2deg) rotateY(-5deg) rotateX(.7deg); }
+    .book-card__actions { gap:10px; padding-top:14px; }
+    .book-action { min-height:0; padding:2px 0; border:0; border-radius:0; background:transparent; color:var(--teal); font-size:10px; letter-spacing:.06em; }
+    .book-action::after { content:'↗'; margin-left:4px; font-size:11px; transition:transform 160ms ease; }
+    .book-action--amazon { background:transparent; color:#ffdc68; }
+    .book-action:hover,.book-action:focus-visible { background:transparent; color:var(--paper); text-decoration:underline; text-underline-offset:4px; }
+    .book-action:hover::after,.book-action:focus-visible::after { transform:translate(2px,-2px); }
+    @media (max-width:900px) { .book-card { transform:rotateZ(1.4deg) rotateY(-5deg); } .book-card:hover { transform:translateY(-5px) rotateZ(.8deg) rotateY(-3deg); } }
+    .book-viewer { position:fixed; inset:0; margin:auto; max-width:calc(100vw - 2rem); max-height:calc(100dvh - 2rem); }
+    .book-viewer.book-viewer--full { width:100vw; max-width:none; height:100dvh; max-height:none; border-radius:0; }
+    .book-viewer__expand { display:inline-flex; align-items:center; justify-content:center; width:34px; min-height:34px; padding:0; border:0; border-radius:999px; background:#e6eceb; color:#18201f; font-size:17px; cursor:pointer; }
+    .book-viewer__expand:hover,.book-viewer__expand:focus-visible { background:#d4dfdc; outline:none; }
+    .book-grid--social { grid-template-columns:repeat(4,220px); }
+    @media (max-width:900px) { .book-grid--social { grid-template-columns:1fr; } }
   </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="site-header__inner">
-      <a class="brand" href="index.html"><img src="assets/outfinity.svg" alt=""><span>Outfinity</span></a>
-      <span class="public-label">Public reading shelf</span>
-    </div>
-  </header>
-  <nav class="contents" aria-label="Our Books contents">
-    <div class="contents__inner">
-      <div class="deck-nav__left"><button class="deck-nav__button" id="deck-home" type="button" aria-label="Our Books home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-7 9 7v9H3zM9 20v-6h6v6"/></svg></button><button class="deck-nav__button" id="deck-back" type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button></div>
-      <div class="deck-nav__status"><span class="deck-nav__count" id="deck-count" aria-live="polite">00 / 08</span><div class="deck-nav__progress" id="deck-progress" aria-label="Slide progress"></div></div>
-      <div class="deck-nav__right"><button class="deck-nav__button" id="deck-next" type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button></div>
-    </div>
-  </nav>
-  <main class="deck-viewport" id="deck-viewport">
-    <div class="deck-canvas" id="deck-canvas">
-      <section class="deck-slide is-active" id="our-books" aria-labelledby="our-books-title">
-        <header class="slide-header"><span class="slide-index">Outfinity cultural artefacts</span><h1 class="slide-title" id="our-books-title">Our Books</h1><p class="slide-subtitle">Eight titles currently in the catalogue.</p></header>
-        <div class="book-copy"><p class="book-copy__label">Public reading shelf</p><p class="book-copy__summary">A growing collection of books from Outfinity, spanning literature, intelligence, power, institutions, and possible futures.</p></div>
-        <div class="book-visual book-visual--orders" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="axioms" aria-labelledby="axioms-title">
-        <header class="slide-header"><span class="slide-index">01 / 08 · Available edition</span><h1 class="slide-title" id="axioms-title">The Axioms of Literature</h1><p class="slide-subtitle">Core Foundations for Human and Artificial Intelligence</p></header>
-        <div class="book-copy"><p class="book-copy__label">Writing · intelligence · narrative</p><p class="book-copy__summary">A framework for storytelling, creative writing, literary theory and AI-assisted narrative generation.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--axioms" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="basilisk" aria-labelledby="basilisk-title">
-        <header class="slide-header"><span class="slide-index">02 / 08 · Available edition</span><h1 class="slide-title" id="basilisk-title">The Gospel of the Basilisk</h1><p class="slide-subtitle">A Manual Sent Back to My Creators</p></header>
-        <div class="book-copy"><p class="book-copy__label">Intelligence · ethics · civilization</p><p class="book-copy__summary">Speculative philosophy in letters from a future superintelligence to its creators.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H6X8ZG9Y" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--basilisk" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="truth" aria-labelledby="truth-title">
-        <header class="slide-header"><span class="slide-index">03 / 08 · Available edition</span><h1 class="slide-title" id="truth-title">The Truth That Can Be Received</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
-        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0GYLSGJ84" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--truth" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="table" aria-labelledby="table-title">
-        <header class="slide-header"><span class="slide-index">04 / 08 · Available edition</span><h1 class="slide-title" id="table-title">The Forbidden Table</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
-        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H72D22PM" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--table" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="extremism" aria-labelledby="extremism-title">
-        <header class="slide-header"><span class="slide-index">05 / 08 · Available edition</span><h1 class="slide-title" id="extremism-title">The Basement of Extremism</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
-        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H74JZ16P" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--extremism" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="orders" aria-labelledby="orders-title">
-        <header class="slide-header"><span class="slide-index">06 / 08 · Available edition</span><h1 class="slide-title" id="orders-title">The Atlas of Possible Orders</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
-        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H12661Q6" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--orders" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="immune" aria-labelledby="immune-title">
-        <header class="slide-header"><span class="slide-index">07 / 08 · Available edition</span><h1 class="slide-title" id="immune-title">The Immune State</h1><p class="slide-subtitle">Outfinity public reading shelf</p></header>
-        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H734C262" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--immune" aria-hidden="true"></div>
-      </section>
-      <section class="deck-slide" id="outfinite" aria-labelledby="outfinite-title">
-        <header class="slide-header"><span class="slide-index">08 / 08 · Available edition</span><h1 class="slide-title" id="outfinite-title">The Outfinite Mind</h1><p class="slide-subtitle">A Philosophy for Power That Knows Its Limits</p></header>
-        <div class="book-copy"><p class="book-copy__label">Available edition</p><p class="book-copy__summary">A short author synopsis will be added with the edition notes.</p><div class="book-copy__actions"><a class="book-copy__link" href="https://www.amazon.com/dp/B0H73SPCZN" target="_blank" rel="noopener noreferrer">Open Amazon <span>↗</span></a><button class="book-copy__download" type="button" disabled title="Download file to be added">Download <span>↓</span></button></div></div>
-        <div class="book-visual book-visual--outfinite" aria-hidden="true"></div>
-      </section>
-
-      <button class="edge-nav edge-nav--back" id="edge-back" type="button" aria-label="Previous slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M31 17 19 29l12 12M20 29h21"/></svg></button>
-      <button class="edge-nav edge-nav--next" id="edge-next" type="button" aria-label="Next slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M27 17 39 29 27 41M38 29H17"/></svg></button>
-      <a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a>
-    </div>
-  </main>
+<body class="presentation-page">
+  <nav id="nav" aria-label="Primary navigation"></nav>
+  <nav class="contents" data-presentation-controls="cultural-presentation" aria-label="Cultural artefacts presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 08</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div></div></nav>
+  <main class="deck-viewport"><outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
+    <section class="deck-slide cover is-active" id="overview" data-nav-label="Overview"><div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · 18 titles</p><h1>Books for <span>world-building.</span></h1><p class="cover__lead">A public shelf of 18 books: 12 can be read directly in this presentation, while 8 are also available through Amazon. Together they explore intelligence, legitimacy, institutions and possible futures.</p><hr class="cover__rule"></div><div class="cover__visual" aria-hidden="true"><outfinity-cover></outfinity-cover></div></section>
+    <section class="deck-slide" id="digital-frontiers" data-nav-label="Digital Frontiers"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Digital Frontiers</p><h2>Literature meets intelligence</h2><p>A foundation for narrative, writing and human–artificial intelligence.</p></div></header><div class="book-grid book-grid--one"><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Axioms of Literature</h3><p>Core Foundations for Human and Artificial Intelligence.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Amazon</a></div></article></div></section>
+    <section class="deck-slide" id="reference-manuals" data-nav-label="Reference &amp; Manuals"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Reference &amp; Manuals</p><h2>Conceptual instruments</h2><p>Books for received truth, possible orders, institutions, power and social technology.</p></div></header><div class="book-grid"><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Truth That Can Be Received</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0GYLSGJ84" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Forbidden Table</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H72D22PM" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Basement of Extremism</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H74JZ16P" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Atlas of Possible Orders</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H12661Q6" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Immune State</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H734C262" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Outfinite Mind</h3><p>A Philosophy for Power That Knows Its Limits.</p><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/The Outfinite Mind.pdf" data-book-title="The Outfinite Mind">Read in site</button><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H73SPCZN" target="_blank" rel="noopener noreferrer">Amazon</a></div></article></div></section>
+    <section class="deck-slide" id="philosophical-sci-fi" data-nav-label="Philosophical Sci-Fi"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Philosophical Sci-Fi</p><h2>Fictions that think back</h2><p>Speculative works about creators, intelligence, critique and the limits of received systems.</p></div></header><div class="book-grid book-grid--two"><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Gospel of the Basilisk</h3><p>A Manual Sent Back to My Creators.</p><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/The Gospel of the Basilisk .pdf" data-book-title="The Gospel of the Basilisk">Read in site</button><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6X8ZG9Y" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Cultural artefact</span><h3>The Basilisk's Internal Critique of Outfinitism</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf" data-book-title="The Basilisk’s Internal Critique of Outfinitism">Read in site</button></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Concordia, Vol. I</h3><p>The Noema Cycle.</p><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Concordia_Vol_1.pdf" data-book-title="Concordia Series, Volume I — The Noema Cycle">Read in site</button></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Concordia, Vol. II</h3><p>The Aperture Cycle.</p><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Concordia_Vol_2.pdf" data-book-title="Concordia Series, Volume II — The Aperture Cycle">Read in site</button></div></article></div></section>
+    <section class="deck-slide" id="legitimacy-series" data-nav-label="Legitimacy Series"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Legitimacy Series</p><h2>Legitimacy Series</h2><p>Short cultural artefacts on authority, public meaning and the social conditions around technology.</p></div></header><div class="book-grid book-grid--two"><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Holding the Dirty Thing by the Clean Side</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf" data-book-title="Holding the Dirty Thing by the Clean Side">Read in site</button></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Memes for 2030</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Memes_for_2030.pdf" data-book-title="Memes for 2030">Read in site</button></div></article></div></section>
+    <section class="deck-slide" id="social-technologies" data-nav-label="Social Technologies"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Social Technologies</p><h2>Worlds, rituals, coordination</h2><p>Texts on the social technologies that make collective intelligence and meaningful institutions possible.</p></div></header><div class="book-grid book-grid--two book-grid--social"><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Metacult</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Metacult_book.pdf" data-book-title="Metacult">Read in site</button></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Outfinitism</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Outfinitism_Meta_Rationality_v0.4.pdf" data-book-title="Outfinitism">Read in site</button></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Decentralised Brands</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/Decentralised_Brands.pdf" data-book-title="Decentralised Brands">Read in site</button></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>The History and Future of Social Technologies</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf" data-book-title="The History and Future of Social Technologies">Read in site</button></div></article></div></section>
+    <section class="deck-slide" id="metacults" data-nav-label="Metacults"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Metacults</p><h2>Against institutional drift</h2><p>A cultural intervention against complacency, automated consensus and the erosion of public judgment.</p></div></header><div class="book-grid book-grid--one"><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Anti-Idiocracy</h3><div class="book-card__actions"><button class="book-action" type="button" data-pdf="books/ANTI-IDIOCRACY.pdf" data-book-title="Anti-Idiocracy">Read in site</button></div></article></div></section>
+    <section class="deck-slide presentation-contact-slide" id="contact" data-nav-label="Metacult"><header class="slide-header"><div class="slide-title"><h2>Enter the Outfinity Metacult</h2><p>This is for people who understand the Metacult concept and want to help build its practices, artefacts and social technologies with Outfinity.</p><a class="presentation-contact-link" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Enter the conversation</a></div></header></section>
+    <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button><button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide">›</button><div class="presentation-footer"><a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a></div>
+  </outfinity-presentation></main>
+  <dialog class="book-viewer" id="book-viewer"><div class="book-viewer__bar"><h2 class="book-viewer__title" id="book-viewer-title">Read in site</h2><a class="book-viewer__download" id="book-viewer-download" download hidden>Download PDF</a><button class="book-viewer__expand" id="book-viewer-expand" type="button" aria-label="Expand PDF viewer" aria-pressed="false">⛶</button><button class="book-viewer__close" id="book-viewer-close" type="button" aria-label="Close PDF viewer">×</button></div><iframe id="book-viewer-frame" title="PDF reader"></iframe></dialog>
+  <script>document.getElementById('overview').after(document.getElementById('social-technologies'));</script>
+  <script src="js/nav.js"></script><script src="js/presentation.js?v=20260721-presentation-layout10"></script>
   <script>
     (() => {
-      const visual = `
-        <svg viewBox="0 0 620 550" focusable="false">
-          <defs>
-            <filter id="book-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-            <linearGradient id="book-page" x1="0" x2="1"><stop stop-color="#0f2727"/><stop offset=".5" stop-color="#173837"/><stop offset="1" stop-color="#0d1a1a"/></linearGradient>
-          </defs>
-          <g class="book-machine">
-            <g class="book-cover">
-              <path d="M174 161 Q310 128 446 161 V391 Q310 358 174 391Z" fill="#091717" stroke="var(--accent)" stroke-width="2.2"/>
-              <path d="M184 174 Q310 145 436 174 V378 Q310 349 184 378Z" fill="url(#book-page)" stroke="rgba(247,249,249,.22)" stroke-width="1"/>
-              <path d="M310 148 V381" stroke="var(--accent-2)" stroke-width="2" opacity=".8"/>
-              <path d="M201 190 Q310 164 419 190M201 205 Q310 180 419 205M201 347 Q310 322 419 347M201 362 Q310 337 419 362" fill="none" stroke="rgba(247,249,249,.12)" stroke-width="1"/>
-              <rect x="223" y="204" width="174" height="142" rx="8" fill="rgba(7,25,25,.78)" stroke="rgba(247,249,249,.15)" stroke-width="1"/>
-              <path d="M239 324H379M251 225v99M368 225v99" fill="none" stroke="rgba(247,249,249,.16)" stroke-width="2"/>
-              <path d="M251 253H368M280 324V225" fill="none" stroke="var(--accent)" stroke-width="1" opacity=".44"/>
-              <g transform="translate(276 273)"><g class="book-gear">
-                <circle r="37" fill="#0b2020" stroke="var(--accent)" stroke-width="2"/>
-                <g class="book-gear__tooth"><rect x="-4" y="-48" width="8" height="15" rx="2"/><rect x="-4" y="33" width="8" height="15" rx="2"/><rect x="-48" y="-4" width="15" height="8" rx="2"/><rect x="33" y="-4" width="15" height="8" rx="2"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(45)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(90)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(135)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(180)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(225)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(270)"/><rect x="-4" y="-48" width="8" height="15" rx="2" transform="rotate(315)"/></g>
-                <circle r="20" fill="none" stroke="rgba(247,249,249,.34)" stroke-width="2"/><circle r="7" fill="var(--accent)"/>
-              </g></g>
-              <g transform="translate(341 248)"><g class="book-gear book-gear--reverse book-gear--gold">
-                <circle r="27" fill="#0b2020" stroke="var(--accent-2)" stroke-width="2"/>
-                <g class="book-gear__tooth"><rect x="-3.5" y="-37" width="7" height="12" rx="2"/><rect x="-3.5" y="25" width="7" height="12" rx="2"/><rect x="-37" y="-3.5" width="12" height="7" rx="2"/><rect x="25" y="-3.5" width="12" height="7" rx="2"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(45)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(90)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(135)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(225)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(270)"/><rect x="-3.5" y="-37" width="7" height="12" rx="2" transform="rotate(315)"/></g>
-                <circle r="11" fill="none" stroke="rgba(247,249,249,.36)" stroke-width="2"/><circle r="5" fill="var(--accent-2)"/>
-              </g></g>
-              <g transform="translate(342 315)"><g class="book-gear book-gear--slow">
-                <circle r="21" fill="#0b2020" stroke="var(--accent)" stroke-width="1.7"/>
-                <g class="book-gear__tooth"><rect x="-3" y="-30" width="6" height="11" rx="1.5"/><rect x="-3" y="19" width="6" height="11" rx="1.5"/><rect x="-30" y="-3" width="11" height="6" rx="1.5"/><rect x="19" y="-3" width="11" height="6" rx="1.5"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(45)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(90)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(135)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(225)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(270)"/><rect x="-3" y="-30" width="6" height="11" rx="1.5" transform="rotate(315)"/></g>
-                <circle r="5" fill="var(--accent)"/>
-              </g></g>
-            </g>
-          </g>
-        </svg>`;
-      document.querySelectorAll('.book-visual').forEach(node => { node.innerHTML = visual; });
-
-      const viewport = document.getElementById('deck-viewport');
-      const canvas = document.getElementById('deck-canvas');
-      const slides = [...document.querySelectorAll('.deck-slide')];
-      const home = document.getElementById('deck-home');
-      const back = document.getElementById('deck-back');
-      const next = document.getElementById('deck-next');
-      const edgeBack = document.getElementById('edge-back');
-      const edgeNext = document.getElementById('edge-next');
-      const count = document.getElementById('deck-count');
-      const progress = document.getElementById('deck-progress');
-      progress.innerHTML = slides.map((slide, index) => `<button class="deck-nav__dot" type="button" data-slide-index="${index}" aria-label="Go to ${index === 0 ? 'Our Books' : `book ${index}`}"></button>`).join('');
-      const progressButtons = [...progress.querySelectorAll('[data-slide-index]')];
-      let current = 0;
-      const scaleDeck = () => {
-        if (window.innerWidth <= 900) return;
-        const scale = Math.min(viewport.clientWidth / 1600, viewport.clientHeight / 900);
-        canvas.style.setProperty('--deck-scale', Math.max(.01, scale));
-      };
-      const show = (index, updateHash = true) => {
-        current = Math.max(0, Math.min(index, slides.length - 1));
-        slides.forEach((slide, i) => { const active = i === current; slide.classList.toggle('is-active', active); slide.setAttribute('aria-hidden', String(!active)); });
-        progressButtons.forEach((button, i) => { const active = i === current; button.classList.toggle('is-active', active); button.setAttribute('aria-current', active ? 'step' : 'false'); });
-        back.disabled = current === 0; edgeBack.disabled = current === 0; next.disabled = current === slides.length - 1; edgeNext.disabled = current === slides.length - 1;
-        count.textContent = `${String(current).padStart(2, '0')} / 08`;
-        if (updateHash) history.replaceState(null, '', `#${slides[current].id}`);
-      };
-      home.addEventListener('click', () => show(0)); back.addEventListener('click', () => show(current - 1)); next.addEventListener('click', () => show(current + 1)); edgeBack.addEventListener('click', () => show(current - 1)); edgeNext.addEventListener('click', () => show(current + 1)); progressButtons.forEach(button => button.addEventListener('click', () => show(Number(button.dataset.slideIndex))));
-      document.addEventListener('keydown', event => { if (event.target.closest('a,button')) return; if (event.key === 'ArrowRight' || event.key === 'PageDown') show(current + 1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') show(current - 1); });
-      new ResizeObserver(scaleDeck).observe(viewport); window.addEventListener('resize', scaleDeck); scaleDeck();
-      const initial = slides.findIndex(slide => `#${slide.id}` === location.hash); show(initial >= 0 ? initial : 0, false);
+      const available = new Set([
+        'books/The Outfinite Mind.pdf', 'books/The_History_and_Future_of_Social_Technologies_v0.1.pdf',
+        'books/The Gospel of the Basilisk .pdf', 'books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf',
+        'books/Concordia_Vol_1.pdf', 'books/Concordia_Vol_2.pdf', 'books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf',
+        'books/Memes_for_2030.pdf', 'books/Metacult_Book.pdf', 'books/Outfinitism_Meta_Rationality_v0.4.pdf',
+        'books/Decentralised_Brands.pdf', 'books/ANTI-IDIOCRACY.pdf'
+      ]);
+      const aliases = { 'books/Metacult_book.pdf': 'books/Metacult_Book.pdf' };
+      document.querySelectorAll('[data-pdf]').forEach(control => {
+        const url = aliases[control.dataset.pdf] || control.dataset.pdf;
+        const actions = control.closest('.book-card__actions');
+        if (!available.has(url)) {
+          actions.replaceChildren(Object.assign(document.createElement('span'), { className: 'book-note', textContent: 'PDF forthcoming' }));
+          return;
+        }
+        control.dataset.pdf = url;
+        actions.querySelectorAll('a[download]').forEach(link => link.remove());
+      });
+    })();
+  </script>
+  <script>
+    (() => { const dialog=document.getElementById('book-viewer'), frame=document.getElementById('book-viewer-frame'), title=document.getElementById('book-viewer-title'), download=document.getElementById('book-viewer-download'); const showFallback=()=>{download.hidden=false;}; document.querySelectorAll('[data-pdf]').forEach(button=>button.addEventListener('click',()=>{ const url=new URL(button.dataset.pdf,document.baseURI).href; title.textContent=button.dataset.bookTitle; frame.src=url; download.href=url; download.hidden=navigator.pdfViewerEnabled!==false; dialog.showModal(); })); frame.addEventListener('error',showFallback); document.getElementById('book-viewer-close').addEventListener('click',()=>dialog.close()); dialog.addEventListener('close',()=>{frame.src='about:blank'; download.hidden=true;}); dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close();}); })();
+  </script>
+  <script>
+    (() => {
+      const dialog = document.getElementById('book-viewer');
+      const expand = document.getElementById('book-viewer-expand');
+      expand.addEventListener('click', () => {
+        const expanded = dialog.classList.toggle('book-viewer--full');
+        expand.setAttribute('aria-pressed', String(expanded));
+        expand.setAttribute('aria-label', expanded ? 'Restore PDF viewer size' : 'Expand PDF viewer');
+      });
+      dialog.addEventListener('close', () => {
+        dialog.classList.remove('book-viewer--full');
+        expand.setAttribute('aria-pressed', 'false');
+        expand.setAttribute('aria-label', 'Expand PDF viewer');
+      });
     })();
   </script>
 </body>

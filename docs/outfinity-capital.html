@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-presentation-shell="shared">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow, noarchive">
   <title>Co-Founder Opportunity | Outfinity Capital</title>
   <meta name="description" content="A private founding partner proposal for building Outfinity Capital.">
+  <link rel="alternate" type="text/html" href="outfinity-capital-overview.html" title="Outfinity Capital article">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="css/styles.css?v=20260721-mobile-tablet-layout">
   <style>
     :root {
       --ink: #0d1111;
@@ -1277,35 +1278,26 @@
       * { scroll-behavior: auto !important; }
     }
   </style>
+  <link rel="stylesheet" href="css/presentation.css?v=20260721-presentation-layout10">
 </head>
-<body>
-  <header class="site-header">
-    <div class="site-header__inner">
-      <a class="brand" href="https://www.outfinity.ch" aria-label="Visit the Outfinity website"><img src="assets/outfinity.svg" alt="" width="54" height="54"><span>Outfinity</span></a>
-      <span class="private-label">Private proposal · Share only with relevant parties</span>
-    </div>
-  </header>
+<body class="presentation-page">
+  <nav id="nav" aria-label="Primary navigation"></nav>
 
-  <nav class="contents" aria-label="Proposal sections">
+  <nav class="contents" data-presentation-controls="capital-presentation" aria-label="Presentation controls">
     <div class="contents__inner">
-      <a class="contents__label" id="menu-start" href="#start">Start</a>
-      <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Open presentation menu" aria-expanded="false" aria-controls="proposal-menu"><span></span><span></span><span></span></button>
-      <div class="contents__links" id="proposal-menu">
-        <a href="#partnership">Partnership</a><a href="#investor-service">Investor service</a><a href="#about">Outfinity VS</a><a href="#partner-profile">Partner profile</a><a href="#proposal">Proposal</a><a href="#investment-process">Investment process</a><a href="#co-founding">Co-founding path</a><a href="#ownership">Ownership</a><a href="#next-step">Next step</a>
-      </div>
+      <div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-7 9 7v9H3zM9 20v-6h6v6"/></svg></button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button></div>
+      <div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 10</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div>
+      <div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div>
     </div>
   </nav>
 
-  <div class="deck-controls" aria-label="Presentation controls">
-    <span class="deck-counter" id="deck-counter" aria-live="polite">Start</span><button class="deck-button" id="deck-start" type="button" aria-label="Return to start">Start</button><button class="deck-button" id="deck-back" type="button" aria-label="Previous slide">← Back</button><button class="deck-button deck-button--next" id="deck-next" type="button" aria-label="Next slide">Next →</button><button class="deck-button fullscreen-button" id="deck-fullscreen" type="button" aria-label="Enter full screen">⛶</button>
-  </div>
-
   <div class="deck-viewport" id="deck-viewport">
-    <div class="deck-canvas" id="deck-canvas">
+    <outfinity-presentation class="deck-canvas" id="capital-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="outfinity-capital-overview.html" data-view-more-label="View Article …">
       <svg width="0" height="0" aria-hidden="true"><defs>
         <marker id="arrow-teal" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L8,4.5 L0,8 z" fill="#00cfc8"/></marker>
         <marker id="arrow-gold" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,1 L8,4.5 L0,8 z" fill="#ffc928"/></marker>
       </defs></svg>
+      <p class="presentation-context">Private proposal · Share only with relevant parties</p>
 
       <section class="deck-slide cover is-active" id="start" data-slide="0" aria-labelledby="cover-title">
         <div class="cover__content"><p class="cover__eyebrow">A Founding Partnership</p><h1 id="cover-title">Co-found <span>Outfinity Capital</span></h1><p class="cover__lead">Technologies backed by more than €10 million in cumulative research investment are ready for the next stage: investable ventures built in partnership with Outfinity Venture Studio.</p><hr class="cover__rule"></div>
@@ -1489,19 +1481,23 @@
         <p class="click-hint">Click any element for details</p>
       </section>
 
-      <button class="edge-nav edge-nav--back" id="edge-back" type="button" aria-label="Previous slide">
+      <section class="deck-slide presentation-contact-slide" id="contact" aria-labelledby="capital-contact-title">
+        <header class="slide-header"><span class="slide-number">Contact</span><div class="slide-title"><h2 id="capital-contact-title">Start with a focused conversation</h2><p>Bring a relevant capability, investor perspective, research base or venture question. Outfinity routes the discussion toward the most useful next step.</p><a class="presentation-contact-link" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Open contact form</a></div></header>
+      </section>
+
+      <button class="edge-nav edge-nav--back" id="edge-back" data-presentation-edge-back type="button" aria-label="Previous slide">
         <svg viewBox="0 0 58 58" aria-hidden="true"><path d="M31 17 L19 29 L31 41 M20 29 H41"/></svg>
       </button>
-      <button class="edge-nav edge-nav--next" id="edge-next" type="button" aria-label="Next slide">
+      <button class="edge-nav edge-nav--next" id="edge-next" data-presentation-edge-next type="button" aria-label="Next slide">
         <svg viewBox="0 0 58 58" aria-hidden="true"><path d="M27 17 L39 29 L27 41 M38 29 H17"/></svg>
       </button>
 
-      <a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a>
+      <div class="presentation-footer"><a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a></div>
 
       <div class="detail-overlay" id="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-copy">
         <div class="detail-panel"><button class="detail-close" id="detail-close" type="button" aria-label="Close detail">×</button><p class="detail-panel__eyebrow">Context</p><h3 id="detail-title"></h3><p id="detail-copy"></p></div>
       </div>
-    </div>
+    </outfinity-presentation>
   </div>
 
   <div class="viewport-warning" id="viewport-warning" role="dialog" aria-modal="true" aria-labelledby="viewport-warning-title" aria-describedby="viewport-warning-copy" aria-hidden="true" hidden>
@@ -1516,6 +1512,7 @@
 
   <script>
     (() => {
+      if (document.documentElement.dataset.presentationShell === 'shared') return;
       const viewport = document.getElementById('deck-viewport');
       const canvas = document.getElementById('deck-canvas');
       const slides = [...document.querySelectorAll('.deck-slide')];
@@ -1678,5 +1675,7 @@
       window.setTimeout(updateViewportWarning, 220);
     })();
   </script>
+  <script src="js/nav.js"></script>
+  <script src="js/presentation.js?v=20260721-presentation-layout10"></script>
 </body>
 </html>

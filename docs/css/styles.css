@@ -22,6 +22,16 @@
     --editorial: min(100% - 3rem, 920px);
 }
 
+@media (max-width: 720px) {
+    .arena-action-zone--home > .arena-video-toggle,
+    .arena-action-zone--home > .arena-full-presentation {
+        width: auto;
+        min-width: 0;
+        max-width: none;
+        flex: 1 1 0;
+    }
+}
+
 body:not(.arena-page) {
     --site-teal: #00cfc8;
     --site-teal-dark: #007c78;
@@ -2574,6 +2584,36 @@ body.legal-page .footer {
     white-space: nowrap;
 }
 
+.arena-full-presentation {
+    order: 202;
+    flex: 0 0 auto;
+    gap: 0.48rem;
+    min-width: 166px;
+    border-color: rgba(84, 231, 226, 0.5);
+    background: rgba(84, 231, 226, 0.08);
+    color: var(--arena-signal);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.arena-full-presentation:hover,
+.arena-full-presentation:focus-visible {
+    border-color: var(--arena-signal);
+    background: rgba(84, 231, 226, 0.15);
+}
+
+/* On the home slide, the three destination actions align with the mini-deck above. */
+.arena-action-zone--home {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.arena-action-zone--home > .arena-video-toggle,
+.arena-action-zone--home > .arena-full-presentation {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
 .arena-video-toggle:hover,
 .arena-video-toggle:focus-visible {
     border-color: var(--arena-gold);
@@ -3947,8 +3987,19 @@ a.arena-radar-node:focus-visible {
         gap: 0;
     }
 
-    .arena-video-toggle span {
+    .arena-video-toggle span,
+    .arena-full-presentation span {
         display: none;
+    }
+
+    .arena-full-presentation {
+        width: 34px;
+        min-width: 34px;
+        max-width: 34px;
+        min-height: 34px;
+        padding: 0.38rem 0.5rem;
+        flex: 0 0 34px;
+        gap: 0;
     }
 }
 
@@ -4157,6 +4208,7 @@ a.arena-radar-node:focus-visible {
     .arena-control,
     .arena-tower-link,
     .arena-video-toggle,
+    .arena-full-presentation,
     .arena-choice-action {
         min-height: 30px;
         padding-top: 0.28rem;
@@ -4197,7 +4249,8 @@ a.arena-radar-node:focus-visible {
 
     .arena-icon-only,
     .arena-action-zone > .arena-icon-only,
-    .arena-video-toggle {
+    .arena-video-toggle,
+    .arena-full-presentation {
         width: 36px;
         min-width: 36px;
         max-width: 36px;

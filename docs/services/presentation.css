@@ -1,0 +1,73 @@
+:root{--ink:#0d1111;--green:#062e2d;--teal:#00cfc8;--gold:#ffc928;--paper:#f7f9f9;--muted:#aab8b7;--deck-width:1600px;--deck-height:900px;font-family:ui-sans-serif,system-ui,-apple-system,sans-serif}*{box-sizing:border-box;margin:0;padding:0}button,a{font:inherit}.deck-canvas{position:absolute;top:50%;left:50%;width:var(--deck-width);height:var(--deck-height);overflow:hidden;transform:translate(-50%,-50%) scale(var(--deck-scale,1));transform-origin:center;background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink);background-size:80px 80px,80px 80px,auto,auto}.deck-slide{position:absolute;inset:0;display:none;overflow:hidden}.deck-slide.is-active{display:block;animation:slide-enter .26s ease both}@keyframes slide-enter{from{transform:translateX(22px)}to{transform:translateX(0)}}.slide-header{position:absolute;top:62px;left:110px;right:110px;z-index:4}.slide-title h2{max-width:1250px;font-size:52px;line-height:1.05;letter-spacing:-.045em}.slide-title p{max-width:1220px;margin-top:12px;color:var(--muted);font-size:20px;line-height:1.42}.diagram{position:absolute;top:220px;left:90px;width:1420px;height:530px}.diagram-lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}.diagram-line{fill:none;stroke:rgba(0,207,200,.58);stroke-width:3}.diagram-line--gold{stroke:rgba(255,201,40,.72)}.visual-node{position:absolute;z-index:2;border:2px solid rgba(0,207,200,.48);border-radius:10px;background:rgba(13,25,25,.96);color:var(--paper);text-align:left;cursor:pointer;transition:.16s}.visual-node:hover,.visual-node:focus-visible{border-color:var(--teal);background:var(--green);transform:translateY(-3px);outline:none}.visual-node__tag{display:block;margin-bottom:8px;color:var(--teal);font-size:13px;font-weight:900;letter-spacing:.11em;text-transform:uppercase}.visual-node__title{display:block;font-size:25px;font-weight:850;line-height:1.15;letter-spacing:-.025em}.visual-node__text{display:block;margin-top:10px;color:var(--muted);font-size:15.5px;line-height:1.38}.node-box{padding:24px 26px}.node-circle{display:grid;place-content:center;padding:34px;border-radius:50%;text-align:center}.node-pill{display:flex;align-items:center;justify-content:center;padding:20px 30px;border-radius:999px;text-align:center}.partnership-studio{left:10px;top:115px;width:390px;height:285px}.partnership-partner{left:535px;top:8px;width:350px;height:145px;border-color:rgba(247,249,249,.42)}.partnership-capital{left:520px;top:175px;width:380px;height:245px;border-color:var(--gold);border-width:3px;box-shadow:0 0 0 12px rgba(255,201,40,.035),0 24px 65px rgba(0,0,0,.3)}.partnership-capital .visual-node__tag{color:var(--gold)}.partnership-investors{left:1020px;top:115px;width:390px;height:285px;border-color:var(--gold)}.partnership-service{left:415px;top:455px;width:590px;height:72px}.source-list,.investor-list{display:grid;gap:9px;margin-top:16px;color:var(--muted);font-size:15px}.source-list span::before,.investor-list span::before{content:"→";margin-right:9px;color:var(--teal)}.investor-list span::before{color:var(--gold)}.edge-nav{position:absolute;top:50%;z-index:15;width:58px;height:78px;display:grid;place-items:center;transform:translateY(-50%);border:0;border-radius:999px;background:rgba(6,46,45,.82);color:var(--teal);cursor:pointer}.edge-nav--back{left:20px}.edge-nav--next{right:20px}.edge-nav svg{width:34px;height:34px}.edge-nav path{fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round}.edge-nav:disabled{visibility:hidden;pointer-events:none}.deck-credit{color:rgba(247,249,249,.58);font-size:13.5px;font-weight:740;text-decoration:none}.deck-credit span{color:var(--teal)}.contact-card{position:absolute;top:230px;left:365px;width:690px;padding:42px 52px;border:2px solid rgba(0,207,200,.5);border-radius:18px;background:rgba(13,25,25,.96);text-align:center}.contact-card p{margin-top:18px;color:var(--muted);font-size:21px;line-height:1.5}.contact-card a{display:inline-flex;margin-top:28px;padding:14px 22px;border-radius:999px;background:var(--teal);color:var(--ink);font-weight:900;text-decoration:none}.explore-grid{position:absolute;top:225px;left:145px;right:145px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.explore-card{min-height:150px;padding:25px;border:1px solid rgba(0,207,200,.4);border-radius:12px;background:rgba(13,25,25,.96);color:var(--paper);text-decoration:none}.explore-card:hover{border-color:var(--gold);transform:translateY(-3px)}.explore-card span,.explore-card b{display:block;color:var(--teal);font-size:12px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.explore-card strong{display:block;margin:10px 0 20px;font-size:24px;line-height:1.12}.explore-card b{color:var(--gold);font-size:11px}@media(max-width:900px){.deck-canvas{position:relative;top:auto;left:auto;width:100%;height:100%;transform:none!important;background-size:48px 48px,48px 48px,auto,auto}.deck-slide.is-active:not(.cover){padding:22px 40px 82px;overflow-y:auto}.slide-header{position:relative;top:auto;left:auto;right:auto}.slide-title h2{font-size:clamp(27px,7vw,38px);white-space:normal}.slide-title p{font-size:14px}.diagram{position:relative;top:auto;left:auto;width:100%;height:520px;margin-top:25px}.visual-node{transform:scale(.72);transform-origin:top left}.partnership-studio{left:0}.partnership-partner{left:39%}.partnership-capital{left:37%;top:160px}.partnership-investors{left:61%}.partnership-service{left:29%;top:415px}.contact-card{position:relative;top:auto;left:auto;width:auto;margin:70px auto 0;padding:30px}.explore-grid{position:relative;top:auto;left:auto;right:auto;margin-top:38px;grid-template-columns:1fr}.cover__content{left:48px;width:54%}.cover h1{font-size:clamp(42px,7vw,72px)}.cover__visual{right:24px;transform:scale(.78);transform-origin:right center}}@media(max-width:600px){.deck-slide.is-active:not(.cover){padding:20px 22px 76px}.diagram{height:610px;transform:scale(.78);transform-origin:top left;width:128%}.cover__content{top:54%;left:24px;width:calc(100% - 48px);transform:translateY(-50%)}.cover h1{font-size:42px}.cover__lead{max-width:62%;margin-top:18px;font-size:15px}.cover__visual{top:90px;right:-108px;transform:scale(.55)}.contact-card{margin-top:32px;padding:25px}.contact-card p{font-size:16px}.explore-card{min-height:110px}.edge-nav{width:40px;height:54px}.edge-nav--back{left:5px}.edge-nav--next{right:5px}}
+
+    .cover__content {
+      position: absolute;
+      top: 50%;
+      left: 120px;
+      z-index: 2;
+      width: 830px;
+      transform: translateY(-52%);
+    }
+
+    .cover__eyebrow {
+      margin-bottom: 24px;
+      color: var(--teal);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .cover h1 {
+      font-size: 88px;
+      line-height: 0.98;
+      letter-spacing: -0.065em;
+      text-wrap: balance;
+    }
+
+    .cover h1 span { color: var(--teal); }
+    .cover__lead {
+      max-width: 720px;
+      margin-top: 38px;
+      color: #b9c3c2;
+      font-size: 24.5px;
+      line-height: 1.46;
+      font-style: italic;
+      text-align: justify;
+      text-align-last: left;
+    }
+
+    .cover__visual {
+      position: absolute;
+      top: 182px;
+      right: 105px;
+      z-index: 1;
+      width: 495px;
+      height: 495px;
+      filter: drop-shadow(0 24px 52px rgba(0, 0, 0, 0.28));
+      animation: cover-float 10s ease-in-out infinite;
+    }
+
+    .cover__rule { width: 130px; height: 6px; margin-top: 42px; border: 0; border-radius: 5px; background: linear-gradient(90deg, var(--gold), var(--teal)); }
+
+    /* Diagram-specific visual language */
+
+    /* Layout only: the animated SVG itself belongs to the shared
+       <outfinity-cover> component in ../js/presentation.js. */
+    @media (max-width: 900px) {
+      .cover__content { left: 48px; width: 54%; }
+      .cover h1 { font-size: clamp(42px, 7vw, 72px); }
+      .cover__visual { right: 24px; transform: scale(.78); transform-origin: right center; }
+    }
+
+    @media (max-width: 600px) {
+      .cover__content {
+        top: 54%;
+        left: 24px;
+        width: calc(100% - 48px);
+        transform: translateY(-50%);
+      }
+      .cover h1 { font-size: 42px; }
+      .cover__lead { max-width: 62%; margin-top: 18px; font-size: 15px; }
+      .cover__visual { top: 90px; right: -108px; transform: scale(.55); }
+    }

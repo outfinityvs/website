@@ -32,7 +32,7 @@
       subtitle: [
         "Social legitimacy and early validation are now the scarce assets. Start the Quick Presentation for a concise Outfinity overview, watch the Video Pitch, then visit the classical site for deeper material, public research, and selected free books."
       ],
-      slideLink: { label: "AI ventures, built through structured collaboration.", href: "tower.html" },
+      slideLink: { label: "View Full presentation", href: "presentation.html" },
       graphic: {
         type: "gate",
         items: [
@@ -183,7 +183,7 @@
       tone: "neutral",
       headline: ["Venture Validation Studio"],
       subtitle: ["We test technical truth, market signal, rights, and formation risk before capital, teams, and public narratives commit—so investors can fund, investigate, reshape, or stop before the expensive phase."],
-      slideLink: { label: "AI ventures, built through structured collaboration.", href: "tower.html" },
+      slideLink: { label: "View Full presentation", href: "presentation.html" },
       graphic: {
         type: "formation",
         items: [
@@ -381,10 +381,12 @@
       }
       return '<button class="' + classes.join(" ") + '" type="button" data-next="' + escapeHtml(action.next) + '"' + (action.start ? ' data-start="true"' : "") + ">" + actionContent(action) + "</button>";
     }).join("") : "";
-    return '<div class="arena-action-zone" aria-label="Quick Presentation actions">' +
+    return '<div class="arena-action-zone' + (isHomeView ? ' arena-action-zone--home' : '') + '" aria-label="Quick Presentation actions">' +
       (isHomeView ? "" : '<div class="arena-presentation-controls" aria-label="Presentation navigation">' + back + forward + home + "</div>") +
       main +
       '<button class="arena-control arena-video-toggle" type="button" data-video-open aria-haspopup="dialog" title="Watch the video pitch">' + buttonIcon("video") + '<span>Video Pitch</span></button>' +
+      '<a class="arena-control arena-full-presentation" href="presentation.html" aria-label="Open the full presentation" title="Open the full presentation">' + buttonIcon("presentation") + '<span>Full Presentation</span></a>' +
+      '<a class="arena-control arena-full-presentation arena-books-link" href="cultural-artefacts.html" aria-label="Open our books" title="Open our books">' + buttonIcon("books") + '<span>Our Books</span></a>' +
       "</div>";
   }
 
@@ -417,6 +419,8 @@
       research: '<path d="M6 4h8l4 4v12H6z"></path><path d="M14 4v5h5"></path><path d="M9 14h6M9 17h4"></path>',
       process: '<path d="M5 12a7 7 0 0 1 12-5"></path><path d="M17 4v4h-4"></path><path d="M19 12a7 7 0 0 1-12 5"></path><path d="M7 20v-4h4"></path>',
       video: '<rect x="3" y="5" width="14" height="14" rx="2"></rect><path d="m17 10 4-2v8l-4-2z"></path><path d="m9 9 4 3-4 3z"></path>',
+      presentation: '<rect x="4" y="4" width="16" height="16" rx="2"></rect><path d="M8 9h8M8 13h5"></path><path d="m14 16 3 0"></path>',
+      books: '<path d="M4 5.5c2.6-.9 5.2-.5 8 1.1v12c-2.8-1.6-5.4-2-8-1.1z"></path><path d="M20 5.5c-2.6-.9-5.2-.5-8 1.1v12c2.8-1.6 5.4-2 8-1.1z"></path><path d="M12 6.6v12"></path>',
       details: '<path d="M6 7h12M6 12h12M6 17h8"></path>'
     };
     return '<svg class="arena-button-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">' + (icons[name] || icons.details) + "</svg>";
@@ -844,7 +848,7 @@
     var link = event.target.closest("a[data-intent]");
     if (!link) return;
     var intent = link.getAttribute("data-intent") || "";
-    if (intent === "tower") track("tower_clicked", { intent: intent });
+    if (intent === "presentation") track("presentation_clicked", { intent: intent });
   });
 
   var audioContext = null;

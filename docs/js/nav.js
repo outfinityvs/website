@@ -153,7 +153,7 @@
   var logoSrc = getRelativePath("assets/outfinity.svg");
   var currentPath = getPagePath();
   var homeCurrent = currentPath === "" || currentPath === "index.html" ? " current" : "";
-  var towerCurrent = currentPath === "tower.html" ? " current" : "";
+  var presentationCurrent = currentPath === "presentation.html" ? " current" : "";
 
   var navHtml =
     '<nav class="nav" aria-label="Primary navigation">' +
@@ -164,7 +164,7 @@
     "</a>" +
     '<ul class="menu-groups">' +
     '<li class="menu-direct-item"><a class="menu-direct' + homeCurrent + '" href="' + getRelativePath("/") + '">Home</a></li>' +
-    '<li class="menu-direct-item"><a class="menu-direct' + towerCurrent + '" href="' + getRelativePath("tower.html") + '">Tower</a></li>' +
+    '<li class="menu-direct-item"><a class="menu-direct' + presentationCurrent + '" href="' + getRelativePath("presentation.html") + '">Presentation</a></li>' +
     '<li class="menu-group menu-group--studio' + s + '">' +
     '<button class="menu-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="menu-panel-studio">Studio</button>' +
     '<div class="menu-layer"><div class="menu-panel" id="menu-panel-studio" aria-label="Studio submenu">' +
@@ -302,4 +302,21 @@
       setOpenGroup(null);
     }
   });
+
+  var conventionalExceptions = ["legal-disclaimer.html", "privacy-policy.html", "imprint.html"];
+  var isEmbeddedArticleSource = currentPath.indexOf("/articles/") !== -1;
+  if (document.querySelector("main.page-main") && !document.body.classList.contains("presentation-page") && conventionalExceptions.indexOf(currentPath) === -1 && !isEmbeddedArticleSource) {
+    var presentationCss = document.createElement("link");
+    presentationCss.rel = "stylesheet";
+    presentationCss.href = getRelativePath("css/presentation.css?v=20260721-presentation-layout10");
+    document.head.appendChild(presentationCss);
+    var componentScript = document.createElement("script");
+    componentScript.src = getRelativePath("js/presentation.js?v=20260721-presentation-layout10");
+    componentScript.onload = function () {
+      var adapterScript = document.createElement("script");
+      adapterScript.src = getRelativePath("js/legacy-presentation.js?v=20260721-presentation-layout10");
+      document.body.appendChild(adapterScript);
+    };
+    document.body.appendChild(componentScript);
+  }
 })();
