@@ -30,7 +30,7 @@
       tone: "neutral",
       headline: ["AI Builds Fast"],
       subtitle: [
-        "Social legitimacy and early validation are now the scarce assets. Start the Quick Presentation for a concise Outfinity overview, watch the Video Pitch, then visit the classical site for deeper material, public research, and selected free books."
+        "Social legitimacy and early validation are now the scarce assets. Start the Quick Presentation for a concise Outfinity overview, watch the Video Pitch, then view the Full Presentation and all other article presentations."
       ],
       slideLink: { label: "View Full presentation", href: "presentation.html" },
       graphic: {
@@ -261,6 +261,7 @@
 
   function renderSlideContent(view) {
     var html = "";
+    html += '<p class="arena-slide-eyebrow">Outfinity Venture Studio</p>';
     html += renderHeadline(view.headline);
     html += renderLines(view.subtitle, "arena-subtitle");
     if (view.between) html += renderLines(view.between, "arena-between");
@@ -285,7 +286,7 @@
     var roleActions = view.choices ? renderMiniChoiceActions(view) : "";
     return '<section class="arena-mini-deck" aria-label="Presentation slide ' + String(currentIndex + 1) + ' of ' + String(presentationOrder.length) + '">' +
       '<div class="arena-mini-deck__header"><span>' + escapeHtml(slide.kicker) + '</span><span class="arena-mini-deck__count">' + String(currentIndex + 1).padStart(2, "0") + ' / ' + String(presentationOrder.length).padStart(2, "0") + '</span></div>' +
-      '<article class="arena-mini-slide"><div class="arena-mini-slide__copy">' + renderSlideContent(view) + roleActions + '</div>' + renderMiniDiagram(slide) + '</article>' +
+      '<article class="arena-mini-slide"><div class="arena-mini-slide__copy">' + renderSlideContent(view) + roleActions + '</div>' + renderMiniDiagram(slide, view) + '</article>' +
       '<button type="button" class="arena-mini-deck__arrow arena-mini-deck__arrow--back" data-slide-view="' + previous + '" aria-label="Previous presentation slide"' + (previous ? "" : " disabled") + '>‹</button>' +
       '<button type="button" class="arena-mini-deck__arrow arena-mini-deck__arrow--next" data-slide-view="' + next + '" aria-label="Next presentation slide"' + (next ? "" : " disabled") + '>›</button>' +
       '<nav class="arena-mini-deck__controls" aria-label="Presentation navigation">' +
@@ -318,7 +319,13 @@
     }).join("") + '</div>';
   }
 
-  function renderMiniDiagram(slide) {
+  function renderMiniDiagram(slide, view) {
+    // On larger screens the live radar becomes the slide's visual, rather than
+    // being a second, competing element beside it. The standalone version is
+    // retained for the compact tablet and phone layouts.
+    if (view && view.graphic) {
+      return '<div class="arena-mini-diagram arena-mini-diagram--radar" aria-label="Interactive venture radar">' + renderRadar(view, view.graphic) + '</div>';
+    }
     if (slide && slide.stages) {
       return '<div class="arena-mini-diagram arena-mini-diagram--progress-ladder arena-mini-diagram--progress-' + escapeHtml(slide.accent || "cyan") + '" aria-hidden="true">' + slide.stages.map(function (stage) {
         return '<span><b>' + escapeHtml(stage) + '</b><i></i></span>';
@@ -760,10 +767,20 @@
     render();
   }
 
-  document.addEventListener("click", function (event) {
+  // iOS Safari requires Web Audio to be created and started directly from a
+  // touch gesture. `click` can arrive too late there, so use pointer/touch
+  // input as the primary unlock and retain click as the keyboard fallback.
+  function unlockSoundFromEvent(event) {
     if (event.target.closest("[data-sound-toggle]")) return;
     enableSoundFromInteraction();
-  }, true);
+  }
+
+  if (window.PointerEvent) {
+    document.addEventListener("pointerdown", unlockSoundFromEvent, true);
+  } else {
+    document.addEventListener("touchstart", unlockSoundFromEvent, { capture: true, passive: true });
+  }
+  document.addEventListener("click", unlockSoundFromEvent, true);
 
   host.addEventListener("click", function (event) {
     var slideNavigation = event.target.closest("[data-slide-view]");
@@ -853,6 +870,7 @@
 
   var audioContext = null;
   var masterGain = null;
+  var audioUnlocked = false;
   var radarFrameId = 0;
   var radarLastFrameTime = 0;
   var radarLastAngle = null;
@@ -961,12 +979,27 @@
       masterGain.gain.value = 0.48;
       masterGain.connect(audioContext.destination);
     }
-    var ready = audioContext.state === "suspended" ? audioContext.resume() : Promise.resolve();
+    unlockAudioContext();
+    var needsResume = audioContext.state === "suspended" || audioContext.state === "interrupted";
+    var ready = needsResume ? audioContext.resume() : Promise.resolve();
     return ready.then(function () {
       return !!audioContext && audioContext.state === "running";
     }).catch(function () {
       return false;
     });
+  }
+
+  function unlockAudioContext() {
+    if (audioUnlocked || !audioContext || !masterGain) return;
+    // A zero-length buffer source is intentionally started in the user gesture.
+    // This unlocks iOS Safari's Web Audio output without producing a sound.
+    try {
+      var source = audioContext.createBufferSource();
+      source.buffer = audioContext.createBuffer(1, 1, audioContext.sampleRate);
+      source.connect(masterGain);
+      source.start(0);
+      audioUnlocked = true;
+    } catch (error) {}
   }
 
   function prepareAudioForInteraction() {
@@ -993,8 +1026,10 @@
   function startRadarSweep(token) {
     stopRadarSweep();
     if (state.reducedMotion) return;
-    var sweep = host.querySelector(".arena-radar-sweep");
-    var radar = host.querySelector(".arena-radar");
+    var radar = Array.from(host.querySelectorAll(".arena-radar")).find(function (candidate) {
+      return candidate.offsetWidth > 0 && candidate.offsetHeight > 0;
+    });
+    var sweep = radar && radar.querySelector(".arena-radar-sweep");
     if (!sweep || !radar) return;
     var startTime = performance.now();
     radarLastAngle = null;
@@ -1006,7 +1041,7 @@
         return;
       }
       radarLastFrameTime = now;
-      var nodes = Array.from(host.querySelectorAll(".arena-radar-node"));
+      var nodes = Array.from(radar.querySelectorAll(".arena-radar-node"));
       if (!nodes.length) return;
       var elapsed = (now - startTime) % radarCycleMs;
       var centerAngle = normalizeAngle((elapsed / radarCycleMs) * Math.PI * 2);

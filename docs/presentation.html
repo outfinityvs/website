@@ -6,7 +6,7 @@
   <title>Presentation | Outfinity</title>
   <meta name="description" content="A visual presentation of Outfinity's research, venture validation, company formation and investor participation model.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/styles.css?v=20260721-mobile-tablet-layout">
+  <link rel="stylesheet" href="css/styles.css?v=20260721-uniform-shell">
   <style>
     :root {
       --ink: #0d1111;
@@ -32,7 +32,7 @@
     body {
       min-width: 320px;
       display: grid;
-      grid-template-rows: 72px auto 56px minmax(0, 1fr);
+      grid-template-rows: 78px auto minmax(0, 1fr) auto;
       background: var(--ink);
       color: var(--paper);
       font-family: var(--font);
@@ -59,7 +59,7 @@
       justify-content: space-between;
     }
 
-    .brand {
+    .site-header .brand {
       display: inline-flex;
       align-items: center;
       gap: 0.7rem;
@@ -70,9 +70,9 @@
       text-decoration: none;
     }
 
-    .brand img { width: 54px; height: auto; display: block; }
+    .site-header .brand img { width: 54px; height: auto; display: block; }
 
-    .private-label {
+    .site-header .private-label {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
@@ -83,7 +83,7 @@
       text-transform: uppercase;
     }
 
-    .private-label::before {
+    .site-header .private-label::before {
       content: "";
       width: 7px;
       height: 7px;
@@ -168,7 +168,7 @@
 
     .deck-viewport {
       position: relative;
-      grid-row: 4;
+      grid-row: 3;
       min-height: 0;
       overflow: hidden;
       background:
@@ -904,12 +904,12 @@
     .fullscreen-button { min-width: 46px; width: 46px; padding: 0; font-size: 18px; }
 
     @media (max-width: 1100px), (max-aspect-ratio: 4 / 5), (max-height: 650px) {
-      body { height: 100dvh; grid-template-rows: 56px 44px 40px minmax(0, 1fr); }
+      body { height: 100dvh; grid-template-rows: 78px 44px minmax(0, 1fr) auto; }
 
       .site-header__inner { width: calc(100% - 1.5rem); }
-      .brand { gap: .5rem; font-size: 1rem; }
-      .brand img { width: 40px; }
-      .private-label { font-size: .54rem; letter-spacing: .08em; }
+      .site-header .brand { gap: .5rem; font-size: 1rem; }
+      .site-header .brand img { width: 40px; }
+      .site-header .private-label { font-size: .54rem; letter-spacing: .08em; }
 
       .contents { position: relative; min-width: 0; }
       .contents.is-open { z-index: 120; }
@@ -1180,14 +1180,22 @@
     }
 
     @media (max-width: 560px) {
-      .private-label { display: none; }
+      .site-header .private-label { display: none; }
       .viewport-warning__panel { padding-inline: clamp(16px, 6vw, 24px); }
     }
 
+    @media (min-width: 721px) and (max-width: 920px) {
+      body { grid-template-rows: 132px 44px minmax(0, 1fr) auto; }
+    }
+
+    @media (max-width: 720px) {
+      body { grid-template-rows: 70px 44px minmax(0, 1fr) auto; }
+    }
+
     @media (max-height: 600px) and (orientation: landscape) {
-      body { grid-template-rows: 48px 40px 36px minmax(0, 1fr); }
+      body { grid-template-rows: 70px 40px minmax(0, 1fr) auto; }
       .site-header__inner { width: calc(100% - 1.25rem); }
-      .brand img { width: 34px; }
+      .site-header .brand img { width: 34px; }
       .contents__inner { height: 40px; min-height: 40px; }
       .contents__links { top: 40px; }
       .deck-controls { height: 36px; padding-block: 2px; }
@@ -1488,13 +1496,18 @@
         <svg viewBox="0 0 58 58" aria-hidden="true"><path d="M27 17 L39 29 L27 41 M38 29 H17"/></svg>
       </button>
 
-      <div class="presentation-footer"><a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a></div>
-
       <div class="detail-overlay" id="detail-overlay" role="dialog" aria-modal="true" aria-labelledby="detail-title" aria-describedby="detail-copy">
         <div class="detail-panel"><button class="detail-close" id="detail-close" type="button" aria-label="Close detail">×</button><p class="detail-panel__eyebrow">Context</p><h3 id="detail-title"></h3><p id="detail-copy"></p></div>
       </div>
     </outfinity-presentation>
   </div>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p>
+      <div class="footer-links"><a href="legal-disclaimer.html">Legal Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="imprint.html">Imprint</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></div>
+    </div>
+  </footer>
 
   <div class="viewport-warning" id="viewport-warning" role="dialog" aria-modal="true" aria-labelledby="viewport-warning-title" aria-describedby="viewport-warning-copy" aria-hidden="true" hidden>
     <div class="viewport-warning__panel">
