@@ -8,7 +8,7 @@
   <title>Cultural Artefacts | Outfinity</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="css/styles.css?v=20260721-mobile-tablet-layout">
-  <link rel="stylesheet" href="css/presentation.css?v=20260721-presentation-layout10">
+  <link rel="stylesheet" href="css/presentation.css?v=20260721-navigation-scale">
   <style>
     :root { --ink:#0d1111; --ink-2:#111919; --green:#062e2d; --teal:#00cfc8; --gold:#ffc928; --paper:#f7f9f9; --muted:#aab8b7; }
     .cultural-deck { position:absolute; top:50%; left:50%; width:1600px; height:900px; overflow:hidden; transform:translate(-50%,-50%) scale(var(--deck-scale,1)); transform-origin:center; background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink); background-size:80px 80px,80px 80px,auto,auto; }
@@ -44,6 +44,7 @@
     @media (max-width: 900px) {
       .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) {
         display: grid;
+        grid-template-areas: "header" "books";
         grid-template-rows: auto minmax(0, 1fr);
         height: calc(100dvh - 120px);
         min-height: 0;
@@ -51,11 +52,14 @@
         overflow: hidden;
       }
 
+      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .slide-header { grid-area: header; }
+
       .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid,
       .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--two,
       .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--three,
       .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--one {
         position: relative;
+        grid-area: books;
         top: auto;
         left: auto;
         width: 100%;
@@ -70,8 +74,7 @@
         overscroll-behavior: contain;
         -webkit-overflow-scrolling: touch;
         touch-action: pan-y;
-        scrollbar-width: thin;
-        scrollbar-color: rgba(0, 207, 200, 0.54) transparent;
+        scrollbar-width: none;
       }
 
       .cultural-deck .book-card {
@@ -83,6 +86,57 @@
       .cultural-deck .book-card h3 { font-size: 17px; }
       .cultural-deck .book-card p { font-size: 11.5px; }
       .cultural-deck .book-card__actions { padding-top: 9px; }
+
+      .cultural-deck .book-grid { scroll-snap-type: y proximity; scroll-padding-block: 4px 12px; }
+      .cultural-deck .book-grid::-webkit-scrollbar { display: none; }
+      .cultural-deck .book-card { scroll-snap-align: start; }
+      .cultural-deck .book-carousel-tail {
+        grid-column: 1;
+        width: 1px;
+        min-height: 0;
+        height: 0;
+        pointer-events: none;
+        scroll-snap-align: none;
+      }
+
+      .cultural-deck .book-carousel-controls {
+        position: relative;
+        grid-area: books;
+        align-self: start;
+        justify-self: end;
+        margin: 10px 0 0;
+        z-index: 14;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 4px;
+        border: 1px solid rgba(0, 207, 200, .58);
+        border-radius: 999px;
+        background: rgba(6, 46, 45, .96);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, .42);
+      }
+
+      .cultural-deck .book-carousel-controls[hidden] { display: none; }
+      .cultural-deck .book-carousel-control {
+        width: 34px;
+        height: 28px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--teal);
+        font: 800 20px/1 system-ui, sans-serif;
+        cursor: pointer;
+      }
+
+      .cultural-deck .book-carousel-control:not(:disabled):hover,
+      .cultural-deck .book-carousel-control:not(:disabled):focus-visible {
+        background: rgba(0, 207, 200, .15);
+        color: var(--paper);
+        outline: none;
+      }
+
+      .cultural-deck .book-carousel-control:disabled { opacity: .3; cursor: default; }
+      .cultural-deck .book-carousel-control:not(:disabled) { background: rgba(0, 207, 200, .1); }
     }
 
     @media (max-width: 900px) and (max-height: 720px) {
@@ -128,7 +182,7 @@
     <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button><button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide">›</button><div class="presentation-footer"><a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a></div>
   </outfinity-presentation></main>
   <script>document.getElementById('overview').after(document.getElementById('social-technologies'));</script>
-  <script src="js/nav.js"></script><script src="js/presentation.js?v=20260721-presentation-layout10"></script>
+  <script src="js/nav.js"></script><script src="js/presentation.js?v=20260721-navigation-scale"></script>
   <script>
     (() => {
       const available = new Set([
@@ -160,6 +214,92 @@
         control.replaceWith(pdfLink);
         actions.querySelectorAll('a[download]').forEach(link => link.remove());
       });
+    })();
+  </script>
+  <script>
+    (() => {
+      const mobile = window.matchMedia('(max-width: 900px)');
+      const deck = document.getElementById('cultural-presentation');
+      if (!deck) return;
+
+      const refreshAll = () => {
+        deck.querySelectorAll('.book-carousel-controls').forEach(controls => controls.refresh());
+      };
+
+      deck.querySelectorAll('.deck-slide:not(.cover):not(.presentation-contact-slide)').forEach(slide => {
+        const grid = slide.querySelector('.book-grid');
+        if (!grid) return;
+
+        const controls = document.createElement('div');
+        controls.className = 'book-carousel-controls';
+        controls.setAttribute('role', 'group');
+        controls.setAttribute('aria-label', 'Book list navigation');
+        controls.innerHTML = '<button class="book-carousel-control" type="button" aria-label="Previous books">↑</button><button class="book-carousel-control" type="button" aria-label="More books">↓</button>';
+        const [up, down] = controls.querySelectorAll('button');
+        const tail = document.createElement('div');
+        tail.className = 'book-carousel-tail';
+        tail.setAttribute('aria-hidden', 'true');
+        grid.appendChild(tail);
+
+        const cards = () => Array.from(grid.querySelectorAll('.book-card'));
+        const updateTail = () => {
+          const last = cards().at(-1);
+          if (!last || !grid.clientHeight) return;
+          const styles = getComputedStyle(grid);
+          const gap = Number.parseFloat(styles.rowGap) || 0;
+          const trailingPadding = Number.parseFloat(styles.paddingBottom) || 0;
+          tail.style.height = Math.max(0, (grid.clientHeight - last.getBoundingClientRect().height) / 2 - gap - trailingPadding) + 'px';
+        };
+        const scrollTarget = card => {
+          const last = cards().at(-1);
+          if (card !== last) return card.offsetTop;
+          return Math.max(0, card.offsetTop - (grid.clientHeight - card.getBoundingClientRect().height) / 2);
+        };
+        const refresh = () => {
+          updateTail();
+          const overflow = grid.scrollHeight - grid.clientHeight > 4;
+          controls.hidden = !mobile.matches || !slide.classList.contains('is-active') || !overflow;
+          up.disabled = grid.scrollTop <= 1;
+          down.disabled = !overflow || grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 1;
+        };
+        const snapToCard = direction => {
+          const list = cards();
+          const current = grid.scrollTop;
+          const target = direction > 0
+            ? list.find(card => card.offsetTop > current + 8) || list.at(-1)
+            : list.filter(card => card.offsetTop < current - 8).pop() || list[0];
+          if (!target) return;
+          grid.scrollTo({
+            top: scrollTarget(target),
+            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
+          });
+          window.setTimeout(refresh, 240);
+        };
+        let touchStartY = null;
+
+        up.addEventListener('click', () => snapToCard(-1));
+        down.addEventListener('click', () => snapToCard(1));
+        grid.addEventListener('scroll', refresh, { passive: true });
+        grid.addEventListener('touchstart', event => { touchStartY = event.changedTouches[0].clientY; }, { passive: true });
+        grid.addEventListener('touchend', event => {
+          if (touchStartY === null) return;
+          const distance = touchStartY - event.changedTouches[0].clientY;
+          touchStartY = null;
+          if (Math.abs(distance) > 26) snapToCard(Math.sign(distance));
+        }, { passive: true });
+        controls.refresh = refresh;
+        slide.appendChild(controls);
+        refresh();
+      });
+
+      new MutationObserver(() => requestAnimationFrame(refreshAll)).observe(deck, {
+        attributes: true,
+        attributeFilter: ['class'],
+        subtree: true
+      });
+      mobile.addEventListener('change', refreshAll);
+      window.addEventListener('resize', refreshAll, { passive: true });
+      requestAnimationFrame(refreshAll);
     })();
   </script>
 </body>

@@ -308,13 +308,13 @@
   if (document.querySelector("main.page-main") && !document.body.classList.contains("presentation-page") && conventionalExceptions.indexOf(currentPath) === -1 && !isEmbeddedArticleSource) {
     var presentationCss = document.createElement("link");
     presentationCss.rel = "stylesheet";
-    presentationCss.href = getRelativePath("css/presentation.css?v=20260721-presentation-layout10");
+    presentationCss.href = getRelativePath("css/presentation.css?v=20260721-navigation-scale");
     document.head.appendChild(presentationCss);
     var componentScript = document.createElement("script");
-    componentScript.src = getRelativePath("js/presentation.js?v=20260721-presentation-layout10");
+    componentScript.src = getRelativePath("js/presentation.js?v=20260721-navigation-scale");
     componentScript.onload = function () {
       var adapterScript = document.createElement("script");
-      adapterScript.src = getRelativePath("js/legacy-presentation.js?v=20260721-presentation-layout10");
+      adapterScript.src = getRelativePath("js/legacy-presentation.js?v=20260721-navigation-scale");
       document.body.appendChild(adapterScript);
     };
     document.body.appendChild(componentScript);

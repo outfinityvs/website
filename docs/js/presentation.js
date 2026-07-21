@@ -4,7 +4,7 @@
      survive a deploy through the browser cache. */
   document.querySelectorAll('link[href*="css/presentation.css"]').forEach(function (link) {
     var href = new URL(link.getAttribute('href'), document.baseURI);
-    href.searchParams.set('v', '20260721-presentation-layout10');
+    href.searchParams.set('v', '20260721-navigation-scale');
     link.href = href.href;
   });
 
@@ -370,7 +370,7 @@
       if (this.next) this.next.disabled = this.current === this.slides.length - 1;
       if (this.edgeBack) this.edgeBack.disabled = this.current === 0;
       if (this.edgeNext) this.edgeNext.disabled = this.current === this.slides.length - 1;
-      if (this.count) this.count.textContent = String(this.current + 1).padStart(2, '0') + ' / ' + String(this.slides.length).padStart(2, '0');
+      if (this.count) this.count.textContent = String(this.current + 1).padStart(2, '0') + '/' + String(this.slides.length).padStart(2, '0');
       if (updateHash !== false && this.slides[this.current].id) history.replaceState(null, '', '#' + this.slides[this.current].id);
     }
 

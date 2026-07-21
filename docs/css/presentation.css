@@ -1,11 +1,13 @@
 /* Shared shell for Outfinity's long-form presentation pages. */
 body.presentation-page {
+  --presentation-nav-height: 82px;
+  --presentation-toolbar-height: 76px;
   min-width: 320px;
   min-height: 100dvh;
   display: block !important;
   overflow-x: hidden !important;
   overflow-y: auto !important;
-  padding-top: 82px;
+  padding-top: calc(var(--presentation-nav-height) + var(--presentation-toolbar-height));
   background: #0d1111;
 }
 
@@ -17,18 +19,21 @@ body.presentation-page {
 }
 
 .presentation-page .contents {
-  position: relative;
+  position: fixed;
+  top: var(--presentation-nav-height);
+  right: 0;
+  left: 0;
   z-index: 20;
-  height: 58px;
-  min-height: 58px;
+  height: 76px;
+  min-height: 76px;
   background: #062e2d;
   border-bottom: 1px solid rgba(0, 207, 200, .25);
 }
 
 .presentation-page .contents__inner {
   width: min(100% - 3rem, 1280px);
-  height: 58px;
-  min-height: 58px;
+  height: 76px;
+  min-height: 76px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
@@ -37,7 +42,7 @@ body.presentation-page {
 
 .presentation-page .deck-viewport {
   position: relative;
-  height: calc(100dvh - 140px);
+  height: calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height));
   min-height: 0;
   overflow: hidden;
 }
@@ -119,15 +124,17 @@ outfinity-presentation[data-animation="none"] *::after {
 }
 
 .presentation-page .deck-nav__button {
-  width: 36px;
-  height: 36px;
+  width: 64px;
+  height: 64px;
   display: grid;
   place-items: center;
   padding: 0;
-  border: 1px solid rgba(247,249,249,.22);
-  border-radius: 50%;
+  border: 0;
+  border-radius: 0;
   background: transparent;
   color: rgba(247,249,249,.86);
+  font-size: 2rem;
+  line-height: 1;
   cursor: pointer;
 }
 
@@ -143,8 +150,7 @@ outfinity-presentation[data-animation="none"] *::after {
 
 .presentation-page .deck-nav__button:hover,
 .presentation-page .deck-nav__button:focus-visible {
-  border-color: #ffc928;
-  background: rgba(255,201,40,.12);
+  background: transparent;
   color: #ffdc68;
   outline: none;
 }
@@ -152,23 +158,24 @@ outfinity-presentation[data-animation="none"] *::after {
 .presentation-page .deck-nav__button:disabled { opacity: .28; cursor: default; }
 
 .presentation-page .deck-nav__count {
-  min-width: 48px;
+  min-width: 78px;
   color: #ffc928;
-  font-size: .7rem;
+  font-size: 1.65rem;
   font-weight: 900;
-  letter-spacing: .1em;
+  letter-spacing: .06em;
   text-align: center;
+  white-space: nowrap;
 }
 
 .presentation-page .deck-nav__progress {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
 }
 
 .presentation-page .deck-nav__dot {
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -180,7 +187,7 @@ outfinity-presentation[data-animation="none"] *::after {
 .presentation-page .deck-nav__dot:hover,
 .presentation-page .deck-nav__dot:focus-visible,
 .presentation-page .deck-nav__dot.is-active {
-  width: 15px;
+  width: 20px;
   border-radius: 999px;
   background: #ffc928;
   outline: none;
@@ -438,26 +445,26 @@ outfinity-presentation[data-animation="none"] *::after {
 .presentation-contact-link { display: inline-flex; margin-top: 34px; padding: .9rem 1.35rem; border-radius: 999px; background: #ffc928; color: #18201f; font-weight: 900; text-decoration: none; }
 
 @media (max-width: 920px) {
-  body.presentation-page { padding-top: 132px; overflow-x: hidden !important; overflow-y: auto !important; }
-  .presentation-page .deck-viewport { height: calc(100dvh - 182px); }
+  body.presentation-page { --presentation-nav-height: 132px; --presentation-toolbar-height: 76px; overflow-x: hidden !important; overflow-y: auto !important; }
+  .presentation-page .deck-viewport { height: calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); }
   .presentation-page .contents__inner { width: min(100% - 1.6rem, 1180px); }
 }
 
 @media (max-width: 720px) {
-  body.presentation-page { padding-top: 70px; }
+  body.presentation-page { --presentation-nav-height: 70px; --presentation-toolbar-height: 64px; }
   .presentation-page .contents,
-  .presentation-page .contents__inner { height: 50px; min-height: 50px; }
+  .presentation-page .contents__inner { height: 64px; min-height: 64px; }
   .presentation-page .contents__inner { width: calc(100% - 1rem); }
-  .presentation-page .deck-viewport { height: calc(100dvh - 120px); }
-  .presentation-page .deck-nav__status { min-width: 150px; gap: .55rem; }
-  .presentation-page .deck-nav__button { width: 31px; height: 31px; }
+  .presentation-page .deck-viewport { height: calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); }
+  .presentation-page .deck-nav__status { min-width: 132px; gap: .25rem; }
+  .presentation-page .deck-nav__button { width: 56px; height: 56px; font-size: 1.85rem; }
   .presentation-page .deck-nav__button svg { width: 15px; height: 15px; }
-  .presentation-page .deck-nav__count { min-width: 39px; font-size: .6rem; }
+  .presentation-page .deck-nav__count { min-width: 65px; font-size: 1.55rem; }
   .presentation-page .deck-nav__progress { gap: 3px; }
-  .presentation-page .deck-nav__dot { width: 5px; height: 5px; }
+  .presentation-page .deck-nav__dot { width: 6px; height: 6px; }
   .presentation-page .deck-nav__dot:hover,
   .presentation-page .deck-nav__dot:focus-visible,
-  .presentation-page .deck-nav__dot.is-active { width: 10px; }
+  .presentation-page .deck-nav__dot.is-active { width: 11px; }
   .presentation-context { top: 15px; right: 20px; left: 20px; font-size: 8px; }
   .presentation-footer { right: 18px; bottom: 16px; left: 18px; }
   .presentation-detail-hint { font-size: 9px; }
@@ -475,6 +482,11 @@ outfinity-presentation[data-animation="none"] *::after {
   .presentation-page .deck-slide[id$="contact"] .slide-title p,
   .presentation-page .presentation-contact-slide .slide-title p { max-width: 100%; }
   .presentation-site-footer > div { display: block; }.presentation-site-footer nav { justify-content: flex-start; margin-top: .55rem; }
+}
+
+@media (max-width: 360px) {
+  .presentation-page .deck-nav__progress { display: none; }
+  .presentation-page .deck-nav__status { min-width: 60px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
