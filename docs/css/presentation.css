@@ -115,6 +115,14 @@ outfinity-presentation[data-animation="none"] *::after {
 .presentation-page .deck-nav__left { justify-self: end; }
 .presentation-page .deck-nav__right { justify-self: start; }
 
+.presentation-page .deck-nav__page-title {
+  color: rgba(247,249,249,.86);
+  font: 900 1.65rem/1 var(--font-primary);
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
 .presentation-page .deck-nav__status {
   display: flex;
   align-items: center;
@@ -132,15 +140,15 @@ outfinity-presentation[data-animation="none"] *::after {
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: rgba(247,249,249,.86);
-  font-size: 2rem;
+  color: #f7f9f9;
+  font-size: 1.65rem;
   line-height: 1;
   cursor: pointer;
 }
 
 .presentation-page .deck-nav__button svg {
-  width: 17px;
-  height: 17px;
+  width: 1.65rem;
+  height: 1.65rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -155,7 +163,7 @@ outfinity-presentation[data-animation="none"] *::after {
   outline: none;
 }
 
-.presentation-page .deck-nav__button:disabled { opacity: .28; cursor: default; }
+.presentation-page .deck-nav__button:disabled { opacity: 1; cursor: default; }
 
 .presentation-page .deck-nav__count {
   min-width: 78px;
@@ -256,6 +264,19 @@ outfinity-presentation[data-animation="none"] *::after {
   margin-right: .7rem;
   color: var(--teal, #00cfc8);
 }
+
+.presentation-page .presentation-footer .deck-credit,
+.presentation-page .presentation-footer .presentation-detail-hint,
+.presentation-page .click-hint {
+  font-family: var(--font-primary) !important;
+  font-size: 13.5px !important;
+  font-weight: 740 !important;
+  letter-spacing: .025em !important;
+  line-height: 1.2 !important;
+  text-transform: none !important;
+}
+
+.presentation-page .presentation-footer .deck-credit span { margin-left: 0; }
 
 .presentation-page .click-hint { display: none !important; }
 
@@ -459,6 +480,10 @@ outfinity-presentation[data-animation="none"] *::after {
   .presentation-page .deck-nav__status { min-width: 132px; gap: .25rem; }
   .presentation-page .deck-nav__button { width: 56px; height: 56px; font-size: 1.85rem; }
   .presentation-page .deck-nav__button svg { width: 15px; height: 15px; }
+  .presentation-page .deck-nav__page-title { display: none; }
+  .presentation-page .presentation-footer .deck-credit,
+  .presentation-page .presentation-footer .presentation-detail-hint,
+  .presentation-page .click-hint { font-size: 9px !important; }
   .presentation-page .deck-nav__count { min-width: 65px; font-size: 1.55rem; }
   .presentation-page .deck-nav__progress { gap: 3px; }
   .presentation-page .deck-nav__dot { width: 6px; height: 6px; }

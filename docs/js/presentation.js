@@ -4,12 +4,23 @@
      survive a deploy through the browser cache. */
   document.querySelectorAll('link[href*="css/presentation.css"]').forEach(function (link) {
     var href = new URL(link.getAttribute('href'), document.baseURI);
-    href.searchParams.set('v', '20260721-navigation-scale');
+    href.searchParams.set('v', '20260722-footer-normalized');
     link.href = href.href;
   });
 
   var COVER_SVG = '<svg viewBox="0 0 560 560" role="img" aria-label="Outfinity research, venture and capital system"><defs><radialGradient id="oc-halo" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#00cfc8" stop-opacity=".13"/><stop offset=".58" stop-color="#00cfc8" stop-opacity=".035"/><stop offset="1" stop-color="#00cfc8" stop-opacity="0"/></radialGradient><radialGradient id="oc-core" cx="42%" cy="36%" r="70%"><stop stop-color="#15302f"/><stop offset=".52" stop-color="#0a1a1a"/><stop offset="1" stop-color="#061111"/></radialGradient><linearGradient id="oc-gradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#00cfc8"/><stop offset=".5" stop-color="#16a6a1"/><stop offset="1" stop-color="#ffc928"/></linearGradient><filter id="oc-glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="3.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><circle cx="280" cy="280" r="238" fill="url(#oc-halo)"/><g class="cover-orbit" fill="none"><ellipse cx="280" cy="280" rx="224" ry="154" stroke="#00cfc8" stroke-opacity=".13" stroke-width="1" stroke-dasharray="3 15" transform="rotate(-17 280 280)"/><circle cx="280" cy="56" r="4" fill="#ffc928" filter="url(#oc-glow)"/></g><g class="cover-orbit cover-orbit--reverse" fill="none"><ellipse cx="280" cy="280" rx="172" ry="231" stroke="#ffc928" stroke-opacity=".095" stroke-width="1" stroke-dasharray="17 21" transform="rotate(29 280 280)"/></g><g fill="none" stroke-width="1.5" stroke-linecap="round"><path class="cover-flow" d="M202 254 C176 241 153 221 136 197" stroke="#00cfc8"/><path class="cover-flow" d="M358 254 C385 238 410 216 424 197" stroke="#00cfc8"/><path class="cover-flow" d="M280 356 C280 380 280 405 280 423" stroke="#ffc928"/></g><g class="cover-planet"><ellipse cx="116" cy="178" rx="57" ry="16" fill="none" stroke="#00cfc8" stroke-opacity=".32" transform="rotate(-18 116 178)"/><circle cx="116" cy="178" r="43" fill="#0b2221" stroke="#00cfc8" stroke-opacity=".62"/><text x="116" y="182" fill="#d9fffd" font-size="10" text-anchor="middle">RESEARCH</text></g><g class="cover-planet cover-planet--2"><ellipse cx="444" cy="178" rx="52" ry="15" fill="none" stroke="#00cfc8" stroke-opacity=".32" transform="rotate(25 444 178)"/><circle cx="444" cy="178" r="40" fill="#0b2221" stroke="#00cfc8" stroke-opacity=".62"/><text x="444" y="182" fill="#d9fffd" font-size="10" text-anchor="middle">VENTURE</text></g><g class="cover-planet cover-planet--3"><ellipse cx="280" cy="450" rx="70" ry="19" fill="none" stroke="#ffc928" stroke-opacity=".38" transform="rotate(16 280 450)"/><circle cx="280" cy="450" r="49" fill="#201d10" stroke="#ffc928" stroke-opacity=".68"/><text x="280" y="454" fill="#fff1ba" font-size="10" text-anchor="middle">CAPITAL</text></g><g class="cover-core"><circle cx="280" cy="280" r="96" fill="url(#oc-core)" stroke="url(#oc-gradient)" stroke-width="1.6"/><g class="cover-core__hexagon"><path d="M280 236 L318 258 L318 302 L280 324 L242 302 L242 258 Z" fill="none" stroke="#f7f9f9" stroke-opacity=".22" stroke-width="1.2"/><path d="M280 280 L280 236 M280 280 L318 302 M280 280 L242 302" fill="none" stroke="#f7f9f9" stroke-opacity=".14"/><circle cx="280" cy="236" r="4" fill="#00cfc8"/><circle cx="318" cy="302" r="4" fill="#ffc928"/><circle cx="242" cy="302" r="4" fill="#00cfc8"/></g></g></svg>';
   var coverSourcePromise;
+
+  function pageLabelFromFilename() {
+    var pathname = decodeURIComponent(window.location.pathname || '');
+    var filename = pathname.split('/').pop() || '';
+    return filename
+      .replace(/\.html?$/i, '')
+      .replace(/[-_]+/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .toUpperCase() || 'PRESENTATION';
+  }
 
   function exactCoverSvg() {
     if (coverSourcePromise) return coverSourcePromise;
@@ -55,6 +66,7 @@
       this.ensureDetailOverlay();
       this.ensureArticleOverlay();
       this.ensureSiteFooter();
+      this.normalizeDeckCredit();
       this.ensureViewMore();
       this.bindDetails();
       this.bindKeyboard();
@@ -77,6 +89,17 @@
       this.progress = controls.querySelector('[data-presentation-progress]');
       this.edgeBack = this.querySelector('[data-presentation-edge-back]');
       this.edgeNext = this.querySelector('[data-presentation-edge-next]');
+
+      if (this.home && this.home.parentElement) {
+        var pageTitle = controls.querySelector('[data-presentation-page-title]');
+        if (!pageTitle) {
+          pageTitle = document.createElement('span');
+          pageTitle.className = 'deck-nav__page-title';
+          pageTitle.setAttribute('data-presentation-page-title', '');
+          this.home.insertAdjacentElement('afterend', pageTitle);
+        }
+        pageTitle.textContent = pageLabelFromFilename();
+      }
 
       if (this.progress) {
         var self = this;
@@ -118,6 +141,12 @@
       footer.className = 'presentation-site-footer';
       footer.innerHTML = '<div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="' + href('legal-disclaimer.html') + '">Legal Disclaimer</a><a href="' + href('privacy-policy.html') + '">Privacy Policy</a><a href="' + href('imprint.html') + '">Imprint</a><a href="' + href('terms.html') + '">Terms</a><a href="' + href('cookies.html') + '">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></nav></div>';
       (this.viewport || this).insertAdjacentElement('afterend', footer);
+    }
+
+    normalizeDeckCredit() {
+      this.querySelectorAll('.presentation-footer .deck-credit[href*="outfinity.ch"]').forEach(function (credit) {
+        credit.innerHTML = 'Outfinity Venture Studio&nbsp;<span>[www.outfinity.ch]</span>';
+      });
     }
 
     ensureViewMore() {

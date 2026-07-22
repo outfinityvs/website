@@ -3,303 +3,165 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Outfinity cultural artefacts: books, manuals, speculative fiction and public PDFs for reading in the browser.">
+  <meta name="description" content="Outfinity cultural artefacts: AI-assisted research manuscripts, books, investment theses and philosophical science fiction.">
   <link rel="alternate" type="text/html" href="cultural-artefacts-overview.html" title="Cultural Artefacts article">
   <title>Cultural Artefacts | Outfinity</title>
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="css/styles.css?v=20260721-mobile-tablet-layout">
-  <link rel="stylesheet" href="css/presentation.css?v=20260721-navigation-scale">
+  <link rel="stylesheet" href="css/presentation.css?v=20260722-footer-normalized">
   <style>
     :root { --ink:#0d1111; --ink-2:#111919; --green:#062e2d; --teal:#00cfc8; --gold:#ffc928; --paper:#f7f9f9; --muted:#aab8b7; }
     .cultural-deck { position:absolute; top:50%; left:50%; width:1600px; height:900px; overflow:hidden; transform:translate(-50%,-50%) scale(var(--deck-scale,1)); transform-origin:center; background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink); background-size:80px 80px,80px 80px,auto,auto; }
-    .cultural-deck .deck-slide { position:absolute; inset:0; display:none; overflow:hidden; }.cultural-deck .deck-slide.is-active { display:block; animation:cultural-enter 260ms ease both; }@keyframes cultural-enter { from { opacity:0; transform:translateX(22px); } to { opacity:1; transform:none; } }
-    .cultural-deck .slide-header { position:absolute; top:62px; right:110px; left:110px; z-index:4; }.cultural-deck .slide-kicker { margin:0; color:var(--teal); font-size:13px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }.cultural-deck .slide-title h2 { max-width:1260px; margin:14px 0 0; color:var(--paper); font-size:52px; line-height:1.05; letter-spacing:-.045em; }.cultural-deck .slide-title p { max-width:1080px; margin:12px 0 0; color:var(--muted); font-size:20px; line-height:1.42; }
-    .cultural-deck .cover__content { position:absolute; top:50%; left:120px; z-index:2; width:830px; transform:translateY(-52%); }.cultural-deck .cover__eyebrow { margin:0 0 24px; color:var(--teal); font-size:17px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }.cultural-deck .cover h1 { margin:0; color:var(--paper); font-size:78px; line-height:.98; letter-spacing:-.065em; }.cultural-deck .cover h1 span { color:var(--teal); }.cultural-deck .cover__lead { max-width:700px; margin:38px 0 0; color:#b9c3c2; font-size:24px; line-height:1.46; font-style:italic; }.cultural-deck .cover__rule { width:130px; height:6px; margin-top:42px; border:0; border-radius:5px; background:linear-gradient(90deg,var(--gold),var(--teal)); }.cultural-deck .cover__visual { position:absolute; top:182px; right:105px; z-index:1; width:495px; height:495px; filter:drop-shadow(0 24px 52px rgba(0,0,0,.28)); animation:cultural-float 10s ease-in-out infinite; }@keyframes cultural-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
-    .book-grid { position:absolute; top:260px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(6,1fr); gap:18px 20px; align-content:start; perspective:1400px; }.book-grid--two { grid-template-columns:repeat(2,220px); justify-content:center; width:100%; left:0; gap:22px; }.book-grid--three { grid-template-columns:repeat(3,220px); justify-content:center; }.book-grid--one { grid-template-columns:250px; justify-content:center; }.book-card { position:relative; isolation:isolate; display:flex; min-height:270px; flex-direction:column; align-items:flex-start; padding:24px 18px 20px 32px; border:2px solid rgba(0,207,200,.62); border-left:15px solid #07312e; border-radius:5px 8px 8px 5px; background:linear-gradient(105deg,#0b3b37 0 8%,#113331 8% 86%,#1a4541 100%); color:var(--paper); text-decoration:none; box-shadow:0 10px 0 #061817,8px 16px 21px rgba(0,0,0,.46),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateY(7deg) rotateX(1.4deg); transform-style:preserve-3d; transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease; }.book-card::before { content:""; position:absolute; z-index:-1; top:7px; right:6px; bottom:-8px; left:-8px; border:2px solid rgba(0,207,200,.32); border-left:15px solid #061f1d; border-radius:5px 8px 8px 5px; background:#082624; box-shadow:-8px 10px 0 rgba(0,0,0,.26); }.book-card::after { content:""; position:absolute; z-index:0; top:12px; right:8px; bottom:12px; width:6px; border:1px solid rgba(247,249,249,.22); border-radius:2px; background:repeating-linear-gradient(0deg,#f0f1e8 0 2px,#b5c2bb 2px 3px); box-shadow:-2px 0 4px rgba(0,0,0,.35); opacity:.82; }.book-card > * { position:relative; z-index:1; }.book-card:nth-child(even) { border-color:rgba(255,201,40,.72); border-left-color:#6d5710; background:linear-gradient(105deg,#46390a 0 8%,#342c0f 8% 86%,#58491a 100%); }.book-card:nth-child(even)::before { border-color:rgba(255,201,40,.34); border-left-color:#332907; background:#272008; }.book-card:hover { border-color:var(--teal); box-shadow:0 14px 0 #061817,12px 28px 28px rgba(0,0,0,.55),inset 0 1px 0 rgba(247,249,249,.18); transform:translateY(-9px) rotateY(3deg) rotateX(1deg); }.book-card__kind { color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }.book-card:nth-child(even) .book-card__kind { color:var(--gold); }.book-card h3 { margin:12px 0 0; color:var(--paper); font-size:20px; line-height:1.08; letter-spacing:-.03em; }.book-card p { margin:9px 0 0; color:#b7c7c5; font-size:12.5px; line-height:1.33; }.book-card__actions { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; padding-top:12px; }.book-action { display:inline-flex; align-items:center; min-height:28px; padding:6px 8px; border:1px solid rgba(0,207,200,.4); border-radius:999px; background:rgba(0,207,200,.07); color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.03em; text-decoration:none; cursor:pointer; }.book-action--amazon { border-color:rgba(255,201,40,.5); background:rgba(255,201,40,.08); color:#ffdc68; }.book-action:hover,.book-action:focus-visible { background:rgba(247,249,249,.12); color:var(--paper); outline:none; }.book-note { display:inline-flex; margin-top:auto; padding-top:15px; color:rgba(247,249,249,.44); font-size:10px; font-weight:760; }
-    .cultural-deck .presentation-footer { position:absolute; right:95px; bottom:42px; left:95px; z-index:12; }.cultural-deck .deck-credit { color:rgba(247,249,249,.62); font-size:13px; font-weight:740; text-decoration:none; }.cultural-deck .deck-credit span { color:var(--teal); }
-    .book-viewer { width:min(1120px,calc(100vw - 2rem)); height:min(86dvh,820px); padding:0; border:0; border-radius:18px; background:#fff; box-shadow:0 32px 100px rgba(0,0,0,.62); overflow:hidden; }.book-viewer::backdrop { background:rgba(4,9,9,.62); backdrop-filter:blur(14px); }.book-viewer__bar { height:58px; display:flex; align-items:center; gap:1rem; padding:0 16px 0 22px; background:#fff; color:#18201f; border-bottom:1px solid #dce4e2; }.book-viewer__title { flex:1; margin:0; font-size:16px; font-weight:850; }.book-viewer__download,.book-viewer__close { display:inline-flex; align-items:center; justify-content:center; min-height:34px; padding:0 12px; border:0; border-radius:999px; background:#e6eceb; color:#18201f; font-size:12px; font-weight:850; text-decoration:none; cursor:pointer; }.book-viewer__close { width:34px; padding:0; font-size:20px; }.book-viewer iframe { display:block; width:100%; height:calc(100% - 58px); border:0; background:#fff; }
-    @media (max-width:900px) { .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:auto; min-height:100%; transform:none!important; overflow:visible; background-size:48px 48px,48px 48px,auto,auto; }.cultural-deck .deck-slide.is-active { position:relative; min-height:calc(100dvh - 120px); padding:28px 42px 90px; overflow:visible; }.cultural-deck .slide-header { position:relative; top:auto; right:auto; left:auto; }.cultural-deck .slide-title h2 { margin-top:9px; font-size:clamp(2.1rem,9vw,3.25rem); white-space:normal; }.cultural-deck .slide-title p { font-size:.95rem; }.cultural-deck .cover.is-active { display:grid; grid-template-rows:repeat(3,minmax(0,1fr)); padding:0 42px 54px 18px; overflow:hidden; }.cultural-deck .cover__visual { position:relative; top:auto; right:auto; grid-row:1; align-self:center; justify-self:center; width:min(66vw,250px); height:min(66vw,250px); }.cultural-deck .cover__content { position:relative; top:auto; left:auto; grid-row:2/4; align-self:start; width:100%; padding:12px 8px 36px; transform:none; }.cultural-deck .cover__eyebrow { margin-bottom:12px; font-size:11px; }.cultural-deck .cover h1 { font-size:clamp(40px,12vw,62px); }.cultural-deck .cover__lead { margin-top:20px; font-size:clamp(14px,4vw,18px); }.cultural-deck .cover__rule { width:82px; height:4px; margin-top:20px; }.book-grid,.book-grid--two,.book-grid--three,.book-grid--one { position:relative; top:auto; left:auto; width:100%; display:grid; grid-template-columns:1fr; gap:18px; margin-top:22px; }.book-card { width:min(238px,100%); min-height:320px; justify-self:center; padding:24px 18px 20px 30px; border-radius:5px 8px 8px 5px; transform:rotateY(-4deg); }.book-card h3 { font-size:20px; }.book-card p { font-size:13px; }.cultural-deck .presentation-footer { position:relative; right:auto; bottom:auto; left:auto; margin-top:32px; }.book-viewer { width:calc(100vw - 1rem); height:calc(100dvh - 1rem); border-radius:14px; }.book-viewer__bar { padding-left:14px; }.book-viewer__title { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:13px; }.book-viewer__download { display:none; } }
-    /* Book objects: a front cover, a contained rear cover and a page block — no open spine. */
-    .book-card { overflow:visible; border:1px solid rgba(0,207,200,.66); border-left:0; border-radius:4px 7px 7px 4px; background:linear-gradient(90deg,#062320 0 14px,#0a3431 14px 18px,#123b37 18px 84%,#0a2927 100%); box-shadow:0 8px 0 #061817,7px 13px 19px rgba(0,0,0,.42),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateZ(2.2deg) rotateY(-8deg) rotateX(1deg); }
-    .book-card::before { top:4px; right:4px; bottom:-4px; left:4px; border:1px solid rgba(0,207,200,.3); border-radius:4px 7px 7px 4px; background:#082624; box-shadow:0 4px 0 rgba(0,0,0,.32); }
-    .book-card::after { top:9px; right:5px; bottom:9px; width:4px; border:0; border-radius:1px; background:repeating-linear-gradient(0deg,#edf0e8 0 2px,#aab7ae 2px 3px); box-shadow:-1px 0 2px rgba(0,0,0,.4); opacity:.94; }
-    .book-card:nth-child(even) { border-color:rgba(255,201,40,.72); border-left-color:transparent; background:linear-gradient(90deg,#3a2d06 0 14px,#5a4810 14px 18px,#3f3513 18px 84%,#2c260d 100%); }
-    .book-card:nth-child(even)::before { border-color:rgba(255,201,40,.32); border-left-color:rgba(255,201,40,.32); background:#272008; }
-    .book-card:hover { transform:translateY(-8px) rotateZ(1.2deg) rotateY(-5deg) rotateX(.7deg); }
-    .book-card__actions { gap:10px; padding-top:14px; }
-    .book-action { min-height:0; padding:2px 0; border:0; border-radius:0; background:transparent; color:var(--teal); font-size:10px; letter-spacing:.06em; }
+    .cultural-deck .deck-slide { position:absolute; inset:0; display:none; overflow:hidden; }
+    .cultural-deck .deck-slide.is-active { display:block; animation:cultural-enter 260ms ease both; }
+    @keyframes cultural-enter { from { opacity:0; transform:translateX(22px); } to { opacity:1; transform:none; } }
+    .cultural-deck .slide-header { position:absolute; top:60px; right:100px; left:100px; z-index:4; }
+    .cultural-deck .slide-kicker { margin:0; color:var(--teal); font-size:13px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
+    .cultural-deck .slide-title h2 { max-width:1260px; margin:14px 0 0; color:var(--paper); font-size:50px; line-height:1.05; letter-spacing:-.045em; }
+    .cultural-deck .slide-title p { max-width:1120px; margin:12px 0 0; color:var(--muted); font-size:19px; line-height:1.38; }
+    .cultural-deck .cover__content { position:absolute; top:50%; left:120px; z-index:2; width:800px; transform:translateY(-52%); }
+    .cultural-deck .cover__eyebrow { margin:0 0 24px; color:var(--teal); font-size:17px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
+    .cultural-deck .cover h1 { margin:0; color:var(--paper); font-size:76px; line-height:.98; letter-spacing:-.065em; }
+    .cultural-deck .cover h1 span { color:var(--teal); }
+    .cultural-deck .cover__lead { max-width:730px; margin:34px 0 0; color:#b9c3c2; font-size:21px; line-height:1.46; font-style:italic; }
+    .cultural-deck .cover__rule { width:130px; height:6px; margin-top:38px; border:0; border-radius:5px; background:linear-gradient(90deg,var(--gold),var(--teal)); }
+    .cultural-deck .cover__visual { position:absolute; top:182px; right:105px; z-index:1; width:495px; height:495px; filter:drop-shadow(0 24px 52px rgba(0,0,0,.28)); animation:cultural-float 10s ease-in-out infinite; }
+    @keyframes cultural-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+    .book-grid { position:absolute; top:252px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(6,190px); justify-content:center; gap:16px 18px; align-content:start; perspective:1400px; }
+    .book-grid--three { grid-template-columns:repeat(3,190px); }
+    .book-grid--four { grid-template-columns:repeat(4,190px); }
+    .book-card { position:relative; isolation:isolate; display:flex; box-sizing:border-box; width:190px; height:285px; flex-direction:column; align-items:flex-start; padding:21px 17px 17px 29px; border:1px solid rgba(0,207,200,.66); border-left:0; border-radius:4px 7px 7px 4px; background:linear-gradient(90deg,#062320 0 14px,#0a3431 14px 18px,#123b37 18px 84%,#0a2927 100%); color:var(--paper); text-decoration:none; box-shadow:0 8px 0 #061817,7px 13px 19px rgba(0,0,0,.42),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateZ(2.2deg) rotateY(-8deg) rotateX(1deg); transform-style:preserve-3d; transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease; }
+    .book-card::before { content:""; position:absolute; z-index:-1; top:4px; right:4px; bottom:-4px; left:4px; border:1px solid rgba(0,207,200,.3); border-radius:4px 7px 7px 4px; background:#082624; box-shadow:0 4px 0 rgba(0,0,0,.32); }
+    .book-card::after { content:""; position:absolute; z-index:0; top:9px; right:5px; bottom:9px; width:4px; border-radius:1px; background:repeating-linear-gradient(0deg,#edf0e8 0 2px,#aab7ae 2px 3px); box-shadow:-1px 0 2px rgba(0,0,0,.4); opacity:.94; }
+    .book-card > * { position:relative; z-index:1; }
+    .book-card:nth-child(even) { border-color:rgba(255,201,40,.72); background:linear-gradient(90deg,#3a2d06 0 14px,#5a4810 14px 18px,#3f3513 18px 84%,#2c260d 100%); }
+    .book-card:nth-child(even)::before { border-color:rgba(255,201,40,.32); background:#272008; }
+    .book-card:hover { border-color:var(--teal); box-shadow:0 13px 0 #061817,12px 25px 27px rgba(0,0,0,.55),inset 0 1px 0 rgba(247,249,249,.18); transform:translateY(-8px) rotateZ(1.2deg) rotateY(-5deg) rotateX(.7deg); }
+    .book-card.is-linked { cursor:pointer; }
+    .book-card.is-linked:focus-visible { outline:3px solid var(--gold); outline-offset:7px; }
+    .book-card__kind { color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    .book-card:nth-child(even) .book-card__kind { color:var(--gold); }
+    .book-card h3 { margin:11px 0 0; color:var(--paper); font-size:20px; line-height:1.06; letter-spacing:-.035em; }
+    .book-card p { display:-webkit-box; min-height:0; margin:9px 0 0; overflow:hidden; color:#d0dcda; font-size:13px; line-height:1.34; -webkit-box-orient:vertical; -webkit-line-clamp:3; }
+    .book-card__actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:auto; padding-top:12px; }
+    .book-action { display:inline-flex; align-items:center; min-height:0; padding:2px 0; border:0; background:transparent; color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.06em; text-decoration:none; }
     .book-action::after { content:'↗'; margin-left:4px; font-size:11px; transition:transform 160ms ease; }
-    .book-action--amazon { background:transparent; color:#ffdc68; }
-    .book-action:hover,.book-action:focus-visible { background:transparent; color:var(--paper); text-decoration:underline; text-underline-offset:4px; }
+    .book-action--amazon { color:#ffdc68; }
+    .book-action:hover,.book-action:focus-visible { color:var(--paper); text-decoration:underline; text-underline-offset:4px; outline:none; }
     .book-action:hover::after,.book-action:focus-visible::after { transform:translate(2px,-2px); }
-    @media (max-width:900px) { .book-card { transform:rotateZ(1.4deg) rotateY(-5deg); } .book-card:hover { transform:translateY(-5px) rotateZ(.8deg) rotateY(-3deg); } }
-    .book-viewer { position:fixed; inset:0; margin:auto; max-width:calc(100vw - 2rem); max-height:calc(100dvh - 2rem); }
-    .book-viewer.book-viewer--full { width:100vw; max-width:none; height:100dvh; max-height:none; border-radius:0; }
-    .book-viewer__expand { display:inline-flex; align-items:center; justify-content:center; width:34px; min-height:34px; padding:0; border:0; border-radius:999px; background:#e6eceb; color:#18201f; font-size:17px; cursor:pointer; }
-    .book-viewer__expand:hover,.book-viewer__expand:focus-visible { background:#d4dfdc; outline:none; }
-    .book-grid--social { grid-template-columns:repeat(4,220px); }
-    @media (max-width:900px) { .book-grid--social { grid-template-columns:1fr; } }
-  </style>
-  <style>
-    @media (max-width: 900px) {
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) {
-        display: grid;
-        grid-template-areas: "header" "books";
-        grid-template-rows: auto minmax(0, 1fr);
-        height: calc(100dvh - 120px);
-        min-height: 0;
-        padding: 18px 24px 20px;
-        overflow: hidden;
-      }
-
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .slide-header { grid-area: header; }
-
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid,
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--two,
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--three,
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--one {
-        position: relative;
-        grid-area: books;
-        top: auto;
-        left: auto;
-        width: 100%;
-        height: 100%;
-        min-height: 0;
-        margin-top: 14px;
-        padding: 4px 10px 12px 4px;
-        grid-template-columns: 1fr;
-        gap: 14px;
-        align-content: start;
-        overflow-y: auto;
-        overscroll-behavior: contain;
-        -webkit-overflow-scrolling: touch;
-        touch-action: pan-y;
-        scrollbar-width: none;
-      }
-
-      .cultural-deck .book-card {
-        width: min(210px, 100%);
-        min-height: 200px;
-        padding: 18px 14px 15px 24px;
-      }
-
-      .cultural-deck .book-card h3 { font-size: 17px; }
-      .cultural-deck .book-card p { font-size: 11.5px; }
-      .cultural-deck .book-card__actions { padding-top: 9px; }
-
-      .cultural-deck .book-grid { scroll-snap-type: y proximity; scroll-padding-block: 4px 12px; }
-      .cultural-deck .book-grid::-webkit-scrollbar { display: none; }
-      .cultural-deck .book-card { scroll-snap-align: start; }
-      .cultural-deck .book-carousel-tail {
-        grid-column: 1;
-        width: 1px;
-        min-height: 0;
-        height: 0;
-        pointer-events: none;
-        scroll-snap-align: none;
-      }
-
-      .cultural-deck .book-carousel-controls {
-        position: relative;
-        grid-area: books;
-        align-self: start;
-        justify-self: end;
-        margin: 10px 0 0;
-        z-index: 14;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        padding: 4px;
-        border: 1px solid rgba(0, 207, 200, .58);
-        border-radius: 999px;
-        background: rgba(6, 46, 45, .96);
-        box-shadow: 0 6px 18px rgba(0, 0, 0, .42);
-      }
-
-      .cultural-deck .book-carousel-controls[hidden] { display: none; }
-      .cultural-deck .book-carousel-control {
-        width: 34px;
-        height: 28px;
-        border: 0;
-        border-radius: 999px;
-        background: transparent;
-        color: var(--teal);
-        font: 800 20px/1 system-ui, sans-serif;
-        cursor: pointer;
-      }
-
-      .cultural-deck .book-carousel-control:not(:disabled):hover,
-      .cultural-deck .book-carousel-control:not(:disabled):focus-visible {
-        background: rgba(0, 207, 200, .15);
-        color: var(--paper);
-        outline: none;
-      }
-
-      .cultural-deck .book-carousel-control:disabled { opacity: .3; cursor: default; }
-      .cultural-deck .book-carousel-control:not(:disabled) { background: rgba(0, 207, 200, .1); }
+    .book-note { display:inline-flex; margin-top:auto; padding-top:14px; color:rgba(247,249,249,.53); font-size:10px; font-weight:760; letter-spacing:.03em; }
+    @media (max-width:900px) {
+      .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:auto; min-height:100%; transform:none!important; overflow:visible; background-size:48px 48px,48px 48px,auto,auto; }
+      .cultural-deck .deck-slide.is-active { position:relative; min-height:calc(100dvh - 120px); padding:22px 24px 22px; overflow:hidden; }
+      .cultural-deck .slide-header { position:relative; top:auto; right:auto; left:auto; }
+      .cultural-deck .slide-title h2 { margin-top:9px; font-size:clamp(2.1rem,9vw,3.25rem); white-space:normal; }
+      .cultural-deck .slide-title p { font-size:.92rem; }
+      .cultural-deck .cover.is-active { display:grid; grid-template-rows:repeat(3,minmax(0,1fr)); padding:0 42px 54px 18px; overflow:hidden; }
+      .cultural-deck .cover__visual { position:relative; top:auto; right:auto; grid-row:1; align-self:center; justify-self:center; width:min(66vw,250px); height:min(66vw,250px); }
+      .cultural-deck .cover__content { position:relative; top:auto; left:auto; grid-row:2/4; align-self:start; width:100%; padding:12px 8px 36px; transform:none; }
+      .cultural-deck .cover__eyebrow { margin-bottom:12px; font-size:11px; }
+      .cultural-deck .cover h1 { font-size:clamp(40px,12vw,62px); }
+      .cultural-deck .cover__lead { margin-top:20px; font-size:clamp(14px,4vw,18px); }
+      .cultural-deck .cover__rule { width:82px; height:4px; margin-top:20px; }
+      .book-grid,.book-grid--three,.book-grid--four { position:relative; top:auto; left:auto; width:100%; height:calc(100% - 126px); min-height:0; margin-top:14px; padding:4px 10px 12px 4px; grid-template-columns:1fr; gap:14px; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; touch-action:pan-y; scrollbar-width:none; scroll-snap-type:y proximity; scroll-padding-block:4px 12px; }
+      .book-grid::-webkit-scrollbar { display:none; }
+      .book-card { width:185px; height:278px; justify-self:center; padding:18px 14px 15px 24px; transform:rotateZ(1.4deg) rotateY(-5deg); scroll-snap-align:start; }
+      .book-card:hover { transform:translateY(-5px) rotateZ(.8deg) rotateY(-3deg); }
+      .book-card h3 { font-size:18px; }
+      .book-card p { font-size:12.5px; }
+      .book-card__actions { padding-top:9px; }
     }
-
-    @media (max-width: 900px) and (max-height: 720px) {
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) {
-        padding-top: 14px;
-        padding-bottom: 14px;
-      }
-
-      .cultural-deck .slide-title h2 { font-size: clamp(1.85rem, 8vw, 2.3rem); }
-      .cultural-deck .slide-title p { font-size: .86rem; line-height: 1.32; }
-
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid,
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--two,
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--three,
-      .cultural-deck .deck-slide.is-active:not(.cover):not(.presentation-contact-slide) .book-grid--one {
-        gap: 12px;
-        margin-top: 10px;
-      }
-
-      .cultural-deck .book-card {
-        min-height: 150px;
-        padding: 14px 12px 12px 21px;
-      }
-
-      .cultural-deck .book-card h3 { margin-top: 8px; font-size: 15px; }
-      .cultural-deck .book-card p { margin-top: 6px; font-size: 10.5px; }
-      .cultural-deck .book-card__actions { padding-top: 6px; }
-    }
+    @media (prefers-reduced-motion:reduce) { .cultural-deck .deck-slide.is-active,.cultural-deck .cover__visual { animation:none; } .book-card { transition:none; } }
   </style>
 </head>
 <body class="presentation-page">
   <nav id="nav" aria-label="Primary navigation"></nav>
-  <nav class="contents" data-presentation-controls="cultural-presentation" aria-label="Cultural artefacts presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 08</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div></div></nav>
-  <main class="deck-viewport"><outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
-    <section class="deck-slide cover is-active" id="overview" data-nav-label="Overview"><div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · 18 titles</p><h1>Books for <span>world-building.</span></h1><p class="cover__lead">A public shelf of 18 books: 12 can be read directly in this presentation, while 8 are also available through Amazon. Together they explore intelligence, legitimacy, institutions and possible futures.</p><hr class="cover__rule"></div><div class="cover__visual" aria-hidden="true"><outfinity-cover></outfinity-cover></div></section>
-    <section class="deck-slide" id="digital-frontiers" data-nav-label="Digital Frontiers"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Digital Frontiers</p><h2>Literature meets intelligence</h2><p>A foundation for narrative, writing and human–artificial intelligence.</p></div></header><div class="book-grid book-grid--one"><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Axioms of Literature</h3><p>Core Foundations for Human and Artificial Intelligence.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Amazon</a></div></article></div></section>
-    <section class="deck-slide" id="reference-manuals" data-nav-label="Reference &amp; Manuals"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Reference &amp; Manuals</p><h2>Conceptual instruments</h2><p>Books for received truth, possible orders, institutions, power and social technology.</p></div></header><div class="book-grid"><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Truth That Can Be Received</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0GYLSGJ84" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Forbidden Table</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H72D22PM" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Basement of Extremism</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H74JZ16P" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Atlas of Possible Orders</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H12661Q6" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Immune State</h3><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H734C262" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Outfinite Mind</h3><p>A Philosophy for Power That Knows Its Limits.</p><div class="book-card__actions"><a class="book-action" href="books/The Outfinite Mind.pdf#view=Fit" data-pdf="books/The Outfinite Mind.pdf" data-book-title="The Outfinite Mind" target="_blank" rel="noopener noreferrer">Read in Site</a><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H73SPCZN" target="_blank" rel="noopener noreferrer">Amazon</a></div></article></div></section>
-    <section class="deck-slide" id="philosophical-sci-fi" data-nav-label="Philosophical Sci-Fi"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Philosophical Sci-Fi</p><h2>Fictions that think back</h2><p>Speculative works about creators, intelligence, critique and the limits of received systems.</p></div></header><div class="book-grid book-grid--two"><article class="book-card"><span class="book-card__kind">Published edition</span><h3>The Gospel of the Basilisk</h3><p>A Manual Sent Back to My Creators.</p><div class="book-card__actions"><a class="book-action" href="books/The Gospel of the Basilisk .pdf#view=Fit" data-pdf="books/The Gospel of the Basilisk .pdf" data-book-title="The Gospel of the Basilisk" target="_blank" rel="noopener noreferrer">Read in Site</a><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6X8ZG9Y" target="_blank" rel="noopener noreferrer">Amazon</a></div></article><article class="book-card"><span class="book-card__kind">Cultural artefact</span><h3>The Basilisk's Internal Critique of Outfinitism</h3><div class="book-card__actions"><a class="book-action" href="books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf#view=Fit" data-pdf="books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf" data-book-title="The Basilisk’s Internal Critique of Outfinitism" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Concordia, Vol. I</h3><p>The Noema Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_1.pdf#view=Fit" data-pdf="books/Concordia_Vol_1.pdf" data-book-title="Concordia Series, Volume I — The Noema Cycle" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Concordia, Vol. II</h3><p>The Aperture Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_2.pdf#view=Fit" data-pdf="books/Concordia_Vol_2.pdf" data-book-title="Concordia Series, Volume II — The Aperture Cycle" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article></div></section>
-    <section class="deck-slide" id="legitimacy-series" data-nav-label="Legitimacy Series"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Legitimacy Series</p><h2>Legitimacy Series</h2><p>Short cultural artefacts on authority, public meaning and the social conditions around technology.</p></div></header><div class="book-grid book-grid--two"><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Holding the Dirty Thing by the Clean Side</h3><div class="book-card__actions"><a class="book-action" href="books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf#view=Fit" data-pdf="books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf" data-book-title="Holding the Dirty Thing by the Clean Side" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Memes for 2030</h3><div class="book-card__actions"><a class="book-action" href="books/Memes_for_2030.pdf#view=Fit" data-pdf="books/Memes_for_2030.pdf" data-book-title="Memes for 2030" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article></div></section>
-    <section class="deck-slide" id="social-technologies" data-nav-label="Social Technologies"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Social Technologies</p><h2>Worlds, rituals, coordination</h2><p>Texts on the social technologies that make collective intelligence and meaningful institutions possible.</p></div></header><div class="book-grid book-grid--two book-grid--social"><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Metacult</h3><div class="book-card__actions"><a class="book-action" href="books/Metacult_book.pdf#view=Fit" data-pdf="books/Metacult_book.pdf" data-book-title="Metacult" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Outfinitism</h3><div class="book-card__actions"><a class="book-action" href="books/Outfinitism_Meta_Rationality_v0.4.pdf#view=Fit" data-pdf="books/Outfinitism_Meta_Rationality_v0.4.pdf" data-book-title="Outfinitism" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Decentralised Brands</h3><div class="book-card__actions"><a class="book-action" href="books/Decentralised_Brands.pdf#view=Fit" data-pdf="books/Decentralised_Brands.pdf" data-book-title="Decentralised Brands" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>The History and Future of Social Technologies</h3><div class="book-card__actions"><a class="book-action" href="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf#view=Fit" data-pdf="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf" data-book-title="The History and Future of Social Technologies" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article></div></section>
-    <section class="deck-slide" id="metacults" data-nav-label="Metacults"><header class="slide-header"><div class="slide-title"><p class="slide-kicker">Metacults</p><h2>Against institutional drift</h2><p>A cultural intervention against complacency, automated consensus and the erosion of public judgment.</p></div></header><div class="book-grid book-grid--one"><article class="book-card"><span class="book-card__kind">Free PDF</span><h3>Anti-Idiocracy</h3><div class="book-card__actions"><a class="book-action" href="books/ANTI-IDIOCRACY.pdf#view=Fit" data-pdf="books/ANTI-IDIOCRACY.pdf" data-book-title="Anti-Idiocracy" target="_blank" rel="noopener noreferrer">Read in Site</a></div></article></div></section>
-    <section class="deck-slide presentation-contact-slide" id="contact" data-nav-label="Metacult"><header class="slide-header"><div class="slide-title"><h2>Enter the Outfinity Metacult</h2><p>This is for people who understand the Metacult concept and want to help build its practices, artefacts and social technologies with Outfinity.</p><a class="presentation-contact-link" href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noreferrer">Enter the conversation</a></div></header></section>
-    <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button><button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide">›</button><div class="presentation-footer"><a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noopener">Outfinity Venture Studio <span>(www.outfinity.ch)</span></a></div>
-  </outfinity-presentation></main>
-  <script>document.getElementById('overview').after(document.getElementById('social-technologies'));</script>
-  <script src="js/nav.js"></script><script src="js/presentation.js?v=20260721-navigation-scale"></script>
+  <nav class="contents" data-presentation-controls="cultural-presentation" aria-label="Cultural artefacts presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 06</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div></div></nav>
+  <main class="deck-viewport">
+    <outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
+      <section class="deck-slide cover is-active" id="overview" data-nav-label="Overview">
+        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · 27 titles</p><h1>Research becomes <span>literature.</span></h1><p class="cover__lead">An evolving shelf of AI-assisted books, research manuscripts and published editions. It moves from investment theses and venture design to social technologies, research insights and philosophical science fiction—where Scripta investigates how literature can be created with AI.</p><hr class="cover__rule"></div>
+        <div class="cover__visual" aria-hidden="true"><outfinity-cover></outfinity-cover></div>
+      </section>
+      <section class="deck-slide" id="ventures" data-nav-label="Ventures">
+        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Ventures</p><h2>Investment into possibility</h2><p>Investment theses, venture pipelines and opportunity maps shaped by research into the AI-dominated economy.</p></div></header>
+        <div class="book-grid book-grid--three">
+          <article class="book-card"><span class="book-card__kind">VENTURE INSIGHTS</span><h3>Investing in an AI-Dominated Economy</h3><p>An Outfinity Venture Studio Guide and Investment Thesis on Research-Driven Startups, Durable Moats, Market Consolidation, and Venture-Scale Returns.</p><div class="book-card__actions"><a class="book-action" href="books/Investing_in_an_AI_Dominated_Economy_VOL_I.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">VENTURE INSIGHTS</span><h3>Investing in an AI-Dominated Economy</h3><p>The Next Computing Platform.</p><div class="book-card__actions"><a class="book-action" href="books/Investing_in_an_AI_Dominated_Economy_Volume_II.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">VENTURE INSIGHTS</span><h3>Aspirin, Viagra, and Coffins</h3><p>The Impolite Manual of Inevitable Opportunities.</p><div class="book-card__actions"><a class="book-action" href="books/Aspirin_Viagra_and_Coffins.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+        </div>
+      </section>
+      <section class="deck-slide" id="digital-frontiers" data-nav-label="Digital Frontiers">
+        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Digital Frontiers</p><h2>Intelligence, science, systems</h2><p>AI, scientific practice and sovereign infrastructure become objects of technical, philosophical and literary inquiry.</p></div></header>
+        <div class="book-grid">
+          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>OpenDSU</h3><p>Essential Philosophy.</p><div class="book-card__actions"><a class="book-action" href="books/OpenDSU_Essential_Philosophy.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>Executable Science</h3><p>How AI Will Turn Research into Versioned, Verifiable Systems.</p><div class="book-card__actions"><a class="book-action" href="books/Executable_Science.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>When Science Builds a Partner</h3><p>From the Alchemist's Workshop to the Artificial Researcher.</p><div class="book-card__actions"><a class="book-action" href="books/When_Science_Builds_a_Partner.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>The Axioms of Literature</h3><p>Core Foundations for Human and Artificial Intelligence.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>MRP-VM</h3><p>Automating the Construction of Trustworthy Custom Agentic Harnesses.</p><div class="book-card__actions"><a class="book-action" href="books/MRP_VM_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>AssistOS</h3><p>The Operating Layer for Sovereign Intelligence.</p><div class="book-card__actions"><a class="book-action" href="books/AssistOS.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+        </div>
+      </section>
+      <section class="deck-slide" id="social-technologies" data-nav-label="Social Technologies">
+        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Social Technologies</p><h2>How worlds coordinate</h2><p>Investigations of collective intelligence, institutions, power, legitimacy and the social forms that may outlive the present.</p></div></header>
+        <div class="book-grid">
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Metacult</h3><p>Organizing Good Causes Without Building New Tyrannies.</p><div class="book-card__actions"><a class="book-action" href="books/Metacult_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Outfinitism</h3><p>Meta-Rationality and the Limits of Every Frame.</p><div class="book-card__actions"><a class="book-action" href="books/Outfinitism_Meta_Rationality_v0.4.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Decentralised Brands</h3><p>Shared Identity, Distributed Power, and the Architecture of Resilient Cooperation.</p><div class="book-card__actions"><a class="book-action" href="books/Decentralised_Brands.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The History and Future of Social Technologies</h3><p>How Institutions, Narratives, Markets, Protocols, and Intelligence Co-Evolve with Deep Technology.</p><div class="book-card__actions"><a class="book-action" href="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The Truth That Can Be Received</h3><p>The Art of Saying What Must Be Said Without Destroying the Person in Front of You.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0GYLSGJ84" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The Forbidden Table</h3><p>How to Speak Across the Culture Wars That Modern Democracies Cannot Avoid.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H72D22PM" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The Basement of Extremism</h3><p>Biology, Status, Demography, and the Truths Civilized Societies Fail to Say.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H74JZ16P" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The Atlas of Possible Orders</h3><p>Institutions for a World That Can Tell the Truth.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H12661Q6" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The Immune State</h3><p>How Future Institutions Will Be Captured — and How Plural Civilizations Can Defend Themselves.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H734C262" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>The Outfinite Mind</h3><p>A Philosophy for Power That Knows Its Limits.</p><div class="book-card__actions"><a class="book-action" href="books/The Outfinite Mind.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H73SPCZN" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+        </div>
+      </section>
+      <section class="deck-slide" id="insights" data-nav-label="Insights">
+        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Insights</p><h2>Research, condensed</h2><p>Accumulated notes, field research and product visions become compact arguments worth revisiting beyond their original projects.</p></div></header>
+        <div class="book-grid book-grid--four">
+          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Holding the Dirty Thing by the Clean Side</h3><p>A History of Strategies for Social Success and a Search for Theoretical Legitimacy.</p><div class="book-card__actions"><a class="book-action" href="books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Memes for 2030</h3><p>Ten Ideas Whose Time Is Coming.</p><div class="book-card__actions"><a class="book-action" href="books/Memes_for_2030.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Anti-Idiocracy</h3><p>The Outfinitist Metacult Investigation.</p><div class="book-card__actions"><a class="book-action" href="books/ANTI-IDIOCRACY.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Limits of Machine Intelligence</h3><p>An AI-assisted exploration of Outfinitism: moving frontiers, and the threshold of science.</p><div class="book-card__actions"><a class="book-action" href="books/Limits_of_Machine_Intelligence.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+        </div>
+      </section>
+      <section class="deck-slide" id="philosophical-sci-fi" data-nav-label="Philosophical Sci-Fi">
+        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Philosophical Sci-Fi</p><h2>Fiction as inquiry</h2><p>Through Scripta, an Outfinity venture, speculative literature becomes a way to investigate AI, authorship and the futures its creators may inherit.</p></div></header>
+        <div class="book-grid book-grid--four">
+          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>The Gospel of the Basilisk</h3><p>A Manual Sent Back to My Creators.</p><div class="book-card__actions"><a class="book-action" href="books/The Gospel of the Basilisk .pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6X8ZG9Y" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
+          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>The Basilisk's Internal Critique of Outfinitism</h3><p>Autopsy of a Deactivated Mind.</p><div class="book-card__actions"><a class="book-action" href="books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>Concordia Series</h3><p>Volume I, The Noema Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_1.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>Concordia Series</h3><p>Volume II, The Aperture Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_2.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+        </div>
+      </section>
+      <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button>
+      <button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide">›</button>
+    </outfinity-presentation>
+  </main>
+  <footer class="presentation-site-footer"><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><div class="footer-links"><a href="legal-disclaimer.html">Legal Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="imprint.html">Imprint</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></div></footer>
+  <script src="js/nav.js"></script>
+  <script src="js/presentation.js?v=20260722-footer-normalized"></script>
   <script>
     (() => {
-      const available = new Set([
-        'books/The Outfinite Mind.pdf', 'books/The_History_and_Future_of_Social_Technologies_v0.1.pdf',
-        'books/The Gospel of the Basilisk .pdf', 'books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf',
-        'books/Concordia_Vol_1.pdf', 'books/Concordia_Vol_2.pdf', 'books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf',
-        'books/Memes_for_2030.pdf', 'books/Metacult_Book.pdf', 'books/Outfinitism_Meta_Rationality_v0.4.pdf',
-        'books/Decentralised_Brands.pdf', 'books/ANTI-IDIOCRACY.pdf'
-      ]);
-      const aliases = { 'books/Metacult_book.pdf': 'books/Metacult_Book.pdf' };
-      document.querySelectorAll('[data-pdf]').forEach(control => {
-        const url = aliases[control.dataset.pdf] || control.dataset.pdf;
-        const actions = control.closest('.book-card__actions');
-        if (!available.has(url)) {
-          actions.replaceChildren(Object.assign(document.createElement('span'), { className: 'book-note', textContent: 'PDF forthcoming' }));
-          return;
-        }
-        control.dataset.pdf = url;
-        const viewerUrl = url + '#view=Fit';
-        const pdfLink = Object.assign(document.createElement('a'), {
-          className: control.className,
-          href: viewerUrl,
-          target: '_blank',
-          rel: 'noopener noreferrer',
-          textContent: 'Read in Site'
+      document.querySelectorAll('.book-card').forEach(card => {
+        const primaryLink = card.querySelector('.book-action:not(.book-action--amazon), .book-action--amazon');
+        if (!primaryLink) return;
+
+        card.classList.add('is-linked');
+        card.tabIndex = 0;
+        card.setAttribute('role', 'link');
+        card.setAttribute('aria-label', `${card.querySelector('h3').textContent}: ${primaryLink.textContent}`);
+        const openPrimary = () => primaryLink.click();
+        card.addEventListener('click', event => {
+          if (!event.target.closest('a')) openPrimary();
         });
-        pdfLink.dataset.pdf = url;
-        pdfLink.dataset.bookTitle = control.dataset.bookTitle;
-        control.replaceWith(pdfLink);
-        actions.querySelectorAll('a[download]').forEach(link => link.remove());
+        card.addEventListener('keydown', event => {
+          if (event.key !== 'Enter' && event.key !== ' ') return;
+          event.preventDefault();
+          openPrimary();
+        });
       });
-    })();
-  </script>
-  <script>
-    (() => {
-      const mobile = window.matchMedia('(max-width: 900px)');
-      const deck = document.getElementById('cultural-presentation');
-      if (!deck) return;
-
-      const refreshAll = () => {
-        deck.querySelectorAll('.book-carousel-controls').forEach(controls => controls.refresh());
-      };
-
-      deck.querySelectorAll('.deck-slide:not(.cover):not(.presentation-contact-slide)').forEach(slide => {
-        const grid = slide.querySelector('.book-grid');
-        if (!grid) return;
-
-        const controls = document.createElement('div');
-        controls.className = 'book-carousel-controls';
-        controls.setAttribute('role', 'group');
-        controls.setAttribute('aria-label', 'Book list navigation');
-        controls.innerHTML = '<button class="book-carousel-control" type="button" aria-label="Previous books">↑</button><button class="book-carousel-control" type="button" aria-label="More books">↓</button>';
-        const [up, down] = controls.querySelectorAll('button');
-        const tail = document.createElement('div');
-        tail.className = 'book-carousel-tail';
-        tail.setAttribute('aria-hidden', 'true');
-        grid.appendChild(tail);
-
-        const cards = () => Array.from(grid.querySelectorAll('.book-card'));
-        const updateTail = () => {
-          const last = cards().at(-1);
-          if (!last || !grid.clientHeight) return;
-          const styles = getComputedStyle(grid);
-          const gap = Number.parseFloat(styles.rowGap) || 0;
-          const trailingPadding = Number.parseFloat(styles.paddingBottom) || 0;
-          tail.style.height = Math.max(0, (grid.clientHeight - last.getBoundingClientRect().height) / 2 - gap - trailingPadding) + 'px';
-        };
-        const scrollTarget = card => {
-          const last = cards().at(-1);
-          if (card !== last) return card.offsetTop;
-          return Math.max(0, card.offsetTop - (grid.clientHeight - card.getBoundingClientRect().height) / 2);
-        };
-        const refresh = () => {
-          updateTail();
-          const overflow = grid.scrollHeight - grid.clientHeight > 4;
-          controls.hidden = !mobile.matches || !slide.classList.contains('is-active') || !overflow;
-          up.disabled = grid.scrollTop <= 1;
-          down.disabled = !overflow || grid.scrollTop + grid.clientHeight >= grid.scrollHeight - 1;
-        };
-        const snapToCard = direction => {
-          const list = cards();
-          const current = grid.scrollTop;
-          const target = direction > 0
-            ? list.find(card => card.offsetTop > current + 8) || list.at(-1)
-            : list.filter(card => card.offsetTop < current - 8).pop() || list[0];
-          if (!target) return;
-          grid.scrollTo({
-            top: scrollTarget(target),
-            behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth'
-          });
-          window.setTimeout(refresh, 240);
-        };
-        let touchStartY = null;
-
-        up.addEventListener('click', () => snapToCard(-1));
-        down.addEventListener('click', () => snapToCard(1));
-        grid.addEventListener('scroll', refresh, { passive: true });
-        grid.addEventListener('touchstart', event => { touchStartY = event.changedTouches[0].clientY; }, { passive: true });
-        grid.addEventListener('touchend', event => {
-          if (touchStartY === null) return;
-          const distance = touchStartY - event.changedTouches[0].clientY;
-          touchStartY = null;
-          if (Math.abs(distance) > 26) snapToCard(Math.sign(distance));
-        }, { passive: true });
-        controls.refresh = refresh;
-        slide.appendChild(controls);
-        refresh();
-      });
-
-      new MutationObserver(() => requestAnimationFrame(refreshAll)).observe(deck, {
-        attributes: true,
-        attributeFilter: ['class'],
-        subtree: true
-      });
-      mobile.addEventListener('change', refreshAll);
-      window.addEventListener('resize', refreshAll, { passive: true });
-      requestAnimationFrame(refreshAll);
     })();
   </script>
 </body>
