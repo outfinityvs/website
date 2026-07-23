@@ -170,6 +170,14 @@ outfinity-presentation[data-animation="none"] *::after {
 
 .presentation-page .deck-nav__button:disabled { opacity: 1; cursor: default; }
 
+.presentation-page .deck-nav__button[data-presentation-icon="back"],
+.presentation-page .deck-nav__button[data-presentation-icon="next"] {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: .7;
+}
+
 .presentation-page .deck-nav__count {
   min-width: 78px;
   color: #ffc928;
@@ -254,6 +262,13 @@ outfinity-presentation[data-animation="none"] *::after {
 .presentation-page .edge-nav { position:absolute; top:50%; z-index:15; width:58px; height:78px; display:grid; place-items:center; padding:0; border:0; border-radius:999px; background:rgba(6,46,45,.82); color:#00cfc8; box-shadow:0 16px 34px rgba(0,0,0,.3), inset 0 0 24px rgba(0,207,200,.055); transform:translateY(-50%); cursor:pointer; }
 .presentation-page .edge-nav--back { left:20px; }.presentation-page .edge-nav--next { right:20px; }
 .presentation-page .edge-nav:hover,.presentation-page .edge-nav:focus-visible { background:rgba(7,65,62,.96); color:#f7f9f9; outline:none; }.presentation-page .edge-nav:disabled { visibility:hidden; opacity:0; pointer-events:none; }
+
+.presentation-page outfinity-presentation > .edge-nav {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: .7;
+}
 
 .presentation-detail-hint {
   flex: 1;
@@ -489,16 +504,17 @@ outfinity-presentation[data-animation="none"] *::after {
   .presentation-page .deck-nav__page-title { display: none; }
   .presentation-page .presentation-footer .deck-credit,
   .presentation-page .presentation-footer .presentation-detail-hint,
-  .presentation-page .click-hint { font-size: 9px !important; }
+  .presentation-page .click-hint,
+  .presentation-page .presentation-context { display: none !important; }
   .presentation-page .deck-nav__count { min-width: 65px; font-size: 1.55rem; }
   .presentation-page .deck-nav__progress { gap: 3px; }
   .presentation-page .deck-nav__dot { width: 6px; height: 6px; }
   .presentation-page .deck-nav__dot:hover,
   .presentation-page .deck-nav__dot:focus-visible,
   .presentation-page .deck-nav__dot.is-active { width: 11px; }
-  .presentation-context { top: 15px; right: 20px; left: 20px; font-size: 8px; }
   .presentation-footer { right: 18px; bottom: 16px; left: 18px; }
-  .presentation-detail-hint { font-size: 9px; }
+  .presentation-page .presentation-footer { justify-content: flex-end; pointer-events: none; }
+  .presentation-page .presentation-footer .presentation-view-more { pointer-events: auto; }
   .presentation-view-more { min-height: 30px; padding: .32rem .58rem; font-size: 10px; }
   .presentation-page .detail-overlay { padding: 14px; overflow-y: auto; }
   .presentation-page .detail-panel { padding: 46px 24px 26px; border-radius: 14px; }
@@ -618,3 +634,277 @@ body.presentation-page--auto { color: #f7f9f9; font-family: Inter, ui-sans-serif
 .presentation-page--auto .edge-nav { position: absolute; top: 50%; z-index: 15; width: 58px; height: 78px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 999px; background: rgba(6,46,45,.84); color: #00cfc8; transform: translateY(-50%); cursor: pointer; }.presentation-page--auto .edge-nav--back { left: 20px; }.presentation-page--auto .edge-nav--next { right: 20px; }.presentation-page--auto .edge-nav:disabled { visibility: hidden; }.presentation-page--auto .edge-nav svg { width: 34px; fill: none; stroke: currentColor; stroke-width: 2.1; stroke-linecap: round; stroke-linejoin: round; }
 .presentation-page--auto .deck-credit { color: rgba(247,249,249,.62); font-size: 13px; font-weight: 740; text-decoration: none; }.presentation-page--auto .deck-credit span { color: #00cfc8; }
 @media (max-width: 900px) { body.presentation-page--auto { overflow: auto !important; }.presentation-page--auto .deck-viewport { height: auto; min-height: calc(100dvh - 120px); overflow: visible; }.presentation-page--auto .deck-canvas { position: relative; top: auto; left: auto; width:100%; height:auto; min-height:calc(100dvh - 120px); transform:none!important; overflow:visible; }.presentation-page--auto .deck-slide.is-active { position:relative; display:block; min-height:calc(100dvh - 120px); padding:74px 42px 96px; overflow:visible; }.presentation-page--auto .deck-slide.auto-cover.is-active,.presentation-page--auto .deck-slide.auto-contact.is-active { display:grid; }.presentation-page--auto .auto-standard-header { position:relative; top:auto; right:auto; left:auto; width:100%; }.presentation-page--auto .auto-standard-header .slide-title h2 { font-size:clamp(2.25rem,9vw,3.5rem); line-height:1.06; white-space:normal; }.presentation-page--auto .auto-standard-header .slide-title p:not(.auto-kicker) { font-size:1rem; white-space:normal; }.presentation-page--auto .auto-standard-diagram { position:relative; top:auto; left:auto; width:100%; height:auto; display:grid; grid-template-columns:1fr; gap:14px; margin-top:34px; }.presentation-page--auto .auto-standard-diagram .diagram-lines { display:none; }.presentation-page--auto .auto-standard-node,.presentation-page--auto .auto-standard-diagram--3 .auto-standard-node,.presentation-page--auto .auto-standard-diagram--2 .auto-standard-node,.presentation-page--auto .auto-standard-diagram--1 .auto-standard-node { position:relative !important; top:auto !important; right:auto !important; bottom:auto !important; left:auto !important; width:100% !important; height:auto !important; min-height:138px; padding:17px 18px; border-radius:14px; }.presentation-page--auto .auto-standard-node .visual-node__title { font-size:19px; }.presentation-page--auto .auto-standard-node .visual-node__text { margin-top:7px; font-size:13px; line-height:1.34; }.presentation-page--auto .auto-cover { grid-template-columns:1fr; }.presentation-page--auto .auto-cover .auto-slide-header { padding-left:0; }.presentation-page--auto .auto-cover .cover__visual { width:min(66vw,250px); height:min(66vw,250px); margin-top:28px; }.presentation-page--auto .auto-slide-header h1,.presentation-page--auto .auto-slide-header h2,.presentation-page--auto .auto-cover h1 { font-size:clamp(2.25rem,9vw,3.5rem); }.presentation-page--auto .auto-slide-header p { font-size:1rem; }.presentation-page--auto .edge-nav { position:fixed; width:32px; height:54px; }.presentation-page--auto .edge-nav--back { left:2px; }.presentation-page--auto .edge-nav--next { right:2px; }.presentation-page--auto .edge-nav svg { width:24px; }.presentation-page--auto .presentation-footer { position:relative; right:auto; bottom:auto; left:auto; margin-top:36px; } }
+
+/* One restrained glass treatment for every reusable diagram node. The tint is
+   intentionally subtle so the information hierarchy remains typographic. */
+.presentation-page outfinity-presentation :where(.visual-node, .auto-node) {
+  border-width: 1px !important;
+  background-color: rgba(5, 12, 12, .91) !important;
+  background-image:
+    linear-gradient(145deg, rgba(0, 207, 200, .095), rgba(0, 207, 200, .018) 42%, transparent 70%),
+    linear-gradient(165deg, rgba(255, 255, 255, .045), rgba(0, 0, 0, .16)) !important;
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .065),
+    inset 0 0 28px rgba(0, 207, 200, .025) !important;
+  backdrop-filter: blur(9px) saturate(112%);
+  -webkit-backdrop-filter: blur(9px) saturate(112%);
+}
+
+.presentation-page outfinity-presentation :where(
+  .visual-node--gold,
+  .auto-node:nth-child(even),
+  .partnership-capital,
+  .partnership-investors,
+  .service-capital,
+  .about-hub,
+  .about-d,
+  .phase-3,
+  .role-capital,
+  .proposal-hub,
+  .ownership-hub
+) {
+  background-image:
+    linear-gradient(145deg, rgba(255, 201, 40, .10), rgba(255, 201, 40, .018) 42%, transparent 70%),
+    linear-gradient(165deg, rgba(255, 255, 255, .045), rgba(0, 0, 0, .16)) !important;
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, .28),
+    inset 0 1px 0 rgba(255, 255, 255, .065),
+    inset 0 0 28px rgba(255, 201, 40, .03) !important;
+}
+
+.presentation-page outfinity-presentation .node-circle {
+  background-image:
+    radial-gradient(circle at 36% 25%, rgba(255, 255, 255, .07), transparent 31%),
+    radial-gradient(circle at 50% 60%, rgba(0, 207, 200, .085), rgba(5, 12, 12, .94) 70%) !important;
+}
+
+.presentation-page outfinity-presentation :where(.visual-node, .auto-node):is(:hover, :focus-visible) {
+  box-shadow:
+    0 20px 46px rgba(0, 0, 0, .34),
+    0 0 0 1px rgba(0, 207, 200, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .09) !important;
+}
+
+@media (max-width: 720px) {
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .presentation-page :where(.deck-slide.is-active, .slide-header, .slide-title, .diagram, .explore-grid, .contact-card) { min-width: 0; max-width: 100%; }
+  .presentation-page :where(.slide-title h1, .slide-title h2, .cover h1, .visual-node__title) { overflow-wrap: anywhere; }
+  .presentation-page outfinity-presentation :where(.visual-node, .auto-node) {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, .24), inset 0 1px 0 rgba(255, 255, 255, .055) !important;
+    backdrop-filter: blur(6px) saturate(108%);
+    -webkit-backdrop-filter: blur(6px) saturate(108%);
+  }
+  .presentation-page outfinity-presentation > .edge-nav {
+    position: fixed !important;
+    top: 50vh !important;
+    top: 50svh !important;
+    width: 28px !important;
+    height: 50px !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    color: rgba(247, 249, 249, .72) !important;
+    font-size: 2.25rem !important;
+  }
+  .presentation-page outfinity-presentation > .edge-nav--back { left: max(0px, env(safe-area-inset-left)) !important; }
+  .presentation-page outfinity-presentation > .edge-nav--next { right: max(0px, env(safe-area-inset-right)) !important; }
+  .presentation-page outfinity-presentation > .edge-nav svg { width: 22px !important; height: 22px !important; }
+}
+
+@media (min-width: 721px) and (max-width: 920px) and (max-height: 500px) and (orientation: landscape) {
+  body.presentation-page { --presentation-nav-height: 70px; --presentation-toolbar-height: 54px; }
+  .presentation-page .contents { top: 70px; height: 54px; min-height: 54px; }
+  .presentation-page .contents__inner { height: 54px; min-height: 54px; }
+  .presentation-page .deck-viewport { height: calc(100svh - 124px); }
+  .presentation-page .deck-nav__button { width: 48px; height: 48px; }
+  .presentation-page .deck-nav__page-title,
+  .presentation-page .presentation-footer .deck-credit,
+  .presentation-page .presentation-footer .presentation-detail-hint,
+  .presentation-page .click-hint,
+  .presentation-page .presentation-context { display: none !important; }
+  .presentation-page outfinity-presentation > .edge-nav {
+    position: fixed !important;
+    top: 50svh !important;
+    width: 28px !important;
+    height: 48px !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    color: rgba(247, 249, 249, .72) !important;
+    font-size: 2.25rem !important;
+  }
+  .presentation-page outfinity-presentation > .edge-nav--back { left: max(0px, env(safe-area-inset-left)) !important; }
+  .presentation-page outfinity-presentation > .edge-nav--next { right: max(0px, env(safe-area-inset-right)) !important; }
+}
+
+/* Canonical presentation controls. Every page inherits one visual rhythm,
+   regardless of the legacy symbols or local presentation theme in its HTML. */
+.presentation-page .contents {
+  --deck-control-size: 48px;
+  --deck-icon-size: 22px;
+  --deck-ui-font: var(--font-primary, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif);
+  font-family: var(--deck-ui-font);
+}
+
+.presentation-page .contents__inner {
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: clamp(6px, 1.2vw, 18px);
+  font-family: var(--deck-ui-font);
+}
+
+.presentation-page .deck-nav__left,
+.presentation-page .deck-nav__right {
+  min-width: 0;
+  height: var(--deck-control-size);
+  gap: 0;
+  align-items: center;
+}
+
+.presentation-page .deck-nav__left { justify-content: flex-end; }
+.presentation-page .deck-nav__right { justify-content: flex-start; }
+
+.presentation-page .deck-nav__button {
+  width: var(--deck-control-size);
+  min-width: var(--deck-control-size);
+  height: var(--deck-control-size);
+  min-height: var(--deck-control-size);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+  font-family: var(--deck-ui-font);
+  font-size: var(--deck-icon-size);
+  font-weight: 800;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.presentation-page .deck-nav__button svg,
+.presentation-page .deck-nav__button .deck-nav__icon {
+  width: var(--deck-icon-size);
+  height: var(--deck-icon-size);
+  flex-basis: var(--deck-icon-size);
+  stroke-width: 1.9;
+}
+
+.presentation-page .deck-nav__button[data-presentation-icon="home"] svg,
+.presentation-page .deck-nav__button[data-presentation-icon="home"] .deck-nav__icon {
+  width: 25px;
+  height: 25px;
+  flex-basis: 25px;
+}
+
+.presentation-page .deck-nav__button[data-presentation-icon="back"],
+.presentation-page .deck-nav__button[data-presentation-icon="next"] {
+  padding-bottom: .08em;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: calc(var(--deck-icon-size) * 1.65);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.presentation-page .deck-nav__page-title {
+  min-width: 0;
+  max-width: min(25vw, 340px);
+  margin: 0 .55rem 0 .2rem;
+  overflow: hidden;
+  color: rgba(247, 249, 249, .8);
+  font-family: var(--deck-ui-font);
+  font-size: 1.05rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .065em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.presentation-page .deck-nav__status {
+  min-width: 0;
+  height: var(--deck-control-size);
+  gap: .65rem;
+  align-items: center;
+  font-family: var(--deck-ui-font);
+}
+
+.presentation-page .deck-nav__count {
+  min-width: 0;
+  display: inline-block;
+  font-family: var(--deck-ui-font);
+  font-size: .94rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: .06em;
+  text-align: center;
+}
+
+.presentation-page .deck-nav__progress {
+  min-height: var(--deck-control-size);
+  gap: 5px;
+  align-items: center;
+}
+
+.presentation-page .deck-nav__dot {
+  width: 8px;
+  height: 8px;
+  flex: 0 0 auto;
+}
+
+.presentation-page .deck-nav__dot:hover,
+.presentation-page .deck-nav__dot:focus-visible,
+.presentation-page .deck-nav__dot.is-active { width: 16px; }
+
+/* The edge arrows use the same unframed symbols as the Home mini deck on
+   desktop and mobile. Focus remains visible through color and glow only. */
+.presentation-page outfinity-presentation > .edge-nav,
+.presentation-page--auto outfinity-presentation > .edge-nav {
+  width: 46px;
+  height: 68px;
+  padding: 0;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  color: rgba(247, 249, 249, .68);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: .7;
+}
+
+.presentation-page outfinity-presentation > .edge-nav:hover,
+.presentation-page outfinity-presentation > .edge-nav:focus-visible,
+.presentation-page--auto outfinity-presentation > .edge-nav:hover,
+.presentation-page--auto outfinity-presentation > .edge-nav:focus-visible {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #ffdc68;
+  text-shadow: 0 0 14px rgba(255, 201, 40, .35);
+  outline: none;
+}
+
+@media (max-width: 720px) {
+  .presentation-page .contents { --deck-control-size: 44px; --deck-icon-size: 19px; }
+  .presentation-page .deck-nav__button[data-presentation-icon="home"] svg,
+  .presentation-page .deck-nav__button[data-presentation-icon="home"] .deck-nav__icon { width: 22px; height: 22px; flex-basis: 22px; }
+  .presentation-page .contents__inner { column-gap: 2px; }
+  .presentation-page .deck-nav__status { min-width: 0; gap: .3rem; }
+  .presentation-page .deck-nav__count { font-size: .78rem; letter-spacing: .035em; }
+  .presentation-page .deck-nav__progress { gap: 3px; }
+  .presentation-page .deck-nav__dot { width: 6px; height: 6px; }
+  .presentation-page .deck-nav__dot:hover,
+  .presentation-page .deck-nav__dot:focus-visible,
+  .presentation-page .deck-nav__dot.is-active { width: 11px; }
+}

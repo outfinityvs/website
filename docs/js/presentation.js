@@ -4,7 +4,7 @@
      survive a deploy through the browser cache. */
   document.querySelectorAll('link[href*="css/presentation.css"]').forEach(function (link) {
     var href = new URL(link.getAttribute('href'), document.baseURI);
-    href.searchParams.set('v', '20260723-controls-books');
+    href.searchParams.set('v', '20260723-header-clean');
     link.href = href.href;
   });
 
@@ -21,6 +21,12 @@
     if (!button || !CONTROL_ICONS[icon]) return;
     button.innerHTML = CONTROL_ICONS[icon];
     button.dataset.presentationIcon = icon;
+  }
+
+  function normalizeDirectionalArrow(button, direction) {
+    if (!button) return;
+    button.textContent = direction === 'back' ? '‹' : '›';
+    button.dataset.presentationIcon = direction;
   }
 
   function pageLabelFromFilename() {
@@ -107,13 +113,16 @@
       this.fullscreen = controls.querySelector('[data-presentation-fullscreen]');
       this.count = controls.querySelector('[data-presentation-count]');
       this.progress = controls.querySelector('[data-presentation-progress]');
+      this.contextLabels = Array.from(this.querySelectorAll('.presentation-context'));
       this.edgeBack = this.querySelector('[data-presentation-edge-back]');
       this.edgeNext = this.querySelector('[data-presentation-edge-next]');
 
       normalizeControlIcon(this.home, 'home');
-      normalizeControlIcon(this.back, 'back');
-      normalizeControlIcon(this.next, 'next');
+      normalizeDirectionalArrow(this.back, 'back');
+      normalizeDirectionalArrow(this.next, 'next');
       normalizeControlIcon(this.fullscreen, 'fullscreen');
+      normalizeDirectionalArrow(this.edgeBack, 'back');
+      normalizeDirectionalArrow(this.edgeNext, 'next');
 
       if (this.home && this.home.parentElement) {
         var pageTitle = controls.querySelector('[data-presentation-page-title]');
@@ -426,7 +435,15 @@
       if (this.next) this.next.disabled = this.current === this.slides.length - 1;
       if (this.edgeBack) this.edgeBack.disabled = this.current === 0;
       if (this.edgeNext) this.edgeNext.disabled = this.current === this.slides.length - 1;
-      if (this.count) this.count.textContent = String(this.current + 1).padStart(2, '0') + '/' + String(this.slides.length).padStart(2, '0');
+      var currentSlide = this.slides[this.current];
+      var currentLabel = currentSlide.dataset.navLabel || currentSlide.getAttribute('aria-label') || currentSlide.id || ('Slide ' + String(this.current + 1));
+      if (this.count) {
+        this.count.textContent = String(this.current + 1).padStart(2, '0') + '/' + String(this.slides.length).padStart(2, '0');
+        this.count.setAttribute('aria-label', 'Slide ' + String(this.current + 1) + ' of ' + String(this.slides.length) + ': ' + currentLabel);
+      }
+      if (this.contextLabels) this.contextLabels.forEach(function (context) {
+        context.textContent = 'OUTFINITY — ' + currentLabel;
+      });
       if (updateHash !== false && this.slides[this.current].id) history.replaceState(null, '', '#' + this.slides[this.current].id);
     }
 

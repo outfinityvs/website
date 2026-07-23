@@ -7,8 +7,8 @@
   <link rel="alternate" type="text/html" href="cultural-artefacts-overview.html" title="Cultural Artefacts article">
   <title>Cultural Artefacts | Outfinity</title>
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/styles.css?v=20260723-safari-mobile">
-  <link rel="stylesheet" href="css/presentation.css?v=20260723-controls-books">
+  <link rel="stylesheet" href="css/styles.css?v=20260723-control-bar">
+  <link rel="stylesheet" href="css/presentation.css?v=20260723-header-clean">
   <style>
     :root { --ink:#0d1111; --ink-2:#111919; --green:#062e2d; --teal:#00cfc8; --gold:#ffc928; --paper:#f7f9f9; --muted:#aab8b7; }
     .cultural-deck { position:absolute; top:50%; left:50%; width:1600px; height:900px; overflow:hidden; transform:translate(-50%,-50%) scale(var(--deck-scale,1)); transform-origin:center; background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink); background-size:80px 80px,80px 80px,auto,auto; }
@@ -73,8 +73,9 @@
       .book-card h3 { font-size:18px; }
       .book-card p { font-size:12.5px; }
       .book-card__actions { padding-top:9px; }
-      .book-scroll-control { z-index:3; display:grid; width:44px; height:28px; place-items:center; align-self:center; padding:0; border:1px solid rgba(0,207,200,.34); border-radius:999px; background:rgba(6,46,45,.88); color:var(--teal); font-size:21px; line-height:1; cursor:pointer; }
-      .book-scroll-control:hover,.book-scroll-control:focus-visible { border-color:var(--teal); color:var(--paper); outline:none; }
+      .book-scroll-control { z-index:3; display:grid; width:28px; height:32px; place-items:center; align-self:center; padding:0; border:0; background:transparent; color:rgba(247,249,249,.72); font-family:Georgia,"Times New Roman",serif; font-size:2.25rem; font-weight:900; line-height:.7; cursor:pointer; }
+      .book-scroll-control span { display:block; transform:rotate(90deg); }
+      .book-scroll-control:hover,.book-scroll-control:focus-visible { color:var(--paper); outline:none; }
       .book-scroll-control:disabled { opacity:.24; cursor:default; }
       .book-scroll-control--up { grid-row:1; }
       .book-scroll-control--down { grid-row:3; }
@@ -154,8 +155,8 @@
     </outfinity-presentation>
   </main>
   <footer class="presentation-site-footer"><div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="legal-disclaimer.html">Legal Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="imprint.html">Imprint</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></nav></div></footer>
-  <script src="js/nav.js?v=20260723-safari-mobile"></script>
-  <script src="js/presentation.js?v=20260723-controls-books"></script>
+  <script src="js/nav.js?v=20260723-brand-unified"></script>
+  <script src="js/presentation.js?v=20260723-header-clean"></script>
   <script>
     (() => {
       document.querySelectorAll('.book-grid').forEach((grid, gridIndex) => {
@@ -170,8 +171,8 @@
         up.className = 'book-scroll-control book-scroll-control--up';
         down.className = 'book-scroll-control book-scroll-control--down';
         up.type = down.type = 'button';
-        up.textContent = '⌃';
-        down.textContent = '⌄';
+        up.innerHTML = '<span aria-hidden="true">‹</span>';
+        down.innerHTML = '<span aria-hidden="true">›</span>';
         up.setAttribute('aria-label', 'Previous book');
         down.setAttribute('aria-label', 'Next book');
         up.setAttribute('aria-controls', grid.id);

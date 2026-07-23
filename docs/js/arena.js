@@ -462,7 +462,6 @@
   function renderGraphic(view) {
     var graphic = view.graphic || { type: "gate" };
     var html = '<div class="arena-visual arena-visual--radar arena-visual--' + escapeHtml(graphic.type) + '">';
-    html += renderSoundToggle();
     html += renderRadar(view, graphic);
     html += "</div>";
     return html;
@@ -473,6 +472,7 @@
     var center = radarCenter(graphic);
     var count = Math.max(items.length, 1);
     return '<div class="arena-radar" style="--count:' + count + '">' +
+      renderSoundToggle() +
       '<svg class="arena-radar-svg" viewBox="0 0 400 400" aria-hidden="true" focusable="false">' +
       '<circle cx="200" cy="200" r="174"></circle><circle cx="200" cy="200" r="124"></circle><circle cx="200" cy="200" r="70"></circle>' +
       '<path d="M200 26v348M26 200h348M77 77l246 246M323 77 77 323"></path>' +
