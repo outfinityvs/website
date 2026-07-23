@@ -316,13 +316,13 @@
   if (document.querySelector("main.page-main") && !document.body.classList.contains("presentation-page") && conventionalExceptions.indexOf(currentPath) === -1 && !isEmbeddedArticleSource) {
     var presentationCss = document.createElement("link");
     presentationCss.rel = "stylesheet";
-    presentationCss.href = getRelativePath("css/presentation.css?v=20260721-navigation-scale");
+    presentationCss.href = getRelativePath("css/presentation.css?v=20260723-desktop-credit");
     document.head.appendChild(presentationCss);
     var componentScript = document.createElement("script");
-    componentScript.src = getRelativePath("js/presentation.js?v=20260721-navigation-scale");
+    componentScript.src = getRelativePath("js/presentation.js?v=20260723-footer-contact");
     componentScript.onload = function () {
       var adapterScript = document.createElement("script");
-      adapterScript.src = getRelativePath("js/legacy-presentation.js?v=20260721-navigation-scale");
+      adapterScript.src = getRelativePath("js/legacy-presentation.js?v=20260723-three-slide-essential");
       document.body.appendChild(adapterScript);
     };
     document.body.appendChild(componentScript);
