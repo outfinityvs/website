@@ -1,4 +1,12 @@
 (function () {
+  var userAgent = navigator.userAgent || "";
+  var isAppleWebKit = /AppleWebKit/i.test(userAgent);
+  var isSafari = isAppleWebKit && /Safari/i.test(userAgent) && !/(?:Chrome|Chromium|CriOS|Edg|EdgiOS|FxiOS|OPiOS|Android)/i.test(userAgent);
+  var isIPadOS = navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1;
+  var isMobileSafari = isSafari && (/(?:iPhone|iPad|iPod)/i.test(userAgent) || isIPadOS);
+  document.documentElement.classList.toggle("is-safari", isSafari);
+  document.documentElement.classList.toggle("is-mobile-safari", isMobileSafari);
+
   var path = window.location.pathname;
   var basePath = "";
   
@@ -160,7 +168,7 @@
     '<div class="nav-inner">' +
     '<a class="brand" href="' + brandHref + '">' +
     '<img src="' + logoSrc + '" alt="Outfinity logo">' +
-    "<span>Outfinity</span>" +
+    '<span class="brand__name">Outfinity</span>' +
     "</a>" +
     '<ul class="menu-groups">' +
     '<li class="menu-direct-item"><a class="menu-direct' + homeCurrent + '" href="' + getRelativePath("/") + '">Home</a></li>' +

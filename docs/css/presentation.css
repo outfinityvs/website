@@ -44,6 +44,7 @@ body.presentation-page {
   position: relative;
   height: calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height));
   min-height: 0;
+  padding-top: 0;
   overflow: hidden;
 }
 
@@ -117,7 +118,7 @@ outfinity-presentation[data-animation="none"] *::after {
 
 .presentation-page .deck-nav__page-title {
   color: rgba(247,249,249,.86);
-  font: 900 1.65rem/1 var(--font-primary);
+  font: 900 1.65rem/1 var(--font-primary, ui-sans-serif, system-ui, sans-serif);
   letter-spacing: .06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -144,11 +145,15 @@ outfinity-presentation[data-animation="none"] *::after {
   font-size: 1.65rem;
   line-height: 1;
   cursor: pointer;
+  font-family: var(--font-primary, ui-sans-serif, system-ui, sans-serif);
 }
 
-.presentation-page .deck-nav__button svg {
+.presentation-page .deck-nav__button svg,
+.presentation-page .deck-nav__button .deck-nav__icon {
   width: 1.65rem;
   height: 1.65rem;
+  display: block;
+  flex: 0 0 1.65rem;
   fill: none;
   stroke: currentColor;
   stroke-width: 2;
@@ -173,6 +178,7 @@ outfinity-presentation[data-animation="none"] *::after {
   letter-spacing: .06em;
   text-align: center;
   white-space: nowrap;
+  font-family: var(--font-primary, ui-sans-serif, system-ui, sans-serif);
 }
 
 .presentation-page .deck-nav__progress {
@@ -507,6 +513,35 @@ outfinity-presentation[data-animation="none"] *::after {
   .presentation-page .deck-slide[id$="contact"] .slide-title p,
   .presentation-page .presentation-contact-slide .slide-title p { max-width: 100%; }
   .presentation-site-footer > div { display: block; }.presentation-site-footer nav { justify-content: flex-start; margin-top: .55rem; }
+
+  /* A transform on the whole active slide made otherwise identical mobile
+     presentations enter from visibly different vertical positions. */
+  .presentation-page outfinity-presentation > .deck-slide.is-active {
+    animation: outfinity-mobile-slide-enter 180ms ease both !important;
+  }
+}
+
+@keyframes outfinity-mobile-slide-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Safari uses a changing visual viewport while its browser chrome expands and
+   collapses. Keep the fixed navigation and deck measured against the stable
+   viewport so the slide cannot move underneath either header. */
+@media (max-width: 920px) {
+  html.is-safari body.presentation-page {
+    min-height: 100svh;
+  }
+
+  html.is-safari .presentation-page .deck-viewport {
+    height: calc(100svh - var(--presentation-nav-height) - var(--presentation-toolbar-height));
+  }
+
+  html.is-safari .presentation-page .contents {
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
 }
 
 @media (max-width: 360px) {
@@ -518,6 +553,12 @@ outfinity-presentation[data-animation="none"] *::after {
   .presentation-page *,
   .presentation-page *::before,
   .presentation-page *::after { scroll-behavior: auto !important; }
+  .presentation-page outfinity-cover *,
+  .presentation-page .cover__visual,
+  .presentation-page .deck-slide.is-active {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* Automatic presentation adapter for legacy editorial pages. */

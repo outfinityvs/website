@@ -4,6 +4,9 @@
   var videoModal = document.querySelector("[data-video-modal]");
   var videoFrame = document.querySelector("[data-video-frame]");
   var videoConfirm = document.querySelector("[data-video-confirm]");
+  var articleModal = null;
+  var articleTrigger = null;
+  var articleRequestId = 0;
   if (!app || !host) return;
 
   var storageKey = "outfinity.quickPresentation.state.v1";
@@ -480,7 +483,7 @@
         var content = iconSvg(index) + '<b>' + escapeHtml(item.label) + "</b>";
         var style = ' style="--i:' + index + ';--count:' + count + '"';
         if (item.href) {
-          return '<a class="arena-radar-node" href="' + escapeHtml(item.href) + '" target="_blank" rel="noopener noreferrer"' + style + ' aria-label="Open ' + escapeHtml(item.label) + '">' + content + "</a>";
+          return '<button class="arena-radar-node" type="button" data-article-url="' + escapeHtml(item.href) + '"' + style + ' aria-label="View article: ' + escapeHtml(item.label) + '">' + content + "</button>";
         }
         return '<span class="arena-radar-node"' + style + ">" + content + "</span>";
       }).join("") + "</div>" +
@@ -767,6 +770,108 @@
     render();
   }
 
+  function ensureArticleModal() {
+    if (articleModal) return articleModal;
+    articleModal = document.createElement("dialog");
+    articleModal.className = "arena-article-modal";
+    articleModal.setAttribute("aria-labelledby", "arena-article-title");
+    articleModal.setAttribute("aria-busy", "false");
+    articleModal.innerHTML = '<article class="arena-article-panel"><button class="arena-article-close" type="button" data-article-close aria-label="Close article">×</button><h1 id="arena-article-title" aria-live="polite" aria-atomic="true">Article</h1><div class="arena-article-content" data-article-content></div></article>';
+    document.body.appendChild(articleModal);
+    articleModal.addEventListener("click", function (event) {
+      if (event.target === articleModal || event.target.closest("[data-article-close]")) closeArticle();
+    });
+    articleModal.addEventListener("cancel", function (event) {
+      event.preventDefault();
+      closeArticle();
+    });
+    return articleModal;
+  }
+
+  function articleTitle(value) {
+    return String(value || "Article").replace(/\s*\|\s*Outfinity\s*$/i, "").replace(/\s*[—-]\s*Article\s*$/i, "").trim() || "Article";
+  }
+
+  function fetchArticleDocument(url) {
+    return window.fetch(url).then(function (response) {
+      if (!response.ok) throw new Error("Article unavailable");
+      return response.text();
+    }).then(function (html) { return new DOMParser().parseFromString(html, "text/html"); });
+  }
+
+  function extractArticle(documentSource, sourceUrl) {
+    var alternate = documentSource.querySelector('link[rel="alternate"][type="text/html"]');
+    if (alternate) return { alternate: new URL(alternate.getAttribute("href"), sourceUrl).href };
+    return documentSource.querySelector("article.presentation-seo-source, article.presentation-article-source, article.presentation-article, main article, main") || documentSource.body;
+  }
+
+  function renderArticle(source, title) {
+    var modal = ensureArticleModal();
+    modal.querySelector("#arena-article-title").textContent = articleTitle(title);
+    var content = modal.querySelector("[data-article-content]");
+    var holder = document.createElement("div");
+    if (source) holder.appendChild(source.cloneNode(true));
+    holder.querySelectorAll("nav, footer, form, script, style, noscript, iframe, outfinity-presentation, outfinity-cover, .deck-viewport, .deck-canvas, .contents, .site-header, .presentation-footer, .presentation-site-footer, .continue-exploring, .page-cta").forEach(function (node) { node.remove(); });
+    var fragment = document.createDocumentFragment();
+    Array.from(holder.querySelectorAll("h2, h3, h4, p, ul, ol, blockquote, table, figure, pre")).filter(function (node) {
+      return !node.closest("li") && !node.closest("figure") && (node.textContent.trim() || node.querySelector("img, video"));
+    }).forEach(function (node) {
+      var copy = node.cloneNode(true);
+      [copy].concat(Array.from(copy.querySelectorAll("*"))).forEach(function (element) {
+        element.removeAttribute("class");
+        element.removeAttribute("id");
+        element.removeAttribute("style");
+        Array.from(element.attributes).forEach(function (attribute) {
+          if (/^data-|^on/i.test(attribute.name)) element.removeAttribute(attribute.name);
+        });
+      });
+      fragment.appendChild(copy);
+    });
+    if (!fragment.childNodes.length) {
+      var fallback = document.createElement("p");
+      fallback.textContent = "The editorial article could not be loaded in this presentation.";
+      fragment.appendChild(fallback);
+    }
+    content.replaceChildren(fragment);
+    modal.setAttribute("aria-busy", "false");
+  }
+
+  function openArticle(url, trigger) {
+    var modal = ensureArticleModal();
+    var requestId = ++articleRequestId;
+    articleTrigger = trigger;
+    modal.setAttribute("aria-busy", "true");
+    modal.querySelector("#arena-article-title").textContent = "Loading article …";
+    modal.querySelector("[data-article-content]").replaceChildren();
+    if (typeof modal.showModal === "function") modal.showModal();
+    else modal.setAttribute("open", "");
+    var sourceUrl = new URL(url, document.baseURI).href;
+    fetchArticleDocument(sourceUrl).then(function (documentSource) {
+      var source = extractArticle(documentSource, sourceUrl);
+      if (!source.alternate) return { source: source, title: documentSource.title };
+      return fetchArticleDocument(source.alternate).then(function (articleDocument) {
+        return { source: extractArticle(articleDocument, source.alternate), title: articleDocument.title };
+      });
+    }).then(function (result) {
+      if (requestId !== articleRequestId || !modal.hasAttribute("open")) return;
+      if (result.source && result.source.alternate) throw new Error("Article unavailable");
+      renderArticle(result.source, result.title);
+    }).catch(function () {
+      if (requestId !== articleRequestId || !modal.hasAttribute("open")) return;
+      renderArticle(null, "Article unavailable");
+    });
+  }
+
+  function closeArticle() {
+    if (!articleModal || !articleModal.hasAttribute("open")) return;
+    articleRequestId += 1;
+    articleModal.setAttribute("aria-busy", "false");
+    if (typeof articleModal.close === "function") articleModal.close();
+    else articleModal.removeAttribute("open");
+    if (articleTrigger && articleTrigger.focus) articleTrigger.focus({ preventScroll: true });
+    articleTrigger = null;
+  }
+
   // iOS Safari requires Web Audio to be created and started directly from a
   // touch gesture. `click` can arrive too late there, so use pointer/touch
   // input as the primary unlock and retain click as the keyboard fallback.
@@ -783,6 +888,13 @@
   document.addEventListener("click", unlockSoundFromEvent, true);
 
   host.addEventListener("click", function (event) {
+    var articleAction = event.target.closest("[data-article-url]");
+    if (articleAction) {
+      event.preventDefault();
+      stopAutoPlay();
+      openArticle(articleAction.dataset.articleUrl, articleAction);
+      return;
+    }
     var slideNavigation = event.target.closest("[data-slide-view]");
     if (slideNavigation) {
       event.preventDefault();

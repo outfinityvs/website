@@ -7,8 +7,8 @@
   <link rel="alternate" type="text/html" href="cultural-artefacts-overview.html" title="Cultural Artefacts article">
   <title>Cultural Artefacts | Outfinity</title>
   <link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/styles.css?v=20260721-mobile-tablet-layout">
-  <link rel="stylesheet" href="css/presentation.css?v=20260722-footer-normalized">
+  <link rel="stylesheet" href="css/styles.css?v=20260723-safari-mobile">
+  <link rel="stylesheet" href="css/presentation.css?v=20260723-controls-books">
   <style>
     :root { --ink:#0d1111; --ink-2:#111919; --green:#062e2d; --teal:#00cfc8; --gold:#ffc928; --paper:#f7f9f9; --muted:#aab8b7; }
     .cultural-deck { position:absolute; top:50%; left:50%; width:1600px; height:900px; overflow:hidden; transform:translate(-50%,-50%) scale(var(--deck-scale,1)); transform-origin:center; background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink); background-size:80px 80px,80px 80px,auto,auto; }
@@ -36,7 +36,7 @@
     .book-card > * { position:relative; z-index:1; }
     .book-card:nth-child(even) { border-color:rgba(255,201,40,.72); background:linear-gradient(90deg,#3a2d06 0 14px,#5a4810 14px 18px,#3f3513 18px 84%,#2c260d 100%); }
     .book-card:nth-child(even)::before { border-color:rgba(255,201,40,.32); background:#272008; }
-    .book-card:hover { border-color:var(--teal); box-shadow:0 13px 0 #061817,12px 25px 27px rgba(0,0,0,.55),inset 0 1px 0 rgba(247,249,249,.18); transform:translateY(-8px) rotateZ(1.2deg) rotateY(-5deg) rotateX(.7deg); }
+    @media (hover:hover) and (pointer:fine) { .book-card:hover { border-color:var(--teal); box-shadow:0 13px 0 #061817,12px 25px 27px rgba(0,0,0,.55),inset 0 1px 0 rgba(247,249,249,.18); transform:translateY(-8px) rotateZ(1.2deg) rotateY(-5deg) rotateX(.7deg); } }
     .book-card.is-linked { cursor:pointer; }
     .book-card.is-linked:focus-visible { outline:3px solid var(--gold); outline-offset:7px; }
     .book-card__kind { color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
@@ -50,9 +50,12 @@
     .book-action:hover,.book-action:focus-visible { color:var(--paper); text-decoration:underline; text-underline-offset:4px; outline:none; }
     .book-action:hover::after,.book-action:focus-visible::after { transform:translate(2px,-2px); }
     .book-note { display:inline-flex; margin-top:auto; padding-top:14px; color:rgba(247,249,249,.53); font-size:10px; font-weight:760; letter-spacing:.03em; }
+    .book-carousel { display:contents; }
+    .book-scroll-control { display:none; }
     @media (max-width:900px) {
-      .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:auto; min-height:100%; transform:none!important; overflow:visible; background-size:48px 48px,48px 48px,auto,auto; }
-      .cultural-deck .deck-slide.is-active { position:relative; min-height:calc(100dvh - 120px); padding:22px 24px 22px; overflow:hidden; }
+      .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:100%; min-height:0; transform:none!important; overflow:hidden; background-size:48px 48px,48px 48px,auto,auto; }
+      .cultural-deck .deck-slide.is-active:not(.cover) { position:relative; height:100%; min-height:0; padding:58px 24px 54px; overflow:hidden; flex-direction:column; }
+      .cultural-deck .deck-slide.is-active:not(.cover) { display:flex; }
       .cultural-deck .slide-header { position:relative; top:auto; right:auto; left:auto; }
       .cultural-deck .slide-title h2 { margin-top:9px; font-size:clamp(2.1rem,9vw,3.25rem); white-space:normal; }
       .cultural-deck .slide-title p { font-size:.92rem; }
@@ -63,13 +66,23 @@
       .cultural-deck .cover h1 { font-size:clamp(40px,12vw,62px); }
       .cultural-deck .cover__lead { margin-top:20px; font-size:clamp(14px,4vw,18px); }
       .cultural-deck .cover__rule { width:82px; height:4px; margin-top:20px; }
-      .book-grid,.book-grid--three,.book-grid--four { position:relative; top:auto; left:auto; width:100%; height:calc(100% - 126px); min-height:0; margin-top:14px; padding:4px 10px 12px 4px; grid-template-columns:1fr; gap:14px; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; touch-action:pan-y; scrollbar-width:none; scroll-snap-type:y proximity; scroll-padding-block:4px 12px; }
+      .book-carousel { position:relative; display:grid; min-height:0; flex:1 1 auto; grid-template-rows:32px minmax(0,1fr) 32px; justify-items:center; margin-top:10px; }
+      .book-grid,.book-grid--three,.book-grid--four { position:relative; top:auto; left:auto; width:100%; height:100%; min-height:0; margin:0; padding:4px 10px 12px 4px; grid-template-columns:1fr; gap:14px; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; touch-action:pan-y; scrollbar-width:none; scroll-snap-type:y proximity; scroll-padding-block:4px 12px; perspective:none; }
       .book-grid::-webkit-scrollbar { display:none; }
-      .book-card { width:185px; height:278px; justify-self:center; padding:18px 14px 15px 24px; transform:rotateZ(1.4deg) rotateY(-5deg); scroll-snap-align:start; }
-      .book-card:hover { transform:translateY(-5px) rotateZ(.8deg) rotateY(-3deg); }
+      .book-card { width:185px; height:278px; justify-self:center; padding:18px 14px 15px 24px; transform:rotateZ(.8deg) rotateY(-3deg); transform-origin:center; scroll-snap-align:start; scroll-snap-stop:always; }
       .book-card h3 { font-size:18px; }
       .book-card p { font-size:12.5px; }
       .book-card__actions { padding-top:9px; }
+      .book-scroll-control { z-index:3; display:grid; width:44px; height:28px; place-items:center; align-self:center; padding:0; border:1px solid rgba(0,207,200,.34); border-radius:999px; background:rgba(6,46,45,.88); color:var(--teal); font-size:21px; line-height:1; cursor:pointer; }
+      .book-scroll-control:hover,.book-scroll-control:focus-visible { border-color:var(--teal); color:var(--paper); outline:none; }
+      .book-scroll-control:disabled { opacity:.24; cursor:default; }
+      .book-scroll-control--up { grid-row:1; }
+      .book-scroll-control--down { grid-row:3; }
+      .book-carousel .book-grid { grid-row:2; }
+      .cultural-deck > .edge-nav { width:32px; height:54px; }
+      .cultural-deck > .edge-nav--back { left:3px; }
+      .cultural-deck > .edge-nav--next { right:3px; }
+      .cultural-deck .presentation-footer { display:none; }
     }
     @media (prefers-reduced-motion:reduce) { .cultural-deck .deck-slide.is-active,.cultural-deck .cover__visual { animation:none; } .book-card { transition:none; } }
   </style>
@@ -135,15 +148,62 @@
           <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>Concordia Series</h3><p>Volume II, The Aperture Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_2.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
         </div>
       </section>
+      <div class="presentation-footer"><a class="deck-credit" href="https://www.outfinity.ch" target="_blank" rel="noreferrer">Outfinity Venture Studio&nbsp;<span>[www.outfinity.ch]</span></a></div>
       <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button>
       <button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide">›</button>
     </outfinity-presentation>
   </main>
-  <footer class="presentation-site-footer"><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><div class="footer-links"><a href="legal-disclaimer.html">Legal Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="imprint.html">Imprint</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></div></footer>
-  <script src="js/nav.js"></script>
-  <script src="js/presentation.js?v=20260722-footer-normalized"></script>
+  <footer class="presentation-site-footer"><div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="legal-disclaimer.html">Legal Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="imprint.html">Imprint</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></nav></div></footer>
+  <script src="js/nav.js?v=20260723-safari-mobile"></script>
+  <script src="js/presentation.js?v=20260723-controls-books"></script>
   <script>
     (() => {
+      document.querySelectorAll('.book-grid').forEach((grid, gridIndex) => {
+        const carousel = document.createElement('div');
+        const up = document.createElement('button');
+        const down = document.createElement('button');
+        const cards = Array.from(grid.querySelectorAll('.book-card'));
+        const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        grid.id ||= `book-list-${gridIndex + 1}`;
+        carousel.className = 'book-carousel';
+        up.className = 'book-scroll-control book-scroll-control--up';
+        down.className = 'book-scroll-control book-scroll-control--down';
+        up.type = down.type = 'button';
+        up.textContent = '⌃';
+        down.textContent = '⌄';
+        up.setAttribute('aria-label', 'Previous book');
+        down.setAttribute('aria-label', 'Next book');
+        up.setAttribute('aria-controls', grid.id);
+        down.setAttribute('aria-controls', grid.id);
+
+        grid.before(carousel);
+        carousel.append(up, grid, down);
+
+        const cardPosition = card => card.getBoundingClientRect().top - grid.getBoundingClientRect().top + grid.scrollTop;
+        const updateControls = () => {
+          const maximum = Math.max(0, grid.scrollHeight - grid.clientHeight);
+          up.disabled = grid.scrollTop <= 3;
+          down.disabled = grid.scrollTop >= maximum - 3;
+        };
+        const move = direction => {
+          const current = grid.scrollTop;
+          const positions = cards.map(cardPosition);
+          const target = direction > 0
+            ? positions.find(position => position > current + 8) ?? positions.at(-1)
+            : positions.slice().reverse().find(position => position < current - 8) ?? positions[0];
+          grid.scrollTo({ top:target, behavior:reducedMotion.matches ? 'auto' : 'smooth' });
+        };
+
+        up.addEventListener('click', () => move(-1));
+        down.addEventListener('click', () => move(1));
+        grid.addEventListener('scroll', updateControls, { passive:true });
+        window.addEventListener('resize', updateControls, { passive:true });
+        if ('ResizeObserver' in window) new ResizeObserver(updateControls).observe(grid);
+        new MutationObserver(updateControls).observe(grid.closest('.deck-slide'), { attributes:true, attributeFilter:['class'] });
+        requestAnimationFrame(updateControls);
+      });
+
       document.querySelectorAll('.book-card').forEach(card => {
         const primaryLink = card.querySelector('.book-action:not(.book-action--amazon), .book-action--amazon');
         if (!primaryLink) return;

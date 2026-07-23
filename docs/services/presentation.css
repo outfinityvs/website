@@ -52,22 +52,62 @@
 
     /* Diagram-specific visual language */
 
-    /* Layout only: the animated SVG itself belongs to the shared
-       <outfinity-cover> component in ../js/presentation.js. */
-    @media (max-width: 900px) {
-      .cover__content { left: 48px; width: 54%; }
-      .cover h1 { font-size: clamp(42px, 7vw, 72px); }
-      .cover__visual { right: 24px; transform: scale(.78); transform-origin: right center; }
-    }
-
-    @media (max-width: 600px) {
-      .cover__content {
-        top: 54%;
-        left: 24px;
-        width: calc(100% - 48px);
-        transform: translateY(-50%);
-      }
-      .cover h1 { font-size: 42px; }
-      .cover__lead { max-width: 62%; margin-top: 18px; font-size: 15px; }
-      .cover__visual { top: 90px; right: -108px; transform: scale(.55); }
-    }
+/* Canonical mobile cover shared with the other presentation themes. This
+   replaces the former half-width/offset service cover that pushed the shared
+   animation down and to the right on narrow screens. */
+@media (max-width: 900px) {
+  .deck-canvas { height: 100%; }
+  .deck-slide.is-active:not(.cover) { overflow-x: hidden; }
+  .diagram {
+    width: 100%;
+    height: auto;
+    transform: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+    gap: 12px;
+  }
+  .diagram-lines { display: none; }
+  .diagram .visual-node {
+    position: relative !important;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 138px;
+    transform: none;
+    padding: 17px 18px;
+  }
+  .cover.is-active {
+    display: grid;
+    grid-template-rows: repeat(3, minmax(0, 1fr));
+    padding: 0 40px 48px 18px;
+    overflow: hidden;
+  }
+  .cover__visual {
+    position: relative;
+    top: auto;
+    right: auto;
+    grid-row: 1;
+    align-self: center;
+    justify-self: center;
+    width: min(66vw, 250px);
+    height: min(66vw, 250px);
+    transform: none;
+  }
+  .cover__content {
+    position: relative;
+    top: auto;
+    left: auto;
+    grid-row: 2 / 4;
+    align-self: start;
+    width: 100%;
+    padding: 12px 8px 36px;
+    transform: none;
+  }
+  .cover__eyebrow { margin-bottom: 12px; font-size: 11px; }
+  .cover h1 { font-size: clamp(40px, 12vw, 62px); }
+  .cover__lead { max-width: none; margin-top: 20px; font-size: clamp(14px, 4vw, 18px); }
+  .cover__rule { width: 82px; height: 4px; margin-top: 20px; }
+}
