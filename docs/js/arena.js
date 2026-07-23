@@ -876,7 +876,12 @@
   // touch gesture. `click` can arrive too late there, so use pointer/touch
   // input as the primary unlock and retain click as the keyboard fallback.
   function unlockSoundFromEvent(event) {
-    if (event.target.closest("[data-sound-toggle]")) return;
+    if (event.target.closest("[data-sound-toggle]")) {
+      // Prime without changing the visible preference. The following click
+      // performs the actual toggle against an already resumed context.
+      ensureAudio(true);
+      return;
+    }
     enableSoundFromInteraction();
   }
 
@@ -1009,7 +1014,7 @@
   function openVideo(trigger) {
     if (!videoModal || !videoFrame) return;
     videoTrigger = trigger;
-    videoFrame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/2FwHgugXZko?autoplay=1&controls=0&disablekb=1&fs=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1" title="Outfinity presentation film" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
+    videoFrame.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/ySwhcRRy_i8?autoplay=1&controls=0&disablekb=1&fs=0&playsinline=1&rel=0&iv_load_policy=3&cc_load_policy=0&enablejsapi=1" title="Outfinity presentation film" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>';
     var frame = videoFrame.querySelector("iframe");
     if (frame) frame.addEventListener("load", function () { disableVideoCaptions(frame); }, { once: true });
     if (typeof videoModal.showModal === "function") videoModal.showModal();
@@ -1063,10 +1068,16 @@
   if (videoFrame) videoFrame.addEventListener("click", showVideoConfirm);
 
   function enableSoundFromInteraction() {
-    if (state.soundEnabled || state.soundPreference === "off") return;
-    state.soundEnabled = true;
-    updateSoundButtons();
-    saveStoredState();
+    if (state.soundPreference === "off") return;
+    if (!state.soundEnabled) {
+      state.soundEnabled = true;
+      updateSoundButtons();
+      saveStoredState();
+    }
+    // iOS can move a running AudioContext back to suspended/interrupted when
+    // Safari chrome changes, the page is backgrounded, or output is rerouted.
+    // Retry inside every subsequent trusted gesture instead of trusting only
+    // the UI state.
     playWhenAudioReady(ensureAudio());
   }
 
@@ -1077,12 +1088,14 @@
     saveStoredState();
     track("sound_toggled");
     if (state.soundEnabled) {
-      playWhenAudioReady(ensureAudio());
+      ensureAudio().then(function (ready) {
+        if (ready) playSoundConfirmation();
+      });
     }
   }
 
-  function ensureAudio() {
-    if (!state.soundEnabled) return Promise.resolve(false);
+  function ensureAudio(forceUnlock) {
+    if (!state.soundEnabled && !forceUnlock) return Promise.resolve(false);
     if (!audioContext) {
       var AudioCtor = window.AudioContext || window.webkitAudioContext;
       if (!AudioCtor) return Promise.resolve(false);
@@ -1091,10 +1104,14 @@
       masterGain.gain.value = 0.48;
       masterGain.connect(audioContext.destination);
     }
-    unlockAudioContext();
     var needsResume = audioContext.state === "suspended" || audioContext.state === "interrupted";
+    // Calling resume synchronously from the gesture is essential on iOS.
     var ready = needsResume ? audioContext.resume() : Promise.resolve();
-    return ready.then(function () {
+    unlockAudioContext();
+    return Promise.resolve(ready).then(function () {
+      if (audioContext && audioContext.state !== "running" && audioContext.resume) return audioContext.resume();
+    }).then(function () {
+      unlockAudioContext();
       return !!audioContext && audioContext.state === "running";
     }).catch(function () {
       return false;
@@ -1102,15 +1119,44 @@
   }
 
   function unlockAudioContext() {
-    if (audioUnlocked || !audioContext || !masterGain) return;
-    // A zero-length buffer source is intentionally started in the user gesture.
-    // This unlocks iOS Safari's Web Audio output without producing a sound.
+    if (!audioContext || !masterGain) return;
+    if (audioUnlocked && audioContext.state === "running") return;
+    // Prime both a buffer source and an oscillator during the trusted gesture.
+    // The dedicated zero-gain node keeps this completely silent.
     try {
+      var silentGain = audioContext.createGain();
+      silentGain.gain.value = 0;
+      silentGain.connect(audioContext.destination);
       var source = audioContext.createBufferSource();
-      source.buffer = audioContext.createBuffer(1, 1, audioContext.sampleRate);
-      source.connect(masterGain);
+      source.buffer = audioContext.createBuffer(1, 32, audioContext.sampleRate);
+      source.connect(silentGain);
       source.start(0);
+      if (audioContext.createOscillator) {
+        var oscillator = audioContext.createOscillator();
+        oscillator.connect(silentGain);
+        oscillator.start(0);
+        oscillator.stop(audioContext.currentTime + 0.035);
+      }
       audioUnlocked = true;
+    } catch (error) {}
+  }
+
+  function playSoundConfirmation() {
+    if (!state.soundEnabled || !audioContext || audioContext.state !== "running") return;
+    try {
+      var now = audioContext.currentTime;
+      var gain = audioContext.createGain();
+      var oscillator = audioContext.createOscillator();
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(660, now);
+      oscillator.frequency.exponentialRampToValueAtTime(880, now + 0.09);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.12, now + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+      oscillator.connect(gain);
+      connectAudio(gain);
+      oscillator.start(now);
+      oscillator.stop(now + 0.13);
     } catch (error) {}
   }
 

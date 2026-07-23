@@ -4852,15 +4852,15 @@ body.legal-page .footer {
     }
 
     html.is-mobile-safari .arena-visual {
-        --mobile-radar-size: min(calc(100vw - 7rem), 26svh, 220px);
+        --mobile-radar-size: min(calc(100vw - 4.5rem), 30svh, 238px);
         overflow: visible;
         transform: translateY(.25rem);
     }
 
     html.is-mobile-safari .arena-radar-node {
-        width: clamp(68px, calc(var(--mobile-radar-size) * .38), 86px);
+        width: clamp(64px, calc(var(--mobile-radar-size) * .34), 82px);
         min-height: 44px;
-        transform: rotate(calc((360deg / var(--count)) * var(--i))) translate(calc(var(--mobile-radar-size) * .37)) rotate(calc((-360deg / var(--count)) * var(--i))) translate(-50%, -50%);
+        transform: rotate(calc((360deg / var(--count)) * var(--i))) translate(calc(var(--mobile-radar-size) * .46)) rotate(calc((-360deg / var(--count)) * var(--i))) translate(-50%, -50%);
     }
 
     html.is-mobile-safari .arena-radar-node b {
