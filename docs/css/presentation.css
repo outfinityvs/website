@@ -908,3 +908,20 @@ body.presentation-page--auto { color: #f7f9f9; font-family: Inter, ui-sans-serif
   .presentation-page .deck-nav__dot:focus-visible,
   .presentation-page .deck-nav__dot.is-active { width: 11px; }
 }
+
+/* Studio credit and interaction hint are desktop-only metadata. Hide every
+   structural variant on narrow or touch-first screens; local presentation
+   themes must not bring them back and force wrapped footer rows. */
+@media (max-width: 920px), (hover: none) and (pointer: coarse) {
+  body.presentation-page .deck-credit,
+  body.presentation-page .presentation-detail-hint,
+  body.presentation-page .click-hint,
+  body.presentation-page .presentation-context,
+  body.presentation-page outfinity-presentation .deck-credit,
+  body.presentation-page outfinity-presentation .presentation-detail-hint,
+  body.presentation-page outfinity-presentation .click-hint,
+  body.presentation-page outfinity-presentation .presentation-context {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}

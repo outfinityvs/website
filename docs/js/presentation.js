@@ -4,7 +4,7 @@
      survive a deploy through the browser cache. */
   document.querySelectorAll('link[href*="css/presentation.css"]').forEach(function (link) {
     var href = new URL(link.getAttribute('href'), document.baseURI);
-    href.searchParams.set('v', '20260723-header-clean');
+    href.searchParams.set('v', '20260723-desktop-credit');
     link.href = href.href;
   });
 
@@ -175,7 +175,7 @@
       var isNew = !footer;
       if (!footer) footer = document.createElement('footer');
       footer.className = 'presentation-site-footer';
-      footer.innerHTML = '<div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="' + href('legal-disclaimer.html') + '">Legal Disclaimer</a><a href="' + href('privacy-policy.html') + '">Privacy Policy</a><a href="' + href('imprint.html') + '">Imprint</a><a href="' + href('terms.html') + '">Terms</a><a href="' + href('cookies.html') + '">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></nav></div>';
+      footer.innerHTML = '<div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="' + href('contact.html') + '">Contact</a><a href="' + href('legal-disclaimer.html') + '">Legal Disclaimer</a><a href="' + href('privacy-policy.html') + '">Privacy Policy</a><a href="' + href('imprint.html') + '">Imprint</a><a href="' + href('terms.html') + '">Terms</a><a href="' + href('cookies.html') + '">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></nav></div>';
       if (isNew) (this.viewport || this).insertAdjacentElement('afterend', footer);
     }
 

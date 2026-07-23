@@ -2785,6 +2785,20 @@ body.legal-page .footer {
     flex: 0 0 auto;
 }
 
+.arena-back,
+.arena-forward {
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+.arena-directional-arrow {
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2.25rem;
+    font-weight: 900;
+    line-height: 0.7;
+    transform: translateY(-0.04em);
+}
+
 .arena-back:disabled,
 .arena-forward:disabled,
 .arena-home:disabled {

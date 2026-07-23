@@ -379,8 +379,8 @@
     var slideIndex = presentationOrder.indexOf(state.currentView);
     var nextSlide = slideIndex >= 0 && slideIndex < presentationOrder.length - 1 ? presentationOrder[slideIndex + 1] : "";
     var isHomeView = state.currentView === "V0";
-    var back = '<button class="arena-control arena-back arena-icon-only" type="button" data-back aria-label="Back" title="Back"' + (state.history.length ? "" : " disabled") + '>' + buttonIcon("back") + "</button>";
-    var forward = '<button class="arena-control arena-forward arena-icon-only" type="button" data-deck-step="' + nextSlide + '" aria-label="Next presentation slide" title="Next presentation slide"' + (nextSlide ? "" : " disabled") + '>' + buttonIcon("forward") + "</button>";
+    var back = '<button class="arena-control arena-back arena-icon-only" type="button" data-back aria-label="Back" title="Back"' + (state.history.length ? "" : " disabled") + '><span class="arena-directional-arrow" aria-hidden="true">‹</span></button>';
+    var forward = '<button class="arena-control arena-forward arena-icon-only" type="button" data-deck-step="' + nextSlide + '" aria-label="Next presentation slide" title="Next presentation slide"' + (nextSlide ? "" : " disabled") + '><span class="arena-directional-arrow" aria-hidden="true">›</span></button>';
     var home = '<button class="arena-control arena-home arena-icon-only" type="button" data-home aria-label="Home" title="Home"' + (state.currentView === "V0" ? " disabled" : "") + '>' + buttonIcon("home") + "</button>";
     var main = actions && actions.length ? actions.map(function (action) {
       var classes = ["arena-action"];
