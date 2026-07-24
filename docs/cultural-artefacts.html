@@ -27,7 +27,7 @@
     .cultural-deck .cover__rule { width:130px; height:6px; margin-top:38px; border:0; border-radius:5px; background:linear-gradient(90deg,var(--gold),var(--teal)); }
     .cultural-deck .cover__visual { position:absolute; top:182px; right:105px; z-index:1; width:495px; height:495px; filter:drop-shadow(0 24px 52px rgba(0,0,0,.28)); animation:cultural-float 10s ease-in-out infinite; }
     @keyframes cultural-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
-    .book-grid { position:absolute; top:252px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(6,190px); justify-content:center; gap:16px 18px; align-content:start; perspective:1400px; }
+    .book-grid { position:absolute; top:252px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(4,190px); justify-content:center; gap:16px 18px; align-content:start; perspective:1400px; }
     .book-grid--two { grid-template-columns:repeat(2,190px); }
     .book-grid--three { grid-template-columns:repeat(3,190px); }
     .book-grid--four { grid-template-columns:repeat(4,190px); }
@@ -95,7 +95,7 @@
   <main class="deck-viewport">
     <outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
       <section class="deck-slide cover is-active" id="overview" data-nav-label="Overview">
-        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · 28 titles</p><h1>Research becomes <span>literature.</span></h1><p class="cover__lead">AI contributes across the collection. Except for the explicitly labelled AI-Assisted Research shelf, where AI may also set the direction, human authors stand behind the message.</p><hr class="cover__rule"></div>
+        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · 29 titles</p><h1>Research becomes <span>literature.</span></h1><p class="cover__lead">AI contributes across the collection. Except for the explicitly labelled AI-Assisted Research shelf, where AI may also set the direction, human authors stand behind the message.</p><hr class="cover__rule"></div>
         <div class="cover__visual" aria-hidden="true"><outfinity-cover></outfinity-cover></div>
       </section>
       <section class="deck-slide" id="ventures" data-nav-label="Ventures">
@@ -127,10 +127,11 @@
       </section>
       <section class="deck-slide" id="ai-assisted-research" data-nav-label="AI-Assisted Research">
         <header class="slide-header"><div class="slide-title"><p class="slide-kicker">AI-Assisted Research</p><h2>Published for review</h2><p>AI made the largest contribution to these works, including their direction. Human contributors do not assume responsibility for the content; the results are published because they are interesting enough to invite scrutiny, critique and further review.</p></div></header>
-        <div class="book-grid book-grid--three">
+        <div class="book-grid book-grid--four">
           <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The History and Future of Social Technologies</h3><p>How Institutions, Narratives, Markets, Protocols, and Intelligence Co-Evolve with Deep Technology.</p><div class="book-card__actions"><a class="book-action" href="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
           <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>Limits of Machine Intelligence</h3><p>An AI-assisted exploration of Outfinitism: moving frontiers, and the threshold of science.</p><div class="book-card__actions"><a class="book-action" href="books/Limits_of_Machine_Intelligence.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
           <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The Atlas of Operational Ideas</h3><p>Identity, Novelty, and Scientific Discovery in Neuro-Symbolic AI.</p><div class="book-card__actions"><a class="book-action" href="books/The_Atlas_of_Operational_Ideas.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The Frontier of Novelty</h3><p>Machine Learning, the Unknown, and the Architecture of Discovery.</p><div class="book-card__actions"><a class="book-action" href="books/The_Frontier_of_Novelty.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
         </div>
       </section>
       <section class="deck-slide" id="interpretation-adoption" data-nav-label="Interpretation &amp; Adoption">
