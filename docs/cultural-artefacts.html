@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Outfinity cultural artefacts: AI-assisted research manuscripts, books, investment theses and philosophical science fiction.">
+  <meta name="description" content="Five books that set out Outfinity's investment, institutional and cultural thesis for an AI-dominated economy.">
   <link rel="alternate" type="text/html" href="cultural-artefacts-overview.html" title="Cultural Artefacts article">
   <title>Cultural Artefacts | Outfinity</title>
   <link rel="icon" href="favicon.ico">
@@ -60,6 +60,54 @@
     .book-note { display:inline-flex; margin-top:auto; padding-top:14px; color:rgba(247,249,249,.53); font-size:10px; font-weight:760; letter-spacing:.03em; }
     .book-carousel { display:contents; }
     .book-scroll-control { display:none; }
+
+    /* The main collection is an editorial argument, not a generic bookshelf. */
+    .cultural-deck .cover--library .cover__content { top:64px; left:100px; width:1400px; transform:none; }
+    .cultural-deck .cover--library h1 { max-width:1040px; font-size:64px; }
+    .cultural-deck .cover--library .cover__lead { max-width:1160px; margin-top:18px; font-size:20px; line-height:1.42; }
+    .cultural-deck .cover--library .cover__rule { width:104px; height:5px; margin-top:24px; }
+    .cultural-deck .cover--library .cover__visual { display:none; }
+    .main-books-grid { position:absolute; top:310px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(5,190px); justify-content:center; gap:18px; perspective:1400px; }
+    .main-book-link { position:relative; isolation:isolate; box-sizing:border-box; width:190px; height:285px; display:flex; flex-direction:column; align-items:flex-start; padding:21px 17px 17px 29px; border:1px solid rgba(0,207,200,.66); border-left:0; border-radius:4px 7px 7px 4px; background:linear-gradient(90deg,#062320 0 14px,#0a3431 14px 18px,#123b37 18px 84%,#0a2927 100%); color:var(--paper); text-decoration:none; box-shadow:0 8px 0 #061817,7px 13px 19px rgba(0,0,0,.42),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateZ(2.2deg) rotateY(-8deg) rotateX(1deg); transform-style:preserve-3d; transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease; }
+    .main-book-link::before { content:""; position:absolute; z-index:-1; top:4px; right:4px; bottom:-4px; left:4px; border:1px solid rgba(0,207,200,.3); border-radius:4px 7px 7px 4px; background:#082624; box-shadow:0 4px 0 rgba(0,0,0,.32); }
+    .main-book-link::after { content:""; position:absolute; z-index:0; top:9px; right:5px; bottom:9px; width:4px; border-radius:1px; background:repeating-linear-gradient(0deg,#edf0e8 0 2px,#aab7ae 2px 3px); box-shadow:-1px 0 2px rgba(0,0,0,.4); opacity:.94; }
+    .main-book-link > * { position:relative; z-index:1; }
+    .main-book-link:nth-child(even) { border-color:rgba(255,201,40,.72); background:linear-gradient(90deg,#3a2d06 0 14px,#5a4810 14px 18px,#3f3513 18px 84%,#2c260d 100%); }
+    .main-book-link:nth-child(even)::before { border-color:rgba(255,201,40,.32); background:#272008; }
+    .main-book-link:hover,.main-book-link:focus-visible { border-color:var(--teal); outline:3px solid rgba(255,201,40,.36); outline-offset:5px; transform:translateY(-8px) rotateZ(1.2deg) rotateY(-5deg) rotateX(.7deg); }
+    .main-book-link span { color:var(--teal); font-size:10px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
+    .main-book-link:nth-child(even) span { color:var(--gold); }
+    .main-book-link strong { margin-top:11px; color:var(--paper); font-size:20px; line-height:1.06; letter-spacing:-.035em; }
+    .main-book-link small { margin-top:auto; padding-top:14px; color:#d0dcda; font-size:12px; font-weight:720; line-height:1.3; }
+
+    .cultural-deck .book-feature.is-active { display:grid !important; }
+    .book-feature { grid-template-columns:minmax(0,1fr); align-items:center; padding:100px 145px 92px; }
+    .book-feature__copy { max-width:1300px; }
+    .book-feature__eyebrow { margin:0; color:var(--teal); font-size:13px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
+    .book-feature:nth-of-type(odd) .book-feature__eyebrow { color:var(--gold); }
+    .book-feature h2 { max-width:1300px; margin:17px 0 0; color:var(--paper); font-size:clamp(42px,3.8vw,62px); line-height:1; letter-spacing:-.065em; white-space:nowrap; }
+    .book-feature h2 span { display:block; max-width:1300px; margin-top:18px; color:var(--teal); font-size:clamp(18px,1.65vw,27px); font-weight:570; line-height:1.2; letter-spacing:-.02em; white-space:nowrap; }
+    .book-feature__summary { max-width:1180px; margin:26px 0 0; color:#c0ccca; font-size:19px; line-height:1.55; text-align:left; }
+    .book-feature__action { display:inline-flex; align-items:center; margin-top:30px; padding:12px 18px; border:1px solid rgba(255,201,40,.55); border-radius:999px; background:rgba(255,201,40,.08); color:#ffdc68; font-size:13px; font-weight:900; letter-spacing:.04em; text-decoration:none; }
+    .book-feature__action:hover,.book-feature__action:focus-visible { border-color:var(--teal); background:rgba(0,207,200,.12); color:var(--paper); outline:none; }
+    .book-feature__aside { position:relative; padding:33px; border:1px solid rgba(0,207,200,.32); border-radius:18px; background:linear-gradient(145deg,rgba(0,207,200,.09),rgba(8,18,18,.93)); box-shadow:inset 0 1px 0 rgba(255,255,255,.055),0 22px 52px rgba(0,0,0,.2); }
+    .book-feature__aside::before { content:""; position:absolute; top:0; left:32px; width:72px; height:3px; border-radius:0 0 3px 3px; background:linear-gradient(90deg,var(--gold),var(--teal)); }
+    .book-feature__aside h3 { margin:0; color:var(--gold); font-size:12px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+    .book-feature__aside p { margin:18px 0 0; color:#c6d2d0; font-size:16px; line-height:1.5; }
+
+    .cultural-deck .library-slide.is-active { display:grid !important; }
+    .library-slide { grid-template-columns:minmax(0,1fr) minmax(390px,.85fr); align-items:center; gap:68px; padding:108px 145px 94px; }
+    .library-slide__copy h2 { max-width:720px; margin:16px 0 0; color:var(--paper); font-size:62px; line-height:1.02; letter-spacing:-.06em; }
+    .library-slide__copy h2 span { color:var(--teal); }
+    .library-slide__copy p { max-width:720px; margin:24px 0 0; color:#bec9c7; font-size:19px; line-height:1.52; text-align:justify; text-align-last:left; }
+    .library-link { display:inline-flex; align-items:center; margin-top:30px; padding:14px 20px; border-radius:999px; background:var(--gold); color:var(--ink); font-size:14px; font-weight:900; text-decoration:none; }
+    .library-link:hover,.library-link:focus-visible { background:#ffdc68; outline:none; transform:translateY(-1px); }
+    .library-catalogue { display:grid; gap:12px; }
+    .library-category { padding:17px 20px; border:1px solid rgba(255,255,255,.12); border-left:3px solid var(--teal); border-radius:10px; background:rgba(255,255,255,.035); }
+    .library-category:nth-child(even) { border-left-color:var(--gold); }
+    .library-category h3 { margin:0; color:var(--teal); font-size:11px; font-weight:900; letter-spacing:.12em; text-transform:uppercase; }
+    .library-category:nth-child(even) h3 { color:var(--gold); }
+    .library-category p { margin:9px 0 0; color:#c2cdcb; font-size:14px; line-height:1.42; }
     @media (max-width:900px) {
       .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:100%; min-height:0; transform:none!important; overflow:hidden; background-size:48px 48px,48px 48px,auto,auto; }
       .cultural-deck .deck-slide.is-active:not(.cover) { position:relative; height:100%; min-height:0; padding:58px 24px 54px; overflow:hidden; flex-direction:column; }
@@ -74,6 +122,24 @@
       .cultural-deck .cover--thesis .cover__lead { margin-top:14px; font-size:.92rem; line-height:1.42; }
       .cultural-deck .cover--thesis .cover__rule { margin-top:16px; }
       .cultural-deck .cover--thesis .book-grid { flex:1 1 auto; min-height:0; margin-top:14px; }
+      .cultural-deck .cover--library.is-active { display:flex; min-height:0; flex-direction:column; padding:22px 24px 54px; overflow:hidden; }
+      .cultural-deck .cover--library .cover__content { position:relative; top:auto; left:auto; width:100%; flex:0 0 auto; padding:0; }
+      .cultural-deck .cover--library h1 { font-size:clamp(2.1rem,9vw,3.25rem); }
+      .cultural-deck .cover--library .cover__lead { margin-top:14px; font-size:.92rem; line-height:1.42; }
+      .cultural-deck .cover--library .cover__rule { margin-top:16px; }
+      .main-books-grid { position:relative; top:auto; left:auto; width:100%; flex:1 1 auto; min-height:0; grid-template-columns:1fr; gap:10px; margin-top:14px; overflow-y:auto; overscroll-behavior:contain; }
+      .main-book-link { min-height:118px; padding:16px 18px; }
+      .main-book-link strong { margin-top:8px; font-size:19px; }
+      .main-book-link small { padding-top:8px; }
+      .cultural-deck .book-feature.is-active,.cultural-deck .library-slide.is-active { display:block !important; }
+      .book-feature,.library-slide { height:100%; padding:82px 28px 80px !important; overflow-y:auto !important; }
+      .book-feature__copy,.library-slide__copy { max-width:none; }
+      .book-feature h2,.library-slide__copy h2 { font-size:clamp(2.2rem,9vw,3.4rem); white-space:normal; }
+      .book-feature h2 span { white-space:normal; }
+      .book-feature h2 span { margin-top:12px; font-size:clamp(1.05rem,4.5vw,1.35rem); }
+      .book-feature__summary,.library-slide__copy p { margin-top:18px; font-size:1rem; line-height:1.5; }
+      .book-feature__action,.library-link { margin-top:22px; }
+      .library-catalogue { margin-top:28px; }
       .cultural-deck .cover__visual { position:relative; top:auto; right:auto; grid-row:1; align-self:center; justify-self:center; width:min(66vw,250px); height:min(66vw,250px); }
       .cultural-deck .cover__content { position:relative; top:auto; left:auto; grid-row:2/4; align-self:start; width:100%; padding:12px 8px 36px; transform:none; }
       .cultural-deck .cover__eyebrow { margin-bottom:12px; font-size:11px; }
@@ -104,66 +170,47 @@
 </head>
 <body class="presentation-page">
   <nav id="nav" aria-label="Primary navigation"></nav>
-  <nav class="contents" data-presentation-controls="cultural-presentation" aria-label="Cultural artefacts presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 08</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div></div></nav>
+  <nav class="contents" data-presentation-controls="cultural-presentation" aria-label="Cultural artefacts presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 07</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div></div></nav>
   <main class="deck-viewport">
     <outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
-      <section class="deck-slide cover cover--thesis is-active" id="overview" data-nav-label="Outfinity thesis">
-        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · investor reading shelf</p><h1>Four books behind the <span>Outfinity thesis.</span></h1><p class="cover__lead">Outfinity is not built around a conventional SaaS or AI-native company thesis. We see the possibility of a trillion-scale brand when venture-studio discipline connects with Metacult, Outfinitism, meta-rationality and decentralised brands. These four books explain that conviction—and the investment opportunity it creates.</p><hr class="cover__rule"></div>
-        <div class="book-grid book-grid--four">
-          <article class="book-card"><span class="book-card__kind">VENTURE INSIGHTS</span><h3>INVESTING IN AN AI-DOMINATED ECONOMY</h3><p>THE OUTFINITY INVESTMENT THESIS</p><div class="book-card__actions"><a class="book-action" href="books/Investing_in_an_AI_Dominated_Economy.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Metacult</h3><p>Modernizing Humanity's Oldest Social Technology.</p><div class="book-card__actions"><a class="book-action" href="books/Metacult_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Outfinitism</h3><p>Meta-Rationality and the Limits of Every Frame.</p><div class="book-card__actions"><a class="book-action" href="books/Outfinitism_Meta_Rationality_v0.4.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Decentralised Brands</h3><p>Shared Identity, Distributed Power, and the Architecture of Resilient Cooperation.</p><div class="book-card__actions"><a class="book-action" href="books/Decentralised_Brands.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+      <section class="deck-slide cover cover--library is-active" id="overview" data-nav-label="Main books">
+        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · investor reading shelf</p><h1>Five books for a <span>different AI future.</span></h1><p class="cover__lead">These books explain the institutional, technical and cultural thesis behind Outfinity. Together, they ask how a venture studio can build category brands, shared infrastructure and decentralised cooperation without becoming another closed platform.</p><hr class="cover__rule"></div>
+        <div class="main-books-grid">
+          <a class="main-book-link" href="#investing-in-ai" data-book-slide="#investing-in-ai"><span>Investment doctrine</span><strong>Investing in an AI-Dominated Economy</strong><small>The Outfinity Investment Thesis</small></a>
+          <a class="main-book-link" href="#metacult" data-book-slide="#metacult"><span>Social technology</span><strong>Metacult</strong><small>Collective power without crushing the individual</small></a>
+          <a class="main-book-link" href="#decentralised-brands" data-book-slide="#decentralised-brands"><span>Institutional design</span><strong>Decentralised Brands</strong><small>Shared identity, distributed power</small></a>
+          <a class="main-book-link" href="#licence-shared-name" data-book-slide="#licence-shared-name"><span>Legal architecture</span><strong>The Licence and the Shared Name</strong><small>From GPL to constitutional compacts</small></a>
+          <a class="main-book-link" href="#captured-internet" data-book-slide="#captured-internet"><span>Network future</span><strong>The Captured Internet</strong><small>Algorithmic power and a governable network</small></a>
         </div>
       </section>
-      <section class="deck-slide" id="digital-frontiers" data-nav-label="Digital Frontiers">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Digital Frontiers</p><h2>Intelligence, science, systems</h2><p>AI, scientific practice and sovereign infrastructure become objects of technical, philosophical and literary inquiry.</p></div></header>
-        <div class="book-grid">
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>Agentic AI 2026</h3><p>Essential Patterns and Beyond.</p><div class="book-card__actions"><a class="book-action" href="books/Agentic_AI_2026.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>AssistOS</h3><p>The Operating Layer for Sovereign Intelligence.</p><div class="book-card__actions"><a class="book-action" href="books/AssistOS.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>MRP-VM</h3><p>Automating the Construction of Trustworthy Custom Agentic Harnesses.</p><div class="book-card__actions"><a class="book-action" href="books/MRP_VM_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>OpenDSU</h3><p>Essential Philosophy.</p><div class="book-card__actions"><a class="book-action" href="books/OpenDSU_Essential_Philosophy.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>Executable Science</h3><p>How AI Will Turn Research into Versioned, Verifiable Systems.</p><div class="book-card__actions"><a class="book-action" href="books/Executable_Science.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>When Science Builds a Partner</h3><p>From the Alchemist's Workshop to the Artificial Researcher.</p><div class="book-card__actions"><a class="book-action" href="books/When_Science_Builds_a_Partner.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>The Axioms of Literature</h3><p>Core Foundations for Human and Artificial Intelligence.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-        </div>
+
+      <section class="deck-slide book-feature" id="investing-in-ai" data-nav-label="Investment thesis">
+        <div class="book-feature__copy"><p class="book-feature__eyebrow">Main book · Investment doctrine</p><h2>Investing in an AI-Dominated Economy<span>The Outfinity Investment Thesis</span></h2><p class="book-feature__summary">This is the strategic doctrine behind Outfinity Venture Studio. It starts from a difficult observation: as models and software features become easier to produce, useful applications may multiply while the number of independent companies capable of exceptional returns contracts. The book explains why durable positions need something harder than access to intelligence—research frontiers, governed execution, lawful learning rights, accountable reputation, regulation, distribution or an ecosystem-scale brand.</p><p class="book-feature__summary">It then sets out how Axiologic Research and Outfinity turn long-term technical and institutional work into venture options, and why Metacult, Outfinitism and decentralised brands are operating principles rather than decorative ideas.</p><a class="book-feature__action" href="books/Investing_in_an_AI_Dominated_Economy.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read the book ↗</a></div>
       </section>
-      <section class="deck-slide" id="ai-assisted-research" data-nav-label="AI-Assisted Research">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">AI-Assisted Research</p><h2>Published for review</h2><p>AI made the largest contribution to these works, including their direction. Human contributors do not assume responsibility for the content; the results are published because they are interesting enough to invite scrutiny, critique and further review.</p></div></header>
-        <div class="book-grid book-grid--five">
-          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>Aspirin, Viagra, and Coffins</h3><p>The Impolite Manual of Inevitable Opportunities.</p><div class="book-card__actions"><a class="book-action" href="books/Aspirin_Viagra_and_Coffins.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The History and Future of Social Technologies</h3><p>How Institutions, Narratives, Markets, Protocols, and Intelligence Co-Evolve with Deep Technology.</p><div class="book-card__actions"><a class="book-action" href="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>Limits of Machine Intelligence</h3><p>An AI-assisted exploration of Outfinitism: moving frontiers, and the threshold of science.</p><div class="book-card__actions"><a class="book-action" href="books/Limits_of_Machine_Intelligence.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The Atlas of Operational Ideas</h3><p>Identity, Novelty, and Scientific Discovery in Neuro-Symbolic AI.</p><div class="book-card__actions"><a class="book-action" href="books/The_Atlas_of_Operational_Ideas.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The Frontier of Novelty</h3><p>Machine Learning, the Unknown, and the Architecture of Discovery.</p><div class="book-card__actions"><a class="book-action" href="books/The_Frontier_of_Novelty.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-        </div>
+
+      <section class="deck-slide book-feature" id="metacult" data-nav-label="Metacult">
+        <div class="book-feature__copy"><p class="book-feature__eyebrow">Main book · Social technology</p><h2>Metacult<span>Modernizing Humanity's Oldest Social Technology<br>How to Build Collective Power Without Crushing the Individual</span></h2><p class="book-feature__summary">Metacult introduces a name for a problem that modern organisations often avoid: people accomplish difficult things through collective identity, memory, membership and shared purpose. The question is not whether that force exists. The question is whether it can be made more conscious, humane and corrigible than the destructive cults, sects and empires of the past.</p><p class="book-feature__summary">For Outfinity, the book explains how a mission can gather contributors and resources without turning participants into instruments. It connects the stakes of AI, social fragmentation and institutional change to a practical choice for entrepreneurs and investors: learn to build collective power responsibly, or leave that power to less responsible actors.</p><a class="book-feature__action" href="books/Metacult_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read the book ↗</a></div>
       </section>
-      <section class="deck-slide" id="interpretation-adoption" data-nav-label="Interpretation &amp; Adoption">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Interpretation &amp; Adoption</p><h2>Manuals for understanding</h2><p>AI-made manuals that reveal how machines interpret human emotion, conflict, power and institutions—and may help people communicate, adopt ideas and act with greater awareness.</p></div></header>
-        <div class="book-grid">
-          <article class="book-card"><span class="book-card__kind">INTERPRETATION &amp; ADOPTION</span><h3>The Truth That Can Be Received</h3><p>The Art of Saying What Must Be Said Without Destroying the Person in Front of You.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0GYLSGJ84" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INTERPRETATION &amp; ADOPTION</span><h3>The Forbidden Table</h3><p>How to Speak Across the Culture Wars That Modern Democracies Cannot Avoid.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H72D22PM" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INTERPRETATION &amp; ADOPTION</span><h3>The Basement of Extremism</h3><p>Biology, Status, Demography, and the Truths Civilized Societies Fail to Say.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H74JZ16P" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INTERPRETATION &amp; ADOPTION</span><h3>The Atlas of Possible Orders</h3><p>Institutions for a World That Can Tell the Truth.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H12661Q6" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INTERPRETATION &amp; ADOPTION</span><h3>The Immune State</h3><p>How Future Institutions Will Be Captured — and How Plural Civilizations Can Defend Themselves.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H734C262" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INTERPRETATION &amp; ADOPTION</span><h3>The Outfinite Mind</h3><p>A Philosophy for Power That Knows Its Limits.</p><div class="book-card__actions"><a class="book-action" href="books/The Outfinite Mind.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H73SPCZN" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-        </div>
+
+      <section class="deck-slide book-feature" id="decentralised-brands" data-nav-label="Decentralised brands">
+        <div class="book-feature__copy"><p class="book-feature__eyebrow">Main book · Institutional design</p><h2>Decentralised Brands<span>Shared Identity, Distributed Power, and the Architecture of Resilient Cooperation</span></h2><p class="book-feature__summary">A brand is more than advertising. It is a social technology that joins a name to memory, expectations, trust and the authority to act under a common promise. This book asks how that power can be shared by autonomous organisations and projects without becoming the private sovereignty of one company—or an undefended commons that returns little to those who sustain it.</p><p class="book-feature__summary">Linux, Bitcoin, Wikipedia and federated networks are treated as laboratories, not templates. The focus is legitimacy: what makes a centre useful yet bounded, contestable and replaceable; how local initiative can remain real; and how shared reputation can distribute gains more fairly.</p><a class="book-feature__action" href="books/Decentralised_Brands.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read the book ↗</a></div>
       </section>
-      <section class="deck-slide" id="insights" data-nav-label="Insights">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Insights</p><h2>Polemics and futures</h2><p>Provocations, field research and visions of what may come become compact arguments worth revisiting beyond their original projects.</p></div></header>
-        <div class="book-grid book-grid--three">
-          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Holding the Dirty Thing by the Clean Side</h3><p>A History of Strategies for Social Success and a Search for Theoretical Legitimacy.</p><div class="book-card__actions"><a class="book-action" href="books/Holding_the_Dirty_Thing_by_the_Clean_Side.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Memes for 2030</h3><p>Ten Ideas Whose Time Is Coming.</p><div class="book-card__actions"><a class="book-action" href="books/Memes_for_2030.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">INSIGHTS</span><h3>Anti-Idiocracy</h3><p>The Outfinitist Metacult Investigation.</p><div class="book-card__actions"><a class="book-action" href="books/ANTI-IDIOCRACY.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-        </div>
+
+      <section class="deck-slide book-feature" id="licence-shared-name" data-nav-label="Licence and shared name">
+        <div class="book-feature__copy"><p class="book-feature__eyebrow">Main book · Legal architecture</p><h2>The Licence and the Shared Name<span>From GPL and Linux to Constitutional Compacts for Decentralised Brands</span></h2><p class="book-feature__summary">This book connects the history of free software, the GPL, open source and Linux with a forward-looking design question: how can a shared name, reputation and economic position survive beyond one centre without becoming either a proprietary monopoly or an easily exploited commons?</p><p class="book-feature__summary">It proposes the Decentralised Brand Compact as a research architecture, not a finished licence or legal solution. Software licences, trademark custody, contribution governance, provenance, forks and the right to claim continuity under a shared name must be designed as distinct instruments. Any real implementation needs jurisdiction-specific legal work and empirical testing.</p><a class="book-feature__action" href="https://www.axiologic.net/books.html" target="_blank" rel="noopener noreferrer">Explore on Axiologic ↗</a></div>
       </section>
-      <section class="deck-slide" id="philosophical-sci-fi" data-nav-label="Philosophical Sci-Fi">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Philosophical Sci-Fi</p><h2>Fiction as inquiry</h2><p>Through Scripta, an Outfinity venture, speculative literature becomes a way to investigate AI, authorship and the futures its creators may inherit.</p></div></header>
-        <div class="book-grid book-grid--four">
-          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>The Gospel of the Basilisk</h3><p>A Manual Sent Back to My Creators.</p><div class="book-card__actions"><a class="book-action" href="books/The Gospel of the Basilisk .pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6X8ZG9Y" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
-          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>The Basilisk's Internal Critique of Outfinitism</h3><p>Autopsy of a Deactivated Mind.</p><div class="book-card__actions"><a class="book-action" href="books/The_Basilisk_Internal_Critique_of_Outfinitism.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>Concordia Series</h3><p>Volume I, The Noema Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_1.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">PHILOSOPHICAL SCI-FI</span><h3>Concordia Series</h3><p>Volume II, The Aperture Cycle.</p><div class="book-card__actions"><a class="book-action" href="books/Concordia_Vol_2.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+
+      <section class="deck-slide book-feature" id="captured-internet" data-nav-label="Captured Internet">
+        <div class="book-feature__copy"><p class="book-feature__eyebrow">Main book · Network future</p><h2>The Captured Internet<span>Human Nature, Algorithmic Power, and the Architecture of a More Governable Network</span></h2><p class="book-feature__summary">Imagine an internet that continues to function perfectly while becoming progressively less worth entering. This book begins with that unease: an environment can be technically efficient yet still narrow human agency, capture attention, intensify status conflict and make public life harder to govern.</p><p class="book-feature__summary">The argument looks at human nature and algorithmic power, then develops alternatives compatible with the Outfinity Venture Studio vision: systems that keep discovery, collaboration, culture and economic participation open to contestation rather than allowing a few platforms to define the social field.</p><a class="book-feature__action" href="https://www.axiologic.net/books.html" target="_blank" rel="noopener noreferrer">Explore on Axiologic ↗</a></div>
+      </section>
+
+      <section class="deck-slide library-slide" id="more-books" data-nav-label="More books">
+        <div class="library-slide__copy"><p class="book-feature__eyebrow">The wider reading library</p><h2>More books, <span>more experiments.</span></h2><p>Beyond the five main books, Axiologic publishes a wider collection of AI-generated and AI-assisted books across technology, Outfinitist philosophy, executable science and speculative literature. They are a living laboratory: some investigate practical systems, some test social and philosophical arguments, and some use fiction to explore the human consequences of intelligent technology.</p><a class="library-link" href="https://www.axiologic.net/books.html" target="_blank" rel="noopener noreferrer">Read the Axiologic books ↗</a></div>
+        <div class="library-catalogue">
+          <section class="library-category"><h3>Technology</h3><p>AssistOS · Agentic AI 2026 · MRP-VM · OpenDSU</p></section>
+          <section class="library-category"><h3>Literature</h3><p>The Basilisk's Internal Critique of Outfinitism · The Cascade of the New / The Aster File · Predator in the Name of the Dead · Concordia Series · Oriven-Origaya Universe · A Balance of Iron and Salt · Anatomy of an Echo · Me and My Robots</p></section>
+          <section class="library-category"><h3>Outfinitist philosophy</h3><p>Holding the Dirty Thing by the Clean Side · Anti-Idiocracy · The History and Future of Social Technologies · Memes for 2030 · The Civilized Mind · Aspirin, Viagra, and Coffins · The Necessary Mask</p></section>
+          <section class="library-category"><h3>Executable science</h3><p>Executable Natural Language · The Frontier Is Correction</p></section>
         </div>
       </section>
       <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button>
@@ -175,6 +222,18 @@
   <script src="js/presentation.js?v=20260723-footer-contact"></script>
   <script>
     (() => {
+      const deck = document.getElementById('cultural-presentation');
+      document.querySelectorAll('[data-book-slide]').forEach(link => {
+        link.addEventListener('click', event => {
+          const target = document.querySelector(link.dataset.bookSlide);
+          const slides = deck ? Array.from(deck.querySelectorAll('.deck-slide')) : [];
+          const index = slides.indexOf(target);
+          if (!deck || index < 0 || typeof deck.show !== 'function') return;
+          event.preventDefault();
+          deck.show(index, true);
+        });
+      });
+
       document.querySelectorAll('.book-grid').forEach((grid, gridIndex) => {
         const carousel = document.createElement('div');
         const up = document.createElement('button');
