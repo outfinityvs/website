@@ -1,6 +1,8 @@
 /* Shared shell for Outfinity's long-form presentation pages. */
 body.presentation-page {
-  --presentation-nav-height: 82px;
+  /* The injected primary navigation is 78px high on desktop.  Matching that
+     actual height prevents a seam before the presentation toolbar. */
+  --presentation-nav-height: 78px;
   --presentation-toolbar-height: 76px;
   min-width: 320px;
   min-height: 100dvh;
@@ -374,6 +376,8 @@ outfinity-presentation[data-animation="none"] *::after {
   color: #bdc8c7;
   font-size: 23px;
   line-height: 1.62;
+  text-align: justify;
+  text-align-last: left;
 }
 
 .presentation-page .detail-view-more { margin-top: 28px; }
@@ -386,11 +390,31 @@ outfinity-presentation[data-animation="none"] *::after {
   height: 46px;
   border: 1px solid rgba(247,249,249,.2);
   border-radius: 50%;
+  display: grid;
+  place-items: center;
+  padding: 0;
   background: transparent;
   color: #f7f9f9;
   font-size: 24px;
+  line-height: 1;
   cursor: pointer;
 }
+
+/* Keep the scrollbar language consistent with the rounded panels. */
+.presentation-page .detail-panel,
+.presentation-page .article-panel__content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 207, 200, .58) transparent;
+}
+
+.presentation-page .detail-panel::-webkit-scrollbar,
+.presentation-page .article-panel__content::-webkit-scrollbar { width: 8px; }
+.presentation-page .detail-panel::-webkit-scrollbar-track,
+.presentation-page .article-panel__content::-webkit-scrollbar-track { background: transparent; border-radius: 999px; }
+.presentation-page .detail-panel::-webkit-scrollbar-thumb,
+.presentation-page .article-panel__content::-webkit-scrollbar-thumb { border: 2px solid transparent; border-radius: 999px; background: rgba(0, 207, 200, .58); background-clip: padding-box; }
+.presentation-page .detail-panel::-webkit-scrollbar-thumb:hover,
+.presentation-page .article-panel__content::-webkit-scrollbar-thumb:hover { background-color: #00cfc8; }
 
 .presentation-page .article-overlay {
   position: fixed;
@@ -516,8 +540,8 @@ outfinity-presentation[data-animation="none"] *::after {
   .presentation-page .presentation-footer { justify-content: flex-end; pointer-events: none; }
   .presentation-page .presentation-footer .presentation-view-more { pointer-events: auto; }
   .presentation-view-more { min-height: 30px; padding: .32rem .58rem; font-size: 10px; }
-  .presentation-page .detail-overlay { padding: 14px; overflow-y: auto; }
-  .presentation-page .detail-panel { padding: 46px 24px 26px; border-radius: 14px; }
+  .presentation-page .detail-overlay { place-items: start center; align-content: start; padding: 14px; overflow-y: auto; }
+  .presentation-page .detail-panel { width: 100%; max-height: none; padding: 46px 24px 26px; border-radius: 14px; }
   .presentation-page .detail-panel h3 { font-size: clamp(1.65rem, 8vw, 2.15rem); }
   .presentation-page .detail-panel p { font-size: 1rem; line-height: 1.5; }
   .presentation-page .detail-close { top: 12px; right: 12px; width: 34px; height: 34px; }

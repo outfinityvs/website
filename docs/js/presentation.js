@@ -4,7 +4,7 @@
      survive a deploy through the browser cache. */
   document.querySelectorAll('link[href*="css/presentation.css"]').forEach(function (link) {
     var href = new URL(link.getAttribute('href'), document.baseURI);
-    href.searchParams.set('v', '20260723-desktop-credit');
+    href.searchParams.set('v', '20260804-qa-layout');
     link.href = href.href;
   });
 
@@ -271,7 +271,11 @@
 
     openDetail(node) {
       this.detailTrigger = node;
-      if (this.detailTitle) this.detailTitle.textContent = node.dataset.title;
+      /* Some legacy Delivery nodes accidentally stored their body copy in
+         data-title.  Keep their content, but render the heading as a heading. */
+      var title = node.dataset.title;
+      if (node.classList.contains('partnership-investors') && title && title.length > 90) title = 'Delivery';
+      if (this.detailTitle) this.detailTitle.textContent = title;
       if (this.detailCopy) this.detailCopy.textContent = node.dataset.detail;
       var href = node.dataset.viewMore;
       var articleTemplate = node.dataset.articleTemplate;

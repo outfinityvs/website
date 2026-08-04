@@ -31,6 +31,13 @@
     .book-grid--two { grid-template-columns:repeat(2,190px); }
     .book-grid--three { grid-template-columns:repeat(3,190px); }
     .book-grid--four { grid-template-columns:repeat(4,190px); }
+    .book-grid--five { grid-template-columns:repeat(5,190px); }
+    .cultural-deck .cover--thesis .cover__content { top:66px; left:100px; width:1400px; transform:none; }
+    .cultural-deck .cover--thesis h1 { max-width:1100px; font-size:62px; }
+    .cultural-deck .cover--thesis .cover__lead { max-width:1270px; margin-top:20px; font-size:20px; line-height:1.42; }
+    .cultural-deck .cover--thesis .cover__rule { width:104px; height:5px; margin-top:24px; }
+    .cultural-deck .cover--thesis .cover__visual { display:none; }
+    .cultural-deck .cover--thesis .book-grid { top:325px; grid-template-columns:repeat(4,190px); }
     .book-card { position:relative; isolation:isolate; display:flex; box-sizing:border-box; width:190px; height:285px; flex-direction:column; align-items:flex-start; padding:21px 17px 17px 29px; border:1px solid rgba(0,207,200,.66); border-left:0; border-radius:4px 7px 7px 4px; background:linear-gradient(90deg,#062320 0 14px,#0a3431 14px 18px,#123b37 18px 84%,#0a2927 100%); color:var(--paper); text-decoration:none; box-shadow:0 8px 0 #061817,7px 13px 19px rgba(0,0,0,.42),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateZ(2.2deg) rotateY(-8deg) rotateX(1deg); transform-style:preserve-3d; transition:transform 180ms ease,box-shadow 180ms ease,border-color 180ms ease; }
     .book-card::before { content:""; position:absolute; z-index:-1; top:4px; right:4px; bottom:-4px; left:4px; border:1px solid rgba(0,207,200,.3); border-radius:4px 7px 7px 4px; background:#082624; box-shadow:0 4px 0 rgba(0,0,0,.32); }
     .book-card::after { content:""; position:absolute; z-index:0; top:9px; right:5px; bottom:9px; width:4px; border-radius:1px; background:repeating-linear-gradient(0deg,#edf0e8 0 2px,#aab7ae 2px 3px); box-shadow:-1px 0 2px rgba(0,0,0,.4); opacity:.94; }
@@ -61,6 +68,12 @@
       .cultural-deck .slide-title h2 { margin-top:9px; font-size:clamp(2.1rem,9vw,3.25rem); white-space:normal; }
       .cultural-deck .slide-title p { font-size:.92rem; }
       .cultural-deck .cover.is-active { display:grid; grid-template-rows:repeat(3,minmax(0,1fr)); padding:0 42px 54px 18px; overflow:hidden; }
+      .cultural-deck .cover--thesis.is-active { display:flex; min-height:0; flex-direction:column; padding:22px 24px 54px; overflow:hidden; }
+      .cultural-deck .cover--thesis .cover__content { position:relative; top:auto; left:auto; width:100%; flex:0 0 auto; padding:0; }
+      .cultural-deck .cover--thesis h1 { font-size:clamp(2.1rem,9vw,3.25rem); }
+      .cultural-deck .cover--thesis .cover__lead { margin-top:14px; font-size:.92rem; line-height:1.42; }
+      .cultural-deck .cover--thesis .cover__rule { margin-top:16px; }
+      .cultural-deck .cover--thesis .book-grid { flex:1 1 auto; min-height:0; margin-top:14px; }
       .cultural-deck .cover__visual { position:relative; top:auto; right:auto; grid-row:1; align-self:center; justify-self:center; width:min(66vw,250px); height:min(66vw,250px); }
       .cultural-deck .cover__content { position:relative; top:auto; left:auto; grid-row:2/4; align-self:start; width:100%; padding:12px 8px 36px; transform:none; }
       .cultural-deck .cover__eyebrow { margin-bottom:12px; font-size:11px; }
@@ -94,15 +107,13 @@
   <nav class="contents" data-presentation-controls="cultural-presentation" aria-label="Cultural artefacts presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01 / 08</span><div class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></div></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Toggle full screen">⛶</button></div></div></nav>
   <main class="deck-viewport">
     <outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
-      <section class="deck-slide cover is-active" id="overview" data-nav-label="Overview">
-        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · 29 titles</p><h1>Research becomes <span>literature.</span></h1><p class="cover__lead">AI contributes across the collection. Except for the explicitly labelled AI-Assisted Research shelf, where AI may also set the direction, human authors stand behind the message.</p><hr class="cover__rule"></div>
-        <div class="cover__visual" aria-hidden="true"><outfinity-cover></outfinity-cover></div>
-      </section>
-      <section class="deck-slide" id="ventures" data-nav-label="Ventures">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Ventures</p><h2>Investment into possibility</h2><p>Investment theses, venture pipelines and opportunity maps shaped by research into the AI-dominated economy.</p></div></header>
-        <div class="book-grid book-grid--two">
+      <section class="deck-slide cover cover--thesis is-active" id="overview" data-nav-label="Outfinity thesis">
+        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · investor reading shelf</p><h1>Four books behind the <span>Outfinity thesis.</span></h1><p class="cover__lead">Outfinity is not built around a conventional SaaS or AI-native company thesis. We see the possibility of a trillion-scale brand when venture-studio discipline connects with Metacult, Outfinitism, meta-rationality and decentralised brands. These four books explain that conviction—and the investment opportunity it creates.</p><hr class="cover__rule"></div>
+        <div class="book-grid book-grid--four">
           <article class="book-card"><span class="book-card__kind">VENTURE INSIGHTS</span><h3>INVESTING IN AN AI-DOMINATED ECONOMY</h3><p>THE OUTFINITY INVESTMENT THESIS</p><div class="book-card__actions"><a class="book-action" href="books/Investing_in_an_AI_Dominated_Economy.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">VENTURE INSIGHTS</span><h3>Aspirin, Viagra, and Coffins</h3><p>The Impolite Manual of Inevitable Opportunities.</p><div class="book-card__actions"><a class="book-action" href="books/Aspirin_Viagra_and_Coffins.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Metacult</h3><p>Modernizing Humanity's Oldest Social Technology.</p><div class="book-card__actions"><a class="book-action" href="books/Metacult_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Outfinitism</h3><p>Meta-Rationality and the Limits of Every Frame.</p><div class="book-card__actions"><a class="book-action" href="books/Outfinitism_Meta_Rationality_v0.4.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
+          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Decentralised Brands</h3><p>Shared Identity, Distributed Power, and the Architecture of Resilient Cooperation.</p><div class="book-card__actions"><a class="book-action" href="books/Decentralised_Brands.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
         </div>
       </section>
       <section class="deck-slide" id="digital-frontiers" data-nav-label="Digital Frontiers">
@@ -117,17 +128,10 @@
           <article class="book-card"><span class="book-card__kind">DIGITAL FRONTIERS</span><h3>The Axioms of Literature</h3><p>Core Foundations for Human and Artificial Intelligence.</p><div class="book-card__actions"><a class="book-action book-action--amazon" href="https://www.amazon.com/dp/B0H6R3N6MB" target="_blank" rel="noopener noreferrer">Amazon</a></div></article>
         </div>
       </section>
-      <section class="deck-slide" id="social-technologies" data-nav-label="Social Technologies">
-        <header class="slide-header"><div class="slide-title"><p class="slide-kicker">Social Technologies</p><h2>How worlds coordinate</h2><p>Investigations of collective intelligence, institutions, power, legitimacy and the social forms that may outlive the present.</p></div></header>
-        <div class="book-grid book-grid--three">
-          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Metacult</h3><p>Modernizing Humanity's Oldest Social Technology.</p><div class="book-card__actions"><a class="book-action" href="books/Metacult_Book.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Outfinitism</h3><p>Meta-Rationality and the Limits of Every Frame.</p><div class="book-card__actions"><a class="book-action" href="books/Outfinitism_Meta_Rationality_v0.4.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-          <article class="book-card"><span class="book-card__kind">SOCIAL TECHNOLOGIES</span><h3>Decentralised Brands</h3><p>Shared Identity, Distributed Power, and the Architecture of Resilient Cooperation.</p><div class="book-card__actions"><a class="book-action" href="books/Decentralised_Brands.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
-        </div>
-      </section>
       <section class="deck-slide" id="ai-assisted-research" data-nav-label="AI-Assisted Research">
         <header class="slide-header"><div class="slide-title"><p class="slide-kicker">AI-Assisted Research</p><h2>Published for review</h2><p>AI made the largest contribution to these works, including their direction. Human contributors do not assume responsibility for the content; the results are published because they are interesting enough to invite scrutiny, critique and further review.</p></div></header>
-        <div class="book-grid book-grid--four">
+        <div class="book-grid book-grid--five">
+          <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>Aspirin, Viagra, and Coffins</h3><p>The Impolite Manual of Inevitable Opportunities.</p><div class="book-card__actions"><a class="book-action" href="books/Aspirin_Viagra_and_Coffins.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
           <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The History and Future of Social Technologies</h3><p>How Institutions, Narratives, Markets, Protocols, and Intelligence Co-Evolve with Deep Technology.</p><div class="book-card__actions"><a class="book-action" href="books/The_History_and_Future_of_Social_Technologies_v0.1.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
           <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>Limits of Machine Intelligence</h3><p>An AI-assisted exploration of Outfinitism: moving frontiers, and the threshold of science.</p><div class="book-card__actions"><a class="book-action" href="books/Limits_of_Machine_Intelligence.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>
           <article class="book-card"><span class="book-card__kind">AI-ASSISTED RESEARCH</span><h3>The Atlas of Operational Ideas</h3><p>Identity, Novelty, and Scientific Discovery in Neuro-Symbolic AI.</p><div class="book-card__actions"><a class="book-action" href="books/The_Atlas_of_Operational_Ideas.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read Here</a></div></article>

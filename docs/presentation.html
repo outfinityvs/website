@@ -595,7 +595,7 @@
       border-width: 3px;
       box-shadow: 0 0 0 12px rgba(255,201,40,.035), 0 24px 65px rgba(0,0,0,.3);
     }
-    .partnership-investors { left: 1020px; top: 125px; width: 390px; height: 310px; border-color: var(--capital); }
+    .partnership-investors { left: 1020px; top: 125px; width: 390px; height: 335px; border-color: var(--capital); }
     .partnership-service { left: 415px; top: 500px; width: 590px; height: 78px; border-color: rgba(0,207,200,.45); }
     .partnership-capital .visual-node__tag { color: var(--capital); }
     .investor-list { display: grid; gap: 10px; margin-top: 18px; }
@@ -795,11 +795,12 @@
 
     .detail-panel__eyebrow { color: var(--teal); font-size: 14px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
     .detail-panel h3 { margin-top: 14px; font-size: 44px; line-height: 1.08; letter-spacing: -.04em; }
-    .detail-panel p { margin-top: 24px; color: #bdc8c7; font-size: 23px; line-height: 1.62; }
+    .detail-panel p { margin-top: 24px; color: #bdc8c7; font-size: 23px; line-height: 1.62; text-align: justify; text-align-last: left; }
     .detail-close {
       position: absolute; top: 24px; right: 24px; width: 46px; height: 46px;
+      display: grid; place-items: center; padding: 0;
       border: 1px solid rgba(247,249,249,.2); border-radius: 50%; background: transparent;
-      font-size: 24px; cursor: pointer;
+      font-size: 24px; line-height: 1; cursor: pointer;
     }
     .detail-close:hover, .detail-close:focus-visible { border-color: var(--gold); color: var(--gold); outline: none; }
 
@@ -1171,8 +1172,8 @@
       .edge-nav--next { right: 2px; }
       .edge-nav svg { width: 25px; height: 25px; }
 
-      .detail-overlay { padding: 14px; overflow-y: auto; }
-      .detail-panel { width: 100%; padding: 40px 24px 28px; border-radius: 14px; }
+      .detail-overlay { place-items: start center; align-content: start; padding: 14px; overflow-y: auto; }
+      .detail-panel { width: 100%; max-height: none; padding: 40px 24px 28px; border-radius: 14px; }
       .detail-panel h3 { margin-top: 10px; font-size: 28px; }
       .detail-panel p { margin-top: 16px; font-size: 16px; line-height: 1.5; }
       .detail-close { top: 12px; right: 12px; width: 36px; height: 36px; font-size: 19px; }

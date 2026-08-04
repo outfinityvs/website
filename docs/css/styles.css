@@ -2630,7 +2630,7 @@ body.legal-page .footer {
 .arena-video-modal {
     --arena-signal: #54e7e2;
     --arena-gold: #e7ca72;
-    width: min(88vw, 430px);
+    width: min(92vw, 960px);
     max-width: none;
     margin: auto;
     padding: 0;
@@ -2694,7 +2694,7 @@ body.legal-page .footer {
     position: relative;
     z-index: 1;
     width: 100%;
-    aspect-ratio: 9 / 16;
+    aspect-ratio: 16 / 9;
     background: #000;
     border-radius: var(--radius-tight);
     overflow: hidden;
@@ -2705,12 +2705,12 @@ body.legal-page .footer {
 .arena-video-frame iframe {
     position: absolute;
     top: 0;
-    left: 50%;
+    left: 0;
     display: block;
-    width: 316%;
+    width: 100%;
     height: 100%;
     border: 0;
-    transform: translateX(-50%);
+    transform: none;
     pointer-events: none;
 }
 
@@ -3514,16 +3514,20 @@ body.legal-page .footer {
 
 @media (min-width: 1081px) {
     .arena-experience {
-        --arena-slide-height: clamp(440px, min(45vw, 68dvh), 760px);
+        /* Keep the quick-presentation frame equally inset on all sides. The
+           extra vertical room also gives the radar its own area above actions. */
+        --arena-frame-inset: clamp(1rem, 2.75vmin, 2.5rem);
+        --arena-slide-height: calc(100dvh - 82px - (var(--arena-frame-inset) * 2));
         --arena-inline-radar-size: clamp(320px, min(32vw, 58dvh), 540px);
         --arena-control-gap: clamp(0.6rem, 1vw, 1rem);
         --arena-control-size: clamp(46px, 4vw, 58px);
     }
 
     .arena-experience[data-view] .arena-shell {
-        width: min(80vw, 1640px);
-        min-height: calc(100dvh - 82px);
-        padding: clamp(2.2rem, 4vh, 4rem) 0;
+        width: calc(100vw - (var(--arena-frame-inset) * 2));
+        height: calc(100dvh - 82px);
+        min-height: 0;
+        padding: var(--arena-frame-inset) 0;
     }
 
     .arena-experience[data-view] .arena-scene {

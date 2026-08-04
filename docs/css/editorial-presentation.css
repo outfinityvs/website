@@ -16,7 +16,7 @@ body.presentation-page { margin:0; color:var(--paper); font-family:ui-sans-serif
 .visual-node--gold { border-color:rgba(255,201,40,.72); }
 .node-box { padding:26px; }
 .node-circle { display:grid; place-content:center; padding:34px; border-radius:50%; text-align:center; }
-.node-pill { display:flex; align-items:center; justify-content:center; padding:20px 30px; border-radius:999px; text-align:center; }
+.node-pill { display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px 30px; border-radius:999px; text-align:center; }
 .visual-node__tag { display:block; margin-bottom:8px; color:var(--teal); font-size:13px; font-weight:900; letter-spacing:.11em; text-transform:uppercase; }
 .visual-node--gold .visual-node__tag { color:var(--gold); }
 .visual-node__title { display:block; font-size:26px; font-weight:850; line-height:1.15; letter-spacing:-.025em; }

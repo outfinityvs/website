@@ -208,10 +208,10 @@
       graphic: {
         type: "map",
         items: [
-          { label: "Literature", href: "cultural-artefacts.html" },
-          { label: "Intelligence", href: "cultural-artefacts.html" },
-          { label: "Power", href: "cultural-artefacts.html" },
-          { label: "Orders", href: "cultural-artefacts.html" }
+          { label: "Literature", href: "cultural-artefacts.html#philosophical-sci-fi" },
+          { label: "Intelligence", href: "cultural-artefacts.html#digital-frontiers" },
+          { label: "Power", href: "cultural-artefacts.html#social-technologies" },
+          { label: "Orders", href: "cultural-artefacts.html#interpretation-adoption" }
         ]
       },
       actions: []
