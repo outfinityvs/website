@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Six books that set out Outfinity's investment, institutional and cultural thesis for an AI-dominated economy.">
+  <meta name="description" content="Seven books that set out Outfinity's investment, institutional and cultural thesis for an AI-dominated economy.">
   <link rel="alternate" type="text/html" href="cultural-artefacts-overview.html" title="Cultural Artefacts article">
   <title>Cultural Artefacts | Outfinity</title>
   <link rel="icon" href="favicon.ico">
@@ -67,7 +67,7 @@
     .cultural-deck .cover--library .cover__lead { max-width:1160px; margin-top:18px; font-size:20px; line-height:1.42; }
     .cultural-deck .cover--library .cover__rule { width:104px; height:5px; margin-top:24px; }
     .cultural-deck .cover--library .cover__visual { display:none; }
-    .main-books-grid { position:absolute; top:310px; left:90px; width:1420px; display:grid; grid-template-columns:repeat(6,190px); justify-content:center; gap:18px; perspective:1400px; }
+    .main-books-grid { position:absolute; top:310px; left:70px; width:1460px; display:grid; grid-template-columns:repeat(7,190px); justify-content:center; gap:18px; perspective:1400px; }
     .main-book-link { position:relative; isolation:isolate; box-sizing:border-box; width:190px; height:285px; display:block; overflow:hidden; border:0; border-radius:4px 7px 7px 4px; background:#0d1111; color:var(--paper); text-decoration:none; box-shadow:0 8px 0 #061817,7px 13px 19px rgba(0,0,0,.42),inset 0 1px 0 rgba(247,249,249,.14); transform:rotateZ(2.2deg) rotateY(-8deg) rotateX(1deg); transform-style:preserve-3d; transition:transform 180ms ease,box-shadow 180ms ease; }
     .main-book-link::before,.main-book-link::after { display:none; }
     .main-book-link > * { position:relative; z-index:1; }
@@ -76,12 +76,14 @@
     [data-presentation-page-title]:focus-visible { outline:2px solid var(--gold); outline-offset:5px; }
     .main-book-cover { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
     .main-book-cover--transparent { width:200%; max-width:none; object-fit:contain; object-position:left center; }
+    .main-book-cover--founder-lottery { width:212%; height:106%; }
 
     .cultural-deck .book-feature.is-active { display:grid !important; }
     .book-feature { grid-template-columns:320px minmax(0,1fr); align-items:center; gap:50px; padding:100px 145px 92px; }
     .book-feature__cover { width:320px; height:480px; overflow:hidden; border-radius:5px 8px 8px 5px; background:#0d1111; box-shadow:0 16px 36px rgba(0,0,0,.42); }
     .book-feature__cover img { display:block; width:100%; height:100%; object-fit:contain; object-position:center; }
     .book-feature__cover .book-feature__cover--transparent { width:640px; max-width:none; object-fit:contain; object-position:left center; }
+    .book-feature__cover .book-feature__cover--founder-lottery { width:680px; height:510px; }
     .book-feature__copy { max-width:1300px; }
     .book-feature__eyebrow { margin:0; color:var(--teal); font-size:13px; font-weight:900; letter-spacing:.13em; text-transform:uppercase; }
     .book-feature:nth-of-type(odd) .book-feature__eyebrow { color:var(--gold); }
@@ -133,6 +135,7 @@
       .book-feature,.library-slide { height:100%; padding:82px 28px 80px !important; overflow-y:auto !important; }
       .book-feature__cover { width:min(62vw,260px); height:auto; aspect-ratio:2/3; margin:0 auto 28px; }
       .book-feature__cover .book-feature__cover--transparent { width:200%; height:100%; }
+      .book-feature__cover .book-feature__cover--founder-lottery { width:212%; height:106%; }
       .book-feature__copy,.library-slide__copy { max-width:none; }
       .book-feature h2,.library-slide__copy h2 { font-size:clamp(2.2rem,9vw,3.4rem); white-space:normal; }
       .book-feature h2 span { white-space:normal; }
@@ -174,11 +177,12 @@
   <main class="deck-viewport">
     <outfinity-presentation class="cultural-deck" id="cultural-presentation" data-deck-width="1600" data-deck-height="900" data-animation="capital-orbits" data-article-url="cultural-artefacts-overview.html" data-view-more-label="View Article …">
       <section class="deck-slide cover cover--library is-active" id="overview" data-nav-label="Main books">
-        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · investor reading shelf</p><h1>Six books for a <span>different AI future.</span></h1><p class="cover__lead">These books explain the institutional, technical and cultural thesis behind Outfinity. Together, they ask how a venture studio can build category brands, shared infrastructure and decentralised cooperation without becoming another closed platform.</p><hr class="cover__rule"></div>
+        <div class="cover__content"><p class="cover__eyebrow">Outfinity cultural artefacts · investor reading shelf</p><h1>Seven books for a <span>different AI future.</span></h1><p class="cover__lead">These books explain the institutional, technical and cultural thesis behind Outfinity. Together, they ask how a venture studio can build category brands, shared infrastructure and decentralised cooperation without becoming another closed platform.</p><hr class="cover__rule"></div>
         <div class="main-books-grid">
           <a class="main-book-link" href="#investing-in-ai" data-book-slide="#investing-in-ai" aria-label="Investing in an AI-Dominated Economy"><img class="main-book-cover main-book-cover--transparent" src="books/covers/Investing_in_an_AI_Dominated_Economy.png" alt=""></a>
           <a class="main-book-link" href="#metacult" data-book-slide="#metacult" aria-label="Metacult"><img class="main-book-cover main-book-cover--transparent" src="books/covers/Metacult.png" alt=""></a>
           <a class="main-book-link" href="#decentralised-brands" data-book-slide="#decentralised-brands" aria-label="Decentralised Brands"><img class="main-book-cover" src="books/covers/Decentralised_Brands.png" alt=""></a>
+          <a class="main-book-link" href="#founder-lottery" data-book-slide="#founder-lottery" aria-label="The Founder Lottery"><img class="main-book-cover main-book-cover--transparent main-book-cover--founder-lottery" src="books/covers/The_Founder_Lottery.png" alt=""></a>
           <a class="main-book-link" href="#licence-shared-name" data-book-slide="#licence-shared-name" aria-label="The Licence and the Shared Name"><img class="main-book-cover" src="books/covers/THE_LICENCE_AND_THE_SHARED_NAME.png" alt=""></a>
           <a class="main-book-link" href="#captured-internet" data-book-slide="#captured-internet" aria-label="The Captured Internet"><img class="main-book-cover" src="books/covers/The_Captured_Internet.png" alt=""></a>
           <a class="main-book-link" href="#outfinitism" data-book-slide="#outfinitism" aria-label="Outfinitism: Meta-Rationality"><img class="main-book-cover" src="books/covers/Outfinitism_Meta_Rationality.png" alt=""></a>
@@ -195,6 +199,10 @@
 
       <section class="deck-slide book-feature" id="decentralised-brands" data-nav-label="Decentralised brands">
         <div class="book-feature__cover"><img src="books/covers/Decentralised_Brands.png" alt="Cover of Decentralised Brands"></div><div class="book-feature__copy"><p class="book-feature__eyebrow">Institutional design</p><h2>Decentralised Brands<span>Shared Identity, Distributed Power, and the Architecture of Resilient Cooperation</span></h2><p class="book-feature__summary">A brand is more than advertising. It is a social technology that joins a name to memory, expectations, trust and the authority to act under a common promise. This book asks how that power can be shared by autonomous organisations and projects without becoming the private sovereignty of one company—or an undefended commons that returns little to those who sustain it.</p><p class="book-feature__summary">Linux, Bitcoin, Wikipedia and federated networks are treated as laboratories, not templates. The focus is legitimacy: what makes a centre useful yet bounded, contestable and replaceable; how local initiative can remain real; and how shared reputation can distribute gains more fairly.</p><a class="book-feature__action" href="books/Decentralised_Brands.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read the book ↗</a></div>
+      </section>
+
+      <section class="deck-slide book-feature" id="founder-lottery" data-nav-label="Founder lottery">
+        <div class="book-feature__cover"><img class="book-feature__cover--transparent book-feature__cover--founder-lottery" src="books/covers/The_Founder_Lottery.png" alt="Cover of The Founder Lottery"></div><div class="book-feature__copy"><p class="book-feature__eyebrow">Entrepreneurial doctrine</p><h2>The Founder Lottery<span>Entrepreneurship After Generative AI, the Red Queen Economy</span></h2><p class="book-feature__summary">A call to entrepreneurs and investors to define reality more clearly and make the case for reason. The book does not deny that emotion, ambition and the thrill of the game can be stronger than reason in the moment. It asks what that attraction costs when startup outcomes resemble a lottery and generative AI multiplies the number of people able to enter the race.</p><p class="book-feature__summary">At the scale of the change now confronting humanity, entrepreneurship will have to be reconsidered sooner or later as AI becomes a dominant economic force. Continuing the theory and vision of <em>Decentralised Brands</em>, this is a more direct, applied argument: founders and investors must move beyond isolated risk toward shared trust architectures, institutions and games that distribute opportunity more fairly.</p><a class="book-feature__action" href="books/The_Founder_Lottery.pdf#view=Fit" target="_blank" rel="noopener noreferrer">Read the book ↗</a></div>
       </section>
 
       <section class="deck-slide book-feature" id="licence-shared-name" data-nav-label="Licence and shared name">
