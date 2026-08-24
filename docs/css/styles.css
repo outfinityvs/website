@@ -3515,16 +3515,20 @@ body.legal-page .footer {
 @media (min-width: 1081px) {
     .arena-experience {
         /* Keep the quick-presentation frame equally inset on all sides. The
-           extra vertical room also gives the radar its own area above actions. */
+           extra vertical room also gives the radar its own area above actions.
+           On wide canvases, cap the working area instead of letting the copy
+           and radar drift toward opposite edges. */
         --arena-frame-inset: clamp(1rem, 2.75vmin, 2.5rem);
-        --arena-slide-height: calc(100dvh - 82px - (var(--arena-frame-inset) * 2));
+        --arena-slide-height: min(calc(100dvh - 82px - (var(--arena-frame-inset) * 2)), 810px);
         --arena-inline-radar-size: clamp(320px, min(32vw, 58dvh), 540px);
+        --arena-slide-inline-inset: clamp(3.8rem, 7vw, 8rem);
+        --arena-slide-block-inset: clamp(2rem, min(4vw, 7vh), 4.2rem);
         --arena-control-gap: clamp(0.6rem, 1vw, 1rem);
-        --arena-control-size: clamp(46px, 4vw, 58px);
+        --arena-control-size: clamp(42px, 3vw, 58px);
     }
 
     .arena-experience[data-view] .arena-shell {
-        width: calc(100vw - (var(--arena-frame-inset) * 2));
+        width: min(calc(100vw - (var(--arena-frame-inset) * 2)), 1440px);
         height: calc(100dvh - 82px);
         min-height: 0;
         padding: var(--arena-frame-inset) 0;
@@ -3559,10 +3563,10 @@ body.legal-page .footer {
     }
 
     .arena-experience[data-view] .arena-mini-slide {
-        grid-template-columns: minmax(0, 1.14fr) minmax(280px, 0.86fr);
+        grid-template-columns: minmax(0, 1.14fr) minmax(var(--arena-inline-radar-size), 0.86fr);
         align-items: center;
-        gap: clamp(1.8rem, 5vw, 5.2rem);
-        padding: clamp(2rem, 4vw, 4.2rem) clamp(3.8rem, 7vw, 8rem) calc(var(--arena-control-size) + var(--arena-control-gap) * 3.8);
+        gap: clamp(1.8rem, 3vw, 3.5rem);
+        padding: var(--arena-slide-block-inset) var(--arena-slide-inline-inset) calc(var(--arena-control-size) + var(--arena-control-gap) * 3.8);
     }
 
     .arena-experience[data-view] .arena-mini-deck__header > span:first-child {
@@ -3593,11 +3597,11 @@ body.legal-page .footer {
         display: grid;
         width: var(--arena-inline-radar-size);
         height: var(--arena-inline-radar-size);
-        max-width: 100%;
+        max-width: none;
         justify-self: center;
-        align-self: start;
+        align-self: center;
         overflow: visible;
-        transform: translate(clamp(-0.8rem, -0.8vw, -0.5rem), clamp(-2rem, -2.5vh, -1rem));
+        transform: none;
     }
 
     .arena-experience[data-view] .arena-mini-diagram--radar .arena-radar {
@@ -3713,9 +3717,9 @@ body.legal-page .footer {
 
     .arena-experience[data-view] .arena-action-zone {
         position: absolute;
-        right: clamp(3.8rem, 7vw, 8rem);
+        right: var(--arena-slide-inline-inset);
         bottom: var(--arena-control-gap);
-        left: clamp(3.8rem, 7vw, 8rem);
+        left: var(--arena-slide-inline-inset);
         z-index: 6;
         width: auto;
         justify-content: stretch;
@@ -3723,9 +3727,9 @@ body.legal-page .footer {
 
     .arena-experience[data-view] .arena-mini-deck__controls {
         position: absolute;
-        right: clamp(3.8rem, 7vw, 8rem);
+        right: var(--arena-slide-inline-inset);
         bottom: calc(var(--arena-control-size) + var(--arena-control-gap) * 2);
-        left: clamp(3.8rem, 7vw, 8rem);
+        left: var(--arena-slide-inline-inset);
         z-index: 5;
         min-height: 0;
         padding: 0;
@@ -3736,7 +3740,7 @@ body.legal-page .footer {
     .arena-experience[data-view] .arena-video-toggle,
     .arena-experience[data-view] .arena-tower-link {
         min-height: var(--arena-control-size);
-        font-size: clamp(0.82rem, 0.86vw, 0.98rem);
+        font-size: clamp(0.76rem, 0.82vw, 0.98rem);
     }
 
     .arena-experience[data-view] .arena-icon-only {
