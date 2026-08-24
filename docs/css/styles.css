@@ -3641,10 +3641,10 @@ body.legal-page .footer {
     .arena-experience[data-view] .arena-mini-slide__copy .arena-micro,
     .arena-experience[data-view] .arena-mini-slide__copy .arena-punchline-list p {
         max-width: 720px;
-        font-size: clamp(1rem, 1.28vw, 1.53rem);
+        font-size: clamp(0.95rem, 1.16vw, 1.35rem);
         font-weight: 400;
         font-style: italic;
-        line-height: 1.46;
+        line-height: 1.42;
         text-align: justify;
         text-align-last: left;
     }
