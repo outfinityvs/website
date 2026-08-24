@@ -26,6 +26,15 @@
   }
   detectBasePath();
 
+  function loadTracking() {
+    if (document.querySelector('script[src*="js/tracking.js"]')) return;
+    var tracking = document.createElement("script");
+    tracking.defer = true;
+    tracking.src = basePath + "js/tracking.js";
+    document.head.appendChild(tracking);
+  }
+  loadTracking();
+
   function getPagePath() {
     var cleanPath = path.split("?")[0].replace(/\/+$/, "");
     var docsMarker = "/docs/";
