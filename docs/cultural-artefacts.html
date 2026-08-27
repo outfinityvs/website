@@ -118,8 +118,8 @@
     button.library-live__category:hover,button.library-live__category:focus-visible { color:var(--paper); outline:none; }
     button.library-live__category:focus-visible { text-decoration:underline; text-decoration-color:var(--teal); text-underline-offset:4px; }
     .library-live__category.is-active::before { background:var(--gold); animation:library-category-pulse 1.2s ease-in-out infinite; }
-    .library-live__spotlight { position:relative; display:grid; grid-template-columns:42px minmax(0,1fr) 42px; align-items:center; gap:16px; min-height:170px; margin-top:22px; padding:14px 0 0; }
-    .library-live__spotlight::before { position:absolute; top:-1px; left:50%; width:min(36%,340px); height:1px; background:linear-gradient(90deg,var(--gold),var(--teal)); box-shadow:0 0 7px rgba(0,207,200,.58); content:""; transform:translateX(-50%) scaleX(0); transform-origin:left center; }
+    .library-live__spotlight { --library-spotlight-edge:58px; position:relative; display:grid; grid-template-columns:42px minmax(0,1fr) 42px; align-items:center; gap:16px; min-height:170px; margin-top:22px; padding:14px 0 0; }
+    .library-live__spotlight::before { position:absolute; top:-1px; right:var(--library-spotlight-edge); left:var(--library-spotlight-edge); height:1px; background:linear-gradient(90deg,var(--gold),var(--teal)); box-shadow:0 0 7px rgba(0,207,200,.58); content:""; transform:scaleX(0); transform-origin:left center; }
     .library-live__spotlight.is-progressing::before { animation:library-selection-progress 5.2s linear both; }
     .library-live__spotlight.is-paused::before { animation-play-state:paused; }
     .library-live__book { display:grid; grid-template-columns:minmax(0,112px) minmax(0,1fr); align-items:center; gap:18px; min-width:0; color:var(--paper); text-decoration:none; }
@@ -138,7 +138,7 @@
     .library-live__status { margin:0; color:var(--muted); font-size:14px; }
     @keyframes library-book-change { from { opacity:.35; transform:translateY(5px); } to { opacity:1; transform:none; } }
     @keyframes library-category-pulse { 50% { transform:scale(1.55); } }
-    @keyframes library-selection-progress { from { transform:translateX(-50%) scaleX(0); } to { transform:translateX(-50%) scaleX(1); } }
+    @keyframes library-selection-progress { from { transform:scaleX(0); } to { transform:scaleX(1); } }
     .library-live__book.is-changing { animation:library-book-change 260ms ease both; }
     @media (max-width:900px) {
       .cultural-deck { position:relative; top:auto; left:auto; width:100%; height:100%; min-height:0; transform:none!important; overflow:hidden; background-size:48px 48px,48px 48px,auto,auto; }
@@ -176,7 +176,7 @@
       .library-live__total { font-size:19px; }
       .library-live__categories { gap:8px 12px; }
       .library-live__category { font-size:11px; }
-      .library-live__spotlight { grid-template-columns:30px minmax(0,1fr) 30px; gap:8px; min-height:202px; margin-top:18px; }
+      .library-live__spotlight { --library-spotlight-edge:38px; grid-template-columns:30px minmax(0,1fr) 30px; gap:8px; min-height:202px; margin-top:18px; }
       .library-live__step { width:28px; height:28px; font-size:23px; }
       .library-live__book { grid-template-columns:72px minmax(0,1fr); grid-template-areas:"category category" "cover title" "description description"; column-gap:12px; row-gap:7px; }
       .library-live__book.is-coverless { grid-template-columns:minmax(0,1fr); grid-template-areas:"category" "title" "description"; }
@@ -266,13 +266,6 @@
         <section class="library-live" data-axiologic-catalogue aria-label="Current Axiologic catalogue">
           <p class="library-live__status">Loading the current Axiologic catalogue…</p>
         </section>
-        <div class="library-catalogue" hidden aria-hidden="true">
-          <section class="library-category"><h3>Outfinist philosophy</h3><p><a href="https://www.axiologic.net/books/the-necessary-mask/index.html" target="_blank" rel="noopener noreferrer">The Necessary Mask</a><a href="https://www.axiologic.net/books/holding-the-dirty-thing-by-the-clean-side/index.html" target="_blank" rel="noopener noreferrer">Holding the Dirty Thing by the Clean Side</a><a href="https://www.axiologic.net/books/anti-idiocracy/index.html" target="_blank" rel="noopener noreferrer">Anti-Idiocracy</a><a href="https://www.axiologic.net/books/the-thousand-handed-devil/index.html" target="_blank" rel="noopener noreferrer">The Thousand-Handed Devil</a><a href="https://www.axiologic.net/books/revocable-nobility/index.html" target="_blank" rel="noopener noreferrer">Revocable Nobility</a><a href="https://www.axiologic.net/books/the-civilized-mind/index.html" target="_blank" rel="noopener noreferrer">The Civilized Mind</a></p></section>
-          <section class="library-category"><h3>Literature</h3><p><a href="https://www.axiologic.net/books/the-cascade-of-the-new-vol-i/index.html" target="_blank" rel="noopener noreferrer">The Cascade of the New — The Aster File</a><a href="https://www.axiologic.net/books/predator-in-the-name-of-the-dead/index.html" target="_blank" rel="noopener noreferrer">Predator in the Name of the Dead</a><a href="https://www.axiologic.net/books/omnis/index.html" target="_blank" rel="noopener noreferrer">OMNIS</a><a href="https://www.axiologic.net/books/concordia-universe/index.html" target="_blank" rel="noopener noreferrer">Concordia Series</a><a href="https://www.axiologic.net/books/oriven-origaya-universe/index.html" target="_blank" rel="noopener noreferrer">Oriven–Origaya Universe</a><a href="https://www.axiologic.net/books/the-museum-of-good-reasons/index.html" target="_blank" rel="noopener noreferrer">The Museum of Good Reasons</a><a href="https://www.axiologic.net/books/the-sovereignty-archipelago/index.html" target="_blank" rel="noopener noreferrer">The Sovereignty Archipelago</a><a href="https://www.axiologic.net/books/the-silicon-shadows-and-i/index.html" target="_blank" rel="noopener noreferrer">The Silicon Shadows and I</a><a href="https://www.axiologic.net/books/a-balance-of-iron-and-salt/index.html" target="_blank" rel="noopener noreferrer">A Balance of Iron and Salt</a><a href="https://www.axiologic.net/books/anatomy-of-an-echo/index.html" target="_blank" rel="noopener noreferrer">Anatomy Of An Echo</a><a href="https://www.axiologic.net/books/me-and-my-robots/index.html" target="_blank" rel="noopener noreferrer">Me and My Robots</a><a href="https://www.axiologic.net/books/the-tao-of-omis/index.html" target="_blank" rel="noopener noreferrer">The Tao of OMIS</a></p></section>
-          <section class="library-category"><h3>Culture, care &amp; experiments</h3><p><a href="https://www.axiologic.net/books/the-right-to-help/index.html" target="_blank" rel="noopener noreferrer">The Right to Help</a><a href="https://www.axiologic.net/books/the-basilisks-internal-critique-of-outfinitism/index.html" target="_blank" rel="noopener noreferrer">The Basilisk's Internal Critique of Outfinitism</a><a href="https://www.axiologic.net/books/memes-for-2030/index.html" target="_blank" rel="noopener noreferrer">Memes for 2030</a><a href="https://www.axiologic.net/books/too-convinced-to-stop/index.html" target="_blank" rel="noopener noreferrer">Too Convinced to Stop</a><a href="https://www.axiologic.net/books/the-zodiac-on-trial/index.html" target="_blank" rel="noopener noreferrer">The Zodiac on Trial</a><a href="https://www.axiologic.net/books/aspirin-viagra-and-coffins/index.html" target="_blank" rel="noopener noreferrer">Aspirin, Viagra, and Coffins</a><a href="https://www.axiologic.net/books/the-ultimate-sense-of-life/index.html" target="_blank" rel="noopener noreferrer">The Ultimate Sense of Life</a><a href="https://www.axiologic.net/books/the-great-decoupling/index.html" target="_blank" rel="noopener noreferrer">The Great Decoupling</a><a href="https://www.axiologic.net/books/the-fragmented-future/index.html" target="_blank" rel="noopener noreferrer">The Fragmented Future</a><a href="https://www.axiologic.net/books/autopsy-of-future-emotions/index.html" target="_blank" rel="noopener noreferrer">Autopsy of Future Emotions</a><a href="https://www.axiologic.net/books/the-schizoid-and-the-oracle-ro/index.html" target="_blank" rel="noopener noreferrer">The Schizoid and the Oracle</a></p></section>
-          <section class="library-category"><h3>Executable science</h3><p><a href="https://www.axiologic.net/books/cones-of-meaning/index.html" target="_blank" rel="noopener noreferrer">Cones of Meaning</a><a href="https://www.axiologic.net/books/the-history-and-future-of-social-technologies/index.html" target="_blank" rel="noopener noreferrer">The History and Future of Social Technologies</a><a href="https://www.axiologic.net/books/an-autopsy-of-a-digital-mind/index.html" target="_blank" rel="noopener noreferrer">An Autopsy of a Digital Mind</a><a href="https://www.axiologic.net/books/executable-natural-language/index.html" target="_blank" rel="noopener noreferrer">Executable Natural Language</a><a href="https://www.axiologic.net/books/the-frontier-is-correction/index.html" target="_blank" rel="noopener noreferrer">The Frontier Is Correction</a></p></section>
-          <section class="library-category"><h3>Technology</h3><p><a href="https://www.axiologic.net/books/assistos/index.html" target="_blank" rel="noopener noreferrer">AssistOS</a><a href="https://www.axiologic.net/books/agentic-ai-2026/index.html" target="_blank" rel="noopener noreferrer">Agentic AI 2026</a><a href="https://www.axiologic.net/books/opendsu/index.html" target="_blank" rel="noopener noreferrer">OpenDSU</a><a href="https://www.axiologic.net/books/mrp-vm-book/index.html" target="_blank" rel="noopener noreferrer">MRP-VM</a></p></section>
-        </div>
       </section>
       <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide">‹</button>
       <button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide">›</button>
@@ -376,36 +369,9 @@
       const catalogueHost = document.querySelector('[data-axiologic-catalogue]');
       if (catalogueHost) {
         const catalogueUrl = 'https://www.axiologic.net/books.html';
+        const catalogueIndexUrl = 'https://www.axiologic.net/content/index.json';
         const catalogueDataUrl = 'https://www.axiologic.net/assets/js/books.js';
-        const categoryNames = {
-          Technology: 'Technology & Executable Science',
-          'Executable Science': 'Technology & Executable Science',
-          Literature: 'Science Fiction Literature'
-        };
-        const categoryOrder = ['Technology & Executable Science', 'Science Fiction Literature', 'Business & Startups', 'Outfinitist Philosophy', 'Experiments'];
-        const fallbackCatalogue = [
-          { name:'Technology & Executable Science', total:13, books:[
-            { title:'The Smoothing', href:'https://www.axiologic.net/books/the-smoothing/index.html', category:'Technology & Executable Science' },
-            { title:'Executable Scientific Intelligence', href:'https://www.axiologic.net/books/sop-lang-circuits/index.html', category:'Technology & Executable Science' }
-          ] },
-          { name:'Science Fiction Literature', total:21, books:[
-            { title:'The First Wake: The Geometry of Becoming', href:'https://www.axiologic.net/books/the-geometry-of-becoming/index.html', category:'Science Fiction Literature' },
-            { title:'The Houses of Europe', href:'https://www.axiologic.net/books/the-houses-of-europe/index.html', category:'Science Fiction Literature' }
-          ] },
-          { name:'Business & Startups', total:8, books:[
-            { title:'Investing in an AI-Dominated Economy', href:'https://www.axiologic.net/books/investing-in-an-ai-dominated-economy/index.html', category:'Business & Startups' },
-            { title:'Decentralised Brands', href:'https://www.axiologic.net/books/decentralised-brands/index.html', category:'Business & Startups' }
-          ] },
-          { name:'Outfinitist Philosophy', total:15, books:[
-            { title:'Outfinitism', href:'https://www.axiologic.net/books/outfinitism-meta-rationality/index.html', category:'Outfinitist Philosophy' },
-            { title:'Ecology of Predation', href:'https://www.axiologic.net/books/ecology-of-predation/index.html', category:'Outfinitist Philosophy' }
-          ] },
-          { name:'Experiments', total:9, books:[
-            { title:'An Autopsy of a Digital Mind', href:'https://www.axiologic.net/books/an-autopsy-of-a-digital-mind/index.html', category:'Experiments' },
-            { title:'Limits of Machine Intelligence', href:'https://www.axiologic.net/books/limits-of-machine-intelligence/index.html', category:'Experiments' }
-          ] }
-        ];
-        const catalogueCacheKey = 'outfinity-axiologic-catalogue-v1';
+        const catalogueCacheKey = 'outfinity-axiologic-catalogue-v2';
         const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         let rotationTimer = 0;
         const makeElement = (tag, className, text) => {
@@ -414,42 +380,103 @@
           if (text) element.textContent = text;
           return element;
         };
-        const normalizeCategory = category => categoryNames[category] || category;
+        const slugify = value => value.normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         const readString = (source, field) => {
           const match = source.match(new RegExp(`${field}\\s*:\\s*(?:'((?:\\\\.|[^'])*)'|"((?:\\\\.|[^"])*)")`));
           return (match?.[1] ?? match?.[2] ?? '').replace(/\\(['"\\])/g, '$1');
         };
-        const readCatalogue = source => {
+        const readBookMetadata = source => {
           const declaration = source.match(/const books = \[([\s\S]*?)\n\];/);
           if (!declaration) return [];
-          const groups = new Map(categoryOrder.map(name => [name, []]));
-          declaration[1].split(/\n {2}(?=\{)/).forEach(entry => {
+          const entries = [];
+          let depth = 0;
+          let entryStart = -1;
+          let quote = '';
+          let escaped = false;
+          for (let index = 0; index < declaration[1].length; index += 1) {
+            const character = declaration[1][index];
+            if (quote) {
+              if (escaped) escaped = false;
+              else if (character === '\\') escaped = true;
+              else if (character === quote) quote = '';
+              continue;
+            }
+            if (character === "'" || character === '"' || character === '`') {
+              quote = character;
+              continue;
+            }
+            if (character === '{') {
+              if (depth === 0) entryStart = index;
+              depth += 1;
+            } else if (character === '}') {
+              depth -= 1;
+              if (depth === 0 && entryStart >= 0) entries.push(declaration[1].slice(entryStart, index + 1));
+            }
+          }
+          return entries.map(entry => {
             const id = readString(entry, 'id');
-            const title = readString(entry, 'title');
-            const name = normalizeCategory(readString(entry, 'category'));
-            if (!id || !title || !groups.has(name)) return;
-            const staticUrl = readString(entry, 'staticUrl');
-            const fileId = readString(entry, 'fileId') || id;
-            const position = Number(entry.match(/position:\s*([\d.]+)/)?.[1]) || Number.MAX_SAFE_INTEGER;
-            groups.get(name).push({
-              title,
-              category:name,
-              position,
+            const numericPosition = Number(entry.match(/position\s*:\s*(-?[\d.]+)/)?.[1]);
+            return id && {
+              id,
+              title:readString(entry, 'title'),
+              category:readString(entry, 'category'),
               description:readString(entry, 'description'),
-              href:new URL(staticUrl || `./books/${id.toLowerCase().replaceAll('_', '-')}/index.html`, catalogueUrl).href,
-              cover:new URL(`./content/thumbnails/${fileId}.webp`, catalogueUrl).href
+              staticUrl:readString(entry, 'staticUrl'),
+              fileId:readString(entry, 'fileId') || id,
+              position:Number.isFinite(numericPosition) ? numericPosition : Number.MAX_SAFE_INTEGER
+            };
+          }).filter(Boolean);
+        };
+        const readTaxonomy = source => {
+          const documentSource = new DOMParser().parseFromString(source, 'text/html');
+          return Array.from(documentSource.querySelectorAll('.book-category')).map(section => {
+            const name = section.querySelector('h2')?.textContent.trim();
+            const gridId = section.querySelector('.books-grid')?.id || '';
+            return name && { name, slug:gridId.replace(/-grid$/, '') || slugify(name) };
+          }).filter(Boolean);
+        };
+        const buildCatalogue = (indexData, metadataSource, catalogueSource) => {
+          if (!Array.isArray(indexData?.books) || !indexData.books.length) return [];
+          const metadata = new Map();
+          const metadataBySlug = new Map();
+          readBookMetadata(metadataSource).forEach(book => {
+            metadata.set(book.id.trim(), book);
+            metadata.set(book.fileId.trim(), book);
+            const staticSlug = book.staticUrl.match(/\.\/books\/([^/]+)/)?.[1];
+            metadataBySlug.set(staticSlug || slugify(book.id.replaceAll('_', ' ')), book);
+          });
+          const taxonomy = readTaxonomy(catalogueSource);
+          if (!metadata.size || !taxonomy.length) return [];
+          const categories = new Map(taxonomy.map(category => [category.name, { name:category.name, books:[] }]));
+          const resolveCategory = rawCategory => {
+            const rawSlug = slugify(rawCategory);
+            return taxonomy.find(category => category.slug === rawSlug || category.slug.includes(rawSlug))?.name || rawCategory || 'Other';
+          };
+          indexData.books.forEach(indexBook => {
+            const details = metadata.get(indexBook.id.trim()) || metadataBySlug.get(indexBook.slug);
+            if (!details) return;
+            const category = resolveCategory(details.category);
+            if (!categories.has(category)) categories.set(category, { name:category, books:[] });
+            categories.get(category).books.push({
+              title:details.title || indexBook.id.replaceAll('_', ' '),
+              category,
+              position:details.position,
+              description:details.description,
+              href:new URL(details.staticUrl || `./books/${indexBook.slug}/index.html`, catalogueUrl).href,
+              cover:new URL(`./content/thumbnails/${encodeURIComponent(details.fileId)}.webp`, catalogueUrl).href
             });
           });
-          return categoryOrder.map(name => {
-            const books = groups.get(name).sort((a, b) => a.position - b.position);
-            return books.length && { name, total:books.length, books };
-          }).filter(Boolean);
+          return Array.from(categories.values()).map(category => {
+            category.books.sort((a, b) => a.position - b.position || a.title.localeCompare(b.title));
+            category.total = category.books.length;
+            return category;
+          }).filter(category => category.books.length);
         };
         const renderCatalogue = (categories, showSelection = false) => {
           const books = categories.flatMap(category => category.books);
           window.clearInterval(rotationTimer);
           const summary = makeElement('div', 'library-live__summary');
-          const titleCount = categories.reduce((sum, category) => sum + category.total, 0);
+          const titleCount = books.length;
           const total = makeElement('strong', 'library-live__total', `${titleCount} ${titleCount === 1 ? 'title' : 'titles'} across ${categories.length} ${categories.length === 1 ? 'category' : 'categories'}`);
           summary.append(total);
 
@@ -568,28 +595,38 @@
           catalogueHost.replaceChildren(summary, categoryList, spotlight);
         };
 
-        const cachedCatalogue = (() => {
+        const readCachedCatalogue = () => {
           try {
             const value = JSON.parse(localStorage.getItem(catalogueCacheKey));
-            return Array.isArray(value) && value.length && value.every(category => category.name && Number.isFinite(category.total) && Array.isArray(category.books) && category.books.length) ? value : fallbackCatalogue;
+            return Array.isArray(value) && value.length && value.every(category => category.name && Number.isFinite(category.total) && Array.isArray(category.books) && category.books.length) ? value : [];
           } catch (error) {
-            return fallbackCatalogue;
+            return [];
           }
-        })();
-        renderCatalogue(cachedCatalogue);
+        };
+        const fetchCurrent = (url, type) => fetch(url, { cache:'no-store', credentials:'omit' }).then(response => {
+          if (!response.ok) throw new Error(`Axiologic catalogue returned ${response.status}`);
+          return type === 'json' ? response.json() : response.text();
+        });
 
-        fetch(catalogueDataUrl, { cache:'no-cache' })
-          .then(response => {
-            if (!response.ok) throw new Error(`Axiologic catalogue returned ${response.status}`);
-            return response.text();
-          })
-          .then(source => {
-            const categories = readCatalogue(source);
+        Promise.all([
+          fetchCurrent(catalogueIndexUrl, 'json'),
+          fetchCurrent(catalogueDataUrl, 'text'),
+          fetchCurrent(catalogueUrl, 'text')
+        ])
+          .then(([indexData, metadataSource, catalogueSource]) => {
+            const categories = buildCatalogue(indexData, metadataSource, catalogueSource);
             if (!categories.length) throw new Error('No Axiologic book categories found');
             try { localStorage.setItem(catalogueCacheKey, JSON.stringify(categories)); } catch (error) {}
             renderCatalogue(categories, true);
           })
-          .catch(() => {});
+          .catch(() => {
+            const cachedCatalogue = readCachedCatalogue();
+            if (cachedCatalogue.length) {
+              renderCatalogue(cachedCatalogue, true);
+              return;
+            }
+            catalogueHost.replaceChildren(makeElement('p', 'library-live__status', 'The live catalogue is temporarily unavailable. Open the full catalogue above.'));
+          });
       }
     })();
   </script>
