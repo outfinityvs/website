@@ -1,3 +1,3 @@
 # Outfinity books
 
-Place the public PDF editions in this folder using the exact filenames referenced by `../cultural-artefacts.html`. The presentation opens each PDF in the browser and provides a direct download fallback.
+The Cultural Artefacts presentation loads book pages and cover images directly from Axiologic. No book editions or cover files are stored here.
