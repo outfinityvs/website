@@ -194,7 +194,7 @@
       body.presentation-page { overflow-x:hidden !important; overflow-y:auto !important; }
       .presentation-page .deck-viewport { height:auto; min-height:calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); overflow:visible; }
       .presentation-page .deck-canvas { position:relative; top:auto; left:auto; width:100%; height:auto; min-height:inherit; transform:none !important; overflow:visible; background-size:48px 48px,48px 48px,auto,auto; }
-      .presentation-page .deck-slide.is-active { position:relative; inset:auto; display:block; min-height:calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); padding:28px clamp(16px,5vw,40px) 76px; overflow:visible; }
+      .presentation-page .deck-slide.is-active { position:relative; inset:auto; display:block; min-height:calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); padding:28px clamp(26px,6vw,44px) 76px; overflow:visible; }
       .presentation-page .deck-slide .slide-header,
       .presentation-page .deck-slide .diagram,
       .presentation-page .deck-slide .editorial-body { position:relative; top:auto; right:auto; left:auto; width:100%; height:auto; }
@@ -239,7 +239,13 @@
       .cover__rule { margin-top:22px; }
       .cover__visual { position:relative; top:auto; right:auto; align-self:center; width:min(100%,440px); height:auto; aspect-ratio:1; margin:-6% 0 -10%; opacity:1; }
       .presentation-page .presentation-footer { right:clamp(16px,5vw,40px); bottom:18px; left:clamp(16px,5vw,40px); }
-      .edge-nav { display:none !important; }
+      /* Thin chevrons fixed at the vertical middle of the screen; swipe also works. */
+      body.presentation-page outfinity-presentation > .edge-nav { position:fixed !important; top:50vh !important; top:50svh !important; display:grid; place-items:center; width:24px !important; height:56px !important; padding:0; border:0 !important; border-radius:0; background:transparent !important; box-shadow:none !important; backdrop-filter:none; -webkit-backdrop-filter:none; color:rgba(247,249,249,.55) !important; transform:translateY(-50%); }
+      body.presentation-page outfinity-presentation > .edge-nav--back { left:max(2px, env(safe-area-inset-left)) !important; right:auto !important; }
+      body.presentation-page outfinity-presentation > .edge-nav--next { right:max(2px, env(safe-area-inset-right)) !important; left:auto !important; }
+      body.presentation-page outfinity-presentation > .edge-nav svg { width:22px !important; height:22px !important; stroke-width:1.4; }
+      body.presentation-page outfinity-presentation > .edge-nav:disabled { opacity:0; pointer-events:none; }
+      body.presentation-page outfinity-presentation > .edge-nav:focus-visible { color:var(--gold) !important; }
     }
     @media (min-width:600px) and (max-width:900px) {
       .three-grid, .market-grid, .team-grid, .consortium, .next-steps { grid-template-columns:repeat(2,1fr); }
@@ -312,6 +318,26 @@
         if (window.innerWidth > 900 || window.scrollY === 0) return;
         if (records.some(function (r) { return r.target.classList.contains('is-active'); })) window.scrollTo(0, 0);
       }).observe(deck, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    }());
+    // Mobile reflow: horizontal swipe moves to the previous/next slide.
+    (function () {
+      var deck = document.getElementById('axiologic-lab-presentation');
+      if (!deck) return;
+      var start = null;
+      deck.addEventListener('touchstart', function (event) {
+        start = event.touches.length === 1 && window.innerWidth <= 900 && !document.querySelector('.detail-overlay.is-open, .article-overlay.is-open')
+          ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+      }, { passive: true });
+      deck.addEventListener('touchend', function (event) {
+        if (!start || !event.changedTouches.length) return;
+        var dx = event.changedTouches[0].clientX - start.x;
+        var dy = event.changedTouches[0].clientY - start.y;
+        start = null;
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+        var button = deck.querySelector(dx < 0 ? '[data-presentation-edge-next]' : '[data-presentation-edge-back]');
+        if (button && !button.disabled) button.click();
+      }, { passive: true });
+      deck.addEventListener('touchcancel', function () { start = null; }, { passive: true });
     }());
   </script>
 </body>
