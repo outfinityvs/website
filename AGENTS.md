@@ -19,7 +19,7 @@
 ## Responsive and integration requirements
 
 - Use the global navigation injected by `docs/js/nav.js`, keep it contained at tablet widths, and use `docs/css/presentation.css` plus the shared component script.
-- Every presentation keeps the standard footer below the deck: `Outfinity Venture Validation Studio - Research-backed AI venture formation.` plus Legal Disclaimer, Privacy Policy, Imprint, Terms, Cookies, and Quizzes.
+- Every presentation keeps the standard footer below the deck: `Outfinity Venture Validation Studio - Research-backed AI venture formation.` plus Legal Disclaimer, Privacy Policy, Imprint, Terms, and Cookies.
 - Article popups begin with the article/page title, use compact top padding, and remove all contact, Continue Exploring, footer, and navigation material.
 - On mobile, do not add nonessential animation/progress UI that increases vertical scrolling. Preserve the established radar/deck rules on home.
 - Make each slide usable with keyboard navigation, details popup close behavior, and reduced-motion settings.

@@ -125,8 +125,7 @@
     resources: [
       { href: "https://www.axiologic.net", label: "Axiologic Research" },
       { href: "https://www.assistos.org/", label: "AssistOS" },
-      { href: "https://agisystem2.com/", label: "Our Neuro-symbolic Scientific Blog" },
-      { href: "https://quiz.outfinity.ch", label: "Entrepreneur Quiz" }
+      { href: "https://agisystem2.com/", label: "Our Neuro-symbolic Scientific Blog" }
     ],
     books: [
       { href: "cultural-artefacts.html", label: "Explore Our Books" }

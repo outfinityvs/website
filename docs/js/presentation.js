@@ -71,8 +71,9 @@
     connectedCallback() {
       if (this.dataset.ready === 'true') return;
       this.dataset.ready = 'true';
+      var slideSet = this.dataset.slideSet;
       this.slides = Array.from(this.children).filter(function (node) {
-        return node.classList && node.classList.contains('deck-slide') && !node.hasAttribute('data-presentation-hidden');
+        return node.classList && node.classList.contains('deck-slide') && !node.hasAttribute('data-presentation-hidden') && (!slideSet || node.dataset.presentationSet === slideSet);
       });
       if (!this.slides.length) return;
 
@@ -160,6 +161,7 @@
 
     upgradeCovers() {
       this.querySelectorAll('.cover__visual').forEach(function (visual) {
+        if (visual.hasAttribute('data-custom-cover')) return;
         if (visual.querySelector('outfinity-cover')) return;
         visual.replaceChildren(document.createElement('outfinity-cover'));
       });
@@ -175,7 +177,7 @@
       var isNew = !footer;
       if (!footer) footer = document.createElement('footer');
       footer.className = 'presentation-site-footer';
-      footer.innerHTML = '<div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="' + href('contact.html') + '">Contact</a><a href="' + href('legal-disclaimer.html') + '">Legal Disclaimer</a><a href="' + href('privacy-policy.html') + '">Privacy Policy</a><a href="' + href('imprint.html') + '">Imprint</a><a href="' + href('terms.html') + '">Terms</a><a href="' + href('cookies.html') + '">Cookies</a><a href="https://quiz.outfinity.ch" target="_blank" rel="noreferrer">Quizzes</a></nav></div>';
+      footer.innerHTML = '<div><p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p><nav aria-label="Footer navigation"><a href="' + href('contact.html') + '">Contact</a><a href="' + href('legal-disclaimer.html') + '">Legal Disclaimer</a><a href="' + href('privacy-policy.html') + '">Privacy Policy</a><a href="' + href('imprint.html') + '">Imprint</a><a href="' + href('terms.html') + '">Terms</a><a href="' + href('cookies.html') + '">Cookies</a></nav></div>';
       if (isNew) (this.viewport || this).insertAdjacentElement('afterend', footer);
     }
 
