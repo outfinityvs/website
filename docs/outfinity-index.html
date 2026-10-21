@@ -73,11 +73,11 @@
     @keyframes vf-pulse { 0%,55%,100% { transform:scale(1); } 70%,80% { transform:scale(1.35); } }
 
     /* Slides */
-    .slide-header { position:absolute; top:100px; left:115px; right:115px; z-index:4; }
+    .slide-header { position:absolute; top:128px; left:115px; right:115px; z-index:4; }
     .slide-title h2 { max-width:none; margin-top:10px; font-size:42px; letter-spacing:-.05em; line-height:1.08; }
     .slide-title p:not(.kicker) { max-width:1370px; margin-top:18px; color:var(--muted); font-size:18px; line-height:1.5; }
     .venture-tagline { display:block; margin-top:8px; color:var(--teal); font-size:15px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
-    .diagram { position:absolute; top:430px; left:115px; width:1370px; }
+    .diagram { position:absolute; top:478px; left:115px; width:1370px; }
     .visual-node { position:relative; z-index:2; color:var(--paper); text-align:left; font-family:inherit; text-decoration:none; }
     button.visual-node, a.visual-node { cursor:pointer; }
     .node-box { min-height:0; padding:22px 24px; border:0; border-top:1px solid rgba(0,207,200,.65); border-radius:0; background:linear-gradient(90deg,rgba(0,207,200,.055),transparent 78%); box-shadow:none; }
@@ -93,23 +93,10 @@
     .process-grid .node-title { font-size:22px; }
     .process-grid .node-text { font-size:15px; }
     .process-grid .visual-node { min-height:178px; }
-    .approach-diagram { top:400px; }
-    .next-layout { position:absolute; top:400px; left:115px; width:1370px; display:grid; grid-template-columns:1.45fr .85fr; gap:70px; align-items:start; }
-    .next-copy { padding-left:32px; border-left:2px solid var(--teal); }
-    .next-copy p { color:rgba(247,249,249,.88); font-size:20px; line-height:1.52; }
-    .next-copy p + p { margin-top:16px; }
-    .next-copy strong { color:var(--paper); font-weight:850; }
-    .action-row { margin-top:22px; color:var(--gold) !important; font-size:16px !important; font-weight:780; letter-spacing:.02em; }
-    .status-note { margin-top:22px; color:rgba(247,249,249,.48) !important; font-size:13px !important; line-height:1.45 !important; }
-    .contact-card { padding:20px 0 20px 28px; border-left:1px solid rgba(255,201,40,.72); }
-    .contact-card span { display:block; color:var(--gold); font-size:11px; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
-    .contact-card strong { display:block; margin-top:14px; font-size:22px; line-height:1.25; }
-    .contact-card p { margin-top:12px; color:var(--muted); font-size:15px; line-height:1.5; }
-    .contact-card a { display:inline-flex; margin-top:20px; padding:.8rem 1.25rem; border-radius:999px; background:var(--gold); color:#18201f; font-weight:900; text-decoration:none; }
-    .contact-card a:hover, .contact-card a:focus-visible { background:var(--paper); outline:none; }
+    .approach-diagram, .thread-diagram { top:440px; }
+    .status-note { position:absolute; top:690px; left:115px; width:1370px; text-align:left !important; margin-top:22px; color:rgba(247,249,249,.48) !important; font-size:13px !important; line-height:1.45 !important; }
     .slide-title p:not(.kicker),
     .node-text,
-    .next-copy p,
     .article-panel__content p,
     .article-panel__content li { text-align:justify; text-justify:inter-word; hyphens:auto; -webkit-hyphens:auto; }
     .presentation-footer { right:115px; bottom:46px; left:115px; }
@@ -128,24 +115,18 @@
       .presentation-page .deck-slide.is-active { position:relative; inset:auto; display:block; min-height:calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); padding:28px clamp(26px,6vw,44px) 76px; overflow:visible; }
       .presentation-page .deck-slide .slide-header,
       .presentation-page .deck-slide .diagram,
-      .presentation-page .deck-slide .next-layout { position:relative; top:auto; right:auto; left:auto; width:100%; height:auto; }
-      .presentation-page .deck-slide .diagram,
-      .presentation-page .deck-slide .next-layout { margin-top:22px; }
+      .presentation-page .deck-slide .status-note { position:relative; top:auto; right:auto; left:auto; width:100%; height:auto; }
+      .presentation-page .deck-slide .diagram { margin-top:22px; }
+      .presentation-page .deck-slide .status-note { margin-top:18px; }
       .kicker { font-size:11px; letter-spacing:.14em; }
       .venture-tagline { font-size:12px; }
       .presentation-page .slide-title h2 { margin-top:8px; font-size:clamp(1.7rem,7.4vw,2.5rem); line-height:1.08; letter-spacing:-.04em; white-space:normal; }
       .presentation-page .slide-title p:not(.kicker) { margin-top:12px; font-size:15px; line-height:1.5; }
-      .three-grid, .process-grid, .next-layout { grid-template-columns:1fr; gap:12px; }
-      .next-layout { gap:26px; }
+      .three-grid, .process-grid { grid-template-columns:1fr; gap:12px; }
       .presentation-page .deck-slide .visual-node { width:100%; height:auto; min-height:0; padding:14px 16px; }
       .presentation-page .deck-slide .node-tag { font-size:10px; }
       .presentation-page .deck-slide .node-title { margin-top:6px; font-size:19px; line-height:1.15; }
       .presentation-page .deck-slide .node-text { margin-top:6px; font-size:14px; line-height:1.45; }
-      .next-copy { padding-left:16px; }
-      .next-copy p { font-size:17px; line-height:1.55; }
-      .action-row { font-size:14px !important; }
-      .contact-card { padding:6px 0 6px 16px; }
-      .contact-card strong { margin-top:10px; font-size:19px; }
       .presentation-page .deck-slide.cover.is-active { display:flex; flex-direction:column; padding-top:clamp(28px,6vh,56px); }
       .cover__content { position:relative; top:auto; left:auto; width:100%; }
       .cover__eyebrow { font-size:11px; line-height:1.5; }
@@ -163,6 +144,14 @@
       body.presentation-page outfinity-presentation > .edge-nav:disabled { opacity:0; pointer-events:none; }
       body.presentation-page outfinity-presentation > .edge-nav:focus-visible { color:var(--gold) !important; }
     }
+    @media (max-width:599px) {
+      .validation-flow .vf-label { font-size:17px; letter-spacing:.08em; }
+      .validation-flow .vf-label--gate { font-size:16px; letter-spacing:.04em; }
+      .validation-flow .vf-label--step { font-size:14px; }
+      .validation-flow .vf-label--venture { font-size:21px; letter-spacing:.08em; }
+      .validation-flow .vf-label--reject { font-size:15px; letter-spacing:.06em; }
+      .validation-flow .vf-word { font-size:19px; }
+    }
     @media (min-width:600px) and (max-width:900px) {
       .three-grid, .process-grid { grid-template-columns:repeat(2,1fr); }
     }
@@ -170,7 +159,7 @@
   </style>
 </head>
 <body class="presentation-page">
-  <header class="studio-topbar"><a class="studio-mark" href="outfinity-index.html" aria-label="Outfinity home"><span>Outfinity</span> Venture Studio</a><a class="studio-link" href="index.html">Venture Studio ↗</a></header>
+  <header class="studio-topbar"><a class="studio-mark" href="outfinity-index.html" aria-label="Outfinity home"><span>Outfinity</span> Venture Studio</a><a class="studio-link" href="index.html" target="_blank" rel="noopener">Venture Studio ↗</a></header>
   <nav class="contents" data-presentation-controls="outfinity-index-presentation" aria-label="Presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01/09</span><span class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></span></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Fullscreen">⛶</button></div></div></nav>
   <main class="deck-viewport" id="deck-viewport">
     <outfinity-presentation class="deck-canvas" id="outfinity-index-presentation" data-deck-width="1600" data-deck-height="900" data-article-title="Outfinity Venture Studio" data-view-more-label="View Article …">
@@ -192,7 +181,7 @@
             <g><circle class="vf-input" cx="60" cy="220" r="5"/><circle class="vf-input" cx="60" cy="320" r="5"/><circle class="vf-input" cx="60" cy="420" r="5"/><circle class="vf-input" cx="180" cy="320" r="6"/></g>
             <text class="vf-word" x="40" y="204">research</text><text class="vf-word" x="40" y="304">ideas</text><text class="vf-word" x="40" y="404">people</text>
             <circle class="vf-venture-ring" cx="556" cy="320" r="26"/><circle class="vf-venture" cx="556" cy="320" r="12"/>
-            <text class="vf-word" x="556" y="372" text-anchor="middle">worth building</text>
+            <text class="vf-word" x="556" y="380" text-anchor="middle">worth building</text>
             <g>
               <circle class="vf-particle" r="4" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 220 C120 220 130 320 180 320 H250 C262 400 276 450 296 498" dur="6s" repeatCount="indefinite"/></circle>
               <circle class="vf-particle" r="4" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" begin="1s" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 320 H360 C372 400 386 450 406 498" begin="1s" dur="6s" repeatCount="indefinite"/></circle>
@@ -249,13 +238,16 @@
         <a class="visual-node node-box node--gold" href="https://www.assistos.org/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">AssistOS Enterprise</span><span class="node-text">Exploring enterprise adoption of persistent AI workers through customized skills, safe execution, workflows, permissions and integration with real operations.</span><span class="node-url">assistos.org ↗</span></a>
       </div></section>
 
-      <section class="deck-slide" id="invitation" data-slide="8" data-nav-label="Invitation" aria-labelledby="invitation-title"><header class="slide-header"><div class="slide-title"><p class="kicker">Invitation</p><h2 id="invitation-title">Co-found. Pilot. Validate. Build.</h2><p>These are not six unrelated products. They test a common proposition: AI creates lasting value when technical capability is combined with human agency, credible evaluation, useful collaboration and sustainable distribution.</p></div></header><div class="next-layout">
-        <div class="next-copy"><p><strong>Bring a difficult problem. A research result. Or the ability to build.</strong></p><p>We welcome conversations with future co-founders, research groups, domain experts, enterprise partners and investors. The first step can be a short discussion, a technical review or a focused validation sprint.</p><p class="action-row">Explore a venture · Join a founding initiative · Discuss a validation project</p><p class="status-note">The initiatives are presented as active directions of organization and validation, not as independently proven businesses or completed incorporations.</p></div>
-        <div class="contact-card"><span>Get in touch</span><strong>Start a focused conversation.</strong><p>Tell us who you are, what you bring and which venture, research or investment question you want to explore.</p><a href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noopener">Open contact form ↗</a></div>
-      </div></section>
+      <section class="deck-slide" id="common-thread" data-slide="8" data-nav-label="Common thread" aria-labelledby="thread-title"><header class="slide-header"><div class="slide-title"><p class="kicker">A portfolio of complementary bets</p><h2 id="thread-title">Six initiatives, one proposition.</h2><p>These are not six unrelated products. They test a common proposition: AI creates lasting value when technical capability is combined with human agency, credible evaluation, useful collaboration and sustainable distribution.</p></div></header><div class="diagram thread-diagram process-grid">
+        <button class="visual-node node-box" type="button" data-title="Technical capability" data-detail="Differentiated technology, from research in machine understanding to verifiable review methods and governed AI workers, is the starting point, not the conclusion."><span class="node-tag">01</span><span class="node-title">Technical capability</span><span class="node-text">Differentiated technology is the starting point, not the conclusion.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Human agency" data-detail="People keep meaningful control: over their profiles and preferences, over the work of AI workers, and over the final decision."><span class="node-tag">02</span><span class="node-title">Human agency</span><span class="node-text">People keep meaningful control over preferences, oversight and final decisions.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Credible evaluation" data-detail="Explicit criteria, traceable evidence, rigorous benchmarks and independent reproduction before claims are made."><span class="node-tag">03</span><span class="node-title">Credible evaluation</span><span class="node-text">Explicit criteria, traceable evidence and reproducible results.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Useful collaboration" data-detail="Founders, researchers, domain experts, contributors and partners working together around a shared, testable thesis."><span class="node-tag">04</span><span class="node-title">Useful collaboration</span><span class="node-text">Founders, researchers, experts and partners around a testable thesis.</span></button>
+        <button class="visual-node node-box node--gold" type="button" data-title="Sustainable distribution" data-detail="A credible path to the readers, users, customers and communities who will adopt the work, and a business model that can sustain it."><span class="node-tag">05</span><span class="node-title">Sustainable distribution</span><span class="node-text">A credible path to adoption and a model that can sustain it.</span></button>
+      </div><p class="status-note">The initiatives are presented as active directions of organization and validation, not as independently proven businesses or completed incorporations.</p></section>
 
       <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M31 17 19 29l12 12M20 29h21"/></svg></button><button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M27 17 39 29 27 41M38 29H17"/></svg></button>
-      <div class="presentation-footer"><a class="deck-credit" href="https://outfinity.ch/">Outfinity Venture Studio</a></div>
+      <div class="presentation-footer"><a class="deck-credit" href="https://outfinity.ch/" target="_blank" rel="noopener">Outfinity Venture Studio</a></div>
 
       <article class="presentation-seo-source presentation-article-source" id="outfinity-index-article">
         <h1>Outfinity Venture Studio</h1>
@@ -315,6 +307,16 @@
       var title = document.querySelector('[data-presentation-page-title]');
       if (title) title.textContent = 'Outfinity';
       else requestAnimationFrame(setPageTitle);
+    }());
+    // This page is a single presentation: every outbound link, including the
+    // footer injected by the shared component, opens in a new tab.
+    (function newTabLinks() {
+      var footer = document.querySelector('.presentation-site-footer');
+      if (!footer) { requestAnimationFrame(newTabLinks); return; }
+      document.querySelectorAll('a[href]:not(.studio-mark)').forEach(function (link) {
+        link.target = '_blank';
+        link.rel = 'noopener';
+      });
     }());
     // Mobile reflow: the page scrolls, so start each newly shown slide at its top.
     (function () {
