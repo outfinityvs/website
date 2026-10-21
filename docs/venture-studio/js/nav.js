@@ -147,7 +147,8 @@
   function getRelativePath(href) {
     if (isExternal(href)) return href;
     var cleanHref = href.replace(/^\//, "");
-    if (!cleanHref) return basePath + "index.html";
+    // Logo and Home lead to the new site home at the root, one level above the subsite.
+    if (!cleanHref) return basePath + "../";
     // Contact and legal pages stay at the site root, one level above the subsite.
     if (rootPages.indexOf(cleanHref.split(/[?#]/)[0]) !== -1) return basePath + "../" + cleanHref;
     return basePath + cleanHref;
@@ -173,7 +174,7 @@
   var brandHref = getRelativePath("/");
   var logoSrc = getRelativePath("assets/outfinity.svg");
   var currentPath = getPagePath();
-  var homeCurrent = currentPath === "" || currentPath === "index.html" ? " current" : "";
+  var homeCurrent = "";
   var presentationCurrent = currentPath === "presentation.html" ? " current" : "";
 
   var navHtml =
