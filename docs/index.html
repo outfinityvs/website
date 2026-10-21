@@ -1,56 +1,381 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Outfinity Quick Presentation | Outfinity</title>
-  <meta name="description" content="Outfinity Quick Presentation is a short interactive guide into venture validation for the AI age.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Outfinity Venture Studio — Evidence Before Incorporation</title>
+  <meta name="description" content="Outfinity is a Switzerland-based venture validation studio connecting advanced research, entrepreneurial ideas and people capable of bringing them into the world.">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/styles.css?v=20260824-radar-copy-fit">
+  <link rel="stylesheet" href="css/presentation.css?v=20261021-outfinity-index">
+  <style>
+    :root { --ink:#0d1111; --green:#062e2d; --teal:#00cfc8; --gold:#ffc928; --paper:#f7f9f9; --muted:#aab8b7; --font:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html, body { min-width:320px; min-height:100%; background:var(--ink); color:var(--paper); font-family:var(--font); }
+    body { overflow-x:hidden; }
+    a, button { font:inherit; }
+    .studio-topbar { position:fixed; top:0; right:0; left:0; z-index:30; height:62px; display:flex; align-items:center; justify-content:space-between; padding:0 clamp(1.25rem,5vw,5rem); border-bottom:1px solid rgba(0,207,200,.18); background:rgba(7,19,18,.94); backdrop-filter:blur(14px); }
+    .studio-mark { color:var(--paper); font-size:12px; font-weight:850; letter-spacing:.16em; text-decoration:none; text-transform:uppercase; }
+    .studio-mark span { color:var(--teal); }
+    .studio-link { color:rgba(247,249,249,.72); font-size:12px; font-weight:750; letter-spacing:.08em; text-decoration:none; text-transform:uppercase; }
+    .studio-link:hover, .studio-link:focus-visible { color:var(--gold); outline:none; }
+    .presentation-page { --presentation-nav-height:62px; --presentation-toolbar-height:58px; padding-top:120px; }
+    .presentation-page .contents { top:62px; height:58px; min-height:58px; }
+    .presentation-page .contents__inner { height:58px; min-height:58px; grid-template-columns:1fr auto 1fr; }
+    .presentation-page .deck-viewport { height:calc(100dvh - 120px); }
+    .deck-nav__page-title { color:rgba(247,249,249,.88); font-size:12px; font-weight:850; letter-spacing:.13em; text-transform:uppercase; white-space:nowrap; }
+    .presentation-page .deck-nav__button { width:48px; height:48px; font-size:1.35rem; }
+    .presentation-page .deck-nav__count { font-size:1rem; min-width:58px; }
+    .presentation-page .deck-nav__status { gap:.6rem; min-width:145px; }
+    .presentation-page .deck-nav__dot { width:7px; height:7px; }
+    .presentation-page .deck-nav__dot.is-active { width:16px; }
+    .deck-viewport { position:relative; overflow:hidden; background:radial-gradient(circle at 82% 18%,rgba(0,207,200,.09),transparent 30%),radial-gradient(circle at 12% 82%,rgba(255,201,40,.06),transparent 25%),var(--ink); }
+    .deck-canvas { position:absolute; top:50%; left:50%; width:1600px; height:900px; overflow:hidden; transform:translate(-50%,-50%) scale(var(--deck-scale,1)); transform-origin:center; background:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px),radial-gradient(circle at 78% 20%,rgba(0,207,200,.085),transparent 34%),var(--ink); background-size:80px 80px,80px 80px,auto,auto; }
+    .deck-slide { position:absolute; inset:0; display:none; overflow:hidden; }
+    .deck-slide.is-active { display:block; animation:slide-enter 280ms ease both; }
+    .deck-slide.cover.is-active { animation:none; }
+    @keyframes slide-enter { from { transform:translateX(20px); opacity:.5; } to { transform:translateX(0); opacity:1; } }
+    .presentation-context { display:none; }
+
+    /* Cover */
+    .cover__content { position:absolute; z-index:3; top:150px; left:130px; width:740px; }
+    .cover__eyebrow, .kicker { color:var(--gold); font-size:15px; font-weight:850; letter-spacing:.16em; text-transform:uppercase; }
+    .cover h1 { margin:18px 0 26px; font-size:76px; letter-spacing:-.065em; line-height:.94; }
+    .cover h1 span { color:var(--teal); display:block; }
+    .cover__claim { color:var(--paper); font-size:30px; font-weight:780; letter-spacing:-.035em; line-height:1.2; }
+    .cover__claim span { display:block; color:var(--gold); }
+    .cover__lead { max-width:700px; margin-top:22px; color:var(--muted); font-size:19px; line-height:1.5; }
+    .cover__ventures { margin-top:30px; padding-top:22px; border-top:1px solid rgba(255,201,40,.55); }
+    .cover__ventures-label { color:var(--gold); font-size:12px; font-weight:850; letter-spacing:.16em; text-transform:uppercase; }
+    .cover__venture-list { display:flex; flex-wrap:wrap; gap:10px; margin-top:14px; }
+    .cover__venture-list button { padding:.55rem .95rem; border:1px solid rgba(0,207,200,.45); border-radius:999px; background:rgba(0,207,200,.06); color:var(--paper); font-size:15px; font-weight:750; letter-spacing:-.01em; cursor:pointer; }
+    .cover__venture-list button:hover, .cover__venture-list button:focus-visible { border-color:var(--gold); background:rgba(255,201,40,.1); color:var(--gold); outline:none; }
+    .cover__visual { position:absolute; top:110px; right:50px; width:640px; height:640px; }
+
+    /* Validation pipeline animation */
+    .validation-flow { width:100%; height:100%; overflow:visible; }
+    .validation-flow .vf-star { fill:#f7f9f9; opacity:.35; }
+    .validation-flow .vf-track { fill:none; stroke:#00cfc8; stroke-width:1.3; stroke-linecap:round; opacity:.38; }
+    .validation-flow .vf-track--main { stroke-dasharray:4 12; animation:vf-flow 3.2s linear infinite; opacity:.55; }
+    .validation-flow .vf-track--reject { stroke:#f7f9f9; stroke-dasharray:3 9; opacity:.2; }
+    .validation-flow .vf-input { fill:#f7f9f9; filter:drop-shadow(0 0 8px rgba(0,207,200,.8)); }
+    .validation-flow .vf-gate { fill:rgba(0,207,200,.05); stroke:#00cfc8; stroke-width:1.3; opacity:.75; }
+    .validation-flow .vf-gate-glow { fill:none; stroke:#ffc928; stroke-width:2; opacity:0; animation:vf-gate 3s ease-in-out infinite; }
+    .validation-flow .vf-gate-glow--2 { animation-delay:1s; }
+    .validation-flow .vf-gate-glow--3 { animation-delay:2s; }
+    .validation-flow .vf-venture { fill:#ffc928; filter:drop-shadow(0 0 14px rgba(255,201,40,.85)); transform-box:fill-box; transform-origin:center; animation:vf-pulse 3s ease-in-out infinite; }
+    .validation-flow .vf-venture-ring { fill:none; stroke:#ffc928; stroke-width:1.2; opacity:.45; }
+    .validation-flow .vf-label { fill:rgba(247,249,249,.56); font-family:var(--font); font-size:12px; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .validation-flow .vf-label--gate { fill:#00cfc8; font-size:11px; }
+    .validation-flow .vf-label--step { fill:rgba(247,249,249,.36); font-size:10px; }
+    .validation-flow .vf-label--venture { fill:#ffc928; font-size:15px; font-weight:900; letter-spacing:.14em; filter:drop-shadow(0 0 8px rgba(255,201,40,.5)); }
+    .validation-flow .vf-label--reject { fill:rgba(247,249,249,.42); font-size:11px; letter-spacing:.12em; }
+    .validation-flow .vf-word { fill:rgba(247,249,249,.62); font-family:var(--font); font-size:13px; font-weight:700; letter-spacing:.04em; }
+    .validation-flow .vf-particle { fill:#00cfc8; filter:drop-shadow(0 0 7px rgba(0,207,200,.95)); }
+    .validation-flow .vf-particle--pass { fill:#ffc928; filter:drop-shadow(0 0 8px rgba(255,201,40,.95)); }
+    @keyframes vf-flow { from { stroke-dashoffset:48; } to { stroke-dashoffset:0; } }
+    @keyframes vf-gate { 0%,100% { opacity:0; } 30%,45% { opacity:.85; } }
+    @keyframes vf-pulse { 0%,55%,100% { transform:scale(1); } 70%,80% { transform:scale(1.35); } }
+
+    /* Slides */
+    .slide-header { position:absolute; top:128px; left:115px; right:115px; z-index:4; }
+    .slide-title h2 { max-width:none; margin-top:10px; font-size:42px; letter-spacing:-.05em; line-height:1.08; }
+    .slide-title p:not(.kicker) { max-width:1370px; margin-top:18px; color:var(--muted); font-size:18px; line-height:1.5; }
+    .venture-tagline { display:block; margin-top:8px; color:var(--teal); font-size:15px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .diagram { position:absolute; top:478px; left:115px; width:1370px; }
+    .visual-node { position:relative; z-index:2; color:var(--paper); text-align:left; font-family:inherit; text-decoration:none; }
+    button.visual-node, a.visual-node { cursor:pointer; }
+    .node-box { min-height:0; padding:22px 24px; border:0; border-top:1px solid rgba(0,207,200,.65); border-radius:0; background:linear-gradient(90deg,rgba(0,207,200,.055),transparent 78%); box-shadow:none; }
+    .node-box:hover, .node-box:focus-visible { border-color:var(--gold); background:linear-gradient(90deg,rgba(255,201,40,.1),transparent 78%); outline:0; }
+    .node--gold { border-color:rgba(255,201,40,.82); }
+    .node-tag { display:block; color:var(--teal); font-size:11px; font-weight:850; letter-spacing:.13em; text-transform:uppercase; }
+    .node--gold .node-tag { color:var(--gold); }
+    .node-title { display:block; margin-top:9px; font-size:24px; font-weight:850; letter-spacing:-.035em; line-height:1.1; }
+    .node-text { display:block; margin-top:10px; color:var(--muted); font-size:16px; line-height:1.5; }
+    .node-url { display:block; margin-top:14px; color:var(--gold); font-size:14px; font-weight:800; letter-spacing:.03em; }
+    .three-grid { display:grid; grid-template-columns:1fr 1fr .82fr; gap:24px; align-items:stretch; }
+    .process-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+    .process-grid .node-title { font-size:22px; }
+    .process-grid .node-text { font-size:15px; }
+    .process-grid .visual-node { min-height:178px; }
+    .approach-diagram { top:440px; }
+    .next-layout { position:absolute; top:440px; left:115px; width:1370px; display:grid; grid-template-columns:1.45fr .85fr; gap:70px; align-items:start; }
+    .next-copy { padding-left:32px; border-left:2px solid var(--teal); }
+    .next-copy p { color:rgba(247,249,249,.88); font-size:20px; line-height:1.52; }
+    .next-copy p + p { margin-top:16px; }
+    .next-copy strong { color:var(--paper); font-weight:850; }
+    .action-row { margin-top:22px; color:var(--gold) !important; font-size:16px !important; font-weight:780; letter-spacing:.02em; }
+    .contact-card { padding:20px 0 20px 28px; border-left:1px solid rgba(255,201,40,.72); }
+    .contact-card span { display:block; color:var(--gold); font-size:11px; font-weight:850; letter-spacing:.14em; text-transform:uppercase; }
+    .contact-card strong { display:block; margin-top:14px; font-size:22px; line-height:1.25; }
+    .contact-card p { margin-top:12px; color:var(--muted); font-size:15px; line-height:1.5; }
+    .contact-card a { display:inline-flex; margin-top:20px; padding:.8rem 1.25rem; border-radius:999px; background:var(--gold); color:#18201f; font-weight:900; text-decoration:none; }
+    .contact-card a:hover, .contact-card a:focus-visible { background:var(--paper); outline:none; }
+    .status-note { margin-top:22px; color:rgba(247,249,249,.48) !important; font-size:13px !important; line-height:1.45 !important; }
+    .slide-title p:not(.kicker),
+    .node-text,
+    .next-copy p,
+    .article-panel__content p,
+    .article-panel__content li { text-align:justify; text-justify:inter-word; hyphens:auto; -webkit-hyphens:auto; }
+    .presentation-footer { right:115px; bottom:46px; left:115px; }
+    .deck-credit { color:rgba(247,249,249,.5); font-size:13px; letter-spacing:.04em; text-decoration:none; }
+    .edge-nav { position:absolute; z-index:15; top:50%; width:58px; height:58px; border:1px solid rgba(247,249,249,.24); border-radius:50%; background:rgba(7,19,18,.65); color:var(--paper); cursor:pointer; transform:translateY(-50%); }
+    .edge-nav:hover, .edge-nav:focus-visible { border-color:var(--gold); color:var(--gold); outline:none; }.edge-nav--back { left:28px; }.edge-nav--next { right:28px; }.edge-nav svg { width:25px; fill:none; stroke:currentColor; stroke-width:2; }
+    .article-panel__content h2 { color:#062e2d; margin:1.65rem 0 .65rem; font-size:1.25rem; }.article-panel__content h3 { margin:1.25rem 0 .45rem; color:#062e2d; font-size:1rem; }.article-panel__content p { margin:.7rem 0; }.article-panel__content ul { margin:.7rem 0 1rem 1.2rem; }.article-panel__content li { margin:.38rem 0; }
+
+    @media (max-width:760px) { .studio-topbar { height:54px; padding:0 16px; }.studio-mark,.studio-link { font-size:10.5px; letter-spacing:.08em; white-space:nowrap; }.presentation-page { --presentation-nav-height:54px; --presentation-toolbar-height:52px; padding-top:106px; }.presentation-page .contents { top:54px; height:52px; min-height:52px; }.presentation-page .contents__inner { height:52px; min-height:52px; grid-template-columns:1fr auto 1fr; }.presentation-page .deck-viewport { height:calc(100dvh - 106px); }.deck-nav__page-title { font-size:10px; }.presentation-page .deck-nav__button { width:37px; height:42px; }.presentation-page .deck-nav__status { min-width:112px; gap:.4rem; }.presentation-page .deck-nav__count { font-size:.82rem; min-width:48px; }.presentation-page .deck-nav__progress { gap:4px; }.presentation-page .deck-nav__dot { width:6px; height:6px; }.presentation-page .deck-nav__dot.is-active { width:13px; } }
+    /* Below the shared component's scaling breakpoint (900px) the 1600x900 canvas
+       is not scaled, so reflow every slide into a full-width, scrollable column. */
+    @media (max-width:900px) {
+      body.presentation-page { overflow-x:hidden !important; overflow-y:auto !important; }
+      .presentation-page .deck-viewport { height:auto; min-height:calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); overflow:visible; }
+      .presentation-page .deck-canvas { position:relative; top:auto; left:auto; width:100%; height:auto; min-height:inherit; transform:none !important; overflow:visible; background-size:48px 48px,48px 48px,auto,auto; }
+      .presentation-page .deck-slide.is-active { position:relative; inset:auto; display:block; min-height:calc(100dvh - var(--presentation-nav-height) - var(--presentation-toolbar-height)); padding:28px clamp(26px,6vw,44px) 76px; overflow:visible; }
+      .presentation-page .deck-slide .slide-header,
+      .presentation-page .deck-slide .diagram,
+      .presentation-page .deck-slide .next-layout { position:relative; top:auto; right:auto; left:auto; width:100%; height:auto; }
+      .presentation-page .deck-slide .diagram,
+      .presentation-page .deck-slide .next-layout { margin-top:22px; }
+      .kicker { font-size:11px; letter-spacing:.14em; }
+      .venture-tagline { font-size:12px; }
+      .presentation-page .slide-title h2 { margin-top:8px; font-size:clamp(1.7rem,7.4vw,2.5rem); line-height:1.08; letter-spacing:-.04em; white-space:normal; }
+      .presentation-page .slide-title p:not(.kicker) { margin-top:12px; font-size:15px; line-height:1.5; }
+      .three-grid, .process-grid, .next-layout { grid-template-columns:1fr; gap:12px; }
+      .next-layout { gap:26px; }
+      .presentation-page .deck-slide .visual-node { width:100%; height:auto; min-height:0; padding:14px 16px; }
+      .presentation-page .deck-slide .node-tag { font-size:10px; }
+      .presentation-page .deck-slide .node-title { margin-top:6px; font-size:19px; line-height:1.15; }
+      .presentation-page .deck-slide .node-text { margin-top:6px; font-size:14px; line-height:1.45; }
+      .next-copy { padding-left:16px; }
+      .next-copy p { font-size:17px; line-height:1.55; }
+      .action-row { font-size:14px !important; }
+      .contact-card { padding:6px 0 6px 16px; }
+      .contact-card strong { margin-top:10px; font-size:19px; }
+      .presentation-page .deck-slide.cover.is-active { display:flex; flex-direction:column; padding-top:clamp(28px,6vh,56px); }
+      .cover__content { position:relative; top:auto; left:auto; width:100%; }
+      .cover__eyebrow { font-size:11px; line-height:1.5; }
+      .cover h1 { margin:14px 0 18px; font-size:clamp(2.7rem,13.5vw,4.75rem); }
+      .cover__claim { font-size:clamp(1.25rem,5.6vw,1.75rem); }
+      .cover__lead { font-size:15.5px; }
+      .cover__ventures { margin-top:22px; padding-top:16px; }
+      .cover__venture-list { gap:8px; }
+      .cover__venture-list button { padding:.45rem .75rem; font-size:13.5px; }
+      .cover__visual { position:relative; top:auto; right:auto; align-self:center; width:min(100%,460px); height:auto; aspect-ratio:1; margin:-4% 0 -8%; }
+      .presentation-page .presentation-footer { right:clamp(16px,5vw,40px); bottom:18px; left:clamp(16px,5vw,40px); }
+      /* Thin chevrons fixed at the vertical middle of the screen; swipe also works. */
+      body.presentation-page outfinity-presentation > .edge-nav { position:fixed !important; top:50vh !important; top:50svh !important; display:grid; place-items:center; width:24px !important; height:56px !important; padding:0; border:0 !important; border-radius:0; background:transparent !important; box-shadow:none !important; backdrop-filter:none; -webkit-backdrop-filter:none; color:rgba(247,249,249,.55) !important; transform:translateY(-50%); }
+      body.presentation-page outfinity-presentation > .edge-nav--back { left:max(2px, env(safe-area-inset-left)) !important; right:auto !important; }
+      body.presentation-page outfinity-presentation > .edge-nav--next { right:max(2px, env(safe-area-inset-right)) !important; left:auto !important; }
+      body.presentation-page outfinity-presentation > .edge-nav svg { width:22px !important; height:22px !important; stroke-width:1.4; }
+      body.presentation-page outfinity-presentation > .edge-nav:disabled { opacity:0; pointer-events:none; }
+      body.presentation-page outfinity-presentation > .edge-nav:focus-visible { color:var(--gold) !important; }
+    }
+    @media (max-width:599px) {
+      .validation-flow .vf-label { font-size:17px; letter-spacing:.08em; }
+      .validation-flow .vf-label--gate { font-size:16px; letter-spacing:.04em; }
+      .validation-flow .vf-label--step { font-size:14px; }
+      .validation-flow .vf-label--venture { font-size:21px; letter-spacing:.08em; }
+      .validation-flow .vf-label--reject { font-size:15px; letter-spacing:.06em; }
+      .validation-flow .vf-word { font-size:19px; }
+    }
+    @media (min-width:600px) and (max-width:900px) {
+      .three-grid, .process-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; }.validation-flow .vf-particle { display:none; } }
+  </style>
 </head>
-<body class="arena-page">
+<body class="presentation-page">
+  <header class="studio-topbar"><a class="studio-mark" href="./" aria-label="Outfinity home"><span>Outfinity</span> Venture Studio</a><a class="studio-link" href="venture-studio/" target="_blank" rel="noopener">Venture Studio ↗</a></header>
+  <nav class="contents" data-presentation-controls="outfinity-index-presentation" aria-label="Presentation controls"><div class="contents__inner"><div class="deck-nav__left"><button class="deck-nav__button" data-presentation-home type="button" aria-label="First slide">⌂</button><button class="deck-nav__button" data-presentation-back type="button" aria-label="Previous slide">‹</button></div><div class="deck-nav__status"><span class="deck-nav__count" data-presentation-count aria-live="polite">01/09</span><span class="deck-nav__progress" data-presentation-progress aria-label="Slide progress"></span></div><div class="deck-nav__right"><button class="deck-nav__button" data-presentation-next type="button" aria-label="Next slide">›</button><button class="deck-nav__button" data-presentation-fullscreen type="button" aria-label="Fullscreen">⛶</button></div></div></nav>
+  <main class="deck-viewport" id="deck-viewport">
+    <outfinity-presentation class="deck-canvas" id="outfinity-index-presentation" data-deck-width="1600" data-deck-height="900" data-article-title="Outfinity Venture Studio" data-view-more-label="View Article …">
 
-  <nav id="nav" aria-label="Primary navigation"></nav>
-  <main class="arena-main">
-    <section class="arena-experience" id="arena-app" data-view="V0" aria-label="Outfinity Quick Presentation">
-      <canvas class="arena-particles" id="arena-particles" aria-hidden="true"></canvas>
-      <div class="arena-shell">
-        <div class="arena-view" id="arena-view" aria-live="polite"></div>
-      </div>
-      <noscript>
-        <div class="arena-noscript">
-          <h1>AI Builds Fast. Social Legitimacy and Early Validation is the scarce asset.</h1>
-          <a class="btn btn-primary" href="presentation.html" target="_blank" rel="noopener noreferrer">View Full presentation</a>
+      <section class="deck-slide cover is-active" id="outfinity" data-slide="0" data-nav-label="Outfinity" aria-labelledby="cover-title">
+        <div class="cover__content"><p class="cover__eyebrow">Venture Validation Studio · Switzerland</p><h1 id="cover-title">OUTFINITY <span>VENTURE STUDIO</span></h1><p class="cover__claim">AI makes building faster.<span>We make venture formation more deliberate.</span></p><p class="cover__lead">We connect advanced research, entrepreneurial ideas and the people able to bring them into the world, and test them before a company is formed.</p><div class="cover__ventures"><p class="cover__ventures-label">Ventures in progress</p><div class="cover__venture-list"><button type="button" data-goto="2">Venture Studio</button><button type="button" data-goto="3">Axiologic AI Lab</button><button type="button" data-goto="4">ScriptaHub</button><button type="button" data-goto="5">Bizanso</button><button type="button" data-goto="6">Deep Proof</button><button type="button" data-goto="7">AssistOS Enterprise</button></div></div></div>
+        <div class="cover__visual" data-custom-cover aria-hidden="true">
+          <svg class="validation-flow" viewBox="0 0 640 640" role="img">
+            <g class="vf-star"><circle cx="48" cy="84" r="1.5"/><circle cx="168" cy="56" r="1.8"/><circle cx="318" cy="88" r="1.3"/><circle cx="476" cy="60" r="1.7"/><circle cx="598" cy="132" r="1.4"/><circle cx="610" cy="470" r="1.6"/><circle cx="520" cy="590" r="1.3"/><circle cx="214" cy="600" r="1.5"/><circle cx="40" cy="520" r="1.6"/></g>
+            <text class="vf-label" x="40" y="166">Inputs</text><text class="vf-label vf-label--venture" x="556" y="236" text-anchor="middle">VENTURE</text>
+            <g class="vf-track"><path d="M60 220 C120 220 130 320 180 320"/><path d="M60 320 H180"/><path d="M60 420 C120 420 130 320 180 320"/></g>
+            <path class="vf-track vf-track--main" d="M180 320 H540"/>
+            <g class="vf-track vf-track--reject"><path d="M250 340 C262 400 276 450 296 498"/><path d="M360 340 C372 400 386 450 406 498"/><path d="M470 340 C482 400 496 450 516 498"/></g>
+            <g><rect class="vf-gate" x="236" y="262" width="28" height="116" rx="4"/><rect class="vf-gate" x="346" y="262" width="28" height="116" rx="4"/><rect class="vf-gate" x="456" y="262" width="28" height="116" rx="4"/></g>
+            <g><rect class="vf-gate-glow" x="236" y="262" width="28" height="116" rx="4"/><rect class="vf-gate-glow vf-gate-glow--2" x="346" y="262" width="28" height="116" rx="4"/><rect class="vf-gate-glow vf-gate-glow--3" x="456" y="262" width="28" height="116" rx="4"/></g>
+            <text class="vf-label vf-label--step" x="250" y="240" text-anchor="middle">01</text><text class="vf-label vf-label--step" x="360" y="240" text-anchor="middle">02</text><text class="vf-label vf-label--step" x="470" y="240" text-anchor="middle">03</text>
+            <text class="vf-label vf-label--gate" x="250" y="402" text-anchor="middle">Thesis</text><text class="vf-label vf-label--gate" x="360" y="402" text-anchor="middle">Evidence</text><text class="vf-label vf-label--gate" x="470" y="402" text-anchor="middle">Team</text>
+            <text class="vf-label vf-label--reject" x="296" y="526" text-anchor="middle">not yet</text><text class="vf-label vf-label--reject" x="406" y="526" text-anchor="middle">pivot</text><text class="vf-label vf-label--reject" x="516" y="526" text-anchor="middle">no</text>
+            <g><circle class="vf-input" cx="60" cy="220" r="5"/><circle class="vf-input" cx="60" cy="320" r="5"/><circle class="vf-input" cx="60" cy="420" r="5"/><circle class="vf-input" cx="180" cy="320" r="6"/></g>
+            <text class="vf-word" x="40" y="204">research</text><text class="vf-word" x="40" y="304">ideas</text><text class="vf-word" x="40" y="404">people</text>
+            <circle class="vf-venture-ring" cx="556" cy="320" r="26"/><circle class="vf-venture" cx="556" cy="320" r="12"/>
+            <text class="vf-word" x="556" y="380" text-anchor="middle">worth building</text>
+            <g>
+              <circle class="vf-particle" r="4" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 220 C120 220 130 320 180 320 H250 C262 400 276 450 296 498" dur="6s" repeatCount="indefinite"/></circle>
+              <circle class="vf-particle" r="4" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" begin="1s" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 320 H360 C372 400 386 450 406 498" begin="1s" dur="6s" repeatCount="indefinite"/></circle>
+              <circle class="vf-particle vf-particle--pass" r="4.5" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" begin="2s" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 420 C120 420 130 320 180 320 H556" begin="2s" dur="6s" repeatCount="indefinite"/></circle>
+              <circle class="vf-particle" r="4" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" begin="3s" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 220 C120 220 130 320 180 320 H470 C482 400 496 450 516 498" begin="3s" dur="6s" repeatCount="indefinite"/></circle>
+              <circle class="vf-particle" r="4" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.85;1" begin="4s" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 420 C120 420 130 320 180 320 H250 C262 400 276 450 296 498" begin="4s" dur="6s" repeatCount="indefinite"/></circle>
+              <circle class="vf-particle vf-particle--pass" r="4.5" opacity="0"><animate attributeName="opacity" values="0;1;1;0" keyTimes="0;.1;.9;1" begin="5s" dur="6s" repeatCount="indefinite"/><animateMotion path="M60 320 H556" begin="5s" dur="6s" repeatCount="indefinite"/></circle>
+            </g>
+          </svg>
         </div>
-      </noscript>
-    </section>
+      </section>
+
+      <section class="deck-slide" id="approach" data-slide="1" data-nav-label="Approach" aria-labelledby="approach-title"><header class="slide-header"><div class="slide-title"><p class="kicker">Evidence before incorporation</p><h2 id="approach-title">Where research becomes a venture worth building.</h2><p>Outfinity combines deep-tech research, market validation and venture-building discipline. We bring founders, researchers, operators and strategic partners together to test promising ideas, design viable businesses and organize their formation in Switzerland and beyond. The cost of prototyping is falling; the cost of earning trust, finding distribution, proving scientific claims and changing how organizations work is not.</p></div></header><div class="diagram approach-diagram process-grid">
+        <button class="visual-node node-box" type="button" data-title="Source" data-detail="We source opportunities arising from scientific research, emerging technologies and under-served markets."><span class="node-tag">Step 01</span><span class="node-title">Source</span><span class="node-text">Opportunities from research, emerging technologies and under-served markets.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Pressure-test" data-detail="We pressure-test assumptions against the harder constraints (trust, distribution, scientific proof and organizational change) before major commitments are made."><span class="node-tag">Step 02</span><span class="node-title">Pressure-test</span><span class="node-text">Assumptions tested against trust, distribution, proof and adoption.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Validate" data-detail="We validate technology and demand: whether a differentiated capability meets a consequential need and whether buyers or users will act."><span class="node-tag">Step 03</span><span class="node-title">Validate</span><span class="node-text">Technology and demand, with evidence rather than prototypes alone.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Structure" data-detail="We structure collaborations and intellectual property, and organize founding teams and strategic partnerships."><span class="node-tag">Step 04</span><span class="node-title">Structure</span><span class="node-text">Collaborations, intellectual property, founding teams and partners.</span></button>
+        <button class="visual-node node-box node--gold" type="button" data-title="Launch, or not yet" data-detail="We prepare ventures for launch or financing. A clear “not yet” or “no” is a legitimate validation outcome."><span class="node-tag">Step 05</span><span class="node-title">Launch, or not yet</span><span class="node-text">Ready for launch or financing, or a clear “not yet” or “no”.</span></button>
+      </div></section>
+
+      <section class="deck-slide" id="venture-studio" data-slide="2" data-nav-label="Venture Studio" aria-labelledby="studio-title"><header class="slide-header"><div class="slide-title"><p class="kicker">01 / Venture Studio</p><h2 id="studio-title">Build after the evidence, not before it.</h2><span class="venture-tagline">Evidence before incorporation</span><p>Outfinity applies venture-studio methods to opportunities arising from scientific research, emerging technologies and under-served markets. Instead of assuming that every promising prototype should become a startup, we connect the technical thesis with the customer, the business model, the team and the capital structure. That makes validation itself a core product of the studio.</p></div></header><div class="diagram three-grid">
+        <button class="visual-node node-box" type="button" data-title="What we are validating" data-detail="Whether a differentiated capability meets a consequential need, whether buyers or users will act, and whether the right founders and partners can sustain an independent venture."><span class="node-tag">What we are validating</span><span class="node-title">Need, action, founders</span><span class="node-text">Whether a differentiated capability meets a consequential need, whether buyers or users will act, and whether the right founders and partners can sustain an independent venture.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Outfinity’s role" data-detail="Opportunity sourcing, research and technical diligence, customer discovery, venture design, co-founder search, partnership and IP structuring, initial capitalization and spin-out preparation."><span class="node-tag">Outfinity’s role</span><span class="node-title">From sourcing to spin-out</span><span class="node-text">Opportunity sourcing, research and technical diligence, customer discovery, venture design, co-founder search, partnership and IP structuring, initial capitalization and spin-out preparation.</span></button>
+        <a class="visual-node node-box node--gold" href="venture-studio/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">Venture Studio</span><span class="node-text">Research-backed venture design, technical and market validation, founder matching, strategic partnerships and new-company formation.</span><span class="node-url">outfinity.ch/venture-studio ↗</span></a>
+      </div></section>
+
+      <section class="deck-slide" id="axiologic-ai-lab" data-slide="3" data-nav-label="Axiologic AI Lab" aria-labelledby="lab-title"><header class="slide-header"><div class="slide-title"><p class="kicker">02 / Axiologic AI Lab</p><h2 id="lab-title">A new Swiss lab for a new approach to machine understanding.</h2><span class="venture-tagline">A new research institution for machine understanding</span><p>Recent research at Axiologic suggests a potentially important direction in automated understanding, including work associated with the VSS (VSA Semantic Space) approach. Outfinity is bringing together prospective founders and strategic partners for an Axiologic AI Lab in Switzerland, intended to assume and further develop the research activities of Axiologic Research in Romania, subject to a clear legal, organizational and intellectual-property framework.</p></div></header><div class="diagram three-grid">
+        <button class="visual-node node-box" type="button" data-title="What we are validating" data-detail="Independent reproducibility, rigorous benchmarks against meaningful baselines, technical scalability, commercial applications and credible commitments from co-founders and research partners."><span class="node-tag">What we are validating</span><span class="node-title">Reproducible science</span><span class="node-text">Independent reproducibility, rigorous benchmarks against meaningful baselines, technical scalability, commercial applications and credible commitments from co-founders and research partners.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Outfinity’s role" data-detail="Organize the founders consortium, establish the research and governance plan, coordinate technology and IP arrangements, secure partners, and design the Swiss lab’s institutional and venture pathway."><span class="node-tag">Outfinity’s role</span><span class="node-title">Founders consortium</span><span class="node-text">Organize the founders consortium, establish the research and governance plan, coordinate technology and IP arrangements, secure partners, and design the Swiss lab’s institutional and venture pathway.</span></button>
+        <a class="visual-node node-box node--gold" href="https://www.axiologic.net/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">Axiologic AI Lab</span><span class="node-text">Organizing a Swiss founding consortium around emerging approaches to automated understanding, with a planned integration of Axiologic Research’s activities from Romania.</span><span class="node-url">axiologic.net ↗</span></a>
+      </div></section>
+
+      <section class="deck-slide" id="scriptahub" data-slide="4" data-nav-label="ScriptaHub" aria-labelledby="scriptahub-title"><header class="slide-header"><div class="slide-title"><p class="kicker">03 / ScriptaHub</p><h2 id="scriptahub-title">If everyone can write a book, how will the right books find their readers?</h2><span class="venture-tagline">Open collaboration for niche books</span><p>Generative AI is making long-form content easier to produce, but production is only half the challenge. Serious, specialized books still need editorial quality, sustained collaboration, trustworthy attribution and distribution to the right communities. ScriptaHub explores a model inspired by open-source software: authors and contributors could version, review, extend and fork manuscripts while building living books and a discoverable library of niche knowledge.</p></div></header><div class="diagram three-grid">
+        <button class="visual-node node-box" type="button" data-title="What we are validating" data-detail="Whether contributors will collaborate around books as they do around software, whether curation can protect quality, and whether readers and expert communities create a sustainable path to discovery and revenue."><span class="node-tag">What we are validating</span><span class="node-title">Collaboration and curation</span><span class="node-text">Whether contributors will collaborate around books as they do around software, whether curation can protect quality, and whether readers and expert communities create a sustainable path to discovery and revenue.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Outfinity’s role" data-detail="Organize product and editorial experiments, early author communities, contribution governance, distribution partnerships and the venture’s economic model."><span class="node-tag">Outfinity’s role</span><span class="node-title">Experiments and community</span><span class="node-text">Organize product and editorial experiments, early author communities, contribution governance, distribution partnerships and the venture’s economic model.</span></button>
+        <a class="visual-node node-box node--gold" href="https://scriptahub.com/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">ScriptaHub</span><span class="node-text">Exploring a GitHub-inspired approach to writing, revision and discovery, where authors and experts collaborate and quality work can reach its readers.</span><span class="node-url">scriptahub.com ↗</span></a>
+      </div></section>
+
+      <section class="deck-slide" id="bizanso" data-slide="5" data-nav-label="Bizanso" aria-labelledby="bizanso-title"><header class="slide-header"><div class="slide-title"><p class="kicker">04 / Bizanso</p><h2 id="bizanso-title">Reclaim the internet’s promise: connect people to meaningful opportunities.</h2><span class="venture-tagline">AI matching that works for the individual</span><p>Finding the right collaborator, employer, co-founder or project is still surprisingly inefficient, and existing profiling systems often optimize for the platform’s engagement or transaction model. Bizanso explores individualized AI matching across people, projects and opportunities, with explicit preferences and meaningful control retained by the participants. It is not a claim that intermediaries disappear; it is a test of whether their role can be renegotiated.</p></div></header><div class="diagram three-grid">
+        <button class="visual-node node-box" type="button" data-title="What we are validating" data-detail="Match relevance and reciprocity, privacy and user agency, trust in recommendations, and whether a people-aligned intermediary can sustain a viable business model."><span class="node-tag">What we are validating</span><span class="node-title">Relevance and agency</span><span class="node-text">Match relevance and reciprocity, privacy and user agency, trust in recommendations, and whether a people-aligned intermediary can sustain a viable business model.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Outfinity’s role" data-detail="Develop the matching hypothesis, organize pilots with target communities, validate onboarding and discovery mechanics, and shape governance, monetization and partnerships."><span class="node-tag">Outfinity’s role</span><span class="node-title">Pilots and governance</span><span class="node-text">Develop the matching hypothesis, organize pilots with target communities, validate onboarding and discovery mechanics, and shape governance, monetization and partnerships.</span></button>
+        <a class="visual-node node-box node--gold" href="https://bizanso.com/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">Bizanso</span><span class="node-text">Testing people-first discovery of collaborators, projects and opportunities, where AI personalizes matches without taking control away from the participants.</span><span class="node-url">bizanso.com ↗</span></a>
+      </div></section>
+
+      <section class="deck-slide" id="deep-proof" data-slide="6" data-nav-label="Deep Proof" aria-labelledby="deepproof-title"><header class="slide-header"><div class="slide-title"><p class="kicker">05 / Deep Proof</p><h2 id="deepproof-title">For consequential decisions, a chat answer is not a review process.</h2><span class="venture-tagline">High-stakes AI analysis with a method</span><p>Consequential assessments require defined criteria, dependable coverage, explicit evidence and repeatable testing. Deep Proof pursues an engineered, neuro-symbolic approach to dossier analysis: a documented review method supported by model-based analysis, structured checks and validation suites. Its underlying platform is open source; professional value comes from building and calibrating specialized AI Review Skills and integrating them into real decision workflows.</p></div></header><div class="diagram three-grid">
+        <button class="visual-node node-box" type="button" data-title="What we are validating" data-detail="Whether tailored and rigorously evaluated review skills improve coverage, traceability and consistency over ad hoc document chat, and whether organizations will pay for that assurance."><span class="node-tag">What we are validating</span><span class="node-title">Assurance worth paying for</span><span class="node-text">Whether tailored and rigorously evaluated review skills improve coverage, traceability and consistency over ad hoc document chat, and whether organizations will pay for that assurance.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Outfinity’s role" data-detail="Provide domain analysis, skill engineering, benchmark and test design, expert calibration, enterprise integration and stewardship. The AI prepares and documents the analysis; people retain the final decision."><span class="node-tag">Outfinity’s role</span><span class="node-title">Skills, tests, calibration</span><span class="node-text">Domain analysis, skill engineering, benchmark and test design, expert calibration, enterprise integration and stewardship. The AI prepares the analysis; people retain the final decision.</span></button>
+        <a class="visual-node node-box node--gold" href="https://deepproof.ch/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">Deep Proof</span><span class="node-text">Building professional, testable AI Review Skills for complex dossiers and consequential decisions: explicit criteria, traceable evidence and human judgment.</span><span class="node-url">deepproof.ch ↗</span></a>
+      </div></section>
+
+      <section class="deck-slide" id="assistos-enterprise" data-slide="7" data-nav-label="AssistOS Enterprise" aria-labelledby="assistos-title"><header class="slide-header"><div class="slide-title"><p class="kicker">06 / AssistOS Enterprise</p><h2 id="assistos-title">AI workers need roles, tools, context and supervision, not just prompts.</h2><span class="venture-tagline">A workplace for virtual employees</span><p>Virtual employees may become an important layer of enterprise operations, but useful autonomy requires more than a language model interface. Built around the open-source AssistOS ecosystem, AssistOS Enterprise explores persistent AI workers that act in governed workspaces, use tools, follow workflows and maintain task context under human oversight. The commercial opportunity lies in configuring these workers around specific business processes and connecting them to existing systems.</p></div></header><div class="diagram three-grid">
+        <button class="visual-node node-box" type="button" data-title="What we are validating" data-detail="Which workflows deliver measurable value, what degrees of autonomy are acceptable, and which skills, integrations, security controls and operating practices make adoption repeatable."><span class="node-tag">What we are validating</span><span class="node-title">Repeatable adoption</span><span class="node-text">Which workflows deliver measurable value, what degrees of autonomy are acceptable, and which skills, integrations, security controls and operating practices make adoption repeatable.</span></button>
+        <button class="visual-node node-box" type="button" data-title="Outfinity’s role" data-detail="Build domain-specific skills, customize agent packages and workflows, integrate enterprise systems, design permissions and deployment, and support evaluation, monitoring and ongoing improvement."><span class="node-tag">Outfinity’s role</span><span class="node-title">Skills and integration</span><span class="node-text">Build domain-specific skills, customize agent packages and workflows, integrate enterprise systems, design permissions and deployment, and support evaluation, monitoring and ongoing improvement.</span></button>
+        <a class="visual-node node-box node--gold" href="https://www.assistos.org/" target="_blank" rel="noopener"><span class="node-tag">Visit</span><span class="node-title">AssistOS Enterprise</span><span class="node-text">Exploring enterprise adoption of persistent AI workers through customized skills, safe execution, workflows, permissions and integration with real operations.</span><span class="node-url">assistos.org ↗</span></a>
+      </div></section>
+
+      <section class="deck-slide" id="invitation" data-slide="8" data-nav-label="Invitation" aria-labelledby="invitation-title"><header class="slide-header"><div class="slide-title"><p class="kicker">Invitation</p><h2 id="invitation-title">Co-found. Pilot. Validate. Build.</h2><p>These are not six unrelated products. They test a common proposition: AI creates lasting value when technical capability is combined with human agency, credible evaluation, useful collaboration and sustainable distribution.</p></div></header><div class="next-layout">
+        <div class="next-copy"><p><strong>Bring a difficult problem. A research result. Or the ability to build.</strong></p><p>We welcome conversations with future co-founders, research groups, domain experts, enterprise partners and investors. The first step can be a short discussion, a technical review or a focused validation sprint.</p><p class="action-row">Explore a venture · Join a founding initiative · Discuss a validation project</p><p class="status-note">The initiatives are presented as active directions of organization and validation, not as independently proven businesses or completed incorporations.</p></div>
+        <div class="contact-card"><span>Get in touch</span><strong>Start a focused conversation.</strong><p>Tell us who you are, what you bring and which venture, research or investment question you want to explore.</p><a href="https://docs.google.com/forms/d/16HH8lep0hXj5cGq91cereklkb5CxkK5x3soTXcdAp5A/" target="_blank" rel="noopener">Open contact form ↗</a></div>
+      </div></section>
+
+      <button class="edge-nav edge-nav--back" data-presentation-edge-back type="button" aria-label="Previous slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M31 17 19 29l12 12M20 29h21"/></svg></button><button class="edge-nav edge-nav--next" data-presentation-edge-next type="button" aria-label="Next slide"><svg viewBox="0 0 58 58" aria-hidden="true"><path d="M27 17 39 29 27 41M38 29H17"/></svg></button>
+      <div class="presentation-footer"><a class="deck-credit" href="https://outfinity.ch/" target="_blank" rel="noopener">Outfinity Venture Studio</a></div>
+
+      <article class="presentation-seo-source presentation-article-source" id="outfinity-index-article">
+        <h1>Outfinity Venture Studio</h1>
+        <p><strong>AI makes building faster. We make venture formation more deliberate.</strong></p>
+        <p>Outfinity is a Switzerland-based venture validation studio connecting advanced research, entrepreneurial ideas and people capable of bringing them into the world. Our work starts before incorporation: with a thesis worth testing, an evidence plan and a founding team that can earn the right to build.</p>
+        <h2>Where research becomes a venture worth building</h2>
+        <p>Outfinity combines deep-tech research, market validation and venture-building discipline. We bring founders, researchers, operators and strategic partners together to test promising ideas, design viable businesses and organize their formation in Switzerland and beyond.</p>
+        <h3>Why our approach matters</h3>
+        <p>The cost of prototyping is falling. The cost of earning trust, finding distribution, proving scientific claims and changing the way organizations work is not. We focus on these harder constraints—before major commitments are made.</p>
+        <h3>What the studio does</h3>
+        <p>We source opportunities, pressure-test assumptions, validate technology and demand, structure collaborations and intellectual property, organize founding teams and partnerships, and prepare ventures for launch or financing. A clear “not yet” or “no” is a legitimate validation outcome.</p>
+        <h2>Current venture-building priorities</h2>
+        <ul>
+          <li><strong>Venture Studio — Evidence before incorporation.</strong> Research-backed venture design, technical and market validation, founder matching, strategic partnerships and new-company formation. <a href="https://outfinity.ch/venture-studio/">outfinity.ch/venture-studio</a></li>
+          <li><strong>Axiologic AI Lab — A new research institution for machine understanding.</strong> Organizing a Swiss founding consortium around emerging approaches to automated understanding, with a planned integration of Axiologic Research’s activities from Romania. <a href="https://www.axiologic.net/">axiologic.net</a></li>
+          <li><strong>ScriptaHub — Open collaboration for niche books.</strong> Exploring a GitHub-inspired approach to writing, revision and discovery, where authors and experts collaborate and quality work can reach its readers. <a href="https://scriptahub.com/">scriptahub.com</a></li>
+          <li><strong>Bizanso — AI matching that works for the individual.</strong> Testing people-first discovery of collaborators, projects and opportunities, where AI personalizes matches without taking control away from the participants. <a href="https://bizanso.com/">bizanso.com</a></li>
+          <li><strong>Deep Proof — High-stakes AI analysis with a method.</strong> Building professional, testable AI Review Skills for complex dossiers and consequential decisions: explicit criteria, traceable evidence and human judgment. <a href="https://deepproof.ch/">deepproof.ch</a></li>
+          <li><strong>AssistOS Enterprise — A workplace for virtual employees.</strong> Exploring enterprise adoption of persistent AI workers through customized skills, safe execution, workflows, permissions and integration with real operations. <a href="https://www.assistos.org/">assistos.org</a></li>
+        </ul>
+        <h3>A portfolio of complementary bets</h3>
+        <p>These are not six unrelated products. They test a common proposition: AI creates lasting value when technical capability is combined with human agency, credible evaluation, useful collaboration and sustainable distribution.</p>
+        <h2>What we are actually trying to validate</h2>
+        <p>Each initiative has a market-facing proposition and a distinct open question.</p>
+        <h3>01 / Venture Studio — Build after the evidence, not before it</h3>
+        <p>Outfinity applies venture-studio methods to opportunities arising from scientific research, emerging technologies and under-served markets. Instead of starting from the assumption that every promising prototype should become a startup, we connect the technical thesis with the customer, the business model, the team and the capital structure. That makes validation itself a core product of the studio.</p>
+        <p><strong>What we are validating:</strong> Whether a differentiated capability meets a consequential need, whether buyers or users will act, and whether the right founders and partners can sustain an independent venture.</p>
+        <p><strong>Outfinity’s role:</strong> Opportunity sourcing, research and technical diligence, customer discovery, venture design, co-founder search, partnership and IP structuring, initial capitalization and spin-out preparation.</p>
+        <h3>02 / Axiologic AI Lab — A new Swiss lab for a new approach to machine understanding</h3>
+        <p>Recent research at Axiologic suggests a potentially important direction in automated understanding, including work associated with the VSS (VSA Semantic Space) approach. Outfinity is bringing together prospective founders and strategic partners for an Axiologic AI Lab in Switzerland. The proposed lab is intended to assume and further develop the research activities of Axiologic Research in Romania, subject to a clear legal, organizational and intellectual-property framework.</p>
+        <p><strong>What we are validating:</strong> Independent reproducibility, rigorous benchmarks against meaningful baselines, technical scalability, commercial applications and credible commitments from co-founders and research partners.</p>
+        <p><strong>Outfinity’s role:</strong> Organize the founders consortium, establish the research and governance plan, coordinate technology and IP arrangements, secure partners, and design the Swiss lab’s institutional and venture pathway.</p>
+        <h3>03 / ScriptaHub — If everyone can write a book, how will the right books find their readers?</h3>
+        <p>Generative AI is making long-form content easier to produce, but production is only half the challenge. Serious, specialized books still need editorial quality, sustained collaboration, trustworthy attribution and distribution to the right communities. ScriptaHub explores a model inspired by open-source software: authors and contributors could version, review, extend and fork manuscripts while building living books and a discoverable library of niche knowledge.</p>
+        <p><strong>What we are validating:</strong> Whether contributors will collaborate around books as they do around software, whether curation can protect quality, and whether readers and expert communities create a sustainable path to discovery and revenue.</p>
+        <p><strong>Outfinity’s role:</strong> Organize product and editorial experiments, early author communities, contribution governance, distribution partnerships and the venture’s economic model.</p>
+        <h3>04 / Bizanso — Reclaim the internet’s original promise: connect people to meaningful opportunities</h3>
+        <p>The internet can connect almost anyone, yet finding the right collaborator, employer, co-founder or project is still surprisingly inefficient. Existing profiling systems often optimize for the platform’s engagement or transaction model. Bizanso explores an alternative: individualized AI matching across people, projects and opportunities, with explicit preferences and meaningful control retained by the participants. It is not a claim that intermediaries disappear; it is a test of whether their role can be renegotiated.</p>
+        <p><strong>What we are validating:</strong> Match relevance and reciprocity, privacy and user agency, trust in recommendations, and whether a people-aligned intermediary can sustain a viable business model.</p>
+        <p><strong>Outfinity’s role:</strong> Develop the matching hypothesis, organize pilots with target communities, validate onboarding and discovery mechanics, and shape governance, monetization and partnerships.</p>
+        <h3>05 / Deep Proof — For consequential decisions, a chat answer is not a review process</h3>
+        <p>General-purpose AI chat is useful for exploring documents, but consequential assessments require defined criteria, dependable coverage, explicit evidence and repeatable testing. Deep Proof pursues an engineered, neuro-symbolic approach to dossier analysis: a documented review method supported by model-based analysis, structured checks and validation suites. Its underlying platform is open source; professional value comes from building and calibrating specialized AI Review Skills and integrating them into real decision workflows.</p>
+        <p><strong>What we are validating:</strong> Whether tailored and rigorously evaluated review skills improve coverage, traceability and consistency over ad hoc document chat, and whether organizations will pay for that assurance.</p>
+        <p><strong>Outfinity’s role:</strong> Provide domain analysis, skill engineering, benchmark and test design, expert calibration, enterprise integration and stewardship. The AI prepares and documents the analysis; people retain the final decision.</p>
+        <h3>06 / AssistOS Enterprise — AI workers need roles, tools, context and supervision, not just prompts</h3>
+        <p>Virtual employees may become an important layer of enterprise operations, but useful autonomy requires more than a language model interface. Built around the open-source AssistOS ecosystem, AssistOS Enterprise explores persistent AI workers that can act in governed workspaces, use tools, follow workflows and maintain task context under human oversight. The commercial opportunity lies in configuring these workers around specific business processes and connecting them to an organization’s existing systems.</p>
+        <p><strong>What we are validating:</strong> Which workflows deliver measurable value, what degrees of autonomy are acceptable, and which skills, integrations, security controls and operating practices make adoption repeatable.</p>
+        <p><strong>Outfinity’s role:</strong> Build domain-specific skills, customize agent packages and workflows, integrate enterprise systems, design permissions and deployment, and support evaluation, monitoring and ongoing improvement.</p>
+        <p><em>The laboratory, products and venture structures are described as propositions under organization and validation. Scientific claims are framed as research hypotheses until independently reproduced; commercial value is presented as a thesis until market evidence exists.</em></p>
+      </article>
+    </outfinity-presentation>
   </main>
-
-  <dialog class="arena-video-modal" data-video-modal aria-label="Outfinity presentation film">
-    <a class="arena-video-youtube" href="https://youtu.be/P4_jUm4dHLo" target="_blank" rel="noopener noreferrer" data-video-youtube aria-label="Open video on YouTube" title="Open on YouTube">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 5h5v5M19 5l-8 8"></path><path d="M18 13v6H5V6h6"></path></svg>
-    </a>
-    <button class="arena-video-close" type="button" data-video-close aria-label="Close film" title="Close film">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18"></path></svg>
-    </button>
-    <div class="arena-video-frame" data-video-frame></div>
-    <div class="arena-video-confirm" data-video-confirm role="alertdialog" aria-modal="true" aria-labelledby="video-confirm-title" hidden>
-      <p id="video-confirm-title">Watch this video directly on YouTube?</p>
-      <div class="arena-video-confirm-actions">
-        <a href="https://youtu.be/P4_jUm4dHLo" target="_blank" rel="noopener noreferrer" data-video-youtube>Open YouTube</a>
-        <button type="button" data-video-cancel>Cancel</button>
-      </div>
-    </div>
-  </dialog>
-
-  <footer class="footer">
-    <div class="container">
-      <p>Outfinity Venture Validation Studio - Research-backed AI venture formation.</p>
-      <div class="footer-links"><a href="contact.html">Contact</a><a href="legal-disclaimer.html">Legal Disclaimer</a><a href="privacy-policy.html">Privacy Policy</a><a href="imprint.html">Imprint</a><a href="terms.html">Terms</a><a href="cookies.html">Cookies</a></div>
-    </div>
-  </footer>
-
-<script src="js/nav.js?v=20260723-brand-unified"></script>
-  <script src="js/arena.js?v=20260804-qa-layout"></script>
+  <script src="js/presentation.js?v=20261021-outfinity-index"></script>
+  <script>
+    // The shared component labels the toolbar from the file name; this page is the site index.
+    (function setPageTitle() {
+      var title = document.querySelector('[data-presentation-page-title]');
+      if (title) title.textContent = 'Outfinity';
+      else requestAnimationFrame(setPageTitle);
+    }());
+    // This page is a single presentation: every outbound link, including the
+    // footer injected by the shared component, opens in a new tab.
+    (function newTabLinks() {
+      var footer = document.querySelector('.presentation-site-footer');
+      if (!footer) { requestAnimationFrame(newTabLinks); return; }
+      document.querySelectorAll('a[href]:not(.studio-mark)').forEach(function (link) {
+        link.target = '_blank';
+        link.rel = 'noopener';
+      });
+    }());
+    // Cover venture chips jump to the matching slide.
+    document.querySelectorAll('[data-goto]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var deck = document.getElementById('outfinity-index-presentation');
+        if (deck && deck.show) deck.show(Number(button.dataset.goto));
+      });
+    });
+    // Mobile reflow: the page scrolls, so start each newly shown slide at its top.
+    (function () {
+      var deck = document.getElementById('outfinity-index-presentation');
+      if (!deck || !window.MutationObserver) return;
+      new MutationObserver(function (records) {
+        if (window.innerWidth > 900 || window.scrollY === 0) return;
+        if (records.some(function (r) { return r.target.classList.contains('is-active'); })) window.scrollTo(0, 0);
+      }).observe(deck, { subtree: true, attributes: true, attributeFilter: ['class'] });
+    }());
+    // Mobile reflow: horizontal swipe moves to the previous/next slide.
+    (function () {
+      var deck = document.getElementById('outfinity-index-presentation');
+      if (!deck) return;
+      var start = null;
+      deck.addEventListener('touchstart', function (event) {
+        start = event.touches.length === 1 && window.innerWidth <= 900 && !document.querySelector('.detail-overlay.is-open, .article-overlay.is-open')
+          ? { x: event.touches[0].clientX, y: event.touches[0].clientY } : null;
+      }, { passive: true });
+      deck.addEventListener('touchend', function (event) {
+        if (!start || !event.changedTouches.length) return;
+        var dx = event.changedTouches[0].clientX - start.x;
+        var dy = event.changedTouches[0].clientY - start.y;
+        start = null;
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.4) return;
+        var button = deck.querySelector(dx < 0 ? '[data-presentation-edge-next]' : '[data-presentation-edge-back]');
+        if (button && !button.disabled) button.click();
+      }, { passive: true });
+      deck.addEventListener('touchcancel', function () { start = null; }, { passive: true });
+    }());
+  </script>
 </body>
 </html>

@@ -141,10 +141,14 @@
   function normalize(p) {
     return p.replace(/\/$/, "");
   }
+  var rootPages = ["contact.html", "legal-disclaimer.html", "privacy-policy.html", "imprint.html", "terms.html", "cookies.html", "axiologic-ai-lab.html"];
   function getRelativePath(href) {
     if (isExternal(href)) return href;
     var cleanHref = href.replace(/^\//, "");
     if (!cleanHref) return basePath + "index.html";
+    // The old site moved into venture-studio/; only these pages and shared resources stay at the root.
+    var page = cleanHref.split(/[?#]/)[0];
+    if (rootPages.indexOf(page) === -1 && !/^(?:css|js|assets)\//.test(page)) return basePath + "venture-studio/" + cleanHref;
     return basePath + cleanHref;
   }
   function renderLinks(arr) {
